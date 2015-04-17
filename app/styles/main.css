@@ -1,0 +1,94 @@
+body {
+    margin:0;
+    padding:0;
+}
+.container{
+    background-color:grey;
+    position:relative;
+    padding:0;
+    margin: 0;
+}
+.hidden{
+    display:none;
+}
+/* Slide1 */
+
+
+@keyframes animatedBackground {
+	0% { background-position: 0 0; }
+	100% { background-position: 0 100vh; }
+}
+@-moz-keyframes animatedBackground {
+	0% { background-position: 0 0; }
+	100% { background-position: 0 100vh; }
+}
+@-webkit-keyframes animatedBackground {
+	0% { background-position: 0 0; }
+	100% { background-position: 0 100vh; }
+}
+@-ms-keyframes animatedBackground {
+	0% { background-position: 0 0; }
+	100% { background-position: 0 100vh; }
+}
+@-o-keyframes animatedBackground {
+	0% { background-position: 0 0; }
+	100% { background-position: 0 100vh; }
+}
+.movingBackground{
+    position:relative;
+    width:100%;
+    height:100vh;
+    background: url(../images/background2.png) repeat-y center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    animation: animatedBackground 20s linear infinite;
+    -moz-animation: animatedBackground 20s linear infinite;
+    -webkit-animation: animatedBackground 20s linear infinite;
+    -ms-animation: animatedBackground 20s linear infinite;
+    -o-animation: animatedBackground 20s linear infinite;
+}
+
+.logo{
+    position:absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width:0px;
+    height:0px;
+    padding: 132px 500px 131px 500px;
+    background: url(../images/EC-regular-1000x263.png) no-repeat center center;
+}
+
+
+
+
+/* Slide2 */
+
+
+#videoElement{
+    position:relative;
+    width:100%;
+    height:100vh;
+    /* filter:blur(5px); */
+}
+.box{
+    position:absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    height:60%;
+    width:80%;
+    border: 2px solid #FAFCFA;
+}
+.box p {
+    color: #FAFCFA;
+    text-align:center;
+    font-family: 'Slabo 27px', serif;
+    font-size:4em;
+}
