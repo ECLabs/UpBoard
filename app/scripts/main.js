@@ -27,20 +27,28 @@ var eventTiming = {
 
 })();
 
+
+var slide1ToSlide2 = function(){
+    //hide previous
+    $(".movingBackground").addClass("hidden");
+    $(".logo").addClass("hidden");
+    //show current
+    $('#videoElement').removeClass('hidden');
+    $('.box').removeClass('hidden');
+    //add webcamBlur animation so it starts on time
+    $('#videoElement').css('animation-name', 'webcamBlur');
+    //fade container back in
+    $(".container").fadeIn("slow");
+}
+
+
 //timing
 var transitionFunction = function(){
     //fade out container
     $(".container").fadeOut("slow");
-    //wait 2 seconds
+    //wait & call the rest of the transition
     setTimeout(function() {
-        //hide previous
-        $(".movingBackground").addClass("hidden");
-        $(".logo").addClass("hidden");
-        //show current
-        $('#videoElement').removeClass('hidden');
-        $('.box').removeClass('hidden');
-        //fade container back in
-        $(".container").fadeIn("slow");
+        slide1ToSlide2();
     }, eventTiming.slide1Transition);
 }
 
@@ -48,7 +56,6 @@ var transitionFunction = function(){
 //first Transition
 setTimeout(function() {
     transitionFunction();
-    //set value to desired transition speed
 }, eventTiming.slide1Time);
 
 

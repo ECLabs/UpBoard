@@ -59,20 +59,21 @@ body {
 /* Slide2 */
 @-webkit-keyframes webcamBlur {
     0% {-webkit-filter:blur(0px);filter:blur(0px);}
-    100% {-webkit-filter:blur(30px);filter:blur(30px);}
+    100% {-webkit-filter:blur(20px);filter:blur(20px);}
 }
 @keyframes webcamBlur {
     0% {-webkit-filter:blur(0px);filter:blur(0px);}
-    100% {-webkit-filter:blur(30px);filter:blur(30px);}
+    100% {-webkit-filter:blur(20px);filter:blur(20px);}
 }
 
 #videoElement{
     position:relative;
     width:100%;
-    -webkit-animation-name: webcamBlur;
-    animation-name: webcamBlur;
+    /*animation-name: webcamBlur;*/
     -webkit-animation-duration: 2s;
     animation-duration: 2s;
+    -webkit-animation-delay: 2s;
+    animation-delay: 2s;
 }
 .box{
     position:absolute;
