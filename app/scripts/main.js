@@ -1,5 +1,11 @@
 $( document ).ready(function() {
 
+//all event times
+var eventTiming = {
+    slide1Time: 1000,
+    slide1Transition:2000,
+};
+
 //Set up Webcam
 (function() {
     var video = document.querySelector("#videoElement");
@@ -8,7 +14,7 @@ $( document ).ready(function() {
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
 
     if (navigator.getUserMedia) {
-        navigator.getUserMedia({video: true}, handleVideo, videoError);
+        navigator.getUserMedia({video: true, audio: true}, handleVideo, videoError);
     }
 
     function handleVideo(stream) {
@@ -35,7 +41,7 @@ var transitionFunction = function(){
         $('.box').removeClass('hidden');
         //fade container back in
         $(".container").fadeIn("slow");
-    }, 2000);
+    }, eventTiming.slide1Transition);
 }
 
 
@@ -43,7 +49,7 @@ var transitionFunction = function(){
 setTimeout(function() {
     transitionFunction();
     //set value to desired transition speed
-}, 1000);
+}, eventTiming.slide1Time);
 
 
 });

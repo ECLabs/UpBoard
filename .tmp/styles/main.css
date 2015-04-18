@@ -19,10 +19,6 @@ body {
 	0% { background-position: 0 0; }
 	100% { background-position: 0 100vh; }
 }
-@-moz-keyframes animatedBackground {
-	0% { background-position: 0 0; }
-	100% { background-position: 0 100vh; }
-}
 @-webkit-keyframes animatedBackground {
 	0% { background-position: 0 0; }
 	100% { background-position: 0 100vh; }
@@ -31,18 +27,11 @@ body {
 	0% { background-position: 0 0; }
 	100% { background-position: 0 100vh; }
 }
-@-o-keyframes animatedBackground {
-	0% { background-position: 0 0; }
-	100% { background-position: 0 100vh; }
-}
 .movingBackground{
     position:relative;
     width:100%;
     height:100vh;
     background: url(../images/background2.png) repeat-y center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-size: cover;
     animation: animatedBackground 20s linear infinite;
     -moz-animation: animatedBackground 20s linear infinite;
@@ -68,15 +57,21 @@ body {
 
 
 /* Slide2 */
+@-webkit-keyframes webcamBlur {
+    0% {-webkit-filter:blur(0px);filter:blur(0px);}
+    100% {-webkit-filter:blur(30px);filter:blur(30px);}
+}
 @keyframes webcamBlur {
-    0% {filter:blur(0px);}
-    100% {filter:blur(30px);}
+    0% {-webkit-filter:blur(0px);filter:blur(0px);}
+    100% {-webkit-filter:blur(30px);filter:blur(30px);}
 }
 
 #videoElement{
     position:relative;
     width:100%;
+    -webkit-animation-name: webcamBlur;
     animation-name: webcamBlur;
+    -webkit-animation-duration: 2s;
     animation-duration: 2s;
 }
 .box{
