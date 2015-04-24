@@ -70,9 +70,9 @@ body {
 
 /* Slide2 */
 @keyframes webcamBlur {
-    0% {filter:blur(0px);}
-    9% {filter:blur(19px);}
-    100% {filter:blur(20px);}
+    0% {filter:grayscale(0) blur(0px);}
+    9% {filter:grayscale(.8) blur(14px);}
+    100% {filter:grayscale(.8) blur(15px);}
 }
 
 #videoElement{
@@ -83,14 +83,17 @@ body {
     animation-delay: 2s;
 }
 .box{
+    
+    min-height:300px;
+    vertical-align:middle;
     position:absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     margin: auto;
-    height:60%;
-    width:80%;
+    height:50%;
+    width:90%;
     border-top: 2px solid #FAFCFA;
     border-right: 2px solid #FAFCFA;
     border-left: 2px solid #FAFCFA;
@@ -99,7 +102,7 @@ body {
 .boxBottomLeft{
     position:absolute;
     height:0;
-    width:40%;
+    width:45%;
     border:1px solid #FAFCFA;
     left:0px;
     bottom:0px;
@@ -108,7 +111,7 @@ body {
 .boxBottomRight{
     position:absolute;
     height:0;
-    width:40%;
+    width:45%;
     border:1px solid #FAFCFA;
     right:0px;
     bottom:0px;
@@ -117,16 +120,25 @@ body {
 }
 #star{
     position:absolute;
+    background: url(../images/star.png);
     color:white;
     display:inline-block;
     left:50%;
-    bottom:0px;
+    bottom:-10px;
+    padding: 12px 14px 16px 14px;
+    margin-left:-15px;
 }
 .box p {
+    display: table-cell;
     color: #FAFCFA;
     text-align:center;
+    vertical-align:middle;
     font-family: 'Slabo 27px', serif;
-    font-size:4em;
+    font-size:5em;
+    letter-spacing:2px;
+    line-height:130%;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 

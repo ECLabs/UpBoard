@@ -3,7 +3,7 @@ var slide3 = function(){
     var timing = {
         openSection1: 3000, //Open the first section after this amount of time showing all
         openSection: 1000, //open section after returning to layout
-        closeSection: 7000, //close section after this delay
+        closeSection: 1000, //close section after this delay
     };
 
     $('#bl-main').removeClass('hidden');
