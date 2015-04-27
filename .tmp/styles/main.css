@@ -4,7 +4,7 @@ body {
     overflow:hidden;
 }
 .container{
-    background-color:grey;
+    background-color:white;
     position:relative;
     padding:0;
     margin: 0;
@@ -79,7 +79,7 @@ body {
     animation-delay: 2s;
 }
 .box{
-    
+
     min-height:300px;
     vertical-align:middle;
     position:absolute;

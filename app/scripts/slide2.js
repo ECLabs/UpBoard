@@ -2,7 +2,7 @@ var slide2 = function(){
 
     //timing control box
     var timing = {
-        slide2Fade:10000, //Fade after this delay
+        slide2Fade:9000, //Fade after this delay
         slide2Transition:2000, //Transition takes this long
     };
 
@@ -16,7 +16,7 @@ var slide2 = function(){
     //fade container back in
     $(".container").fadeIn("slow");
 
-    /*setTimeout(function() { //first Timeout
+    setTimeout(function() { //first Timeout
 
             $(".container").fadeOut("slow"); //first fade out the current container
             //wait & call the rest of the transition
@@ -24,14 +24,16 @@ var slide2 = function(){
             setTimeout(function() {
 
                     //hide previous
+                    $('.box').css('display', 'none');
                     $("#videoElement").addClass("hidden");
                     $(".box").addClass("hidden");
+                    $('.container').css('background-color', 'grey');
 
                     slide3(); //Call the next slide function
 
             }, timing.slide2Transition);
 
-    }, timing.slide2Fade);*/
+    }, timing.slide2Fade);
 
 
 

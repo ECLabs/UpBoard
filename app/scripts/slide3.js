@@ -3,7 +3,8 @@ var slide3 = function(){
     var timing = {
         openSection1: 3000, //Open the first section after this amount of time showing all
         openSection: 1000, //open section after returning to layout
-        closeSection: 1000, //close section after this delay
+        closeSection: 3000, //close section after this delay
+        fadeContainer: 1000, //Final Fade before restart
     };
 
     $('#bl-main').removeClass('hidden');
@@ -42,17 +43,16 @@ var slide3 = function(){
 		// support css transitions
 		supportTransitions = Modernizr.csstransitions;
 
-
+        //Slide1 Open
         setTimeout(function() {
 
             $section1.data( 'open', true ).addClass( 'bl-expand bl-expand-top' );
             $el.addClass( 'bl-expand-item' );
 
-
+                //Slide1 Close
                 setTimeout(function() {
 
                         $section1.data( 'open', false ).removeClass( 'bl-expand' ).on( transEndEventName, function( event ) {
-                            if( !$( "#section1" ).is( 'section' ) ) return false;
                             $( "#section1" ).off( transEndEventName ).removeClass( 'bl-expand-top' );
                         } );
 
@@ -62,8 +62,86 @@ var slide3 = function(){
 
                         $el.removeClass( 'bl-expand-item' );
 
-                        return false;
+                        //Slide2 Open
+                        setTimeout(function() {
 
+                            $section2.data( 'open', true ).addClass( 'bl-expand bl-expand-top' );
+                            $el.addClass( 'bl-expand-item' );
+
+                                //Slide2 Close
+                                setTimeout(function() {
+
+                                        $section2.data( 'open', false ).removeClass( 'bl-expand' ).on( transEndEventName, function( event ) {
+                                            $( "#section2" ).off( transEndEventName ).removeClass( 'bl-expand-top' );
+                                        } );
+
+                                        if( !supportTransitions ) {
+                                            $section2.removeClass( 'bl-expand-top' );
+                                        }
+
+                                        $el.removeClass( 'bl-expand-item' );
+
+                                        //Slide3 Open
+                                        setTimeout(function() {
+
+                                            $section3.data( 'open', true ).addClass( 'bl-expand bl-expand-top' );
+                                            $el.addClass( 'bl-expand-item' );
+
+                                                //Slide3 Close
+                                                setTimeout(function() {
+
+                                                        $section3.data( 'open', false ).removeClass( 'bl-expand' ).on( transEndEventName, function( event ) {
+                                                            $( "#section3" ).off( transEndEventName ).removeClass( 'bl-expand-top' );
+                                                        } );
+
+                                                        if( !supportTransitions ) {
+                                                            $section1.removeClass( 'bl-expand-top' );
+                                                        }
+
+                                                        $el.removeClass( 'bl-expand-item' );
+
+                                                        //Slide4 Open
+                                                        setTimeout(function() {
+
+                                                            $section4.data( 'open', true ).addClass( 'bl-expand bl-expand-top' );
+                                                            $el.addClass( 'bl-expand-item' );
+
+                                                                //Slide4 Close
+                                                                setTimeout(function() {
+
+                                                                        $section4.data( 'open', false ).removeClass( 'bl-expand' ).on( transEndEventName, function( event ) {
+                                                                            $( "#section4" ).off( transEndEventName ).removeClass( 'bl-expand-top' );
+                                                                        } );
+
+                                                                        if( !supportTransitions ) {
+                                                                            $section1.removeClass( 'bl-expand-top' );
+                                                                        }
+
+                                                                        $el.removeClass( 'bl-expand-item' );
+
+                                                                        setTimeout(function() { //first Timeout
+
+                                                                                $(".container").fadeOut("slow"); //first fade out the current container
+                                                                                $('#bl-main').addClass('hidden');
+                                                                                $('.container').css('background-color', 'white');
+
+                                                                        }, timing.fadeContainer);
+
+
+                                                                }, timing.closeSection);
+
+                                                        }, timing.openSection);
+
+
+                                                }, timing.closeSection);
+
+                                        }, timing.openSection);
+
+
+
+                                }, timing.closeSection);
+
+                        }, timing.openSection);
 
                 }, timing.closeSection);
 

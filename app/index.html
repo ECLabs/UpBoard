@@ -46,7 +46,7 @@
                     </div>
                     <span class="bl-icon bl-icon-close"></span>
                 </section>
-                <section id="bl-work-section section2">
+                <section id="section2">
                     <div class="bl-box">
                         <h2 class="bl-icon bl-icon-works">Works</h2>
                     </div>
@@ -174,7 +174,12 @@
 
                 })();
 
-                slide1();
+                var run = function(){
+                    setInterval(slide1, 50000);
+                };
+                run();
+
+
             });
         </script>
 </body>
