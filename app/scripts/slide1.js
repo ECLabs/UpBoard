@@ -2,7 +2,7 @@ var slide1 = function() {
 
     //timing control box
     var timing = {
-        slide1Fade : 10000, //fade starts after 1 second of slide time
+        slide1Fade : 2000, //fade starts after 1 second of slide time
         slide1Transition: 2000, //2 second transition
     };
 
@@ -14,6 +14,8 @@ var slide1 = function() {
 
             $(".container").fadeOut("slow"); //first fade out the current container
             //wait & call the rest of the transition
+
+            $('#videoElement').animate({volume: 1}, 2000);
             setTimeout(function() {
 
                     //hide previous
