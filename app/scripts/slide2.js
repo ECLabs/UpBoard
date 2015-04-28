@@ -2,7 +2,8 @@ var slide2 = function(){
 
     //timing control box
     var timing = {
-        slide2Fade:9000, //Fade after this delay
+        overlay:2000,
+        slide2Fade:5000, //Fade after this delay
         slide2Transition:2000, //Transition takes this long
     };
 
@@ -13,27 +14,33 @@ var slide2 = function(){
     $('.box').css('display', 'table');
     //add webcamBlur animation so it starts on time
     $('#videoElement').css('animation-name', 'webcamBlur');
+    //add overlay fade in animation
+    $('.box').css('animation-name', 'overlay');
     //fade container back in
     $(".container").fadeIn("slow");
 
-    setTimeout(function() { //first Timeout
+    setTimeout(function() {
 
-            $(".container").fadeOut("slow"); //first fade out the current container
-            //wait & call the rest of the transition
+        setTimeout(function() { //first Timeout
 
-            setTimeout(function() {
+                $(".container").fadeOut("slow"); //first fade out the current container
+                //wait & call the rest of the transition
 
-                    //hide previous
-                    $('.box').css('display', 'none');
-                    $("#videoElement").addClass("hidden");
-                    $(".box").addClass("hidden");
-                    $('.container').css('background-color', 'grey');
+                setTimeout(function() {
 
-                    slide3(); //Call the next slide function
+                        //hide previous
+                        $('.box').css('display', 'none');
+                        $("#videoElement").addClass("hidden");
+                        $(".box").addClass("hidden");
+                        $('.container').css('background-color', 'grey');
 
-            }, timing.slide2Transition);
+                        slide3(); //Call the next slide function
 
-    }, timing.slide2Fade);
+                }, timing.slide2Transition);
+
+        }, timing.slide2Fade);
+
+    }, timing.overlay);
 
 
 

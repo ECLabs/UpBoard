@@ -2,7 +2,7 @@ var slide1 = function() {
 
     //timing control box
     var timing = {
-        slide1Fade : 5000, //fade starts after 1 second of slide time
+        slide1Fade : 10000, //fade starts after 1 second of slide time
         slide1Transition: 2000, //2 second transition
     };
 

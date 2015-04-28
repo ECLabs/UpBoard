@@ -119,13 +119,13 @@ var slide3 = function(){
 
                                                                         $el.removeClass( 'bl-expand-item' );
 
-                                                                        setTimeout(function() { //first Timeout
+                                                                        /*setTimeout(function() { //first Timeout
 
                                                                                 $(".container").fadeOut("slow"); //first fade out the current container
                                                                                 $('#bl-main').addClass('hidden');
                                                                                 $('.container').css('background-color', 'white');
 
-                                                                        }, timing.fadeContainer);
+                                                                        }, timing.fadeContainer); */
 
 
                                                                 }, timing.closeSection);
