@@ -7,6 +7,7 @@ var slide2 = function(){
         slide2Audio: 2000, //Wait 2 Seconds so the webcam Volume fades synchronously with the blur and grayscale
     };
 
+
     //first remove hidden class from slide elements
     $('#videoElement').removeClass('hidden');
     $('.box').removeClass('hidden');
@@ -14,15 +15,19 @@ var slide2 = function(){
     //add webcamBlur animation so it starts on time
     $('#videoElement').css('animation-name', 'webcamBlur');
     //add overlay fade in animation
+    $('.box').css('visibility', "visible");
     $('.box').css('animation-name', 'overlay');
     //fade container back in
     $(".container").fadeIn("slow");
 
+
     setTimeout(function() {
 
-        $('#videoElement').animate({volume: 0}, 5000,"linear");
+        $('#videoElement').animate({volume: 0}, 5000,"linear");//This doesn't work super well but it's the only volume method I've found
 
             setTimeout(function() { //first Timeout
+
+
 
                     $(".container").fadeOut("slow"); //first fade out the current container
                     //wait & call the rest of the transition
@@ -30,10 +35,12 @@ var slide2 = function(){
                     setTimeout(function() {
 
                             //hide previous
-                            $('.box').css('display', 'none');
+
                             $("#videoElement").addClass("hidden");
+                            $('.box').css('opacity', 0);
+                            $('.box').css('visibility', "hidden");
                             $(".box").addClass("hidden");
-                            $('.container').css('background-color', 'grey');
+
 
                             slide3(); //Call the next slide function
 

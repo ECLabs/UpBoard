@@ -70,12 +70,12 @@ body {
 /*overlay animation fades from hidden to visible and opacity from 0 to 1*/
 /*this animation is necessary since the box is centered using display table*/
 @-webkit-keyframes overlay {
-    0% {visibility:hidden; opacity:0;}
-    100% {visibility:visible; opacity:1;}
+    0% { opacity:0;}
+    100% { opacity:1;}
 }
 @keyframes overlay {
-    0% {visibility:hidden; opacity:0;}
-    100% {visibility:visible; opacity:1;}
+    0% { opacity:0;}
+    100% { opacity:1;}
 }
 
 
@@ -91,16 +91,20 @@ body {
     animation-fill-mode: forwards;
 
 }
+
+
+
 .box{
     /*animation-name: overlay;*/
-    visibility:hidden;
-    opacity:0;
     -webkit-animation-duration: 5s;
     animation-duration: 5s;
     -webkit-animation-delay: 2s;
     animation-delay: 2s;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
+
+    opacity:0;
+
 
 
     display:table;

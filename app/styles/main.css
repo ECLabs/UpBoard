@@ -77,8 +77,8 @@ body {
 /*overlay animation fades from hidden to visible and opacity from 0 to 1*/
 /*this animation is necessary since the box is centered using display table*/
 @keyframes overlay {
-    0% {visibility:hidden; opacity:0;}
-    100% {visibility:visible; opacity:1;}
+    0% { opacity:0;}
+    100% { opacity:1;}
 }
 
 
@@ -91,13 +91,17 @@ body {
     animation-fill-mode: forwards;
 
 }
+
+
+
 .box{
     /*animation-name: overlay;*/
-    visibility:hidden;
-    opacity:0;
     animation-duration: 5s;
     animation-delay: 2s;
     animation-fill-mode: forwards;
+
+    opacity:0;
+
 
 
     display:table;

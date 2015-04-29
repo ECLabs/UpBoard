@@ -9,6 +9,7 @@ var slide3 = function(){
 
     $('#bl-main').removeClass('hidden');
     $(".container").fadeIn("slow");
+    $('.container').css('background-color', 'grey');
 
     //work in progress
     var $el = $( '#bl-main' ),
@@ -119,13 +120,13 @@ var slide3 = function(){
 
                                                                         $el.removeClass( 'bl-expand-item' );
 
-                                                                        /*setTimeout(function() { //first Timeout
+                                                                        setTimeout(function() {
 
                                                                                 $(".container").fadeOut("slow"); //first fade out the current container
                                                                                 $('#bl-main').addClass('hidden');
                                                                                 $('.container').css('background-color', 'white');
 
-                                                                        }, timing.fadeContainer); */
+                                                                        }, timing.fadeContainer);
 
 
                                                                 }, timing.closeSection);
