@@ -2,6 +2,7 @@ body {
     margin:0;
     padding:0;
     overflow:hidden;
+    background-color:white;
 }
 .container{
     background-color:white;
@@ -80,15 +81,17 @@ body {
 
 
 #videoElement{
-    position:relative;
-    width:100%;
-    /*animation-name: webcamBlur;*/
+        /*animation-name: webcamBlur;*/
     -webkit-animation-duration: 5s;
     animation-duration: 5s;
     -webkit-animation-delay: 2s;
     animation-delay: 2s;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
+
+    position:relative;
+    width:100%;
+
 
 }
 
@@ -104,7 +107,6 @@ body {
     animation-fill-mode: forwards;
 
     opacity:0;
-
 
 
     display:table;
@@ -194,7 +196,6 @@ body, html { font-size: 100%; padding: 0; margin: 0; height: 100%;}
 body {
     font-family: 'Lato', Calibri, Arial, sans-serif;
     color: #f2ede3;
-    background: #333;
     font-size: 0.9em;
     font-weight: 300;
 }

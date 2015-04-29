@@ -8,6 +8,9 @@ var slide2 = function(){
     };
 
 
+
+
+
     //first remove hidden class from slide elements
     $('#videoElement').removeClass('hidden');
     $('.box').removeClass('hidden');
@@ -22,10 +25,10 @@ var slide2 = function(){
 
 
     setTimeout(function() {
-
+        $('.container').css('background-color', '#1B1B1C');//without making the background dark there is a bright halo around the edge of the container from the blur
         $('#videoElement').animate({volume: 0}, 5000,"linear");//This doesn't work super well but it's the only volume method I've found
 
-            setTimeout(function() { //first Timeout
+            setTimeout(function() { //Fade Container
 
 
 

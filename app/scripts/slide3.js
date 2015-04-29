@@ -6,7 +6,7 @@ var slide3 = function(){
         closeSection: 3000, //close section after this delay
         fadeContainer: 1000, //Final Fade before restart
     };
-
+    
     $('#bl-main').removeClass('hidden');
     $(".container").fadeIn("slow");
     $('.container').css('background-color', 'grey');
@@ -124,7 +124,7 @@ var slide3 = function(){
 
                                                                                 $(".container").fadeOut("slow"); //first fade out the current container
                                                                                 $('#bl-main').addClass('hidden');
-                                                                                $('.container').css('background-color', 'white');
+
 
                                                                         }, timing.fadeContainer);
 

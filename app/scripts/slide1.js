@@ -7,6 +7,7 @@ var slide1 = function() {
     };
 
 
+    $('.container').css('background-color', 'white'); //reset background color to white
     $(".movingBackground").removeClass("hidden");
     $(".logo").removeClass("hidden");
     $(".container").fadeIn("slow");
