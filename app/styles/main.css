@@ -85,8 +85,8 @@ body {
 
 #videoElement{
         /*animation-name: webcamBlur;*/
-    animation-duration: 5s;
-    animation-delay: 2s;
+    animation-duration: 5s; /* webcam blur duration */
+    animation-delay: 2s; /* webcam blur delay */
     animation-fill-mode: forwards;
 
     position:relative;
@@ -99,8 +99,8 @@ body {
 
 .box{
     /*animation-name: overlay;*/
-    animation-duration: 5s;
-    animation-delay: 2s;
+    animation-duration: 5s; /* box fade in duration */
+    animation-delay: 4s; /* box fade in delay */
     animation-fill-mode: forwards;
 
     opacity:0;

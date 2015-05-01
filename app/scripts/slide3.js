@@ -3,10 +3,11 @@ var slide3 = function(){
     var timing = {
         openSection1: 3000, //Open the first section after this amount of time showing all
         openSection: 1000, //open section after returning to layout
-        closeSection: 3000, //close section after this delay
+        closeSection: 20000, //close section after this delay
         fadeContainer: 1000, //Final Fade before restart
+        //Total Time on Slide 3 = openSection1 + 4(closeSection) + 3(openSection) + fadeContainer
     };
-    
+
     $('#bl-main').removeClass('hidden');
     $(".container").fadeIn("slow");
     $('.container').css('background-color', 'grey');
