@@ -1,16 +1,4 @@
-var slide2 = function(){
-
-    //timing control box
-    var timing = {
-        slide2Fade:10000, //Fade after this delay
-        slide2Transition:2000, //Transition takes this long
-        slide2Audio: 2000, //Wait 2 Seconds so the webcam Volume fades synchronously with the blur and grayscale
-        //Total slide2 Time = slide2Fade + Slide2Transition + slide2Audio
-    };
-
-
-
-
+var slide2 = function(data){
 
     //first remove hidden class from slide elements
     $('#videoElement').removeClass('hidden');
@@ -46,14 +34,12 @@ var slide2 = function(){
                             $(".box").addClass("hidden");
 
 
-                            slide3(); //Call the next slide function
+                            slide3(data); //Call the next slide function
 
-                    }, timing.slide2Transition);
+                    }, data.slide2.timing.transitionTime);
 
-            }, timing.slide2Fade);
+            }, data.slide2.timing.slideTime);
 
-    }, timing.slide2Audio);
-
-
+    }, data.slide2.timing.audioFadeTime);
 
 }

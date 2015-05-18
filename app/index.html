@@ -78,7 +78,11 @@
 
         </div>
         <script src="../bower_components/jquery/dist/jquery.js"></script>
+        <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+        <script type="text/javascript">
+            var firebaseRef = new Firebase("https://boiling-heat-9947.firebaseio.com/");
 
+        </script>
         <script src="scripts/slide3.js"></script>
         <script src="scripts/slide2.js"></script>
         <script src="scripts/slide1.js"></script>
@@ -111,11 +115,19 @@
 
 
                 var run = function(){
+
                     //Total Time = Slide1 + Slide2 + Slide3 + 2000
-                    setInterval(slide1, 115000);
+                    firebaseRef.once('value', function(snapshot) {
+                        setInterval(slide1(snapshot.val());, 115000);
+                    });
+                    
                 };
+
                 run();
-                slide1();
+
+                firebaseRef.once('value', function(snapshot) {
+                    slide1(snapshot.val()); //pass slide1 the firebase data
+                });
 
 
             });

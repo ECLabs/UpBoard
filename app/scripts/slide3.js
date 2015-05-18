@@ -1,4 +1,4 @@
-var slide3 = function(){
+var slide3 = function(data){
 
     var timing = {
         openSection1: 3000, //Open the first section after this amount of time showing all
@@ -127,29 +127,23 @@ var slide3 = function(){
                                                                                 $('#bl-main').addClass('hidden');
 
 
-                                                                        }, timing.fadeContainer);
+                                                                        }, data.slide3.timing.transitionTime);
 
+                                                                }, data.slide3.timing.sectionTime);
 
-                                                                }, timing.closeSection);
+                                                        }, data.slide3.timing.openSection);
 
-                                                        }, timing.openSection);
+                                                }, data.slide3.timing.sectionTime);
 
+                                        }, data.slide3.timing.openSection);
 
-                                                }, timing.closeSection);
+                                }, data.slide3.timing.sectionTime);
 
-                                        }, timing.openSection);
+                        }, data.slide3.timing.openSection);
 
+                }, data.slide3.timing.sectionTime);
 
-
-                                }, timing.closeSection);
-
-                        }, timing.openSection);
-
-                }, timing.closeSection);
-
-        }, timing.openSection1);
-
-
+        }, data.slide3.timing.openFirstSection);
 
 
 }
