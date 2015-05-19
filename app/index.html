@@ -89,7 +89,7 @@
         <script>
             $(function() {
 
-
+                //set up webcam feed
                 (function() {
 
                     var video = document.querySelector("#videoElement");
@@ -113,22 +113,44 @@
 
                 })();
 
-
-                var run = function(){
-
-                    //Total Time = Slide1 + Slide2 + Slide3 + 2000
-                    firebaseRef.once('value', function(snapshot) {
-                        setInterval(slide1(snapshot.val());, 115000);
-                    });
-                    
-                };
-
-                run();
-
+                //get firebase info
                 firebaseRef.once('value', function(snapshot) {
+
+                    //calculate total slideshow time
+                    var totalTime = function() {
+                        var time=2000;
+                        snapshot.forEach(function(childSnapshot) {
+
+                          var key = childSnapshot.val();
+
+                          if(key.type ==='logo' || key.type==='liveVideoOverlay'){
+                              time+= (key.timing.slideTime + key.timing.transitionTime);
+                          } else if (key.type==='fourPanel'){
+                              time+= (key.timing.openFirstSection + (key.timing.openSection*4) + (key.timing.sectionTime*4) + key.timing.transitionTime);
+                          }
+
+                      });
+                      console.log(time);
+                      return time;
+                    };
+
+
+                    var run = function(){
+
+                        //Total Time = Slide1 + Slide2 + Slide3 + 2000
+
+                            setInterval(function(){
+
+                                    slide1(snapshot.val());
+
+                            }, totalTime());
+
+                    };
+
+                    run();
+
                     slide1(snapshot.val()); //pass slide1 the firebase data
                 });
-
 
             });
         </script>
