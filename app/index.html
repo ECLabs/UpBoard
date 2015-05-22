@@ -6,6 +6,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 		<script src="scripts/modernizr.custom.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <!-- Font -->
         <link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
 
@@ -14,6 +15,27 @@
 
     </head>
     <body>
+    	   <div class="container">
+            <!--Slide1 -->
+            <img class="movingBackground"></img>
+            <img class="logo"></img>
+			<div id="weatherInfo"></div>
+			<script type="text/javascript">
+				$(document).ready(function() {
+				  var url =  "http://api.openweathermap.org/data/2.5/weather?q=Washington,dc&callback=?";
+				  $.ajax({
+				url: url,
+				dataType: 'jsonp',
+			jsonpCallback: 'doStuffWithMyData',
+      
+							  });
+					});
+
+function doStuffWithMyData(data){
+	console.log("My Data looks like this -> "+JSON.stringify(data))
+	$("#weatherInfo").html(data.weather[0].description+" outside right now");
+}
+</script>
 
         <div class="container">
             <!--Slide1 -->
