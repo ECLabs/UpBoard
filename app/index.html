@@ -16,27 +16,7 @@
     </head>
     <body>
     	   <div class="container">
-            <!--Slide1 -->
-            <img class="movingBackground"></img>
-            <img class="logo"></img>
-			<div id="weatherInfo"></div>
-			<script type="text/javascript">
-				$(document).ready(function() {
-				  var url =  "http://api.openweathermap.org/data/2.5/weather?q=Washington,dc&callback=?";
-				  $.ajax({
-				url: url,
-				dataType: 'jsonp',
-			jsonpCallback: 'doStuffWithMyData',
-      
-							  });
-					});
-
-function doStuffWithMyData(data){
-	console.log("My Data looks like this -> "+JSON.stringify(data))
-	$("#weatherInfo").html(data.weather[0].description+" outside right now");
-}
-</script>
-
+            <!--Slide1 --
         <div class="container">
             <!--Slide1 -->
             <img class="movingBackground"></img>
