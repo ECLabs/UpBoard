@@ -1,4 +1,6 @@
-var slide2 = function(data){
+var liveVideoOverlay = function(data, order){
+
+    order.splice(0,1);
 
     //first remove hidden class from slide elements
     $('#videoElement').removeClass('hidden');
@@ -33,9 +35,10 @@ var slide2 = function(data){
                             $('.box').css('visibility', "hidden");
                             $(".box").addClass("hidden");
 
-
-                            slide3(data); //Call the next slide function
-
+                            if (order.length!==0) {
+                                window[order[0]](data, order); //Call the next slide function
+                            }
+                            
                     }, data.slide2.timing.transitionTime);
 
             }, data.slide2.timing.slideTime);

@@ -1,4 +1,4 @@
-var slide3 = function(data){
+var fourPanel = function(data, order){
 
     var timing = {
         openSection1: 3000, //Open the first section after this amount of time showing all
@@ -7,6 +7,8 @@ var slide3 = function(data){
         fadeContainer: 1000, //Final Fade before restart
         //Total Time on Slide 3 = openSection1 + 4(closeSection) + 3(openSection) + fadeContainer
     };
+
+    order.splice(0,1);
 
     $('#bl-main').removeClass('hidden');
     $(".container").fadeIn("slow");
@@ -125,6 +127,11 @@ var slide3 = function(data){
 
                                                                                 $(".container").fadeOut("slow"); //first fade out the current container
                                                                                 $('#bl-main').addClass('hidden');
+
+                                                                                if (order.length!==0) {
+                                                                                    window[order[0]](data, order); //Call the next slide function
+                                                                                }
+
 
 
                                                                         }, data.slide3.timing.transitionTime);

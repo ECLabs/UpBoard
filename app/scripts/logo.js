@@ -1,4 +1,10 @@
-var slide1 = function(data) {
+var logo = function(data, order) {
+
+
+        order.splice(0,1);
+        console.log(order);
+        //console.log(order);
+        //console.log(window.order[0]);
 
         $('.container').css('background-color', 'white'); //reset background color to white
         $(".movingBackground").removeClass("hidden");
@@ -17,7 +23,10 @@ var slide1 = function(data) {
                         $(".movingBackground").addClass("hidden");
                         $(".logo").addClass("hidden");
 
-                        slide2(data); //Call the next slide function
+                        //console.log(window[order[0]]);
+                        if (order.length!==0) {
+                            window[order[0]](data, order); //Call the next slide function
+                        }
 
                 }, data.slide1.timing.transitionTime);
 

@@ -16,11 +16,11 @@
     <body>
 
         <div class="container">
-            <!--Slide1 -->
+            <!--logo -->
             <img class="movingBackground"></img>
             <img class="logo"></img>
 
-            <!--Slide2 -->
+            <!--liveVideoOverlay -->
             <video  autoplay="true" class="hidden" id="videoElement"></video>
             <div class="hidden box">
                 <p>
@@ -31,7 +31,7 @@
                 <div class="boxBottomRight"></div>
             </div>
 
-            <!--Slide3 -->
+            <!--fourPanel -->
             <div id="bl-main" class="bl-main hidden">
 
                 <section id="section1">
@@ -83,9 +83,9 @@
             var firebaseRef = new Firebase("https://boiling-heat-9947.firebaseio.com/");
 
         </script>
-        <script src="scripts/slide3.js"></script>
-        <script src="scripts/slide2.js"></script>
-        <script src="scripts/slide1.js"></script>
+        <script src="scripts/fourPanel.js"></script>
+        <script src="scripts/liveVideoOverlay.js"></script>
+        <script src="scripts/logo.js"></script>
         <script>
             $(function() {
 
@@ -116,6 +116,16 @@
                 //get firebase info
                 firebaseRef.once('value', function(snapshot) {
 
+                    //holder array to specify slide order
+                    var slideOrder = [];
+                    //fill in order array
+                    snapshot.forEach(function(childSnapshot) {
+                      var key = childSnapshot.val();
+                      slideOrder.push(key.type);
+                    });
+
+                    console.log(slideOrder);
+
                     //calculate total slideshow time
                     var totalTime = function() {
                         var time=2000;
@@ -129,27 +139,31 @@
                               time+= (key.timing.openFirstSection + (key.timing.openSection*4) + (key.timing.sectionTime*4) + key.timing.transitionTime);
                           }
 
-                      });
-                      console.log(time);
+                        });
+                      //console.log(order);
                       return time;
                     };
 
 
+                    //calculate slideshow length & order
+                    /*var order = function(){
+                        snapshot.forEach(function(childSnapshot){
+                            var key =
+                        });
+                    }*/
+
                     var run = function(){
 
-                        //Total Time = Slide1 + Slide2 + Slide3 + 2000
-
                             setInterval(function(){
-
-                                    slide1(snapshot.val());
+                                    console.log(window[slideOrder[0]]);
+                                    window[slideOrder[0]]((snapshot.val(), slideOrder));
 
                             }, totalTime());
 
                     };
 
                     run();
-
-                    slide1(snapshot.val()); //pass slide1 the firebase data
+                    window[slideOrder[0]](snapshot.val(), slideOrder); //pass slide1 the firebase data & array
                 });
 
             });
