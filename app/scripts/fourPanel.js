@@ -1,14 +1,7 @@
-var fourPanel = function(data, order){
-
-    var timing = {
-        openSection1: 3000, //Open the first section after this amount of time showing all
-        openSection: 1000, //open section after returning to layout
-        closeSection: 20000, //close section after this delay
-        fadeContainer: 1000, //Final Fade before restart
-        //Total Time on Slide 3 = openSection1 + 4(closeSection) + 3(openSection) + fadeContainer
-    };
-
-    order.splice(0,1);
+var fourPanel = function(data, order, previous){
+    var current = 'slide' + (previous+1);
+    var copyArray = order.slice();
+    copyArray.splice(0,1);
 
     $('#bl-main').removeClass('hidden');
     $(".container").fadeIn("slow");
@@ -129,28 +122,27 @@ var fourPanel = function(data, order){
                                                                                 $('#bl-main').addClass('hidden');
 
                                                                                 if (order.length!==0) {
-                                                                                    window[order[0]](data, order); //Call the next slide function
+                                                                                    window[copyArray[0]](data, copyArray, previoius+1); //Call the next slide function
                                                                                 }
 
 
+                                                                        }, data[current].timing.transitionTime);
 
-                                                                        }, data.slide3.timing.transitionTime);
+                                                                }, data[current].timing.sectionTime);
 
-                                                                }, data.slide3.timing.sectionTime);
+                                                        }, data[current].timing.openSection);
 
-                                                        }, data.slide3.timing.openSection);
+                                                }, data[current].timing.sectionTime);
 
-                                                }, data.slide3.timing.sectionTime);
+                                        }, data[current].timing.openSection);
 
-                                        }, data.slide3.timing.openSection);
+                                }, data[current].timing.sectionTime);
 
-                                }, data.slide3.timing.sectionTime);
+                        }, data[current].timing.openSection);
 
-                        }, data.slide3.timing.openSection);
+                }, data[current].timing.sectionTime);
 
-                }, data.slide3.timing.sectionTime);
-
-        }, data.slide3.timing.openFirstSection);
+        }, data[current].timing.openFirstSection);
 
 
 }

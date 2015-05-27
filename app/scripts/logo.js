@@ -1,35 +1,33 @@
-var logo = function(data, order) {
+var logo = function(data, order, previous) {
+    var current = 'slide' + (previous+1);
+    //copy order array
+    var copyArray = order.slice();
+    copyArray.splice(0,1);
 
+    $('.container').css('background-color', 'white'); //reset background color to white
+    $(".movingBackground").removeClass("hidden");
+    $(".logo").removeClass("hidden");
+    $(".container").fadeIn("slow");
 
-        order.splice(0,1);
-        console.log(order);
-        //console.log(order);
-        //console.log(window.order[0]);
+    setTimeout(function() { //first Timeout
 
-        $('.container').css('background-color', 'white'); //reset background color to white
-        $(".movingBackground").removeClass("hidden");
-        $(".logo").removeClass("hidden");
-        $(".container").fadeIn("slow");
+            $(".container").fadeOut("slow"); //first fade out the current container
+            //wait & call the rest of the transition
 
-        setTimeout(function() { //first Timeout
+            $('#videoElement').animate({volume: 1}, 2000, "linear");
+            setTimeout(function() {
 
-                $(".container").fadeOut("slow"); //first fade out the current container
-                //wait & call the rest of the transition
+                    //hide previous
+                    $('.movingBackground').addClass("hidden");
+                    $('.logo').addClass("hidden");
 
-                $('#videoElement').animate({volume: 1}, 2000, "linear");
-                setTimeout(function() {
+                    //check if this is the end if not call next slide
+                    if (order.length!==0) {
+                        window[copyArray[0]](data, copyArray, previous+1);
+                    }
 
-                        //hide previous
-                        $(".movingBackground").addClass("hidden");
-                        $(".logo").addClass("hidden");
+            }, data[current].timing.transitionTime);
 
-                        //console.log(window[order[0]]);
-                        if (order.length!==0) {
-                            window[order[0]](data, order); //Call the next slide function
-                        }
-
-                }, data.slide1.timing.transitionTime);
-
-        }, data.slide1.timing.slideTime);
+    }, data[current].timing.slideTime);
 
 }

@@ -1,6 +1,8 @@
-var liveVideoOverlay = function(data, order){
+var liveVideoOverlay = function(data, order, previous){
+    var current = 'slide' + (previous+1);
+    var copyArray = order.slice();
+    copyArray.splice(0,1);
 
-    order.splice(0,1);
 
     //first remove hidden class from slide elements
     $('#videoElement').removeClass('hidden');
@@ -21,8 +23,6 @@ var liveVideoOverlay = function(data, order){
 
             setTimeout(function() { //Fade Container
 
-
-
                     $(".container").fadeOut("slow"); //first fade out the current container
                     //wait & call the rest of the transition
 
@@ -36,13 +36,13 @@ var liveVideoOverlay = function(data, order){
                             $(".box").addClass("hidden");
 
                             if (order.length!==0) {
-                                window[order[0]](data, order); //Call the next slide function
+                                window[copyArray[0]](data, copyArray, previous+1);
                             }
-                            
-                    }, data.slide2.timing.transitionTime);
 
-            }, data.slide2.timing.slideTime);
+                    }, data[current].timing.transitionTime);
 
-    }, data.slide2.timing.audioFadeTime);
+            }, data[current].timing.slideTime);
+
+    }, data[current].timing.audioFadeTime);
 
 }

@@ -119,50 +119,35 @@
                     var slideOrder = [];
                     //fill in order array
                     snapshot.forEach(function(childSnapshot) {
-                      var key = childSnapshot.val();
-                      slideOrder.push(key.type);
+                        var key = childSnapshot.val();
+                        slideOrder.push(key.type);
                     });
-
-                    console.log(slideOrder);
 
                     //calculate total slideshow time
                     var totalTime = function() {
                         var time=2000;
                         snapshot.forEach(function(childSnapshot) {
 
-                          var key = childSnapshot.val();
+                            var key = childSnapshot.val();
 
-                          if(key.type ==='logo' || key.type==='liveVideoOverlay'){
+                            if(key.type ==='logo' || key.type==='liveVideoOverlay'){
                               time+= (key.timing.slideTime + key.timing.transitionTime);
-                          } else if (key.type==='fourPanel'){
+                            } else if (key.type==='fourPanel'){
                               time+= (key.timing.openFirstSection + (key.timing.openSection*4) + (key.timing.sectionTime*4) + key.timing.transitionTime);
-                          }
+                            }
 
                         });
-                      //console.log(order);
                       return time;
                     };
 
+                    // start interval
+                    (function(){
+                        setInterval(function(){
+                            window[slideOrder[0]](snapshot.val(), slideOrder, 0);
+                        }, totalTime());
+                    })();
 
-                    //calculate slideshow length & order
-                    /*var order = function(){
-                        snapshot.forEach(function(childSnapshot){
-                            var key =
-                        });
-                    }*/
-
-                    var run = function(){
-
-                            setInterval(function(){
-                                    console.log(window[slideOrder[0]]);
-                                    window[slideOrder[0]]((snapshot.val(), slideOrder));
-
-                            }, totalTime());
-
-                    };
-
-                    run();
-                    window[slideOrder[0]](snapshot.val(), slideOrder); //pass slide1 the firebase data & array
+                    window[slideOrder[0]](snapshot.val(), slideOrder, 0); //pass slide1 the firebase data & array
                 });
 
             });
