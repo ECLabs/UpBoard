@@ -3,8 +3,8 @@ Digital Signage for Corporations
 
 ##Getting Started:
 
-    Uses Grunt & Bower
-    You can use 'grunt serve' for testing
+Uses Grunt & Bower
+You can use 'grunt serve' for testing
 
 all data for the slideshow is stored at https://boiling-heat-9947.firebaseio.com/
 this can be easily updated by changing the URL in index.html line #82
@@ -20,7 +20,7 @@ with the exception of the logo slide the slide must also have a timing,transitio
 
 ##IMPORTANT
 
-Because each slide must call the next slide function from within itself each slide function will not complete until the last slide function completes. This means if you have a lot of slides in the show then you will use a lot of memory. **You have been warned** 
+Because each slide must call the next slide function from within itself, each slide function will not complete until the *final* slide function completes. This means if you have a lot of slides in the show then you will use a lot of memory. **You have been warned**
 
 ##Logo slide data structure:
 
@@ -100,3 +100,6 @@ Because each slide must call the next slide function from within itself each sli
             bio: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
         }
     ]
+
+
+Thanks to [Mary Lou](http://tympanus.net/codrops/author/crnacura/) for the [fourPanel Page Transitions](http://tympanus.net/codrops/2013/04/23/fullscreen-layout-with-page-transitions/) 
