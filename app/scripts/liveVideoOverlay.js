@@ -1,5 +1,5 @@
 var liveVideoOverlay = function(data, order, previous){
-    var current = 'slide' + (previous+1);
+    var current = (previous+1);
     var copyArray = order.slice();
     copyArray.splice(0,1);
 
@@ -20,8 +20,12 @@ var liveVideoOverlay = function(data, order, previous){
     //add overlay fade in animation
     $('.box').css('visibility', "visible");
     $('.box').css('animation-name', 'overlay');
-    //fade container back in
-    $(".container").fadeIn("slow");
+
+
+    if (data[current].transitions.entry === 'fade') {
+        //fade container back in
+        $(".container").fadeIn("slow");
+    }
 
 
     setTimeout(function() {

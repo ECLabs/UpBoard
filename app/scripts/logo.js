@@ -1,14 +1,18 @@
 var logo = function(data, order, previous) {
-    var current = 'slide' + (previous+1);
+    var current = (previous+1);
     //copy order array
     var copyArray = order.slice();
     copyArray.splice(0,1);
 
+    //reset background color to white
+    $('.container').css('background-color', 'white');
 
-    $('.container').css('background-color', 'white'); //reset background color to white
-    $(".movingBackground").removeClass("hidden");
-    $(".logo").removeClass("hidden");
-    $(".container").fadeIn("slow");
+    if (data[current].transitions.entry === 'fade') {
+        $(".movingBackground").removeClass("hidden");
+        $(".logo").removeClass("hidden");
+        $(".container").fadeIn("slow");
+
+    }
 
     setTimeout(function() { //first Timeout
 
