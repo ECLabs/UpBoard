@@ -4,6 +4,7 @@ var logo = function(data, order, previous) {
     var copyArray = order.slice();
     copyArray.splice(0,1);
 
+
     $('.container').css('background-color', 'white'); //reset background color to white
     $(".movingBackground").removeClass("hidden");
     $(".logo").removeClass("hidden");

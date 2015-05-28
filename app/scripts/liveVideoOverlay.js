@@ -3,6 +3,13 @@ var liveVideoOverlay = function(data, order, previous){
     var copyArray = order.slice();
     copyArray.splice(0,1);
 
+    //set slide content and color
+    $('.box p').html(data[current].content.overlay);
+    //default color #FAFCFA
+    if( data[current].content.overlayColor ){
+        $('.box').css('color', data[current].content.overlayColor)
+    };
+
 
     //first remove hidden class from slide elements
     $('#videoElement').removeClass('hidden');
