@@ -26,7 +26,7 @@ var liveVideoOverlay = function(data, order, previous){
         //fade container back in
         $(".container").fadeIn("slow");
     }
-
+    $('#videoElement').animate({volume: 1}, 2000, "linear");
 
     setTimeout(function() {
         $('.container').css('background-color', '#1B1B1C');//without making the background dark there is a bright halo around the edge of the container from the blur

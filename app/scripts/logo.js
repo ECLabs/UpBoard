@@ -19,7 +19,7 @@ var logo = function(data, order, previous) {
             $(".container").fadeOut("slow"); //first fade out the current container
             //wait & call the rest of the transition
 
-            $('#videoElement').animate({volume: 1}, 2000, "linear");
+            
             setTimeout(function() {
 
                     //hide previous

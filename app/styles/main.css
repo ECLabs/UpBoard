@@ -5,6 +5,7 @@ body {
     background-color:white;
 }
 .container{
+
     background-color:white;
     position:relative;
     padding:0;
@@ -39,9 +40,11 @@ body {
 	100% { background-position: 0 100vh; }
 }
 .movingBackground{
+
     position:relative;
     width:100%;
     height:100vh;
+    src: url(../images/background2.png) repeat-y center center fixed;
     background: url(../images/background2.png) repeat-y center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -75,11 +78,43 @@ body {
     0% {filter:grayscale(0) blur(0px) brightness(1);}
     100% {filter:grayscale(.8) blur(15px) brightness(.75);}
 }
-/*overlay animation fades from hidden to visible and opacity from 0 to 1*/
-/*this animation is necessary since the box is centered using display table*/
+@-moz-keyframes webcamBlur {
+    from {filter:grayscale(0) blur(0px) brightness(1); }
+    to {filter:grayscale(.8) blur(15px) brightness(.75); }
+}
+@-webkit-keyframes webcamBlur {
+    from {filter:grayscale(0) blur(0px) brightness(1);}
+    to {filter:grayscale(.8) blur(15px) brightness(.75); }
+}
+@-ms-keyframes webcamBlur {
+    from {filter:grayscale(0) blur(0px) brightness(1);}
+    to {filter:grayscale(.8) blur(15px) brightness(.75);}
+}
+@-o-keyframes webcamBlur {
+    from {filter:grayscale(0) blur(0px) brightness(1);}
+    to {filter:grayscale(.8) blur(15px) brightness(.75);}
+}
+/*overlay animation fades from opacity from 0 to 1*/
+/*this animation is necessary since the box is centered using display table and cannot be display none*/
 @keyframes overlay {
     0% { opacity:0;}
     100% { opacity:1;}
+}
+@-moz-keyframes overlay {
+    from { opacity:0;}
+    to { opacity:1;}
+}
+@-webkit-keyframes overlay {
+    from { opacity:0;}
+    to { opacity:1;}
+}
+@-ms-keyframes overlay {
+    from { opacity:0;}
+    to { opacity:1;}
+}
+@-o-keyframes overlay {
+    from { opacity:0;}
+    to { opacity:1;}
 }
 
 
@@ -88,10 +123,8 @@ body {
     animation-duration: 5s; /* webcam blur duration */
     animation-delay: 2s; /* webcam blur delay */
     animation-fill-mode: forwards;
-
     position:relative;
     width:100%;
-
 
 }
 
@@ -102,10 +135,7 @@ body {
     animation-duration: 5s; /* box fade in duration */
     animation-delay: 4s; /* box fade in delay */
     animation-fill-mode: forwards;
-
     opacity:0;
-
-
     display:table;
     color:#FAFCFA;
     min-height:300px;
