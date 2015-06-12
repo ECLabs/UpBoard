@@ -68,12 +68,12 @@ body {
     100% {-webkit-filter:grayscale(.8) blur(15px) brightness(.75);filter:grayscale(.8) blur(15px) brightness(.75);}
 }
 @-webkit-keyframes webcamBlur {
-    from {-webkit-filter:grayscale(0) blur(0px) brightness(1);filter:grayscale(0) blur(0px) brightness(1);}
-    to {-webkit-filter:grayscale(.8) blur(15px) brightness(.75);filter:grayscale(.8) blur(15px) brightness(.75); }
+    0% {-webkit-filter:grayscale(0) blur(0px) brightness(1);filter:grayscale(0) blur(0px) brightness(1);}
+    100% {-webkit-filter:grayscale(.8) blur(15px) brightness(.75);filter:grayscale(.8) blur(15px) brightness(.75);}
 }
 @-ms-keyframes webcamBlur {
-    from {filter:grayscale(0) blur(0px) brightness(1);}
-    to {filter:grayscale(.8) blur(15px) brightness(.75);}
+    0% {filter:grayscale(0) blur(0px) brightness(1);}
+    100% {filter:grayscale(.8) blur(15px) brightness(.75);}
 }
 /*overlay animation fades from opacity from 0 to 1*/
 /*this animation is necessary since the box is centered using display table and cannot be display none*/
@@ -82,12 +82,12 @@ body {
     100% { opacity:1;}
 }
 @-webkit-keyframes overlay {
-    from { opacity:0;}
-    to { opacity:1;}
+    0% { opacity:0;}
+    100% { opacity:1;}
 }
 @-ms-keyframes overlay {
-    from { opacity:0;}
-    to { opacity:1;}
+    0% { opacity:0;}
+    100% { opacity:1;}
 }
 
 
@@ -101,6 +101,7 @@ body {
     animation-fill-mode: forwards;
     position:relative;
     width:100%;
+    -webkit-transition: all 2s;
 
 }
 

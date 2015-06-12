@@ -21,7 +21,6 @@ var liveVideoOverlay = function(data, order, previous){
     $('.box').css('visibility', "visible");
     $('.box').css('animation-name', 'overlay');
 
-
     if (data[current].transitions.entry === 'fade') {
         //fade container back in
         $(".container").fadeIn("slow");
