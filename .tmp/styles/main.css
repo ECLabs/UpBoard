@@ -119,7 +119,6 @@ body {
     display:table;
     color:#FAFCFA;
     min-height:300px;
-    vertical-align:middle;
     position:absolute;
     top: 0;
     left: 0;
@@ -131,6 +130,12 @@ body {
     border-top: 2px solid #FAFCFA;
     border-right: 2px solid #FAFCFA;
     border-left: 2px solid #FAFCFA;
+    display:-webkit-flex;
+    display:flex;
+    -webkit-justify-content:center;
+    justify-content:center;
+    -webkit-align-items:center;
+    align-items:center;
 
 }
 .boxBottomLeft{
