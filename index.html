@@ -12,6 +12,7 @@
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <link rel="stylesheet" href="UP-1/styles/main.css">
         <link rel="icon" type="image/ico" href="../images/icon.png">
+        
 
     </head>
     <body>
@@ -34,7 +35,7 @@ $(document).ready(function() {
 
 function doStuffWithMyData(data){
 	console.log("My Data looks like this -> "+JSON.stringify(data))
-	$("#weatherInfo").html(((data.main.temp-273)*9/5)+32 +"F" +" degrees and "+data.weather[0].description+" in Shaw DC");
+	$("#weatherInfo").html(((Math.round(data.main.temp-273))*9/5)+32. +"F" +" degrees and "+data.weather[0].description.fontcolor("green").big()+" in Shaw DC");
 }
 </script>
 
