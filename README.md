@@ -101,7 +101,7 @@ Because each slide must call the next slide function from within itself, each sl
         }
     ]
 
-##Logo slide data structure:
+##Weather slide data structure:
     4: {
         type: "weather",
         transitions: {
