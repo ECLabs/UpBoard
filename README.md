@@ -7,16 +7,16 @@ Uses Grunt & Bower
 You can use 'grunt serve' for testing
 
 all data for the slideshow is stored at https://boiling-heat-9947.firebaseio.com/
-this can be easily updated by changing the URL in index.html line #82
+this can be easily updated by changing the URL in index.html
 
 to add a slide make a new node with the number the slide will be (slides added directly to firebase can only be added at the end without deleting and re-writing the previous slides). If you wish to add many new slides I suggest uncommenting and using the function I provide in index.html. If you wish to add a slide manually to firebase then be sure to follow the format of the slide type you wish. These are listed below
 
 slides will be shown in the order in which they appear in the database. not their number, however the number is important and must match the order they appear in the database.
 
-a slide type must then be specified. The types are logo, liveVideoOverlay, and fourPanel.
+a slide type must then be specified. The types are logo, liveVideoOverlay, fourPanel, and weather.
 each of these types has a specific set of parameters to be filled out.
 
-with the exception of the logo slide the slide must also have a timing,transitions, and content field.
+with the exception of the logo slide & weather the slide must also have a timing,transitions, and content field.
 
 ##IMPORTANT
 
@@ -101,5 +101,21 @@ Because each slide must call the next slide function from within itself, each sl
         }
     ]
 
+##Logo slide data structure:
+    4: {
+        type: "weather",
+        transitions: {
+            entry: 'fade', //still only supported type
+            exit: 'fade'
+        },
+        timing: {
+            slideTime: 10000, //same as liveVideoOverlay, time spent on slide
+            transitionTime: 2000, ////transition time
+        },
+        content: {
+            overlayColor: '#FAFCFA', //text color
+            zip: '20001' //set zip code for weather, US only
+        }
+    }
 
-Thanks to [Mary Lou](http://tympanus.net/codrops/author/crnacura/) for the [fourPanel Page Transitions](http://tympanus.net/codrops/2013/04/23/fullscreen-layout-with-page-transitions/) 
+Thanks to [Mary Lou](http://tympanus.net/codrops/author/crnacura/) for the [fourPanel Page Transitions](http://tympanus.net/codrops/2013/04/23/fullscreen-layout-with-page-transitions/)
