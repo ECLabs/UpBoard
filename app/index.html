@@ -17,14 +17,17 @@
         <div class="container">
             <!--logo -->
             <div>
-                <div class="movingBackground"></div>
-                <img class="logo"></img>
+                <div class="movingBackground hidden"></div>
+                <img class="logo hidden"></img>
             </div>
 
 
-            <!--liveVideoOverlay -->
-            <div class="liveVideoOverlay">
+
+            <div>
+                <!--webcam background-->
                 <video  autoplay="true" class="hidden" id="videoElement"></video>
+
+                <!--liveVideoOverlay-->
                 <div class="hidden box">
                     <p>
                         <!--liveVideoOverlayContent Injected Here -->
@@ -32,6 +35,14 @@
                     <div class="boxBottomLeft"></div>
                     <img id="star"></img>
                     <div class="boxBottomRight"></div>
+                </div>
+
+                <!--weather -->
+                <div class="weather hidden">
+                    <p>
+                        i lika do da chacha
+                        <!--weather information Injected Here -->
+                    </p>
                 </div>
             </div>
 
@@ -81,6 +92,7 @@
             </div>
 
         </div>
+
         <script src="../bower_components/jquery/dist/jquery.js"></script>
         <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
         <script type="text/javascript">
@@ -89,6 +101,9 @@
         <script src="scripts/fourPanel.js"></script>
         <script src="scripts/liveVideoOverlay.js"></script>
         <script src="scripts/logo.js"></script>
+        <script src="scripts/weather.js"></script>
+
+        </script>
         <script>
             $(function() {
 
@@ -116,12 +131,29 @@
 
                 })();
 
+                // get weather information
+                $.ajax({
+                   url: 'http://api.openweathermap.org/data/2.5/weather?zip=20001,us&units=imperial',
+                   data: {
+                      format: 'json'
+                   },
+                   error: function() {
+                      console.error("something went wrong with ajax call")
+                   },
+                   dataType: 'jsonp',
+                   success: function(data) {
+                      console.log(data);
+                      $('.weather p').html(data.name + "<br/>It is currently " + data.main.temp + "º <br/>" + data.weather[0].description);
+                   },
+                   type: 'GET'
+                });
+
                 //get firebase info
                 firebaseRef.once('value', function(snapshot) {
 
                     //use this function if you want to write firebase data easily. Note to add a slide copy object of type you wish to add and place in the order you want. make sure that order is ascending by number
 
-                    /*(function(){
+                    (function(){
                         firebaseRef.set({
                               1: {
                                     type: "logo",
@@ -130,7 +162,7 @@
                                         exit: 'fade'
                                     },
                                     timing: {
-                                        slideTime:10000 ,
+                                        slideTime:5000 ,
                                         transitionTime: 2000,
                                     }
                               },
@@ -141,7 +173,7 @@
                                       exit: 'fade'
                                   },
                                   timing: {
-                                      slideTime: 10000,
+                                      slideTime: 5000,
                                       transitionTime: 2000,
                                       audioFadeTime: 2000,
                                   },
@@ -159,15 +191,29 @@
                                   timing: {
                                       openFirstSection: 3000,
                                       openSection: 1000,
-                                      sectionTime: 20000,
+                                      sectionTime: 5000,
                                       transitionTime:1000,
                                   },
                                   content: {
                                       content: [{"name":"Jamil Evans","bio":"As President of Evans & Chambers Technology, Jamil Evans is charged with maintaining good relationships with stakeholders in the Federal Government and Intelligence Community. He manages the technical director of the company to ensure that EC's core competencies and innovations are aligned with our customer base. Jamil's uncommon mixture of hard-core technical expertise and strategic relationship management skills drive the company's winning results. Jamil is an expert in service oriented architectures (SOA), secure web service standards definition, and the design and implementation of mission-critical enterprise services and systems. Prior to founding Evans & Chambers Technology, Jamil served as a senior software engineer at Booz Allen Hamilton, providing vendor analysis and software development services to an Intelligence Community customer."},{"name":"Mary Sabatino","bio":"As a Program Manager for Evans & Chambers Technology, Mary Sabatino plays a key role in transforming customer requirements into application design and managing the resources needed to complete projects. She also works closely with development teams to keep the project within scope and to meet production and budget targets. She supports the entire Software Development Life Cycle, including requirements definition, functional design, development, system testing, documentation, training, implementation, maintenance, and customer support. Prior to working with EC, Mary managed projects with L-3 Communications and CACI to support complex information technology projects.  Mary finds it very rewarding to watch a design “come to life” in the form of a working application and her customers praise her dedication, thoroughness, and ability to go above and beyond to ensure that her projects are managed and executed efficiently."},{"name":"Ryan Gross","bio":"Ryan Gross joined Evans & Chambers Technology (EC) in November 2013. Before joining the team, he worked on a commercial project for EC, developing a workflow management tool built on Java using the Grails framework and utilizing a MySQL database. His previous experience in Java development and web development prepared him for his new role at EC as a Software Developer / Engineer I. Ryan enjoys the challenge of developing and enjoys the opportunity to work on projects that provide a positive impact."},{"name":"Vik David","bio":"Vik David is a Software Engineer for Evans & Chambers Technology's and has been working with EC since September 2010. Vik takes a lot of satisfaction in creating something that will help his clients in their jobs. His focus is on front-end technologies and he recently re-wrote and improved a widely-used dashboard report for his client."}],
                                   }
                               },
+                              4: {
+                                  type: "weather",
+                                  transitions: {
+                                      entry: 'fade',
+                                      exit: 'fade'
+                                  },
+                                  timing: {
+                                      slideTime: 10000,
+                                      transitionTime: 2000,
+                                  },
+                                  content: {
+                                      overlayColor: '#FAFCFA',
+                                  }
+                              }
                             });
-                    })(); */
+                    })();
 
                     //holder array to specify slide order
                     var slideOrder = [];
@@ -184,7 +230,7 @@
 
                             var key = childSnapshot.val();
 
-                            if(key.type ==='logo' || key.type==='liveVideoOverlay'){
+                            if(key.type ==='logo' || key.type==='liveVideoOverlay' || key.type==='weather'){
                               time+= (key.timing.slideTime + key.timing.transitionTime);
                             } else if (key.type==='fourPanel'){
                               time+= (key.timing.openFirstSection + (key.timing.openSection*4) + (key.timing.sectionTime*4) + key.timing.transitionTime);
@@ -202,7 +248,12 @@
                     })();
 
                     window[slideOrder[0]](snapshot.val(), slideOrder, 0); //pass slide1 the firebase data & array
-                });
+
+                }, function (err) { // throw error if get request fails
+                    console.error(err);
+                }
+
+                );
 
             });
         </script>

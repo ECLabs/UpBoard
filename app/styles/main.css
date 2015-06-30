@@ -16,7 +16,14 @@ body {
 .hidden{
     display:none;
 }
-/* Slide1 */
+.noAnimate{
+    -webkit-animation: none !important;
+    -moz-animation: none !important;
+    -o-animation: none !important;
+    -ms-animation: none !important;
+    animation: none !important;
+}
+/* logo */
 
 
 @keyframes animatedBackground {
@@ -73,7 +80,7 @@ body {
 
 
 
-/* Slide2 */
+/* liveVideoOverlay */
 @keyframes webcamBlur {
     0% {filter:grayscale(0) blur(0px) brightness(1);}
     100% {filter:grayscale(.8) blur(15px) brightness(.75);}
@@ -201,7 +208,41 @@ body {
 
 
 
-/* New Stuff */
+
+
+
+/* weather */
+.weather{
+    visibility: hidden;
+    display:table;
+    color:#FAFCFA;
+    min-height:300px;
+    position:absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    height:50%;
+    width:90%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.weather p {
+    display: table-cell;
+    text-align:center;
+    vertical-align:middle;
+    font-family: 'Slabo 27px', serif;
+    font-size:5em;
+    letter-spacing:2px;
+    line-height:130%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+
+/* Fourpanel */
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 
 @font-face {

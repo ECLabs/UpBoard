@@ -131,10 +131,11 @@ var fourPanel = function(data, order, previous){
                                                                         }
 
                                                                         $el.removeClass( 'bl-expand-item' );
-
+                                                                        $(".container").fadeOut("slow"); //first fade out the current container
+                                                                        
                                                                         setTimeout(function() {
 
-                                                                                $(".container").fadeOut("slow"); //first fade out the current container
+
                                                                                 $('#bl-main').addClass('hidden');
 
                                                                                 if (order.length!==0) {
