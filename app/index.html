@@ -131,28 +131,12 @@
 
                 })();
 
-                // get weather information
-                $.ajax({
-                   url: 'http://api.openweathermap.org/data/2.5/weather?zip=20001,us&units=imperial',
-                   data: {
-                      format: 'json'
-                   },
-                   error: function() {
-                      console.error("something went wrong with ajax call")
-                   },
-                   dataType: 'jsonp',
-                   success: function(data) {
-                      console.log(data);
-                      $('.weather p').html(data.name + "<br/>It is currently " + data.main.temp + "º <br/>" + data.weather[0].description);
-                   },
-                   type: 'GET'
-                });
 
                 //get firebase info
                 firebaseRef.once('value', function(snapshot) {
 
                     //use this function if you want to write firebase data easily. Note to add a slide copy object of type you wish to add and place in the order you want. make sure that order is ascending by number
-
+                    /*
                     (function(){
                         firebaseRef.set({
                               1: {
@@ -210,31 +194,45 @@
                                   },
                                   content: {
                                       overlayColor: '#FAFCFA',
+                                      zip: '20001'
                                   }
                               }
                             });
-                    })();
+                    })(); */
 
                     //holder array to specify slide order
                     var slideOrder = [];
-                    //fill in order array
-                    snapshot.forEach(function(childSnapshot) {
-                        var key = childSnapshot.val();
-                        slideOrder.push(key.type);
-                    });
-
                     //calculate total slideshow time
                     var totalTime = function() {
                         var time=2000;
                         snapshot.forEach(function(childSnapshot) {
 
                             var key = childSnapshot.val();
+                            slideOrder.push(key.type); //fill in order array
 
-                            if(key.type ==='logo' || key.type==='liveVideoOverlay' || key.type==='weather'){
+                            if(key.type ==='logo' || key.type==='liveVideoOverlay'){
                               time+= (key.timing.slideTime + key.timing.transitionTime);
                             } else if (key.type==='fourPanel'){
                               time+= (key.timing.openFirstSection + (key.timing.openSection*4) + (key.timing.sectionTime*4) + key.timing.transitionTime);
-                            }
+                          } else if(key.type==='weather'){ //if type is weather then add time same as others and get weather info from api
+                              time+= (key.timing.slideTime + key.timing.transitionTime);
+                              $.ajax({
+                                 url: 'http://api.openweathermap.org/data/2.5/weather?zip='+ key.content.zip + ',us&units=imperial',
+                                 data: {
+                                    format: 'json'
+                                 },
+                                 error: function() {
+                                    console.error("something went wrong with ajax call")
+                                 },
+                                 dataType: 'jsonp',
+                                 success: function(data) {
+                                    console.log(data);
+                                    $('.weather p').html(data.name + "<br/>It is currently " + data.main.temp + "º <br/>" + data.weather[0].description);
+                                 },
+                                 type: 'GET'
+                             });
+
+                          }
 
                         });
                       return time;
