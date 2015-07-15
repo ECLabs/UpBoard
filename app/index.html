@@ -214,7 +214,7 @@
                               time+= (key.timing.slideTime + key.timing.transitionTime);
                             } else if (key.type==='fourPanel'){
                               time+= (key.timing.openFirstSection + (key.timing.openSection*4) + (key.timing.sectionTime*4) + key.timing.transitionTime);
-                          } else if(key.type==='weather'){ //if type is weather then add time same as others and get weather info from api
+                            } else if(key.type==='weather'){ //if type is weather then add time same as others and get weather info from api
                               time+= (key.timing.slideTime + key.timing.transitionTime);
                               $.ajax({
                                  url: 'http://api.openweathermap.org/data/2.5/weather?zip='+ key.content.zip + ',us&units=imperial',
@@ -239,11 +239,19 @@
                     };
 
                     // start interval
-                    (function(){
-                        setInterval(function(){
-                            window[slideOrder[0]](snapshot.val(), slideOrder, 0);
-                        }, totalTime());
+                  //  (function(){
+                    //    setInterval(function(){
+                    //        window[slideOrder[0]](snapshot.val(), slideOrder, 0);
+                    //    }, totalTime());
+                  //  })();
+                    totalTime();
+                    (function blah() {
+
+                        window[slideOrder[0]](snapshot.val(), slideOrder, 0);
+
+                        setTimeout(blah, 100)
                     })();
+
 
                     window[slideOrder[0]](snapshot.val(), slideOrder, 0); //pass slide1 the firebase data & array
 

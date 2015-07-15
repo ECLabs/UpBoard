@@ -19,7 +19,7 @@ var logo = function(data, order, previous) {
             $(".container").fadeOut("slow"); //first fade out the current container
             //wait & call the rest of the transition
 
-            
+
             setTimeout(function() {
 
                     //hide previous

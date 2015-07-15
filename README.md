@@ -4,6 +4,13 @@ Digital Signage for Corporations
 ##Getting Started:
 
 Uses Grunt & Bower
+
+to set up grunt use to install grunt globally
+
+npm install -g grunt-cli
+
+then navigate to UpBoard folder and npm install to install dependencies
+
 You can use 'grunt serve' for testing
 
 all data for the slideshow is stored at https://boiling-heat-9947.firebaseio.com/
