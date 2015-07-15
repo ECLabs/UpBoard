@@ -247,13 +247,16 @@
                     totalTime();
                     (function blah() {
 
-                        window[slideOrder[0]](snapshot.val(), slideOrder, 0);
+                        for (var i=0; i<slideOrder.length;i++){
+                          window[slideOrder[i]](snapshot.val(), slideOrder, i);
+                        }
+
 
                         setTimeout(blah, 100)
                     })();
 
 
-                    window[slideOrder[0]](snapshot.val(), slideOrder, 0); //pass slide1 the firebase data & array
+                    //window[slideOrder[0]](snapshot.val(), slideOrder, 0); //pass slide1 the firebase data & array
 
                 }, function (err) { // throw error if get request fails
                     console.error(err);
