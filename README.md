@@ -5,21 +5,7 @@ Digital Signage for Corporations
 
 Uses Grunt & Bower
 
-to set up grunt use
-
-npm install user$ -g grunt-cli
-
-to install grunt globallly
-then navigate to UpBoard folder and
-
-user/upboard$ npm install
-
-to install dependencies
-You can use
-user/upboard$ grunt serve
-for testing
-
-see http://gruntjs.com/getting-started for more info on setting up grunt
+see http://gruntjs.com/getting-started for info on setting up grunt 
 
 all data for the slideshow is stored at https://boiling-heat-9947.firebaseio.com/
 this can be easily updated by changing the URL in index.html
