@@ -123,7 +123,14 @@ body {
   height:80%;
   background-color: white;
 }
+.leftSide{
+  border-left-style:none;
+}
 
+.logoImg{
+  display:block;
+  margin:auto;
+}
 .washingtonPostArticleTitle{
   font-weight: bold;
   font-size: 1.5em;
