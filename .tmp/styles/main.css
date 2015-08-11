@@ -112,6 +112,7 @@ body {
   border-left-style:solid;
   border-width: 2px;
   border-color: #E0E0E0;
+  overflow: hidden;
 }
 .innerBottom{
   color:black;

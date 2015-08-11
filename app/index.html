@@ -102,7 +102,6 @@
                 <!--weather -->
                 <div class="weather hidden">
                     <p>
-                        i lika do da chacha
                         <!--weather information Injected Here -->
                     </p>
                 </div>
@@ -193,7 +192,32 @@
 
                 })();
 
+                //Get and set washingtonPost content
+                var washingtonPostData;
+                $.ajax({
+                  url      : document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent('http://feeds.washingtonpost.com/rss/blogs/rss_the-switch'),
+                  dataType : 'json',
+                  success  : function (data) {
+                    console.log(data);
+                    washingtonPostData = data;
+                    var current = data.responseData.feed.entries[0];
+                    $('.washingtonPostArticleTitle').html(current.title);
+                    $('.washingtonPostArticleContent').html(current.contentSnippet);
+                    $('.washingtonPostArticleAuthor').html(current.author);
+                    console.log(current.publishedDate);
+                    var res = current.publishedDate.slice(5,25);
+                    console.log(res);
+                    var day = res.slice(0,2);
+                    console.log(day);
+                    var month = res.slice(3,6);
+                    console.log(month);
+                    var year = res.slice(7,11);
+                    console.log(year);
+                    var dayTime = res.slice(12,20);
+                    console.log(dayTime);
 
+                  }
+                });
                 //get firebase info
                 firebaseRef.once('value', function(snapshot) {
 
