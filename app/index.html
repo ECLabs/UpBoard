@@ -206,6 +206,14 @@
                     $('.washingtonPostArticleAuthor').html(current.author);
                     console.log(current.publishedDate);
                     var res = current.publishedDate.slice(5,25);
+
+                    //September abbreviation is Sept so it adds another character and requires special parsing
+                    if (res.slice(3,6) === 'Sep') {
+                      var month = 9;
+                      var day = res.slice(0,2);
+                      var year = res.slice(8,12);
+                      var dayTime = res.slice(13,21);
+                    }
                     console.log(res);
                     var day = res.slice(0,2);
                     console.log(day);

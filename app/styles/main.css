@@ -90,23 +90,22 @@ body {
 .centerBox{
   width:90%;
   height:80%;
-  background-color: yellow;
   display:flex;
   align-items:center;
 }
 .newsSection{
   height:100%;
   width:calc(100% / 3);
-  background-color: green;
+
 }
 .twitter{
-  background-color: pink;
+
 }
 .instagram{
-  background-color: teal;
+
 }
 .washingtonPost{
-  background-color: aqua;
+
 }
 
 
@@ -131,6 +130,7 @@ body {
   margin-right:auto;
   height:80%;
   background-color: white;
+
 }
 .leftSide{
   border-left-style:none;
@@ -142,26 +142,35 @@ body {
 }
 .washingtonPostArticleTitle{
   font-weight: bold;
-  font-size: 1.5em;
-  padding: 5px;
-  margin:0;
+  font-size: 1.7em;
+  padding-top:30px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin:0px;
 }
 .washingtonPostArticleContent{
+  font-size: 1.2em;
   padding: 5px;
-  margin-top:10px;
 }
 
-.washintonPostArticleAuthor{
+.washingtonPostArticleAuthor{
+  font-size: 1.2em;
   font-weight: bold;
-  padding: 5px;
-  width:200px;
   display:inline-block;
-}
-.washintonPostArticleDate{
+  width:49%;
   padding: 5px;
- width:200px;
- display:inline-block;
 }
+.washingtonPostArticleDate{
+  font-size: 1.2em;
+  display:inline-block;
+  width:49%;
+  padding:5px;
+  text-align: right;
+}
+
+
+
+
 
 /* liveVideoOverlay */
 @keyframes webcamBlur {
