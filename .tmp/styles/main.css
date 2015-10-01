@@ -64,6 +64,104 @@ body {
     background: url(../images/EC-regular-1000x263.png) no-repeat center center;
 }
 
+/*News Slide */
+.news{
+  position:relative;
+  width:100%;
+  height:100vh;
+  background-color: white;
+  display:-webkit-flex;
+  display:flex;
+  -webkit-justify-content:center;
+  justify-content:center;
+  -webkit-align-items:center;
+  align-items:center;
+}
+.centerBox{
+  width:90%;
+  height:80%;
+  display:-webkit-flex;
+  display:flex;
+  -webkit-align-items:center;
+  align-items:center;
+}
+.newsSection{
+  height:100%;
+  width:calc(100% / 3);
+
+}
+.twitter{
+
+}
+.instagram{
+
+}
+.washingtonPost{
+
+}
+
+
+.innerTop{
+  color:black;
+  margin-left:auto;
+  margin-right:auto;
+  height:20%;
+  background-color: white;
+  border-bottom-style: solid;
+  border-left-style:solid;
+  border-width: 2px;
+  border-color: #E0E0E0;
+  overflow: hidden;
+}
+.innerBottom{
+  color:black;
+  border-left-style:solid;
+  border-width: 2px;
+  border-color: #E0E0E0;
+  margin-left:auto;
+  margin-right:auto;
+  height:80%;
+  background-color: white;
+
+}
+.leftSide{
+  border-left-style:none;
+}
+
+.logoImg{
+  margin-left: 70px;
+  display:block;
+  opacity: 0;
+}
+.washingtonPostArticleTitle{
+  font-weight: bold;
+  font-size: 1.7em;
+  padding-top:30px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin:0px;
+}
+.washingtonPostArticleContent{
+  font-size: 1.2em;
+  padding: 5px;
+}
+
+.washingtonPostArticleAuthor{
+  font-size: 1.2em;
+  font-weight: bold;
+  display:inline-block;
+  width:49%;
+  padding: 5px;
+}
+.washingtonPostArticleDate{
+  font-size: 1.2em;
+  display:inline-block;
+  width:49%;
+  padding:5px;
+  text-align: right;
+}
+
+
 
 
 

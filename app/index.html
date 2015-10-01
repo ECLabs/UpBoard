@@ -21,6 +21,60 @@
                 <img class="logo hidden"></img>
             </div>
 
+            <!--news -->
+            <div class="news">
+                <div class="centerBox">
+                  <div class="newsSection twitter" >
+                    <div class="innerTop leftSide" >
+                      <img src="../images/twitterlogo.png" class="logoImg"/>
+                    </div>
+                    <div class="innerBottom leftSide">
+                      <p class="washingtonPostArticleTitle"></p>
+                      <p class="washingtonPostArticleContent"></p>
+                      <p class="washingtonPostArticleAuthor"></p>
+                      <p class="washingtonPostArticleDate"></p>
+                    </div>
+                  </div>
+                  <div class="newsSection instagram">
+                    <div class="innerTop">
+                      <img src="../images/instagram3.png" class="logoImg"/>
+                    </div>
+                    <div class="innerBottom">
+                      <p class="washingtonPostArticleTitle">
+                        This slide will include three items: a tweet, an instagram image, and a news article. For this story, focus only on the news article. See the attached wireframe for guidance.
+                      </p>
+                      <p class="washingtonPostArticleContent">
+                        This slide will include three items: a tweet, an instagram image, and a news article. For this story, focus only on the news article. See the attached wireframe for guidance.
+                      </p>
+                      <p class="washingtonPostArticleAuthor">
+                        Kole Myers
+                      </p>
+                      <p class="washingtonPostArticleDate">
+                        6/6/23
+                      </p>
+                    </div>
+                  </div>
+                  <div class="newsSection washingtonPost">
+                    <div class="innerTop">
+                      <img src="../images/Washington-post-logo-thumb.png" class="logoImg"/>
+                    </div>
+                    <div class="innerBottom">
+                      <p class="washingtonPostArticleTitle">
+                        This slide will include three items: a tweet, an instagram image, and a news article. For this story, focus only on the news article. See the attached wireframe for guidance.
+                      </p>
+                      <p class="washingtonPostArticleContent">
+                        This slide will include three items: a tweet, an instagram image, and a news article. For this story, focus only on the news article. See the attached wireframe for guidance.
+                      </p>
+                      <p class="washingtonPostArticleAuthor">
+                        Kole Myers
+                      </p>
+                      <p class="washingtonPostArticleDate">
+                        6/6/23
+                      </p>
+                    </div>
+                  </div>
+                </div>
+            </div>
 
 
             <div>
@@ -40,7 +94,6 @@
                 <!--weather -->
                 <div class="weather hidden">
                     <p>
-                        i lika do da chacha
                         <!--weather information Injected Here -->
                     </p>
                 </div>
@@ -98,6 +151,7 @@
         <script type="text/javascript">
             var firebaseRef = new Firebase("https://boiling-heat-9947.firebaseio.com/");
         </script>
+        <script src="scripts/news.js"></script>
         <script src="scripts/fourPanel.js"></script>
         <script src="scripts/liveVideoOverlay.js"></script>
         <script src="scripts/logo.js"></script>
@@ -131,7 +185,40 @@
 
                 })();
 
+                //Get and set washingtonPost content
+                var washingtonPostData;
+                $.ajax({
+                  url      : document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent('http://feeds.washingtonpost.com/rss/blogs/rss_the-switch'),
+                  dataType : 'json',
+                  success  : function (data) {
+                    console.log(data);
+                    washingtonPostData = data;
+                    var current = data.responseData.feed.entries[0];
+                    $('.washingtonPostArticleTitle').html(current.title);
+                    $('.washingtonPostArticleContent').html(current.contentSnippet);
+                    $('.washingtonPostArticleAuthor').html(current.author);
+                    console.log(current.publishedDate);
+                    var res = current.publishedDate.slice(5,25);
 
+                    //September abbreviation is Sept so it adds another character and requires special parsing
+                    if (res.slice(3,6) === 'Sep') {
+                      var month = 9;
+                      var day = res.slice(0,2);
+                      var year = res.slice(8,12);
+                      var dayTime = res.slice(13,21);
+                    }
+                    console.log(res);
+                    var day = res.slice(0,2);
+                    console.log(day);
+                    var month = res.slice(3,6);
+                    console.log(month);
+                    var year = res.slice(7,11);
+                    console.log(year);
+                    var dayTime = res.slice(12,20);
+                    console.log(dayTime);
+
+                  }
+                });
                 //get firebase info
                 firebaseRef.once('value', function(snapshot) {
 
@@ -239,13 +326,14 @@
                     };
 
                     // start interval
-                    (function(){
+                  /*  (function(){
                         setInterval(function(){
                             window[slideOrder[0]](snapshot.val(), slideOrder, 0);
                         }, totalTime());
                     })();
 
                     window[slideOrder[0]](snapshot.val(), slideOrder, 0); //pass slide1 the firebase data & array
+                    */
 
                 }, function (err) { // throw error if get request fails
                     console.error(err);
