@@ -129,8 +129,9 @@ body {
 }
 
 .logoImg{
+  margin-left: 70px;
   display:block;
-  margin:auto;
+  opacity: 0;
 }
 .washingtonPostArticleTitle{
   font-weight: bold;
