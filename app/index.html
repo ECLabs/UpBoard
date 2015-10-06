@@ -10,7 +10,7 @@
         <link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
 
         <link rel="stylesheet" href="styles/main.css">
-        <link rel="icon" type="image/ico" href="../images/icon.png">
+        <link rel="icon" type="image/ico" href="images/icon.png">
 
     </head>
     <body>
@@ -21,12 +21,12 @@
                 <img class="logo hidden"></img>
             </div>
 
-            <!--news -->
-            <div class="news">
+            <!--news-->
+            <div class="news hidden">
                 <div class="centerBox">
                   <div class="newsSection twitter" >
                     <div class="innerTop leftSide" >
-                      <img src="../images/twitterlogo.png" class="logoImg"/>
+                      <img src="images/twitterlogo.png" class="logoImg"/>
                     </div>
                     <div class="innerBottom leftSide">
                       <p class="washingtonPostArticleTitle"></p>
@@ -37,7 +37,7 @@
                   </div>
                   <div class="newsSection instagram">
                     <div class="innerTop">
-                      <img src="../images/instagram3.png" class="logoImg"/>
+                      <img src="images/instagram3.png" class="logoImg"/>
                     </div>
                     <div class="innerBottom">
                       <p class="washingtonPostArticleTitle">
@@ -56,7 +56,7 @@
                   </div>
                   <div class="newsSection washingtonPost">
                     <div class="innerTop">
-                      <img src="../images/Washington-post-logo-thumb.png" class="logoImg"/>
+                      <img src="images/Washington-post-logo-thumb.png" class="logoImg"/>
                     </div>
                     <div class="innerBottom">
                       <p class="washingtonPostArticleTitle">
@@ -188,8 +188,8 @@
                 //Get and set washingtonPost content
                 var washingtonPostData;
                 $.ajax({
-                  url      : document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent('http://feeds.washingtonpost.com/rss/blogs/rss_the-switch'),
-                  dataType : 'json',
+                  url      : 'http://feeds.washingtonpost.com/rss/blogs/rss_the-switch',
+                  dataType : 'text',
                   success  : function (data) {
                     console.log(data);
                     washingtonPostData = data;
@@ -283,6 +283,17 @@
                                       overlayColor: '#FAFCFA',
                                       zip: '20001'
                                   }
+                              },
+                              5: {
+                                  type: "news",
+                                  transitions: {
+                                      entry: 'fade',
+                                      exit: 'fade'
+                                  },
+                                  timing: {
+                                      slideTime: 10000,
+                                      transitionTime: 2000,
+                                  },
                               }
                             });
                     })(); */
@@ -297,7 +308,7 @@
                             var key = childSnapshot.val();
                             slideOrder.push(key.type); //fill in order array
 
-                            if(key.type ==='logo' || key.type==='liveVideoOverlay'){
+                            if(key.type ==='logo' || key.type==='liveVideoOverlay' || key.type==='news'){
                               time+= (key.timing.slideTime + key.timing.transitionTime);
                             } else if (key.type==='fourPanel'){
                               time+= (key.timing.openFirstSection + (key.timing.openSection*4) + (key.timing.sectionTime*4) + key.timing.transitionTime);
@@ -314,7 +325,7 @@
                                  dataType: 'jsonp',
                                  success: function(data) {
                                     console.log(data);
-                                    $('.weather p').html(data.name + "<br/>It is currently " + data.main.temp + "º <br/>" + data.weather[0].description);
+                                    $('.weather p').html("<div>" + data.name + "</div>" + data.main.temp + "º | " +toCamelCase(data.weather[0].description));
                                  },
                                  type: 'GET'
                              });
@@ -326,14 +337,14 @@
                     };
 
                     // start interval
-                  /*  (function(){
+                    (function(){
                         setInterval(function(){
                             window[slideOrder[0]](snapshot.val(), slideOrder, 0);
                         }, totalTime());
                     })();
 
                     window[slideOrder[0]](snapshot.val(), slideOrder, 0); //pass slide1 the firebase data & array
-                    */
+                    
 
                 }, function (err) { // throw error if get request fails
                     console.error(err);

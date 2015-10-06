@@ -45,7 +45,7 @@ var liveVideoOverlay = function(data, order, previous){
                             $('.box').css('visibility', "hidden");
                             $(".box").addClass("hidden");
 
-                            if (order.length!==0) {
+                            if (copyArray.length!==0) {
                                 window[copyArray[0]](data, copyArray, previous+1);
                             }
 

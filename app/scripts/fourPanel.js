@@ -138,7 +138,7 @@ var fourPanel = function(data, order, previous){
 
                                                                                 $('#bl-main').addClass('hidden');
 
-                                                                                if (order.length!==0) {
+                                                                                if (copyArray.length!==0) {
                                                                                     window[copyArray[0]](data, copyArray, previous+1); //Call the next slide function
                                                                                 }
 

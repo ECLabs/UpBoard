@@ -13,9 +13,6 @@ body {
     height: 100%;
 
 }
-.hidden{
-    display:none;
-}
 .noAnimate{
     -webkit-animation: none !important;
     -moz-animation: none !important;
@@ -334,6 +331,11 @@ body {
     margin-right:auto;
 }
 
+.weather div {
+    border-bottom: 4px solid white;
+    padding-bottom: 11px;
+}
+
 
 /* Fourpanel */
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
@@ -647,4 +649,8 @@ section.bl-expand .bl-icon-close {
 	.bl-content > ul li {
 		width: 40%;
 	}
+}
+
+.hidden{
+    display:none;
 }

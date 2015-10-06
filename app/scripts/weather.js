@@ -3,7 +3,6 @@ var weather = function(data, order, previous){
     var copyArray = order.slice(); //make a copy of the array
     copyArray.splice(0,1); //remove the current slide from the copy of the order array so we can call copyArray[0] to call the next function easily later
 
-
     //default color #FAFCFA
     if( data[current].content.overlayColor ){
         $('.box').css('color', data[current].content.overlayColor)
@@ -32,7 +31,7 @@ var weather = function(data, order, previous){
                             $("#videoElement").addClass("hidden");//set video background to hidden so it doesn't interfere with anything
                             $('.weather').css('visibility', "hidden");
                             $('#videoElement').removeClass('noAnimate');
-                            if (order.length!==0) {
+                            if (copyArray.length!==0) {
                                 window[copyArray[0]](data, copyArray, previous+1);
                             }
 
@@ -40,4 +39,17 @@ var weather = function(data, order, previous){
 
             }, data[current].timing.slideTime);
 
+}
+
+function toCamelCase(string){
+    var words = string.split(" ");
+    var word = null;
+    var camelCasedString = "";
+    
+    for(i in words){
+        word = words[i];
+        camelCasedString += word.charAt(0).toUpperCase() + word.substring(1, word.length) + ' ';
+    }
+
+    return camelCasedString;
 }

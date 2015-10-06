@@ -27,7 +27,7 @@ var logo = function(data, order, previous) {
                     $('.logo').addClass("hidden");
 
                     //check if this is the end if not call next slide
-                    if (order.length!==0) {
+                    if (copyArray.length!==0) {
                         window[copyArray[0]](data, copyArray, previous+1);
                     }
 
