@@ -21,6 +21,12 @@
                 <img class="logo hidden"></img>
             </div>
 
+            <!--picture -->
+            <div class="picture hidden">
+                <center><p></p></center>
+                <img class="fullscreen"></img>
+            </div>
+
             <!--news-->
             <div class="news hidden">
                 <div class="centerBox">
@@ -151,10 +157,11 @@
         <script type="text/javascript">
             var firebaseRef = new Firebase("https://boiling-heat-9947.firebaseio.com/");
         </script>
-        <script src="scripts/news.js"></script>
+        <!-- <script src="scripts/news.js"></script> -->
         <script src="scripts/fourPanel.js"></script>
         <script src="scripts/liveVideoOverlay.js"></script>
         <script src="scripts/logo.js"></script>
+        <script src="scripts/picture.js"></script>
         <script src="scripts/weather.js"></script>
 
         </script>
@@ -188,8 +195,8 @@
                 //Get and set washingtonPost content
                 var washingtonPostData;
                 $.ajax({
-                  url      : 'http://feeds.washingtonpost.com/rss/blogs/rss_the-switch',
-                  dataType : 'text',
+                 url      : document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent('http://feeds.washingtonpost.com/rss/blogs/rss_the-switch'),
+                  dataType : 'json',
                   success  : function (data) {
                     console.log(data);
                     washingtonPostData = data;
@@ -217,6 +224,9 @@
                     var dayTime = res.slice(12,20);
                     console.log(dayTime);
 
+                  },
+                  error : function(data){
+                    console.log(data)
                   }
                 });
                 //get firebase info
@@ -285,7 +295,7 @@
                                   }
                               },
                               5: {
-                                  type: "news",
+                                  type: "picture",
                                   transitions: {
                                       entry: 'fade',
                                       exit: 'fade'
@@ -293,6 +303,9 @@
                                   timing: {
                                       slideTime: 10000,
                                       transitionTime: 2000,
+                                  },
+                                  content: {
+                                      caption: "Photo caption goes here"
                                   },
                               }
                             });
@@ -308,7 +321,7 @@
                             var key = childSnapshot.val();
                             slideOrder.push(key.type); //fill in order array
 
-                            if(key.type ==='logo' || key.type==='liveVideoOverlay' || key.type==='news'){
+                            if(key.type ==='logo' || key.type==='liveVideoOverlay' || key.type==='picture'){
                               time+= (key.timing.slideTime + key.timing.transitionTime);
                             } else if (key.type==='fourPanel'){
                               time+= (key.timing.openFirstSection + (key.timing.openSection*4) + (key.timing.sectionTime*4) + key.timing.transitionTime);
@@ -345,6 +358,15 @@
 
                     window[slideOrder[0]](snapshot.val(), slideOrder, 0); //pass slide1 the firebase data & array
                     
+                    //Pre-load picture so it is rendered to screen in time
+                    for(i in snapshot.val()){
+                      if(snapshot.val()[i] != undefined){
+                        if(snapshot.val()[i].type == "picture"){
+                          $('.picture img').attr('src', snapshot.val()[i].content.imageUrl);
+                          break;
+                        }
+                      }
+                    }
 
                 }, function (err) { // throw error if get request fails
                     console.error(err);
