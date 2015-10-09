@@ -10,13 +10,17 @@ var liveVideoOverlay = function(data, order, previous){
         $('.box').css('color', data[current].content.overlayColor)
     };
 
+    $('.missionStatement video').attr('src', 'http://www.w3schools.com/HTML/mov_bbb.mp4');
+    $('.missionStatement video').get(0).play()
 
     //first remove hidden class from slide elements
-    $('#videoElement').removeClass('hidden');
     $('.box').removeClass('hidden');
+    $('.missionStatement video').removeClass('noAnimate');
+    $('.box').removeClass('noAnimate');
+    $('.missionStatement').removeClass('hidden');
 
     //add webcamBlur animation so it starts on time
-    $('#videoElement').css('animation-name', 'webcamBlur');
+    $('.missionStatement video').css('animation-name', 'webcamBlur');
     //add overlay fade in animation
     $('.box').css('visibility', "visible");
     $('.box').css('animation-name', 'overlay');
@@ -25,11 +29,11 @@ var liveVideoOverlay = function(data, order, previous){
         //fade container back in
         $(".container").fadeIn("slow");
     }
-    $('#videoElement').animate({volume: 1}, 2000, "linear");
+    $('.missionStatement video').animate({volume: 1}, 2000, "linear");
 
     setTimeout(function() {
         $('.container').css('background-color', '#1B1B1C');//without making the background dark there is a bright halo around the edge of the container from the blur
-        $('#videoElement').animate({volume: 0}, 5000,"linear");//This doesn't work super well but it's the only volume method I've found
+        $('.missionStatement video').animate({volume: 0}, 5000,"linear");//This doesn't work super well but it's the only volume method I've found
 
             setTimeout(function() { //Fade Container
 
@@ -40,10 +44,12 @@ var liveVideoOverlay = function(data, order, previous){
 
                             //hide previous
 
-                            $("#videoElement").addClass("hidden");
                             $('.box').css('opacity', 0);
+                            $('.missionStatement video').addClass('noAnimate');
+                            $('.box').addClass('noAnimate');
                             $('.box').css('visibility', "hidden");
-                            $(".box").addClass("hidden");
+                            $('.box').addClass("hidden");
+                            $(".missionStatement").addClass("hidden");
 
                             if (copyArray.length!==0) {
                                 window[copyArray[0]](data, copyArray, previous+1);

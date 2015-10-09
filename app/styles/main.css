@@ -226,7 +226,16 @@ body {
 
 }
 
+video {
+        /*animation-name: webcamBlur;*/
+    animation-duration: 5s; /* webcam blur duration */
+    animation-delay: 2s; /* webcam blur delay */
+    animation-fill-mode: forwards;
+    position:relative;
+    width:100%;
+    -webkit-transition: all 2s;
 
+}
 
 .box{
     /*animation-name: overlay;*/
@@ -668,7 +677,11 @@ section.bl-expand .bl-icon-close {
     margin: auto;
     position: absolute;
     right: 0;
-    text-align: left;
+    text-align: center;
     width: 65%;
     z-index: 1;
+}
+
+.box {
+  z-index: 1;
 }
