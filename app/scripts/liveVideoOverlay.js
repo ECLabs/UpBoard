@@ -10,19 +10,15 @@ var liveVideoOverlay = function(data, order, previous){
         $('.box').css('color', data[current].content.overlayColor)
     };
 
-    $('.missionStatement video').attr('src', 'http://www.w3schools.com/HTML/mov_bbb.mp4');
+    $('.missionStatement video').attr('src', data[current].content.videoUrl);
     $('.missionStatement video').get(0).play()
 
     //first remove hidden class from slide elements
-    $('.box').removeClass('hidden');
-    $('.missionStatement video').removeClass('noAnimate');
-    $('.box').removeClass('noAnimate');
     $('.missionStatement').removeClass('hidden');
 
     //add webcamBlur animation so it starts on time
     $('.missionStatement video').css('animation-name', 'webcamBlur');
     //add overlay fade in animation
-    $('.box').css('visibility', "visible");
     $('.box').css('animation-name', 'overlay');
 
     if (data[current].transitions.entry === 'fade') {
@@ -43,13 +39,19 @@ var liveVideoOverlay = function(data, order, previous){
                     setTimeout(function() {
 
                             //hide previous
-
-                            $('.box').css('opacity', 0);
-                            $('.missionStatement video').addClass('noAnimate');
-                            $('.box').addClass('noAnimate');
-                            $('.box').css('visibility', "hidden");
-                            $('.box').addClass("hidden");
                             $(".missionStatement").addClass("hidden");
+
+                            //Remove and add video to kill animations
+                            $('.missionStatement video').remove();
+                            $('.missionStatement').prepend("<video></video>");
+
+                            $('.box').remove();
+                            $('.missionStatement').append('<div class="box">'+
+                                                              '<p></p>'+
+                                                              '<div class="boxBottomLeft"></div>'+
+                                                              '<img id="star"></img>'+
+                                                              '<div class="boxBottomRight"></div>'+                
+                                                          '</div>');
 
                             if (copyArray.length!==0) {
                                 window[copyArray[0]](data, copyArray, previous+1);

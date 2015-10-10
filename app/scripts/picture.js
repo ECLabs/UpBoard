@@ -11,7 +11,7 @@ var picture = function(data, order, previous){
 
     if (data[current].transitions.entry === 'fade') {
         //fade container back in
-        $(".container").fadeIn(295);
+        $(".container").fadeIn("slow");
     }
 
     setTimeout(function() { //Fade Container

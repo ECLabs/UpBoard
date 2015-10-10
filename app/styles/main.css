@@ -171,25 +171,25 @@ body {
 
 
 /* liveVideoOverlay */
-@keyframes webcamBlur {
-    0% {filter:grayscale(0) blur(0px) brightness(1);}
-    100% {filter:grayscale(.8) blur(15px) brightness(.75);}
-}
 @-moz-keyframes webcamBlur {
-    0% {filter:grayscale(0) blur(0px) }
-    100% {filter:grayscale(.8) blur(15px) }
+    0% {filter:grayscale(0) blur(0px);}
+    80% {}
+    100% {filter: grayscale(.8) blur(8px);}
 }
 @-webkit-keyframes webcamBlur {
-    0% {filter:grayscale(0) blur(0px) brightness(1);}
-    100% {filter:grayscale(.8) blur(15px) brightness(.75);}
+    0% {-webkit-filter:grayscale(0) blur(0px);}
+    80% {}
+    100% {-webkit-filter: grayscale(.8) blur(8px);}
 }
 @-ms-keyframes webcamBlur {
-    0% {filter:grayscale(0) blur(0px) brightness(1);}
-    100% {filter:grayscale(.8) blur(15px) brightness(.75);}
+    0% {filter:grayscale(0) blur(0px);}
+    80% {}
+    100% {filter:grayscale(.8) blur(8px);}
 }
 @-o-keyframes webcamBlur {
-    0% {filter:grayscale(0) blur(0px) brightness(1);}
-    100% {filter:grayscale(.8) blur(15px) brightness(.75);}
+    0% {filter:grayscale(0) blur(0px);}
+    80% {}
+    100% {filter:grayscale(.8) blur(8px);}
 }
 /*overlay animation fades from opacity from 0 to 1*/
 /*this animation is necessary since the box is centered using display table and cannot be display none*/
