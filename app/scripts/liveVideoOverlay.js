@@ -10,26 +10,26 @@ var liveVideoOverlay = function(data, order, previous){
         $('.box').css('color', data[current].content.overlayColor)
     };
 
-    $('.missionStatement video').attr('src', data[current].content.videoUrl);
-    $('.missionStatement video').get(0).play()
 
     //first remove hidden class from slide elements
-    $('.missionStatement').removeClass('hidden');
+    $('#videoElement').removeClass('hidden');
+    $('.box').removeClass('hidden');
 
     //add webcamBlur animation so it starts on time
-    $('.missionStatement video').css('animation-name', 'webcamBlur');
+    $('#videoElement').css('animation-name', 'webcamBlur');
     //add overlay fade in animation
+    $('.box').css('visibility', "visible");
     $('.box').css('animation-name', 'overlay');
 
     if (data[current].transitions.entry === 'fade') {
         //fade container back in
         $(".container").fadeIn("slow");
     }
-    $('.missionStatement video').animate({volume: 1}, 2000, "linear");
+    $('#videoElement').animate({volume: 1}, 2000, "linear");
 
     setTimeout(function() {
         $('.container').css('background-color', '#1B1B1C');//without making the background dark there is a bright halo around the edge of the container from the blur
-        $('.missionStatement video').animate({volume: 0}, 5000,"linear");//This doesn't work super well but it's the only volume method I've found
+        $('#videoElement').animate({volume: 0}, 5000,"linear");//This doesn't work super well but it's the only volume method I've found
 
             setTimeout(function() { //Fade Container
 
@@ -39,21 +39,13 @@ var liveVideoOverlay = function(data, order, previous){
                     setTimeout(function() {
 
                             //hide previous
-                            $(".missionStatement").addClass("hidden");
 
-                            //Remove and add video to kill animations
-                            $('.missionStatement video').remove();
-                            $('.missionStatement').prepend("<video></video>");
+                            $("#videoElement").addClass("hidden");
+                            $('.box').css('opacity', 0);
+                            $('.box').css('visibility', "hidden");
+                            $(".box").addClass("hidden");
 
-                            $('.box').remove();
-                            $('.missionStatement').append('<div class="box">'+
-                                                              '<p></p>'+
-                                                              '<div class="boxBottomLeft"></div>'+
-                                                              '<img id="star"></img>'+
-                                                              '<div class="boxBottomRight"></div>'+                
-                                                          '</div>');
-
-                            if (copyArray.length!==0) {
+                            if (order.length!==0) {
                                 window[copyArray[0]](data, copyArray, previous+1);
                             }
 

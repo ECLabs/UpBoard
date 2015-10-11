@@ -27,7 +27,7 @@
                 <img class="fullscreen"></img>
             </div>
 
-            <!--liveVideoOverlay-->
+            <!--staticVideoOverlay-->
             <div class="missionStatement hidden">
               <video></video>
               <div class="box">
@@ -162,6 +162,7 @@
         <!-- <script src="scripts/news.js"></script> -->
         <script src="scripts/fourPanel.js"></script>
         <script src="scripts/liveVideoOverlay.js"></script>
+        <script src="scripts/staticVideoOverlay.js"></script>
         <script src="scripts/logo.js"></script>
         <script src="scripts/picture.js"></script>
         <script src="scripts/weather.js"></script>
@@ -323,14 +324,14 @@
                             var key = childSnapshot.val();
                             slideOrder.push(key.type); //fill in order array
 
-                            if(key.type ==='logo' || key.type==='liveVideoOverlay' || key.type==='picture'){
+                            if(key.type ==='logo' || key.type==='liveVideoOverlay' || key.type==='picture' || key.type==='staticVideoOverlay'){
                               time+= (key.timing.slideTime + key.timing.transitionTime);
                             } else if (key.type==='fourPanel'){
                               time+= (key.timing.openFirstSection + (key.timing.openSection*4) + (key.timing.sectionTime*4) + key.timing.transitionTime);
                           } else if(key.type==='weather'){ //if type is weather then add time same as others and get weather info from api
                               time+= (key.timing.slideTime + key.timing.transitionTime);
                               $.ajax({
-                                 url: 'http://api.openweathermap.org/data/2.5/weather?zip='+ key.content.zip + ',us&units=imperial',
+                                 url: 'http://api.openweathermap.org/data/2.5/weather?zip='+ key.content.zip + ',us&units=imperial&APPID=8cbe87b8668498c44b0ade0ce19afd6b',
                                  data: {
                                     format: 'json'
                                  },

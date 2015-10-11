@@ -19,8 +19,6 @@ var weather = function(data, order, previous){
         $(".container").fadeIn("slow");
     }
 
-
-
             setTimeout(function() { //Fade Container
 
                     $(".container").fadeOut("slow"); //first fade out the current container
