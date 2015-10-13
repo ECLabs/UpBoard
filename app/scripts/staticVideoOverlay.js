@@ -17,7 +17,7 @@ var staticVideoOverlay = function(data, order, previous){
     $('.missionStatement').removeClass('hidden');
 
     //add webcamBlur animation so it starts on time
-    $('.missionStatement video').css('animation-name', 'webcamBlur');
+    $('.missionStatement video').css('animation-name', 'webcamBlur');    
     //add overlay fade in animation
     $('.box').css('animation-name', 'overlay');
 

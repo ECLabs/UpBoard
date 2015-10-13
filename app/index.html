@@ -107,46 +107,66 @@
                 </div>
             </div>
 
-            <!--fourPanel -->
+            <!--bioPanels -->
             <div id="bl-main" class="bl-main hidden">
 
                 <section id="section1">
                     <div class="bl-box">
-                        <h2 class="bl-icon bl-icon-about"><!--fourPanel top left first name Injected Here --></h2>
+                        <h2 class="bl-icon bl-icon-about"><!--bioPanels top left first name Injected Here --></h2>
                     </div>
                     <div class="bl-content">
-                        <h2><!--fourPanel top left name Injected Here --></h2>
-                        <p><!--fourPanel top left text Injected Here --></p>
+                        <h2><!--bioPanels top left name Injected Here --></h2>
+                        <p><!--bioPanels top left text Injected Here --></p>
                     </div>
                 </section>
 
                 <section id="section2">
                     <div class="bl-box">
-                        <h2 class="bl-icon bl-icon-works"><!--fourPanel top right first name Injected Here --></h2>
+                        <h2 class="bl-icon bl-icon-works"><!--bioPanels top right first name Injected Here --></h2>
                     </div>
                     <div class="bl-content">
-                        <h2><!--fourPanel top right name Injected Here --></h2>
-                        <p><!--fourPanel top right text Injected Here --></p>
+                        <h2><!--bioPanels top right name Injected Here --></h2>
+                        <p><!--bioPanels top right text Injected Here --></p>
                     </div>
                 </section>
 
                 <section id="section3">
                     <div class="bl-box">
-                        <h2 class="bl-icon bl-icon-blog"><!--fourPanel botto left first name Injected Here --></h2>
+                        <h2 class="bl-icon bl-icon-blog"><!--bioPanels botto left first name Injected Here --></h2>
                     </div>
                     <div class="bl-content">
-                        <h2><!--fourPanel bottom left name Injected Here --></h2>
-                        <p><!--fourPanel bottom left text Injected Here --></p>
+                        <h2><!--bioPanels bottom left name Injected Here --></h2>
+                        <p><!--bioPanels bottom left text Injected Here --></p>
                     </div>
                 </section>
 
                 <section id="section4">
                     <div class="bl-box">
-                        <h2 class="bl-icon bl-icon-contact"><!--fourPanel bottom right first name Injected Here --></h2>
+                        <h2 class="bl-icon bl-icon-contact"><!--bioPanels bottom right first name Injected Here --></h2>
                     </div>
                     <div class="bl-content">
-                        <h2><!--fourPanel bottom right name Injected Here --></h2>
-                        <p><!--fourPanel bottom right text Injected Here --></p>
+                        <h2><!--bioPanels bottom right name Injected Here --></h2>
+                        <p><!--bioPanels bottom right text Injected Here --></p>
+                    </div>
+                </section>
+
+                <section id="section5">
+                    <div class="bl-box">
+                        <h2 class="bl-icon bl-icon-contact"><!--bioPanels bottom right first name Injected Here --></h2>
+                    </div>
+                    <div class="bl-content">
+                        <h2><!--bioPanels bottom right name Injected Here --></h2>
+                        <p><!--bioPanels bottom right text Injected Here --></p>
+                    </div>
+                </section>
+
+                <section id="section6">
+                    <div class="bl-box">
+                        <h2 class="bl-icon bl-icon-contact"><!--bioPanels bottom right first name Injected Here --></h2>
+                    </div>
+                    <div class="bl-content">
+                        <h2><!--bioPanels bottom right name Injected Here --></h2>
+                        <p><!--bioPanels bottom right text Injected Here --></p>
                     </div>
                 </section>
 
@@ -160,7 +180,7 @@
             var firebaseRef = new Firebase("https://boiling-heat-9947.firebaseio.com/");
         </script>
         <!-- <script src="scripts/news.js"></script> -->
-        <script src="scripts/fourPanel.js"></script>
+        <script src="scripts/bioPanels.js"></script>
         <script src="scripts/liveVideoOverlay.js"></script>
         <script src="scripts/staticVideoOverlay.js"></script>
         <script src="scripts/logo.js"></script>
@@ -267,7 +287,7 @@
                                   }
                               },
                               3: {
-                                  type: "fourPanel",
+                                  type: "bioPanels",
                                   transitions: {
                                       entry: 'fade',
                                       exit: 'fade'
@@ -326,8 +346,8 @@
 
                             if(key.type ==='logo' || key.type==='liveVideoOverlay' || key.type==='picture' || key.type==='staticVideoOverlay'){
                               time+= (key.timing.slideTime + key.timing.transitionTime);
-                            } else if (key.type==='fourPanel'){
-                              time+= (key.timing.openFirstSection + (key.timing.openSection*4) + (key.timing.sectionTime*4) + key.timing.transitionTime);
+                            } else if (key.type==='bioPanels'){
+                              time+= (key.timing.openFirstSection + (key.timing.openSection*6) + (key.timing.sectionTime*6) + key.timing.transitionTime);
                           } else if(key.type==='weather'){ //if type is weather then add time same as others and get weather info from api
                               time+= (key.timing.slideTime + key.timing.transitionTime);
                               $.ajax({
@@ -340,7 +360,6 @@
                                  },
                                  dataType: 'jsonp',
                                  success: function(data) {
-                                    console.log(data);
                                     $('.weather p').html("<div>" + data.name + "</div>" + data.main.temp + "º | " +toCamelCase(data.weather[0].description));
                                  },
                                  type: 'GET'
