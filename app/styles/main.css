@@ -393,42 +393,38 @@ a {
 	position: absolute;
 	width: 33.3%;
 	height: 50%;
+  background: #ff5a00;
+  border: 1px solid white;
 }
 
 .bl-main > section:first-child {
 	top: 0;
 	left: 0;
-	background: #F06060;
 }
 
 .bl-main > section:nth-child(2) {
 	top: 0;
 	left: 33.3%;
-	background: #FA987D;
 }
 
 .bl-main > section:nth-child(3) {
 	top: 0;
 	left: 66.6%;
-	background: #72CCA7;
 }
 
 .bl-main > section:nth-child(4) {
 	top: 50%;
 	left: 0;
-	background: #10A296;
 }
 
 .bl-main > section:nth-child(5) {
   top: 50%;
   left: 33.3%;
-  background: #10A296;
 }
 
 .bl-main > section:nth-child(6) {
   top: 50%;
   left: 66.6%;
-  background: #10A296;
 }
 
 .bl-box {
@@ -592,23 +588,8 @@ div.bl-panel-items > div > div {
 	z-index: 100;
 }
 
-.bl-main > section:first-child.bl-expand {
-	background: #EE4444;
-}
-.bl-main > section:nth-child(2).bl-expand {
-	background: #F98262;
-}
-.bl-main > section:nth-child(3).bl-expand {
-	background: #4BBE8E;
-}
-.bl-main > section:nth-child(4).bl-expand {
-	background: #0D8278;
-}
-.bl-main > section:nth-child(5).bl-expand {
-  background: #0D8278;
-}
-.bl-main > section:nth-child(6).bl-expand {
-  background: #0D8278;
+.bl-main > section.bl-expand {
+  background-color: #ff5a00;
 }
 
 .bl-main.bl-expand-item > section:not(.bl-expand),
