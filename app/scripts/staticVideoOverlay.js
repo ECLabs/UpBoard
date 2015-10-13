@@ -18,6 +18,7 @@ var staticVideoOverlay = function(data, order, previous){
 
     //add webcamBlur animation so it starts on time
     $('.missionStatement video').css('animation-name', 'webcamBlur');    
+    $('.missionStatement video').css('animation-duration', data[current].timing.slideTime/1000+'s');    
     //add overlay fade in animation
     $('.box').css('animation-name', 'overlay');
 

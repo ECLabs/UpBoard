@@ -228,7 +228,7 @@ body {
 
 video {
         /*animation-name: webcamBlur;*/
-    animation-duration: 5s; /* webcam blur duration */
+    
     animation-delay: 2s; /* webcam blur delay */
     animation-fill-mode: forwards;
     position:relative;
@@ -387,6 +387,7 @@ a {
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
 .bl-main > section {
