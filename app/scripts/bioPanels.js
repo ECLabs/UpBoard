@@ -25,6 +25,9 @@ var bioPanels = function(data, order, previous){
         $('.container').css('background-color', 'grey');
     }
 
+    //Show underline
+    $('#section1 .bl-box .bl-underline').removeClass('hidden');
+
     //work in progress
     var $el = $( '#bl-main' ),
 		$sections = $el.children( 'section' ),
@@ -69,6 +72,9 @@ var bioPanels = function(data, order, previous){
                 //Slide1 Close
                 setTimeout(function() {
 
+                        $('#section1 .bl-box .bl-underline').addClass('hidden');
+                        $('#section2 .bl-box .bl-underline').removeClass('hidden');
+
                         $section1.data( 'open', false ).removeClass( 'bl-expand' ).on( transEndEventName, function( event ) {
                             $( "#section1" ).off( transEndEventName ).removeClass( 'bl-expand-top' );
                         } );
@@ -87,6 +93,9 @@ var bioPanels = function(data, order, previous){
 
                                 //Slide2 Close
                                 setTimeout(function() {
+
+                                        $('#section2 .bl-box .bl-underline').addClass('hidden');
+                                        $('#section3 .bl-box .bl-underline').removeClass('hidden');
 
                                         $section2.data( 'open', false ).removeClass( 'bl-expand' ).on( transEndEventName, function( event ) {
                                             $( "#section2" ).off( transEndEventName ).removeClass( 'bl-expand-top' );
@@ -107,6 +116,9 @@ var bioPanels = function(data, order, previous){
                                                 //Slide3 Close
                                                 setTimeout(function() {
 
+                                                        $('#section3 .bl-box .bl-underline').addClass('hidden');
+                                                        $('#section4 .bl-box .bl-underline').removeClass('hidden');
+
                                                         $section3.data( 'open', false ).removeClass( 'bl-expand' ).on( transEndEventName, function( event ) {
                                                             $( "#section3" ).off( transEndEventName ).removeClass( 'bl-expand-top' );
                                                         } );
@@ -125,6 +137,9 @@ var bioPanels = function(data, order, previous){
 
                                                                 //Slide4 Close
                                                                 setTimeout(function() {
+
+                                                                        $('#section4 .bl-box .bl-underline').addClass('hidden');
+                                                                        $('#section5 .bl-box .bl-underline').removeClass('hidden');
 
                                                                         $section4.data( 'open', false ).removeClass( 'bl-expand' ).on( transEndEventName, function( event ) {
                                                                             $( "#section4" ).off( transEndEventName ).removeClass( 'bl-expand-top' );
@@ -145,6 +160,9 @@ var bioPanels = function(data, order, previous){
                                                                                 //Slide5 Close
                                                                                 setTimeout(function() {
 
+                                                                                        $('#section5 .bl-box .bl-underline').addClass('hidden');
+                                                                                        $('#section6 .bl-box .bl-underline').removeClass('hidden');
+
                                                                                         $section5.data( 'open', false ).removeClass( 'bl-expand' ).on( transEndEventName, function( event ) {
                                                                                             $( "#section5" ).off( transEndEventName ).removeClass( 'bl-expand-top' );
                                                                                         } );
@@ -163,6 +181,8 @@ var bioPanels = function(data, order, previous){
 
                                                                                                 //Slide6 Close
                                                                                                 setTimeout(function() {
+
+                                                                                                        $('#section6 .bl-box .bl-underline').removeClass('hidden');
 
                                                                                                         $section6.data( 'open', false ).removeClass( 'bl-expand' ).on( transEndEventName, function( event ) {
                                                                                                             $( "#section6" ).off( transEndEventName ).removeClass( 'bl-expand-top' );

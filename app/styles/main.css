@@ -395,7 +395,7 @@ a {
 	width: 33.3%;
 	height: 50%;
   background: #ff5a00;
-  border: 1px solid white;
+  border: 0.1rem solid white;
 }
 
 .bl-main > section:first-child {
@@ -426,6 +426,12 @@ a {
 .bl-main > section:nth-child(6) {
   top: 50%;
   left: 66.6%;
+}
+
+.bl-underline {
+    height: 0.5rem;
+    background-color: white;
+    opacity: 0.5;
 }
 
 .bl-box {
@@ -459,14 +465,14 @@ a {
 }
 
 .bl-box h2 {
-    transform:scale(1,1.5);
+  transform:scale(1,1.5);
 	text-align: center;
 	margin: 0;
-	padding: 20px;
+	padding: 0.5em;
 	width: 100%;
 	font-size: 2.5em;
 	letter-spacing: 2px;
-	font-weight: 700;
+	font-weight: 400;
 	text-transform: uppercase;
 }
 
@@ -533,7 +539,7 @@ div.bl-panel-items > div > div {
 }
 
 .bl-content article h3 {
-	font-weight: 700;
+	font-weight: 400;
 	letter-spacing: 2px;
 	text-transform: uppercase;
 	margin: 0 0 10px 0;
