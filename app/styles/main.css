@@ -464,6 +464,14 @@ a {
     align-items: center;
 }
 
+.bl-box img {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0.14;
+}
+
 .bl-box h2 {
   transform:scale(1,1.5);
 	text-align: center;
