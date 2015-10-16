@@ -398,32 +398,32 @@ a {
   border: 0.1rem solid white;
 }
 
-.bl-main > section:first-child {
-	top: 0;
-	left: 0;
-}
-
 .bl-main > section:nth-child(2) {
 	top: 0;
-	left: 33.3%;
+	left: 0;
 }
 
 .bl-main > section:nth-child(3) {
 	top: 0;
-	left: 66.6%;
+	left: 33.3%;
 }
 
 .bl-main > section:nth-child(4) {
+	top: 0;
+	left: 66.6%;
+}
+
+.bl-main > section:nth-child(5) {
 	top: 50%;
 	left: 0;
 }
 
-.bl-main > section:nth-child(5) {
+.bl-main > section:nth-child(6) {
   top: 50%;
   left: 33.3%;
 }
 
-.bl-main > section:nth-child(6) {
+.bl-main > section:nth-child(7) {
   top: 50%;
   left: 66.6%;
 }
