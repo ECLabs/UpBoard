@@ -428,10 +428,13 @@ a {
   left: 66.6%;
 }
 
-.bl-underline {
+#bioUnderline {
     height: 0.5rem;
     background-color: white;
     opacity: 0.5;
+    width: 10rem;
+    position: absolute;
+    z-index: 1;
 }
 
 .bl-box {

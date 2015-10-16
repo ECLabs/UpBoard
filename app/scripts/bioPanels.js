@@ -7,6 +7,13 @@ var bioPanels = function(data, order, previous){
     var copyArray = order.slice();
     copyArray.splice(0,1);
 
+    //Get measurements everytime incase screen size has changed
+    var gridTileCountHorizontal = 3;
+    var gridTileCountVerticle = 2;
+    var htmlWidth = parseInt($('html').css('width'));
+    var htmlHeight = parseInt($('html').css('height'));
+    var bioUnderlineWidth = parseInt(($('#bioUnderline').css('width')));
+
     //set slide content
     for (var i=0; i<6; i++){
         var stringifiedData = JSON.stringify(data[current].content.content),
@@ -27,8 +34,9 @@ var bioPanels = function(data, order, previous){
     }
 
     //Show underline
-    $('#section1 .bl-box .bl-underline').removeClass('hidden');
-
+    $('#bioUnderline').removeClass('hidden');
+    $('#bioUnderline').css('top', getUnderlineTopMargin(gridTileCountVerticle, htmlHeight, 1)+'px');
+    $('#bioUnderline').css('left', getUnderlineLeftMargin(gridTileCountHorizontal, htmlWidth, bioUnderlineWidth, 1)+'px');
     //work in progress
     var $el = $( '#bl-main' ),
 		$sections = $el.children( 'section' ),
@@ -73,9 +81,6 @@ var bioPanels = function(data, order, previous){
                 //Slide1 Close
                 setTimeout(function() {
 
-                        $('#section1 .bl-box .bl-underline').addClass('hidden');
-                        $('#section2 .bl-box .bl-underline').removeClass('hidden');
-
                         $section1.data( 'open', false ).removeClass( 'bl-expand' ).on( transEndEventName, function( event ) {
                             $( "#section1" ).off( transEndEventName ).removeClass( 'bl-expand-top' );
                         } );
@@ -86,6 +91,8 @@ var bioPanels = function(data, order, previous){
 
                         $el.removeClass( 'bl-expand-item' );
 
+                        executeUnderlineAnimation(getUnderlineLeftMargin(gridTileCountHorizontal, htmlWidth, bioUnderlineWidth, 2), getUnderlineTopMargin(gridTileCountVerticle, htmlHeight, 1))
+
                         //Slide2 Open
                         setTimeout(function() {
 
@@ -94,9 +101,6 @@ var bioPanels = function(data, order, previous){
 
                                 //Slide2 Close
                                 setTimeout(function() {
-
-                                        $('#section2 .bl-box .bl-underline').addClass('hidden');
-                                        $('#section3 .bl-box .bl-underline').removeClass('hidden');
 
                                         $section2.data( 'open', false ).removeClass( 'bl-expand' ).on( transEndEventName, function( event ) {
                                             $( "#section2" ).off( transEndEventName ).removeClass( 'bl-expand-top' );
@@ -108,6 +112,8 @@ var bioPanels = function(data, order, previous){
 
                                         $el.removeClass( 'bl-expand-item' );
 
+                                        executeUnderlineAnimation(getUnderlineLeftMargin(gridTileCountHorizontal, htmlWidth, bioUnderlineWidth, 3), getUnderlineTopMargin(gridTileCountVerticle, htmlHeight, 1))
+
                                         //Slide3 Open
                                         setTimeout(function() {
 
@@ -116,9 +122,6 @@ var bioPanels = function(data, order, previous){
 
                                                 //Slide3 Close
                                                 setTimeout(function() {
-
-                                                        $('#section3 .bl-box .bl-underline').addClass('hidden');
-                                                        $('#section4 .bl-box .bl-underline').removeClass('hidden');
 
                                                         $section3.data( 'open', false ).removeClass( 'bl-expand' ).on( transEndEventName, function( event ) {
                                                             $( "#section3" ).off( transEndEventName ).removeClass( 'bl-expand-top' );
@@ -130,6 +133,8 @@ var bioPanels = function(data, order, previous){
 
                                                         $el.removeClass( 'bl-expand-item' );
 
+                                                        executeUnderlineAnimation(getUnderlineLeftMargin(gridTileCountHorizontal, htmlWidth, bioUnderlineWidth, 1), getUnderlineTopMargin(gridTileCountVerticle, htmlHeight, 2))
+
                                                         //Slide4 Open
                                                         setTimeout(function() {
 
@@ -138,9 +143,6 @@ var bioPanels = function(data, order, previous){
 
                                                                 //Slide4 Close
                                                                 setTimeout(function() {
-
-                                                                        $('#section4 .bl-box .bl-underline').addClass('hidden');
-                                                                        $('#section5 .bl-box .bl-underline').removeClass('hidden');
 
                                                                         $section4.data( 'open', false ).removeClass( 'bl-expand' ).on( transEndEventName, function( event ) {
                                                                             $( "#section4" ).off( transEndEventName ).removeClass( 'bl-expand-top' );
@@ -151,6 +153,8 @@ var bioPanels = function(data, order, previous){
                                                                         }
 
                                                                         $el.removeClass( 'bl-expand-item' );
+
+                                                                        executeUnderlineAnimation(getUnderlineLeftMargin(gridTileCountHorizontal, htmlWidth, bioUnderlineWidth, 2), getUnderlineTopMargin(gridTileCountVerticle, htmlHeight, 2))
                                                                         
                                                                         //Slide5 Open
                                                                         setTimeout(function() {
@@ -161,9 +165,6 @@ var bioPanels = function(data, order, previous){
                                                                                 //Slide5 Close
                                                                                 setTimeout(function() {
 
-                                                                                        $('#section5 .bl-box .bl-underline').addClass('hidden');
-                                                                                        $('#section6 .bl-box .bl-underline').removeClass('hidden');
-
                                                                                         $section5.data( 'open', false ).removeClass( 'bl-expand' ).on( transEndEventName, function( event ) {
                                                                                             $( "#section5" ).off( transEndEventName ).removeClass( 'bl-expand-top' );
                                                                                         } );
@@ -173,6 +174,8 @@ var bioPanels = function(data, order, previous){
                                                                                         }
 
                                                                                         $el.removeClass( 'bl-expand-item' );
+
+                                                                                        executeUnderlineAnimation(getUnderlineLeftMargin(gridTileCountHorizontal, htmlWidth, bioUnderlineWidth, 3), getUnderlineTopMargin(gridTileCountVerticle, htmlHeight, 2))
                                                                                         
                                                                                         //Slide6 Open
                                                                                         setTimeout(function() {
@@ -198,7 +201,7 @@ var bioPanels = function(data, order, previous){
                                                                                                         
                                                                                                         setTimeout(function() {
 
-
+                                                                                                                $('#bioUnderline').addClass('hidden');
                                                                                                                 $('#bl-main').addClass('hidden');
 
                                                                                                                 if (copyArray.length!==0) {
@@ -232,4 +235,43 @@ var bioPanels = function(data, order, previous){
 
         }, data[current].timing.openFirstSection);
 
+}
+
+function getUnderlineLeftMargin(gridTileCountHorizontal, htmlWidth, bioUnderlineWidth, xIndex){
+    return htmlWidth * ((((100/gridTileCountHorizontal) * xIndex) - (100/(2 * gridTileCountHorizontal)))/100) - (bioUnderlineWidth/2); 
+}
+
+function getUnderlineTopMargin(gridTileCountVerticle, htmlHeight, yIndex){
+    return htmlHeight * ((((100/gridTileCountVerticle) * yIndex) - (100/(2 * gridTileCountVerticle)))/100) + (htmlHeight * 0.06)
+}
+
+function executeUnderlineAnimation(x, y){
+    var underline = $('#bioUnderline');
+
+    if((Math.round(parseInt(underline.css('top'))) == (Math.round(y)+1)) || //Account for 1 off because of rounding
+    (Math.round(parseInt(underline.css('top'))) == (Math.round(y)-1)) ||
+    (Math.round(parseInt(underline.css('top'))) == (Math.round(y)))){  
+        setTimeout(function(){glideRight(underline, x)}, 1000);    //Horizontal movement, glide to the right
+    }else{  
+        setTimeout(function(){moveDownARow(underline, x, y)}, 1000); //Virticle movement, use fade out then fade in
+    }
+}
+
+function glideRight(underline, x){
+    underline.animate({
+            left: x
+        }, 3000)
+}
+
+function moveDownARow(underline, x, y){
+    underline.animate({
+            opacity: 0
+        }, 1500, function(){
+            underline.css('top', y);
+            underline.css('left', x);
+
+            underline.animate({
+                opacity: 0.5
+            }, 1500)
+        })
 }
