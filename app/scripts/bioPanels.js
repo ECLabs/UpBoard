@@ -20,10 +20,12 @@ var bioPanels = function(data, order, previous){
         content = JSON.parse(stringifiedData),
         fullName = content[i].name,
         firstName = content[i].name.split(" ")[0];
-        $('#section' + (i+1) + ' .bl-box img').attr('src', content[i].pic);
+        $('#section' + (i+1) + ' .bl-box img').attr('src', media["bioCover"+i].src);
+        $('#section' + (i+1) + ' .bl-content img').attr('src', media["bioContent"+i].src);
         $('#section' + (i+1) + ' .bl-box h2').text(firstName);
         $('#section' + (i+1) + ' .bl-content h2').text(fullName);
         $('#section' + (i+1) + ' .bl-content p').text(content[i].bio);
+        $('#section' + (i+1) + ' .bl-content .ecTeamMemberDate').text(content[i].hireYear);
     }
 
     //choose transition

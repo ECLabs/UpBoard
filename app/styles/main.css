@@ -522,13 +522,16 @@ div.bl-panel-items > div > div {
 	position: absolute;
 	top: 60px;
 	left: 30px;
-	right: 30px;
-	bottom: 30px;
-	padding: 0 20px;
+	right: 0px;
+	bottom: 0px;
+	padding: 0 0 0 20px;
 	overflow: hidden;
 	overflow-y: auto;
 }
 
+.bl-content {
+  overflow: hidden;
+}
 
 /* Custom content */
 
@@ -537,12 +540,17 @@ div.bl-panel-items > div > div {
 	padding-bottom: 15px;
 	font-size: 1.7em;
 	line-height: 1.8;
+  font-family: 'Ek Mukta', sans-serif;
+  font-weight: 200;
+  max-height: 75%;
+  overflow: hidden;
 }
 
 .bl-content h2 {
 	font-size: 3em;
-	font-weight: 300;
+	font-weight: 700;
 	margin: 0 0 20px 0;
+  font-family: 'Ek Mukta', sans-serif;
 }
 
 .bl-content article {
@@ -583,6 +591,22 @@ div.bl-panel-items > div > div {
 .bl-content > ul li a img {
 	display: block;
 	max-width: 100%;
+}
+
+.bl-content div {
+  float: left;
+  position: relative;
+  width: 60%;
+}
+
+.bl-content > div:first-of-type {
+  height: 100%;
+}
+
+.bl-content img {
+  width: 40%;
+  float: left;
+  position: relative;
 }
 
 
@@ -701,4 +725,26 @@ section.bl-expand .bl-icon-close {
 
 .box {
   z-index: 1;
+}
+
+.ecTeamMemberBanner {
+  background-color: lightgrey;
+  color: #555555;
+  font-weight: 700;
+  font-family: 'Ek Mukta', sans-serif;
+  width: initial !important;
+  padding: 0.8rem 1rem;
+  font-size: 1.2rem;
+}
+
+.ecTeamMemberDate {
+  position: relative !important;
+  float: left !important;
+  width: 30% !important;
+  background-color: #555555;
+  font-weight: 700;
+  font-family: 'Ek Mukta', sans-serif;
+  width: initial !important;
+  padding: 0.8rem 1rem;
+  font-size: 1.2rem;
 }

@@ -10,7 +10,6 @@ var staticVideoOverlay = function(data, order, previous){
         $('.box').css('color', data[current].content.overlayColor)
     };
 
-    $('.missionStatement video').attr('src', data[current].content.videoUrl);
     $('.missionStatement video').get(0).play()
 
     //first remove hidden class from slide elements
