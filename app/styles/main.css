@@ -605,9 +605,15 @@ div.bl-panel-items > div > div {
 }
 
 .bl-content img {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.bl-content .teamMemberFullPhoto {
   width: 40%;
-  float: left;
-  position: relative;
+  height: 100%;
 }
 
 
