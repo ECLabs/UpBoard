@@ -208,13 +208,14 @@ function init(){
 
 //Caches photos and videos immediately so media is loaded in time
 function preloadMedia(slides){
+media["fullScreen"] = [];
+
   for(i in slides){
     if(slides[i] != undefined){
       if(slides[i].type == "picture"){
         var image = new Image();
         image.src = slides[i].content.imageUrl;
-        media["fullScreen"] = image;
-        $('.picture img').attr('src', media["fullScreen"].src);
+        media["fullScreen"].push(image);
       }
       else if(slides[i].type == "staticVideoOverlay"){
         var video = new Image();
