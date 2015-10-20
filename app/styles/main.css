@@ -3,6 +3,7 @@ body {
     padding:0;
     overflow:hidden;
     background-color:white;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 .container{
 
@@ -296,7 +297,7 @@ video {
 
     text-align:center;
     vertical-align:middle;
-    font-family: 'Slabo 27px', serif;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
     font-size:5em;
     letter-spacing:2px;
     line-height:130%;
@@ -326,7 +327,7 @@ video {
     display: table-cell;
     text-align:center;
     vertical-align:middle;
-    font-family: 'Slabo 27px', serif;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
     font-size:5em;
     letter-spacing:2px;
     line-height:130%;
