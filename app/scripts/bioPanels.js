@@ -39,6 +39,7 @@ var bioPanels = function(data, order, previous){
     $('#bioUnderline').removeClass('hidden');
     $('#bioUnderline').css('top', getUnderlineTopMargin(gridTileCountVerticle, htmlHeight, 1)+'px');
     $('#bioUnderline').css('left', getUnderlineLeftMargin(gridTileCountHorizontal, htmlWidth, bioUnderlineWidth, 1)+'px');
+
     //work in progress
     var $el = $( '#bl-main' ),
 		$sections = $el.children( 'section' ),
@@ -93,7 +94,7 @@ var bioPanels = function(data, order, previous){
 
                         $el.removeClass( 'bl-expand-item' );
 
-                        executeUnderlineAnimation(getUnderlineLeftMargin(gridTileCountHorizontal, htmlWidth, bioUnderlineWidth, 2), getUnderlineTopMargin(gridTileCountVerticle, htmlHeight, 1))
+                        executeUnderlineAnimation(getUnderlineLeftMargin(gridTileCountHorizontal, htmlWidth, bioUnderlineWidth, 2), getUnderlineTopMargin(gridTileCountVerticle, htmlHeight, 1), data[current].timing.transitionTime)
 
                         //Slide2 Open
                         setTimeout(function() {
@@ -114,7 +115,7 @@ var bioPanels = function(data, order, previous){
 
                                         $el.removeClass( 'bl-expand-item' );
 
-                                        executeUnderlineAnimation(getUnderlineLeftMargin(gridTileCountHorizontal, htmlWidth, bioUnderlineWidth, 3), getUnderlineTopMargin(gridTileCountVerticle, htmlHeight, 1))
+                                        executeUnderlineAnimation(getUnderlineLeftMargin(gridTileCountHorizontal, htmlWidth, bioUnderlineWidth, 3), getUnderlineTopMargin(gridTileCountVerticle, htmlHeight, 1), data[current].timing.transitionTime)
 
                                         //Slide3 Open
                                         setTimeout(function() {
@@ -135,7 +136,7 @@ var bioPanels = function(data, order, previous){
 
                                                         $el.removeClass( 'bl-expand-item' );
 
-                                                        executeUnderlineAnimation(getUnderlineLeftMargin(gridTileCountHorizontal, htmlWidth, bioUnderlineWidth, 1), getUnderlineTopMargin(gridTileCountVerticle, htmlHeight, 2))
+                                                        executeUnderlineAnimation(getUnderlineLeftMargin(gridTileCountHorizontal, htmlWidth, bioUnderlineWidth, 1), getUnderlineTopMargin(gridTileCountVerticle, htmlHeight, 2), data[current].timing.transitionTime)
 
                                                         //Slide4 Open
                                                         setTimeout(function() {
@@ -156,7 +157,7 @@ var bioPanels = function(data, order, previous){
 
                                                                         $el.removeClass( 'bl-expand-item' );
 
-                                                                        executeUnderlineAnimation(getUnderlineLeftMargin(gridTileCountHorizontal, htmlWidth, bioUnderlineWidth, 2), getUnderlineTopMargin(gridTileCountVerticle, htmlHeight, 2))
+                                                                        executeUnderlineAnimation(getUnderlineLeftMargin(gridTileCountHorizontal, htmlWidth, bioUnderlineWidth, 2), getUnderlineTopMargin(gridTileCountVerticle, htmlHeight, 2), data[current].timing.transitionTime)
                                                                         
                                                                         //Slide5 Open
                                                                         setTimeout(function() {
@@ -177,7 +178,7 @@ var bioPanels = function(data, order, previous){
 
                                                                                         $el.removeClass( 'bl-expand-item' );
 
-                                                                                        executeUnderlineAnimation(getUnderlineLeftMargin(gridTileCountHorizontal, htmlWidth, bioUnderlineWidth, 3), getUnderlineTopMargin(gridTileCountVerticle, htmlHeight, 2))
+                                                                                        executeUnderlineAnimation(getUnderlineLeftMargin(gridTileCountHorizontal, htmlWidth, bioUnderlineWidth, 3), getUnderlineTopMargin(gridTileCountVerticle, htmlHeight, 2), data[current].timing.transitionTime)
                                                                                         
                                                                                         //Slide6 Open
                                                                                         setTimeout(function() {
@@ -247,33 +248,36 @@ function getUnderlineTopMargin(gridTileCountVerticle, htmlHeight, yIndex){
     return htmlHeight * ((((100/gridTileCountVerticle) * yIndex) - (100/(2 * gridTileCountVerticle)))/100) + (htmlHeight * 0.06)
 }
 
-function executeUnderlineAnimation(x, y){
+function executeUnderlineAnimation(x, y, transitionTime){
     var underline = $('#bioUnderline');
 
     if((Math.round(parseInt(underline.css('top'))) == (Math.round(y)+1)) || //Account for 1 off because of rounding
     (Math.round(parseInt(underline.css('top'))) == (Math.round(y)-1)) ||
     (Math.round(parseInt(underline.css('top'))) == (Math.round(y)))){  
-        setTimeout(function(){glideRight(underline, x)}, 1000);    //Horizontal movement, glide to the right
+        glideRight(underline, x, transitionTime)   //Horizontal movement, glide to the right
     }else{  
-        setTimeout(function(){moveDownARow(underline, x, y)}, 1000); //Virticle movement, use fade out then fade in
+        moveDownARow(underline, x, y, transitionTime) //Virticle movement, use fade out then fade in
     }
 }
 
-function glideRight(underline, x){
+function glideRight(underline, x, transitionTime){
     underline.animate({
             left: x
-        }, 3000)
+        }, {
+            duration: transitionTime, 
+            easing: "easeInOutCubic"
+        });
 }
 
-function moveDownARow(underline, x, y){
+function moveDownARow(underline, x, y, transitionTime){
     underline.animate({
             opacity: 0
-        }, 1500, function(){
+        }, (transitionTime/2), function(){
             underline.css('top', y);
             underline.css('left', x);
 
             underline.animate({
                 opacity: 0.5
-            }, 1500)
+            }, (transitionTime/2))
         })
 }
