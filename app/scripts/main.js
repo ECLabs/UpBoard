@@ -220,7 +220,6 @@ function preloadMedia(slides){
         var video = new Image();
         video.src = slides[i].content.videoUrl;
         media["staticVideoOverlay"] = video;
-        $('.missionStatement video').attr('src', media["staticVideoOverlay"].src);
       }
       else if(slides[i].type == "bioPanels"){
         for(k in slides[i].content.content){
