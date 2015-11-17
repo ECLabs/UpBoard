@@ -184,16 +184,18 @@ function init(){
                       return time;
                     };
 
+                    preloadMedia(snapshot.val());
+                    
                     // start interval
                     (function(){
                         setInterval(function(){                          
                             window[slideOrder[0]](snapshot.val(), slideOrder, 0);
                         }, totalTime());
                     })();
-
+                    
                     window[slideOrder[0]](snapshot.val(), slideOrder, 0); //pass slide1 the firebase data & array
                     
-                    preloadMedia(snapshot.val());
+                    
                     
 
                 }, function (err) { // throw error if get request fails
