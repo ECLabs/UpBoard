@@ -186,18 +186,16 @@ function init(){
 
                     preloadMedia(snapshot.val());
                     
-                    // start interval
+                    // run the slideshow on a loop
                     (function(){
                         setInterval(function(){                          
-                            window[slideOrder[0]](snapshot.val(), slideOrder, 0);
+                            window[slideOrder[0]](snapshot.val(), slideOrder, -1);
                         }, totalTime());
                     })();
                     
-                    window[slideOrder[0]](snapshot.val(), slideOrder, 0); //pass slide1 the firebase data & array
+                    // start the first run of the slideshow
+                    window[slideOrder[0]](snapshot.val(), slideOrder, -1); 
                     
-                    
-                    
-
                 }, function (err) { // throw error if get request fails
                     console.error(err);
                 }
