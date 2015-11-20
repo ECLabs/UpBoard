@@ -1,18 +1,5 @@
  {{ main.currentSlide }}
 
-<!--staticVideoOverlay-->
-<div class="missionStatement hidden">
-  <video></video>
-  <div class="box">
-      <p>
-          <!--liveVideoOverlayContent Injected Here -->
-      </p>
-      <div class="boxBottomLeft"></div>
-      <img id="star"></img>
-      <div class="boxBottomRight"></div>                
-  </div>
-</div>
-
 <!--news-->
 <div class="news hidden">
     <div class="centerBox">

@@ -272,7 +272,6 @@ video {
 /* weather */
 /* line 312, ../../app/styles/main.scss */
 .weather {
-  visibility: hidden;
   display: table;
   color: #FAFCFA;
   min-height: 300px;
@@ -289,7 +288,7 @@ video {
   align-items: center;
 }
 
-/* line 329, ../../app/styles/main.scss */
+/* line 328, ../../app/styles/main.scss */
 .weather p {
   display: table-cell;
   text-align: center;
@@ -302,7 +301,7 @@ video {
   margin-right: auto;
 }
 
-/* line 341, ../../app/styles/main.scss */
+/* line 340, ../../app/styles/main.scss */
 .weather div {
   border-bottom: 4px solid white;
   padding-bottom: 11px;
@@ -316,7 +315,7 @@ video {
   font-weight: normal;
   font-style: normal;
 }
-/* line 361, ../../app/styles/main.scss */
+/* line 360, ../../app/styles/main.scss */
 body, html {
   font-size: 100%;
   padding: 0;
@@ -324,14 +323,14 @@ body, html {
   height: 100%;
 }
 
-/* line 363, ../../app/styles/main.scss */
+/* line 362, ../../app/styles/main.scss */
 *,
 *:after,
 *:before {
   box-sizing: border-box;
 }
 
-/* line 371, ../../app/styles/main.scss */
+/* line 370, ../../app/styles/main.scss */
 body {
   font-family: 'Lato', Calibri, Arial, sans-serif;
   color: #f2ede3;
@@ -339,7 +338,7 @@ body {
   font-weight: 300;
 }
 
-/* line 378, ../../app/styles/main.scss */
+/* line 377, ../../app/styles/main.scss */
 a {
   color: #f0f0f0;
   text-decoration: none;
@@ -350,7 +349,7 @@ a {
   font-size: 80%;
 }
 
-/* line 389, ../../app/styles/main.scss */
+/* line 388, ../../app/styles/main.scss */
 .bl-main {
   position: absolute;
   width: 100%;
@@ -359,7 +358,7 @@ a {
   font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
-/* line 397, ../../app/styles/main.scss */
+/* line 396, ../../app/styles/main.scss */
 .bl-main > section {
   position: absolute;
   width: 33.3%;
@@ -368,43 +367,43 @@ a {
   border: 0.1rem solid white;
 }
 
-/* line 405, ../../app/styles/main.scss */
+/* line 404, ../../app/styles/main.scss */
 .bl-main > section:nth-child(2) {
   top: 0;
   left: 0;
 }
 
-/* line 410, ../../app/styles/main.scss */
+/* line 409, ../../app/styles/main.scss */
 .bl-main > section:nth-child(3) {
   top: 0;
   left: 33.3%;
 }
 
-/* line 415, ../../app/styles/main.scss */
+/* line 414, ../../app/styles/main.scss */
 .bl-main > section:nth-child(4) {
   top: 0;
   left: 66.6%;
 }
 
-/* line 420, ../../app/styles/main.scss */
+/* line 419, ../../app/styles/main.scss */
 .bl-main > section:nth-child(5) {
   top: 50%;
   left: 0;
 }
 
-/* line 425, ../../app/styles/main.scss */
+/* line 424, ../../app/styles/main.scss */
 .bl-main > section:nth-child(6) {
   top: 50%;
   left: 33.3%;
 }
 
-/* line 430, ../../app/styles/main.scss */
+/* line 429, ../../app/styles/main.scss */
 .bl-main > section:nth-child(7) {
   top: 50%;
   left: 66.6%;
 }
 
-/* line 435, ../../app/styles/main.scss */
+/* line 434, ../../app/styles/main.scss */
 #bioUnderline {
   height: 0.5rem;
   background-color: white;
@@ -414,7 +413,7 @@ a {
   z-index: 1;
 }
 
-/* line 444, ../../app/styles/main.scss */
+/* line 443, ../../app/styles/main.scss */
 .bl-box {
   position: relative;
   width: 100%;
@@ -429,7 +428,7 @@ a {
   align-items: center;
 }
 
-/* line 474, ../../app/styles/main.scss */
+/* line 473, ../../app/styles/main.scss */
 .bl-box img {
   position: absolute;
   width: 100%;
@@ -438,7 +437,7 @@ a {
   opacity: 0.14;
 }
 
-/* line 482, ../../app/styles/main.scss */
+/* line 481, ../../app/styles/main.scss */
 .bl-box h2 {
   transform: scale(1, 1.5);
   text-align: center;
@@ -451,7 +450,7 @@ a {
   text-transform: uppercase;
 }
 
-/* line 494, ../../app/styles/main.scss */
+/* line 493, ../../app/styles/main.scss */
 .bl-icon {
   font-style: normal;
   font-weight: normal;
@@ -462,7 +461,7 @@ a {
   -webkit-font-smoothing: antialiased;
 }
 
-/* line 508, ../../app/styles/main.scss */
+/* line 507, ../../app/styles/main.scss */
 .bl-main > section .bl-icon-close {
   position: absolute;
   top: 20px;
@@ -473,12 +472,12 @@ a {
   pointer-events: none;
 }
 
-/* line 518, ../../app/styles/main.scss */
+/* line 517, ../../app/styles/main.scss */
 .bl-icon-close:before {
   content: "\e005";
 }
 
-/* line 522, ../../app/styles/main.scss */
+/* line 521, ../../app/styles/main.scss */
 .bl-content,
 div.bl-panel-items > div > div {
   opacity: 0;
@@ -493,13 +492,13 @@ div.bl-panel-items > div > div {
   overflow-y: auto;
 }
 
-/* line 536, ../../app/styles/main.scss */
+/* line 535, ../../app/styles/main.scss */
 .bl-content {
   overflow: hidden;
 }
 
 /* Custom content */
-/* line 542, ../../app/styles/main.scss */
+/* line 541, ../../app/styles/main.scss */
 .bl-content p {
   margin: 0 auto;
   padding-bottom: 15px;
@@ -511,7 +510,7 @@ div.bl-panel-items > div > div {
   overflow: hidden;
 }
 
-/* line 553, ../../app/styles/main.scss */
+/* line 552, ../../app/styles/main.scss */
 .bl-content h2 {
   font-size: 3em;
   font-weight: 700;
@@ -519,12 +518,12 @@ div.bl-panel-items > div > div {
   font-family: 'Ek Mukta', sans-serif;
 }
 
-/* line 560, ../../app/styles/main.scss */
+/* line 559, ../../app/styles/main.scss */
 .bl-content article {
   padding: 20px 40px 20px 0px;
 }
 
-/* line 564, ../../app/styles/main.scss */
+/* line 563, ../../app/styles/main.scss */
 .bl-content article h3 {
   font-weight: 400;
   letter-spacing: 2px;
@@ -534,51 +533,51 @@ div.bl-panel-items > div > div {
   font-size: 1.4em;
 }
 
-/* line 573, ../../app/styles/main.scss */
+/* line 572, ../../app/styles/main.scss */
 .bl-content article a {
   color: rgba(0, 0, 0, 0.2);
 }
 
-/* line 577, ../../app/styles/main.scss */
+/* line 576, ../../app/styles/main.scss */
 .bl-content > ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-/* line 583, ../../app/styles/main.scss */
+/* line 582, ../../app/styles/main.scss */
 .bl-content > ul li {
   display: inline-block;
   width: 20%;
   margin: 1%;
 }
 
-/* line 589, ../../app/styles/main.scss */
+/* line 588, ../../app/styles/main.scss */
 .bl-content > ul li a {
   display: block;
   padding: 0;
   border: 8px solid rgba(0, 0, 0, 0.1);
 }
 
-/* line 595, ../../app/styles/main.scss */
+/* line 594, ../../app/styles/main.scss */
 .bl-content > ul li a img {
   display: block;
   max-width: 100%;
 }
 
-/* line 600, ../../app/styles/main.scss */
+/* line 599, ../../app/styles/main.scss */
 .bl-content div {
   float: left;
   position: relative;
   width: 60%;
 }
 
-/* line 606, ../../app/styles/main.scss */
+/* line 605, ../../app/styles/main.scss */
 .bl-content > div:first-of-type {
   height: 100%;
 }
 
-/* line 610, ../../app/styles/main.scss */
+/* line 609, ../../app/styles/main.scss */
 .bl-content img {
   height: 100%;
   position: absolute;
@@ -586,7 +585,7 @@ div.bl-panel-items > div > div {
   bottom: 0;
 }
 
-/* line 617, ../../app/styles/main.scss */
+/* line 616, ../../app/styles/main.scss */
 .bl-content .teamMemberFullPhoto {
   width: 40%;
   height: 100%;
@@ -594,12 +593,12 @@ div.bl-panel-items > div > div {
 
 /* Transition classes and properties */
 /* Separated for a better overview and control */
-/* line 626, ../../app/styles/main.scss */
+/* line 625, ../../app/styles/main.scss */
 .bl-main > section {
   transition: all 0.5s ease-in-out;
 }
 
-/* line 632, ../../app/styles/main.scss */
+/* line 631, ../../app/styles/main.scss */
 .bl-main > section.bl-expand {
   width: 100%;
   height: 100%;
@@ -607,46 +606,46 @@ div.bl-panel-items > div > div {
   left: 0;
 }
 
-/* line 639, ../../app/styles/main.scss */
+/* line 638, ../../app/styles/main.scss */
 .bl-main > section.bl-expand-top {
   z-index: 100;
 }
 
-/* line 643, ../../app/styles/main.scss */
+/* line 642, ../../app/styles/main.scss */
 .bl-main > section.bl-expand {
   background-color: #ff5a00;
 }
 
-/* line 647, ../../app/styles/main.scss */
+/* line 646, ../../app/styles/main.scss */
 .bl-main.bl-expand-item > section:not(.bl-expand),
 .bl-main.bl-expand-item > section.bl-scale-down {
   transform: scale(0.5);
   opacity: 0;
 }
 
-/* line 656, ../../app/styles/main.scss */
+/* line 655, ../../app/styles/main.scss */
 .bl-box {
   transition: opacity 0.2s linear 0.5s;
 }
 
-/* line 662, ../../app/styles/main.scss */
+/* line 661, ../../app/styles/main.scss */
 section.bl-expand .bl-box {
   opacity: 0;
   transition: opacity 0s linear;
 }
 
-/* line 669, ../../app/styles/main.scss */
+/* line 668, ../../app/styles/main.scss */
 .bl-box h2 {
   transition: all 0.2s ease-in-out;
 }
 
-/* line 677, ../../app/styles/main.scss */
+/* line 676, ../../app/styles/main.scss */
 .bl-content,
 .bl-icon-close {
   transition: opacity 0.1s linear 0s;
 }
 
-/* line 684, ../../app/styles/main.scss */
+/* line 683, ../../app/styles/main.scss */
 section.bl-expand .bl-content,
 section.bl-expand .bl-icon-close {
   pointer-events: auto;
@@ -655,28 +654,28 @@ section.bl-expand .bl-icon-close {
 }
 
 @media screen and (max-width: 46.5em) {
-  /* line 694, ../../app/styles/main.scss */
+  /* line 693, ../../app/styles/main.scss */
   .bl-content,
   .bl-box {
     font-size: 75%;
   }
 
-  /* line 699, ../../app/styles/main.scss */
+  /* line 698, ../../app/styles/main.scss */
   .bl-expand .bl-box {
     height: 130px;
   }
 
-  /* line 703, ../../app/styles/main.scss */
+  /* line 702, ../../app/styles/main.scss */
   .bl-content > ul li {
     width: 40%;
   }
 }
-/* line 708, ../../app/styles/main.scss */
+/* line 707, ../../app/styles/main.scss */
 .hidden {
   display: none;
 }
 
-/* line 712, ../../app/styles/main.scss */
+/* line 711, ../../app/styles/main.scss */
 .fullscreen {
   position: absolute;
   left: 0;
@@ -684,7 +683,7 @@ section.bl-expand .bl-icon-close {
   width: 100%;
 }
 
-/* line 719, ../../app/styles/main.scss */
+/* line 718, ../../app/styles/main.scss */
 .picture p {
   bottom: 1rem;
   color: white;
@@ -701,12 +700,12 @@ section.bl-expand .bl-icon-close {
   z-index: 1;
 }
 
-/* line 735, ../../app/styles/main.scss */
+/* line 734, ../../app/styles/main.scss */
 .box {
   z-index: 1;
 }
 
-/* line 739, ../../app/styles/main.scss */
+/* line 738, ../../app/styles/main.scss */
 .ecTeamMemberBanner {
   background-color: lightgrey;
   color: #555555;
@@ -717,7 +716,7 @@ section.bl-expand .bl-icon-close {
   font-size: 1.2rem;
 }
 
-/* line 749, ../../app/styles/main.scss */
+/* line 748, ../../app/styles/main.scss */
 .ecTeamMemberDate {
   position: relative !important;
   float: left !important;
@@ -730,13 +729,13 @@ section.bl-expand .bl-icon-close {
   font-size: 1.2rem;
 }
 
-/* line 761, ../../app/styles/main.scss */
+/* line 760, ../../app/styles/main.scss */
 .ub-fade {
   transition-timing-function: linear;
   opacity: 1;
 }
 
-/* line 766, ../../app/styles/main.scss */
+/* line 765, ../../app/styles/main.scss */
 .ub-fade.ng-hide {
   transition-timing-function: linear;
   opacity: 0;
@@ -745,5 +744,3 @@ section.bl-expand .bl-icon-close {
 /*// bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower*/
-
-/*# sourceMappingURL=main.css.map */
