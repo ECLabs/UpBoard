@@ -1,0 +1,874 @@
+//$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+
+body {
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    background-color:white;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+.container{
+
+    background-color:white;
+    position:relative;
+    padding:0;
+    margin: 0;
+    height: 100%;
+    width: 100% !important;
+
+}
+.noAnimate{
+    -webkit-animation: none !important;
+    -moz-animation: none !important;
+    -o-animation: none !important;
+    -ms-animation: none !important;
+    animation: none !important;
+}
+/* logo */
+
+
+@keyframes animatedBackground {
+	0% { background-position: 0 0; }
+	100% { background-position: 0 100vh; }
+}
+@-moz-keyframes animatedBackground {
+	0% { background-position: 0 0; }
+	100% { background-position: 0 100vh; }
+}
+@-webkit-keyframes animatedBackground {
+	0% { background-position: 0 0; }
+	100% { background-position: 0 100vh; }
+}
+@-ms-keyframes animatedBackground {
+	0% { background-position: 0 0; }
+	100% { background-position: 0 100vh; }
+}
+@-o-keyframes animatedBackground {
+	0% { background-position: 0 0; }
+	100% { background-position: 0 100vh; }
+}
+.movingBackground{
+
+    position:relative;
+    width:100%;
+    height:100vh;
+    src: url(../images/background2.png) repeat-y center center fixed;
+    background: url(../images/background2.png) repeat-y center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    animation: animatedBackground 20s linear infinite;
+    -moz-animation: animatedBackground 20s linear infinite;
+    -webkit-animation: animatedBackground 20s linear infinite;
+    -ms-animation: animatedBackground 20s linear infinite;
+    -o-animation: animatedBackground 20s linear infinite;
+}
+
+.logo{
+    position:absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width:0px;
+    height:0px;
+    padding: 132px 500px 131px 500px;
+    background: url(/images/EC-regular-1000x263.png) no-repeat center center;
+}
+
+/*News Slide */
+.news{
+  position:relative;
+  width:100%;
+  height:100vh;
+  background-color: white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.centerBox{
+  width:90%;
+  height:80%;
+  display:flex;
+  align-items:center;
+}
+.newsSection{
+  height:100%;
+  width:calc(100% / 3);
+
+}
+.twitter{
+
+}
+.instagram{
+
+}
+.washingtonPost{
+
+}
+
+
+.innerTop{
+  color:black;
+  margin-left:auto;
+  margin-right:auto;
+  height:20%;
+  background-color: white;
+  border-bottom-style: solid;
+  border-left-style:solid;
+  border-width: 2px;
+  border-color: #E0E0E0;
+  overflow: hidden;
+}
+.innerBottom{
+  color:black;
+  border-left-style:solid;
+  border-width: 2px;
+  border-color: #E0E0E0;
+  margin-left:auto;
+  margin-right:auto;
+  height:80%;
+  background-color: white;
+
+}
+.leftSide{
+  border-left-style:none;
+}
+
+.logoImg{
+  margin-left: 70px;
+  display:block;
+  opacity: 0;
+}
+.washingtonPostArticleTitle{
+  font-weight: bold;
+  font-size: 1.7em;
+  padding-top:30px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin:0px;
+}
+.washingtonPostArticleContent{
+  font-size: 1.2em;
+  padding: 5px;
+}
+
+.washingtonPostArticleAuthor{
+  font-size: 1.2em;
+  font-weight: bold;
+  display:inline-block;
+  width:49%;
+  padding: 5px;
+}
+.washingtonPostArticleDate{
+  font-size: 1.2em;
+  display:inline-block;
+  width:49%;
+  padding:5px;
+  text-align: right;
+}
+
+
+
+
+
+/* liveVideoOverlay */
+@-moz-keyframes webcamBlur {
+    0% {filter:grayscale(0) blur(0px);}
+    80% {}
+    100% {filter: grayscale(.8) blur(8px);}
+}
+@-webkit-keyframes webcamBlur {
+    0% {-webkit-filter:grayscale(0) blur(0px);}
+    80% {}
+    100% {-webkit-filter: grayscale(.8) blur(8px);}
+}
+@-ms-keyframes webcamBlur {
+    0% {filter:grayscale(0) blur(0px);}
+    80% {}
+    100% {filter:grayscale(.8) blur(8px);}
+}
+@-o-keyframes webcamBlur {
+    0% {filter:grayscale(0) blur(0px);}
+    80% {}
+    100% {filter:grayscale(.8) blur(8px);}
+}
+/*overlay animation fades from opacity from 0 to 1*/
+/*this animation is necessary since the box is centered using display table and cannot be display none*/
+@keyframes overlay {
+    0% { opacity:0;}
+    100% { opacity:1;}
+}
+@-moz-keyframes overlay {
+    0% { opacity:0;}
+    100% { opacity:1;}
+}
+@-webkit-keyframes overlay {
+    0% { opacity:0;}
+    100% { opacity:1;}
+}
+@-ms-keyframes overlay {
+    0% { opacity:0;}
+    100% { opacity:1;}
+}
+@-o-keyframes overlay {
+    0% { opacity:0;}
+    100% { opacity:1;}
+}
+
+
+#videoElement{
+        /*animation-name: webcamBlur;*/
+    animation-duration: 5s; /* webcam blur duration */
+    animation-delay: 2s; /* webcam blur delay */
+    animation-fill-mode: forwards;
+    position:relative;
+    width:100%;
+    -webkit-transition: all 2s;
+
+}
+
+video {
+        /*animation-name: webcamBlur;*/
+    
+    animation-delay: 2s; /* webcam blur delay */
+    animation-fill-mode: forwards;
+    position:relative;
+    width:100%;
+    -webkit-transition: all 2s;
+
+}
+
+.box{
+    /*animation-name: overlay;*/
+    animation-duration: 5s; /* box fade in duration */
+    animation-delay: 4s; /* box fade in delay */
+    animation-fill-mode: forwards;
+    opacity:0;
+    display:table;
+    color:#FAFCFA;
+    min-height:300px;
+    position:absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    height:50%;
+    width:90%;
+    border-top: 2px solid #FAFCFA;
+    border-right: 2px solid #FAFCFA;
+    border-left: 2px solid #FAFCFA;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+.boxBottomLeft{
+    position:absolute;
+    height:0;
+    width:45%;
+    border:1px solid #FAFCFA;
+    left:0px;
+    bottom:0px;
+    display:inline-block;
+}
+.boxBottomRight{
+    position:absolute;
+    height:0;
+    width:45%;
+    border:1px solid #FAFCFA;
+    right:0px;
+    bottom:0px;
+    display:inline-block;
+
+}
+#star{
+    position:absolute;
+    background: url(../images/star.png);
+    color:white;
+    display:inline-block;
+    left:50%;
+    bottom:-10px;
+    padding: 12px 14px 16px 14px;
+    margin-left:-15px;
+}
+.box p {
+    display: table-cell;
+
+    text-align:center;
+    vertical-align:middle;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size:5em;
+    letter-spacing:2px;
+    line-height:130%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+/* weather */
+.weather{
+    visibility: hidden;
+    display:table;
+    color:#FAFCFA;
+    min-height:300px;
+    position:absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    height:50%;
+    width:90%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.weather p {
+    display: table-cell;
+    text-align:center;
+    vertical-align:middle;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size:5em;
+    letter-spacing:2px;
+    line-height:130%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.weather div {
+    border-bottom: 4px solid white;
+    padding-bottom: 11px;
+}
+
+
+/* Fourpanel */
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+@font-face {
+	font-family: 'icomoon';
+	src:url('../fonts/icomoon.eot');
+	src:url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/icomoon.woff') format('woff'),
+		url('../fonts/icomoon.ttf') format('truetype'),
+		url('../fonts/icomoon.svg#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body, html { font-size: 100%; padding: 0; margin: 0; height: 100%;}
+
+*,
+*:after,
+*:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lato', Calibri, Arial, sans-serif;
+    color: #f2ede3;
+    font-size: 0.9em;
+    font-weight: 300;
+}
+
+a {
+	color: #f0f0f0;
+	text-decoration: none;
+	font-weight: 700;
+	letter-spacing: 2px;
+	padding: 0 5px;
+	text-transform: uppercase;
+	font-size: 80%;
+}
+
+
+.bl-main {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+.bl-main > section {
+	position: absolute;
+	width: 33.3%;
+	height: 50%;
+  background: #ff5a00;
+  border: 0.1rem solid white;
+}
+
+.bl-main > section:nth-child(2) {
+	top: 0;
+	left: 0;
+}
+
+.bl-main > section:nth-child(3) {
+	top: 0;
+	left: 33.3%;
+}
+
+.bl-main > section:nth-child(4) {
+	top: 0;
+	left: 66.6%;
+}
+
+.bl-main > section:nth-child(5) {
+	top: 50%;
+	left: 0;
+}
+
+.bl-main > section:nth-child(6) {
+  top: 50%;
+  left: 33.3%;
+}
+
+.bl-main > section:nth-child(7) {
+  top: 50%;
+  left: 66.6%;
+}
+
+#bioUnderline {
+    height: 0.5rem;
+    background-color: white;
+    opacity: 0.5;
+    width: 10rem;
+    position: absolute;
+    z-index: 1;
+}
+
+.bl-box {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	opacity: 1;
+	/* Centering with flexbox */
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.bl-box img {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0.14;
+}
+
+.bl-box h2 {
+  transform:scale(1,1.5);
+	text-align: center;
+	margin: 0;
+	padding: 0.5em;
+	width: 100%;
+	font-size: 2.5em;
+	letter-spacing: 2px;
+	font-weight: 400;
+	text-transform: uppercase;
+}
+
+.bl-icon {
+
+
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	cursor: pointer;
+	-webkit-font-smoothing: antialiased;
+}
+
+
+
+.bl-main > section .bl-icon-close {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	cursor: pointer;
+	z-index: 100;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.bl-icon-close:before {
+	content: "\e005";
+}
+
+.bl-content,
+div.bl-panel-items > div > div {
+	opacity: 0;
+	pointer-events: none;
+	position: absolute;
+	top: 60px;
+	left: 30px;
+	right: 0px;
+	bottom: 0px;
+	padding: 0 0 0 20px;
+	overflow: hidden;
+	overflow-y: auto;
+}
+
+.bl-content {
+  overflow: hidden;
+}
+
+/* Custom content */
+
+.bl-content p {
+	margin: 0 auto;
+	padding-bottom: 15px;
+	font-size: 1.7em;
+	line-height: 1.8;
+  font-family: 'Ek Mukta', sans-serif;
+  font-weight: 200;
+  max-height: 75%;
+  overflow: hidden;
+}
+
+.bl-content h2 {
+	font-size: 3em;
+	font-weight: 700;
+	margin: 0 0 20px 0;
+  font-family: 'Ek Mukta', sans-serif;
+}
+
+.bl-content article {
+	padding: 20px 40px 20px 0px;
+}
+
+.bl-content article h3 {
+	font-weight: 400;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	margin: 0 0 10px 0;
+	padding-top: 20px;
+	font-size: 1.4em;
+}
+
+.bl-content article a {
+	color: rgba(0,0,0,0.2);
+}
+
+.bl-content > ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.bl-content > ul li {
+	display: inline-block;
+	width: 20%;
+	margin: 1%;
+}
+
+.bl-content > ul li a {
+	display: block;
+	padding: 0;
+	border: 8px solid rgba(0,0,0,0.1);
+}
+
+.bl-content > ul li a img {
+	display: block;
+	max-width: 100%;
+}
+
+.bl-content div {
+  float: left;
+  position: relative;
+  width: 60%;
+}
+
+.bl-content > div:first-of-type {
+  height: 100%;
+}
+
+.bl-content img {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.bl-content .teamMemberFullPhoto {
+  width: 40%;
+  height: 100%;
+}
+
+
+/* Transition classes and properties */
+/* Separated for a better overview and control */
+
+.bl-main > section {
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+
+.bl-main > section.bl-expand {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+
+.bl-main > section.bl-expand-top {
+	z-index: 100;
+}
+
+.bl-main > section.bl-expand {
+  background-color: #ff5a00;
+}
+
+.bl-main.bl-expand-item > section:not(.bl-expand),
+.bl-main.bl-expand-item > section.bl-scale-down {
+	-webkit-transform: scale(0.5);
+	-moz-transform: scale(0.5);
+	-ms-transform: scale(0.5);
+	transform: scale(0.5);
+	opacity: 0;
+}
+
+.bl-box {
+	-webkit-transition: opacity 0.2s linear 0.5s;
+	-moz-transition: opacity 0.2s linear 0.5s;
+	transition: opacity 0.2s linear 0.5s;
+}
+
+section.bl-expand .bl-box {
+	opacity: 0;
+	-webkit-transition: opacity 0s linear;
+	-moz-transition: opacity 0s linear;
+	transition: opacity 0s linear;
+}
+
+.bl-box h2 {
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+
+
+
+.bl-content,
+.bl-icon-close {
+	-webkit-transition: opacity 0.1s linear 0s;
+	-moz-transition: opacity 0.1s linear 0s;
+	transition: opacity 0.1s linear 0s;
+}
+
+section.bl-expand .bl-content,
+section.bl-expand .bl-icon-close {
+	pointer-events: auto;
+	opacity: 1;
+	-webkit-transition: opacity 0.3s linear 0.5s;
+	-moz-transition: opacity 0.3s linear 0.5s;
+	transition: opacity 0.3s linear 0.5s;
+}
+
+@media screen and (max-width: 46.5em) {
+	.bl-content,
+	.bl-box {
+		font-size: 75%;
+	}
+
+	.bl-expand .bl-box {
+		height: 130px;
+	}
+
+	.bl-content > ul li {
+		width: 40%;
+	}
+}
+
+.hidden{
+    display:none;
+}
+
+.fullscreen {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.picture p {
+    bottom: 1rem;
+    color: white;
+    font-family: serif;
+    font-size: 2.5em;
+    left: 0;
+    letter-spacing: 2px;
+    line-height: 102%;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    width: 65%;
+    z-index: 1;
+}
+
+.box {
+  z-index: 1;
+}
+
+.ecTeamMemberBanner {
+  background-color: lightgrey;
+  color: #555555;
+  font-weight: 700;
+  font-family: 'Ek Mukta', sans-serif;
+  width: initial !important;
+  padding: 0.8rem 1rem;
+  font-size: 1.2rem;
+}
+
+.ecTeamMemberDate {
+  position: relative !important;
+  float: left !important;
+  width: 30% !important;
+  background-color: #555555;
+  font-weight: 700;
+  font-family: 'Ek Mukta', sans-serif;
+  width: initial !important;
+  padding: 0.8rem 1rem;
+  font-size: 1.2rem;
+}
+
+.ub-fade {
+  transition-timing-function: linear; 
+  opacity: 1;
+}
+
+.ub-fade.ng-hide{
+  transition-timing-function: linear;    
+  opacity:0;
+}
+
+//.ub-fade-out{
+//    transition: opacity 2s;
+//  opacity:0;
+//}
+
+//.ub-fade.ng-hide-remove {
+//  opacity:0;
+//}
+//
+//.ub-fade.ng-hide-remove.ng-hide-remove-active {
+//  opacity: 1;
+//}
+
+/*// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower*/
+//
+//.browsehappy {
+//  margin: 0.2em 0;
+//  background: #ccc;
+//  color: #000;
+//  padding: 0.2em 0;
+//}
+//
+//body {
+//  padding: 0;
+//}
+//
+///* Everything but the jumbotron gets side spacing for mobile first views */
+//.header,
+//.marketing,
+//.footer {
+//  padding-left: 15px;
+//  padding-right: 15px;
+//}
+//
+///* Custom page header */
+//.header {
+//  border-bottom: 1px solid #e5e5e5;
+//  margin-bottom: 10px;
+//
+//  /* Make the masthead heading the same height as the navigation */
+//  h3 {
+//    margin-top: 0;
+//    margin-bottom: 0;
+//    line-height: 40px;
+//    padding-bottom: 19px;
+//  }
+//}
+//
+///* Custom page footer */
+//.footer {
+//  padding-top: 19px;
+//  color: #777;
+//  border-top: 1px solid #e5e5e5;
+//}
+//
+//.container-narrow > hr {
+//  margin: 30px 0;
+//}
+//
+///* Main marketing message and sign up button */
+//.jumbotron {
+//  text-align: center;
+//  border-bottom: 1px solid #e5e5e5;
+//
+//  .btn {
+//    font-size: 21px;
+//    padding: 14px 24px;
+//  }
+//}
+//
+///* Supporting marketing content */
+//.marketing {
+//  margin: 40px 0;
+//
+//  p + h4 {
+//    margin-top: 28px;
+//  }
+//}
+//
+///* Responsive: Portrait tablets and up */
+//@media screen and (min-width: 768px) {
+//  .container {
+//    max-width: 730px;
+//  }
+//
+//  /* Remove the padding we set earlier */
+//  .header,
+//  .marketing,
+//  .footer {
+//    padding-left: 0;
+//    padding-right: 0;
+//  }
+//  /* Space out the masthead */
+//  .header {
+//    margin-bottom: 30px;
+//  }
+//  /* Remove the bottom border on the jumbotron for visual effect */
+//  .jumbotron {
+//    border-bottom: 0;
+//  }
+//}
+

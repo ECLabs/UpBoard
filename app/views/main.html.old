@@ -1,0 +1,218 @@
+ {{ main.currentSlide }}
+
+<!--staticVideoOverlay-->
+<div class="missionStatement hidden">
+  <video></video>
+  <div class="box">
+      <p>
+          <!--liveVideoOverlayContent Injected Here -->
+      </p>
+      <div class="boxBottomLeft"></div>
+      <img id="star"></img>
+      <div class="boxBottomRight"></div>                
+  </div>
+</div>
+
+<!--news-->
+<div class="news hidden">
+    <div class="centerBox">
+      <div class="newsSection twitter" >
+        <div class="innerTop leftSide" >
+          <img src="images/twitterlogo.png" class="logoImg"/>
+        </div>
+        <div class="innerBottom leftSide">
+          <p class="washingtonPostArticleTitle"></p>
+          <p class="washingtonPostArticleContent"></p>
+          <p class="washingtonPostArticleAuthor"></p>
+          <p class="washingtonPostArticleDate"></p>
+        </div>
+      </div>
+      <div class="newsSection instagram">
+        <div class="innerTop">
+          <img src="images/instagram3.png" class="logoImg"/>
+        </div>
+        <div class="innerBottom">
+          <p class="washingtonPostArticleTitle">
+            This slide will include three items: a tweet, an instagram image, and a news article. For this story, focus only on the news article. See the attached wireframe for guidance.
+          </p>
+          <p class="washingtonPostArticleContent">
+            This slide will include three items: a tweet, an instagram image, and a news article. For this story, focus only on the news article. See the attached wireframe for guidance.
+          </p>
+          <p class="washingtonPostArticleAuthor">
+            Kole Myers
+          </p>
+          <p class="washingtonPostArticleDate">
+            6/6/23
+          </p>
+        </div>
+      </div>
+      <div class="newsSection washingtonPost">
+        <div class="innerTop">
+          <img src="images/Washington-post-logo-thumb.png" class="logoImg"/>
+        </div>
+        <div class="innerBottom">
+          <p class="washingtonPostArticleTitle">
+            This slide will include three items: a tweet, an instagram image, and a news article. For this story, focus only on the news article. See the attached wireframe for guidance.
+          </p>
+          <p class="washingtonPostArticleContent">
+            This slide will include three items: a tweet, an instagram image, and a news article. For this story, focus only on the news article. See the attached wireframe for guidance.
+          </p>
+          <p class="washingtonPostArticleAuthor">
+            Kole Myers
+          </p>
+          <p class="washingtonPostArticleDate">
+            6/6/23
+          </p>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div>
+    <!--webcam background-->
+    <video src="" autoplay="true" class="hidden" id="videoElement"></video>
+
+    <!--weather -->
+    <div class="weather hidden">
+        <p>
+            <!--weather information Injected Here -->
+        </p>
+    </div>
+</div>
+
+<!--bioPanels -->
+<div id="bl-main" class="bl-main hidden">
+
+    <div id="bioUnderline"></div>
+    <section id="section1">
+        <div class="bl-box">
+            <img />
+            <div class="bl-icon bl-icon-about"><!--bioPanels top left first name Injected Here -->
+               <h2></h2>
+            </div>
+        </div>
+        <div class="bl-content">
+          <div>
+            <h2><!--bioPanels top left name Injected Here --></h2>
+            <p><!--bioPanels top left text Injected Here --></p>
+            <div>
+              <div class="ecTeamMemberBanner">EC Team Member since</div>
+              <div class="ecTeamMemberDate"></div>
+            </div>
+          </div>
+          <div class="teamMemberFullPhoto">
+            <img />
+          </div>
+        </div>
+    </section>
+
+    <section id="section2">
+        <div class="bl-box">
+            <img />
+            <div class="bl-icon bl-icon-about"><!--bioPanels top left first name Injected Here -->
+               <h2></h2>
+            </div>
+        </div>
+        <div class="bl-content">
+          <div>
+            <h2><!--bioPanels top left name Injected Here --></h2>
+            <p><!--bioPanels top left text Injected Here --></p>
+            <div>
+              <div class="ecTeamMemberBanner">EC Team Member since</div>
+              <div class="ecTeamMemberDate"></div>
+            </div>
+          </div>
+          <div class="teamMemberFullPhoto">
+            <img />
+          </div>
+        </div>
+    </section>
+
+    <section id="section3">
+        <div class="bl-box">
+            <img />
+            <div class="bl-icon bl-icon-about"><!--bioPanels top left first name Injected Here -->
+               <h2></h2>
+            </div>
+        </div>
+        <div class="bl-content">
+          <div>
+            <h2><!--bioPanels top left name Injected Here --></h2>
+            <p><!--bioPanels top left text Injected Here --></p>
+            <div>
+              <div class="ecTeamMemberBanner">EC Team Member since</div>
+              <div class="ecTeamMemberDate"></div>
+            </div>
+          </div>
+          <div class="teamMemberFullPhoto">
+            <img />
+          </div>
+        </div>
+    </section>
+
+    <section id="section4">
+        <div class="bl-box">
+            <img />
+            <div class="bl-icon bl-icon-about"><!--bioPanels top left first name Injected Here -->
+               <h2></h2>
+            </div>
+        </div>
+        <div class="bl-content">
+          <div>
+            <h2><!--bioPanels top left name Injected Here --></h2>
+            <p><!--bioPanels top left text Injected Here --></p>
+            <div>
+              <div class="ecTeamMemberBanner">EC Team Member since</div>
+              <div class="ecTeamMemberDate"></div>
+            </div>
+          </div>
+          <div class="teamMemberFullPhoto">
+            <img />
+          </div>
+        </div>
+    </section>
+
+    <section id="section5">
+        <div class="bl-box">
+            <img />
+            <div class="bl-icon bl-icon-about"><!--bioPanels top left first name Injected Here -->
+               <h2></h2>
+            </div>
+        </div>
+        <div class="bl-content">
+          <div>
+            <h2><!--bioPanels top left name Injected Here --></h2>
+            <p><!--bioPanels top left text Injected Here --></p>
+            <div>
+              <div class="ecTeamMemberBanner">EC Team Member since</div>
+              <div class="ecTeamMemberDate"></div>
+            </div>
+          </div>
+          <div class="teamMemberFullPhoto">
+            <img />
+          </div>
+        </div>
+    </section>
+
+    <section id="section6">
+        <div class="bl-box">
+            <img />
+            <div class="bl-icon bl-icon-about"><!--bioPanels top left first name Injected Here -->
+               <h2></h2>
+            </div>
+        </div>
+        <div class="bl-content">
+          <div>
+            <h2><!--bioPanels top left name Injected Here --></h2>
+            <p><!--bioPanels top left text Injected Here --></p>
+            <div>
+              <div class="ecTeamMemberBanner">EC Team Member since</div>
+              <div class="ecTeamMemberDate"></div>
+            </div>
+          </div>
+          <div class="teamMemberFullPhoto">
+            <img />
+          </div>
+        </div>
+    </section>
+</div>

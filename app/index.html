@@ -1,268 +1,88 @@
 <!doctype html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>UpBoard</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-		<script src="scripts/modernizr.custom.js"></script>
-        <!-- Font -->
-        <link href='https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Ek+Mukta:200,700' rel='stylesheet' type='text/css'>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
 
-        <link rel="stylesheet" href="styles/main.css">
-        <link rel="icon" type="image/ico" href="images/icon.png">
+    <link href='https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Ek+Mukta:200,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="upBoardApp">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
 
-    </head>
-    <body>
-        <div class="container">
-            <!--logo -->
-            <div>
-                <div class="movingBackground hidden"></div>
-                <img class="logo hidden"></img>
-            </div>
+    <!-- Add your site or application content here -->
 
-            <!--picture -->
-            <div class="picture hidden">
-                <center><p></p></center>
-                <img class="fullscreen"></img>
-            </div>
+    <div class="container">
+        <div ng-view=""></div>
+    </div>
 
-            <!--staticVideoOverlay-->
-            <div class="missionStatement hidden">
-              <video></video>
-              <div class="box">
-                  <p>
-                      <!--liveVideoOverlayContent Injected Here -->
-                  </p>
-                  <div class="boxBottomLeft"></div>
-                  <img id="star"></img>
-                  <div class="boxBottomRight"></div>                
-              </div>
-           </div>
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-            <!--news-->
-            <div class="news hidden">
-                <div class="centerBox">
-                  <div class="newsSection twitter" >
-                    <div class="innerTop leftSide" >
-                      <img src="images/twitterlogo.png" class="logoImg"/>
-                    </div>
-                    <div class="innerBottom leftSide">
-                      <p class="washingtonPostArticleTitle"></p>
-                      <p class="washingtonPostArticleContent"></p>
-                      <p class="washingtonPostArticleAuthor"></p>
-                      <p class="washingtonPostArticleDate"></p>
-                    </div>
-                  </div>
-                  <div class="newsSection instagram">
-                    <div class="innerTop">
-                      <img src="images/instagram3.png" class="logoImg"/>
-                    </div>
-                    <div class="innerBottom">
-                      <p class="washingtonPostArticleTitle">
-                        This slide will include three items: a tweet, an instagram image, and a news article. For this story, focus only on the news article. See the attached wireframe for guidance.
-                      </p>
-                      <p class="washingtonPostArticleContent">
-                        This slide will include three items: a tweet, an instagram image, and a news article. For this story, focus only on the news article. See the attached wireframe for guidance.
-                      </p>
-                      <p class="washingtonPostArticleAuthor">
-                        Kole Myers
-                      </p>
-                      <p class="washingtonPostArticleDate">
-                        6/6/23
-                      </p>
-                    </div>
-                  </div>
-                  <div class="newsSection washingtonPost">
-                    <div class="innerTop">
-                      <img src="images/Washington-post-logo-thumb.png" class="logoImg"/>
-                    </div>
-                    <div class="innerBottom">
-                      <p class="washingtonPostArticleTitle">
-                        This slide will include three items: a tweet, an instagram image, and a news article. For this story, focus only on the news article. See the attached wireframe for guidance.
-                      </p>
-                      <p class="washingtonPostArticleContent">
-                        This slide will include three items: a tweet, an instagram image, and a news article. For this story, focus only on the news article. See the attached wireframe for guidance.
-                      </p>
-                      <p class="washingtonPostArticleAuthor">
-                        Kole Myers
-                      </p>
-                      <p class="washingtonPostArticleDate">
-                        6/6/23
-                      </p>
-                    </div>
-                  </div>
-                </div>
-            </div>
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
 
-            <div>
-                <!--webcam background-->
-                <video  autoplay="true" class="hidden" id="videoElement"></video>
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/firebase/firebase.js"></script>
+    <script src="bower_components/angularfire/dist/angularfire.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
 
-                <!--weather -->
-                <div class="weather hidden">
-                    <p>
-                        <!--weather information Injected Here -->
-                    </p>
-                </div>
-            </div>
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/angularfire/config.js"></script>
+        <script src="scripts/angularfire/firebase.ref.js"></script>
+        <script src="scripts/controllers/chat.js"></script>
+        <script src="scripts/filters/reverse.js"></script>
+        <script src="scripts/angularfire/auth.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/account.js"></script>
+        <script src="scripts/directives/ngShowAuth.js"></script>
+        <script src="scripts/directives/ngHideAuth.js"></script>
+        <script src="scripts/routes.js"></script>
+        <script src="scripts/directives/logo.js"></script>
+        <script src="scripts/directives/picture.js"></script>
+        <script src="scripts/directives/slideshow.js"></script>
+        <script src="scripts/directives/transition.js"></script>
+        <script src="scripts/directives/staticvideooverlay.js"></script>
+        <!-- endbuild -->
 
-            <!--bioPanels -->
-            <div id="bl-main" class="bl-main hidden">
-
-                <div id="bioUnderline"></div>
-                <section id="section1">
-                    <div class="bl-box">
-                        <img />
-                        <div class="bl-icon bl-icon-about"><!--bioPanels top left first name Injected Here -->
-                           <h2></h2>
-                        </div>
-                    </div>
-                    <div class="bl-content">
-                      <div>
-                        <h2><!--bioPanels top left name Injected Here --></h2>
-                        <p><!--bioPanels top left text Injected Here --></p>
-                        <div>
-                          <div class="ecTeamMemberBanner">EC Team Member since</div>
-                          <div class="ecTeamMemberDate"></div>
-                        </div>
-                      </div>
-                      <div class="teamMemberFullPhoto">
-                        <img />
-                      </div>
-                    </div>
-                </section>
-
-                <section id="section2">
-                    <div class="bl-box">
-                        <img />
-                        <div class="bl-icon bl-icon-about"><!--bioPanels top left first name Injected Here -->
-                           <h2></h2>
-                        </div>
-                    </div>
-                    <div class="bl-content">
-                      <div>
-                        <h2><!--bioPanels top left name Injected Here --></h2>
-                        <p><!--bioPanels top left text Injected Here --></p>
-                        <div>
-                          <div class="ecTeamMemberBanner">EC Team Member since</div>
-                          <div class="ecTeamMemberDate"></div>
-                        </div>
-                      </div>
-                      <div class="teamMemberFullPhoto">
-                        <img />
-                      </div>
-                    </div>
-                </section>
-
-                <section id="section3">
-                    <div class="bl-box">
-                        <img />
-                        <div class="bl-icon bl-icon-about"><!--bioPanels top left first name Injected Here -->
-                           <h2></h2>
-                        </div>
-                    </div>
-                    <div class="bl-content">
-                      <div>
-                        <h2><!--bioPanels top left name Injected Here --></h2>
-                        <p><!--bioPanels top left text Injected Here --></p>
-                        <div>
-                          <div class="ecTeamMemberBanner">EC Team Member since</div>
-                          <div class="ecTeamMemberDate"></div>
-                        </div>
-                      </div>
-                      <div class="teamMemberFullPhoto">
-                        <img />
-                      </div>
-                    </div>
-                </section>
-
-                <section id="section4">
-                    <div class="bl-box">
-                        <img />
-                        <div class="bl-icon bl-icon-about"><!--bioPanels top left first name Injected Here -->
-                           <h2></h2>
-                        </div>
-                    </div>
-                    <div class="bl-content">
-                      <div>
-                        <h2><!--bioPanels top left name Injected Here --></h2>
-                        <p><!--bioPanels top left text Injected Here --></p>
-                        <div>
-                          <div class="ecTeamMemberBanner">EC Team Member since</div>
-                          <div class="ecTeamMemberDate"></div>
-                        </div>
-                      </div>
-                      <div class="teamMemberFullPhoto">
-                        <img />
-                      </div>
-                    </div>
-                </section>
-
-                <section id="section5">
-                    <div class="bl-box">
-                        <img />
-                        <div class="bl-icon bl-icon-about"><!--bioPanels top left first name Injected Here -->
-                           <h2></h2>
-                        </div>
-                    </div>
-                    <div class="bl-content">
-                      <div>
-                        <h2><!--bioPanels top left name Injected Here --></h2>
-                        <p><!--bioPanels top left text Injected Here --></p>
-                        <div>
-                          <div class="ecTeamMemberBanner">EC Team Member since</div>
-                          <div class="ecTeamMemberDate"></div>
-                        </div>
-                      </div>
-                      <div class="teamMemberFullPhoto">
-                        <img />
-                      </div>
-                    </div>
-                </section>
-
-                <section id="section6">
-                    <div class="bl-box">
-                        <img />
-                        <div class="bl-icon bl-icon-about"><!--bioPanels top left first name Injected Here -->
-                           <h2></h2>
-                        </div>
-                    </div>
-                    <div class="bl-content">
-                      <div>
-                        <h2><!--bioPanels top left name Injected Here --></h2>
-                        <p><!--bioPanels top left text Injected Here --></p>
-                        <div>
-                          <div class="ecTeamMemberBanner">EC Team Member since</div>
-                          <div class="ecTeamMemberDate"></div>
-                        </div>
-                      </div>
-                      <div class="teamMemberFullPhoto">
-                        <img />
-                      </div>
-                    </div>
-                </section>
-
-            </div>
-
-        </div>
-
-        <script src="../bower_components/jquery/dist/jquery.js"></script>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-        <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
-        <!-- <script src="scripts/news.js"></script> -->
-        <script src="scripts/bioPanels.js"></script>
+        <script src="scripts/modernizr.custom.js"></script>
+	    <script src="scripts/bioPanels.js"></script>
         <script src="scripts/liveVideoOverlay.js"></script>
         <script src="scripts/staticVideoOverlay.js"></script>
-        <script src="scripts/logo.js"></script>
-        <script src="scripts/picture.js"></script>
         <script src="scripts/weather.js"></script>
-        <script src="scripts/main.js"></script>
 
-        </script>
-        <script>
-            init();
-        </script>
 </body>
 </html>

@@ -1,612 +1,749 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+/* line 3, ../../app/styles/main.scss */
 body {
-    margin:0;
-    padding:0;
-    overflow:hidden;
-    background-color:white;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: white;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
 }
-.container{
 
-    background-color:white;
-    position:relative;
-    padding:0;
-    margin: 0;
-    height: 100%;
+/* line 10, ../../app/styles/main.scss */
+.container {
+  background-color: white;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100% !important;
+}
 
+/* line 20, ../../app/styles/main.scss */
+.noAnimate {
+  animation: none !important;
 }
-.hidden{
-    display:none;
-}
-.noAnimate{
-    -webkit-animation: none !important;
-    -ms-animation: none !important;
-    animation: none !important;
-}
+
 /* logo */
-
-
 @keyframes animatedBackground {
-	0% { background-position: 0 0; }
-	100% { background-position: 0 100vh; }
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100vh;
+  }
 }
-@-webkit-keyframes animatedBackground {
-	0% { background-position: 0 0; }
-	100% { background-position: 0 100vh; }
-}
-@-ms-keyframes animatedBackground {
-	0% { background-position: 0 0; }
-	100% { background-position: 0 100vh; }
-}
-.movingBackground{
-
-    position:relative;
-    width:100%;
-    height:100vh;
-    src: url(../images/background2.png) repeat-y center center fixed;
-    background: url(../images/background2.png) repeat-y center center fixed;
-    background-size: cover;
-    animation: animatedBackground 20s linear infinite;
-    -moz-animation: animatedBackground 20s linear infinite;
-    -webkit-animation: animatedBackground 20s linear infinite;
-    -ms-animation: animatedBackground 20s linear infinite;
-    -o-animation: animatedBackground 20s linear infinite;
+/* line 50, ../../app/styles/main.scss */
+.movingBackground {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  src: url(../images/background2.png) repeat-y center center fixed;
+  background: url(../images/background2.png) repeat-y center center fixed;
+  background-size: cover;
+  animation: animatedBackground 20s linear infinite;
+  -moz-animation: animatedBackground 20s linear infinite;
+  -webkit-animation: animatedBackground 20s linear infinite;
+  -ms-animation: animatedBackground 20s linear infinite;
+  -o-animation: animatedBackground 20s linear infinite;
 }
 
-.logo{
-    position:absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    width:0px;
-    height:0px;
-    padding: 132px 500px 131px 500px;
-    background: url(../images/EC-regular-1000x263.png) no-repeat center center;
+/* line 68, ../../app/styles/main.scss */
+.logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  width: 0px;
+  height: 0px;
+  padding: 132px 500px 131px 500px;
+  background: url(/images/EC-regular-1000x263.png) no-repeat center center;
 }
 
 /*News Slide */
-.news{
-  position:relative;
-  width:100%;
-  height:100vh;
+/* line 82, ../../app/styles/main.scss */
+.news {
+  position: relative;
+  width: 100%;
+  height: 100vh;
   background-color: white;
-  display:-webkit-flex;
-  display:flex;
-  -webkit-justify-content:center;
-  justify-content:center;
-  -webkit-align-items:center;
-  align-items:center;
-}
-.centerBox{
-  width:90%;
-  height:80%;
-  display:-webkit-flex;
-  display:flex;
-  -webkit-align-items:center;
-  align-items:center;
-}
-.newsSection{
-  height:100%;
-  width:calc(100% / 3);
-
-}
-.twitter{
-
-}
-.instagram{
-
-}
-.washingtonPost{
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* line 91, ../../app/styles/main.scss */
+.centerBox {
+  width: 90%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+}
 
-.innerTop{
-  color:black;
-  margin-left:auto;
-  margin-right:auto;
-  height:20%;
+/* line 97, ../../app/styles/main.scss */
+.newsSection {
+  height: 100%;
+  width: calc(100% / 3);
+}
+
+/* line 113, ../../app/styles/main.scss */
+.innerTop {
+  color: black;
+  margin-left: auto;
+  margin-right: auto;
+  height: 20%;
   background-color: white;
   border-bottom-style: solid;
-  border-left-style:solid;
+  border-left-style: solid;
   border-width: 2px;
   border-color: #E0E0E0;
   overflow: hidden;
 }
-.innerBottom{
-  color:black;
-  border-left-style:solid;
+
+/* line 125, ../../app/styles/main.scss */
+.innerBottom {
+  color: black;
+  border-left-style: solid;
   border-width: 2px;
   border-color: #E0E0E0;
-  margin-left:auto;
-  margin-right:auto;
-  height:80%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 80%;
   background-color: white;
-
-}
-.leftSide{
-  border-left-style:none;
 }
 
-.logoImg{
+/* line 136, ../../app/styles/main.scss */
+.leftSide {
+  border-left-style: none;
+}
+
+/* line 140, ../../app/styles/main.scss */
+.logoImg {
   margin-left: 70px;
-  display:block;
+  display: block;
   opacity: 0;
 }
-.washingtonPostArticleTitle{
+
+/* line 145, ../../app/styles/main.scss */
+.washingtonPostArticleTitle {
   font-weight: bold;
   font-size: 1.7em;
-  padding-top:30px;
+  padding-top: 30px;
   padding-left: 5px;
   padding-right: 5px;
-  margin:0px;
+  margin: 0px;
 }
-.washingtonPostArticleContent{
+
+/* line 153, ../../app/styles/main.scss */
+.washingtonPostArticleContent {
   font-size: 1.2em;
   padding: 5px;
 }
 
-.washingtonPostArticleAuthor{
+/* line 158, ../../app/styles/main.scss */
+.washingtonPostArticleAuthor {
   font-size: 1.2em;
   font-weight: bold;
-  display:inline-block;
-  width:49%;
+  display: inline-block;
+  width: 49%;
   padding: 5px;
 }
-.washingtonPostArticleDate{
+
+/* line 165, ../../app/styles/main.scss */
+.washingtonPostArticleDate {
   font-size: 1.2em;
-  display:inline-block;
-  width:49%;
-  padding:5px;
+  display: inline-block;
+  width: 49%;
+  padding: 5px;
   text-align: right;
 }
 
-
-
-
-
 /* liveVideoOverlay */
-@keyframes webcamBlur {
-    0% {-webkit-filter:grayscale(0) blur(0px) brightness(1);filter:grayscale(0) blur(0px) brightness(1);}
-    100% {-webkit-filter:grayscale(.8) blur(15px) brightness(.75);filter:grayscale(.8) blur(15px) brightness(.75);}
-}
-@-webkit-keyframes webcamBlur {
-    0% {-webkit-filter:grayscale(0) blur(0px) brightness(1);filter:grayscale(0) blur(0px) brightness(1);}
-    100% {-webkit-filter:grayscale(.8) blur(15px) brightness(.75);filter:grayscale(.8) blur(15px) brightness(.75);}
-}
-@-ms-keyframes webcamBlur {
-    0% {filter:grayscale(0) blur(0px) brightness(1);}
-    100% {filter:grayscale(.8) blur(15px) brightness(.75);}
-}
 /*overlay animation fades from opacity from 0 to 1*/
 /*this animation is necessary since the box is centered using display table and cannot be display none*/
 @keyframes overlay {
-    0% { opacity:0;}
-    100% { opacity:1;}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-@-webkit-keyframes overlay {
-    0% { opacity:0;}
-    100% { opacity:1;}
-}
-@-ms-keyframes overlay {
-    0% { opacity:0;}
-    100% { opacity:1;}
-}
-
-
-#videoElement{
-        /*animation-name: webcamBlur;*/
-    -webkit-animation-duration: 5s;
-    animation-duration: 5s; /* webcam blur duration */
-    -webkit-animation-delay: 2s;
-    animation-delay: 2s; /* webcam blur delay */
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-    position:relative;
-    width:100%;
-    -webkit-transition: all 2s;
-
+/* line 222, ../../app/styles/main.scss */
+#videoElement {
+  /*animation-name: webcamBlur;*/
+  animation-duration: 5s;
+  /* webcam blur duration */
+  animation-delay: 2s;
+  /* webcam blur delay */
+  animation-fill-mode: forwards;
+  position: relative;
+  width: 100%;
+  -webkit-transition: all 2s;
 }
 
-
-
-.box{
-    /*animation-name: overlay;*/
-    -webkit-animation-duration: 5s;
-    animation-duration: 5s; /* box fade in duration */
-    -webkit-animation-delay: 4s;
-    animation-delay: 4s; /* box fade in delay */
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-    opacity:0;
-    display:table;
-    color:#FAFCFA;
-    min-height:300px;
-    position:absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    height:50%;
-    width:90%;
-    border-top: 2px solid #FAFCFA;
-    border-right: 2px solid #FAFCFA;
-    border-left: 2px solid #FAFCFA;
-    display:-webkit-flex;
-    display:flex;
-    -webkit-justify-content:center;
-    justify-content:center;
-    -webkit-align-items:center;
-    align-items:center;
-
+/* line 233, ../../app/styles/main.scss */
+video {
+  /*animation-name: webcamBlur;*/
+  animation-delay: 2s;
+  /* webcam blur delay */
+  animation-fill-mode: forwards;
+  position: relative;
+  width: 100%;
+  -webkit-transition: all 2s;
 }
-.boxBottomLeft{
-    position:absolute;
-    height:0;
-    width:45%;
-    border:1px solid #FAFCFA;
-    left:0px;
-    bottom:0px;
-    display:inline-block;
-}
-.boxBottomRight{
-    position:absolute;
-    height:0;
-    width:45%;
-    border:1px solid #FAFCFA;
-    right:0px;
-    bottom:0px;
-    display:inline-block;
 
+/* line 244, ../../app/styles/main.scss */
+.box {
+  /*animation-name: overlay;*/
+  animation-duration: 5s;
+  /* box fade in duration */
+  animation-delay: 4s;
+  /* box fade in delay */
+  animation-fill-mode: forwards;
+  opacity: 0;
+  display: table;
+  color: #FAFCFA;
+  min-height: 300px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  height: 50%;
+  width: 90%;
+  border-top: 2px solid #FAFCFA;
+  border-right: 2px solid #FAFCFA;
+  border-left: 2px solid #FAFCFA;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-#star{
-    position:absolute;
-    background: url(../images/star.png);
-    color:white;
-    display:inline-block;
-    left:50%;
-    bottom:-10px;
-    padding: 12px 14px 16px 14px;
-    margin-left:-15px;
+
+/* line 269, ../../app/styles/main.scss */
+.boxBottomLeft {
+  position: absolute;
+  height: 0;
+  width: 45%;
+  border: 1px solid #FAFCFA;
+  left: 0px;
+  bottom: 0px;
+  display: inline-block;
 }
+
+/* line 278, ../../app/styles/main.scss */
+.boxBottomRight {
+  position: absolute;
+  height: 0;
+  width: 45%;
+  border: 1px solid #FAFCFA;
+  right: 0px;
+  bottom: 0px;
+  display: inline-block;
+}
+
+/* line 288, ../../app/styles/main.scss */
+#star {
+  position: absolute;
+  background: url(../images/star.png);
+  color: white;
+  display: inline-block;
+  left: 50%;
+  bottom: -10px;
+  padding: 12px 14px 16px 14px;
+  margin-left: -15px;
+}
+
+/* line 298, ../../app/styles/main.scss */
 .box p {
-    display: table-cell;
-
-    text-align:center;
-    vertical-align:middle;
-    font-family: 'Slabo 27px', serif;
-    font-size:5em;
-    letter-spacing:2px;
-    line-height:130%;
-    margin-left:auto;
-    margin-right:auto;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 5em;
+  letter-spacing: 2px;
+  line-height: 130%;
+  margin-left: auto;
+  margin-right: auto;
 }
-
-
-
-
-
-
 
 /* weather */
-.weather{
-    visibility: hidden;
-    display:table;
-    color:#FAFCFA;
-    min-height:300px;
-    position:absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    height:50%;
-    width:90%;
-    display:-webkit-flex;
-    display:flex;
-    -webkit-justify-content:center;
-    justify-content:center;
-    -webkit-align-items:center;
-    align-items:center;
-}
-.weather p {
-    display: table-cell;
-    text-align:center;
-    vertical-align:middle;
-    font-family: 'Slabo 27px', serif;
-    font-size:5em;
-    letter-spacing:2px;
-    line-height:130%;
-    margin-left:auto;
-    margin-right:auto;
+/* line 312, ../../app/styles/main.scss */
+.weather {
+  visibility: hidden;
+  display: table;
+  color: #FAFCFA;
+  min-height: 300px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  height: 50%;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* line 329, ../../app/styles/main.scss */
+.weather p {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 5em;
+  letter-spacing: 2px;
+  line-height: 130%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 341, ../../app/styles/main.scss */
+.weather div {
+  border-bottom: 4px solid white;
+  padding-bottom: 11px;
+}
 
 /* Fourpanel */
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
-
 @font-face {
-	font-family: 'icomoon';
-	src:url('../fonts/icomoon.eot');
-	src:url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/icomoon.woff') format('woff'),
-		url('../fonts/icomoon.ttf') format('truetype'),
-		url('../fonts/icomoon.svg#icomoon') format('svg');
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'icomoon';
+  src: url("../fonts/icomoon.eot");
+  src: url("../fonts/icomoon.eot?#iefix") format("embedded-opentype"), url("../fonts/icomoon.woff") format("woff"), url("../fonts/icomoon.ttf") format("truetype"), url("../fonts/icomoon.svg#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* line 361, ../../app/styles/main.scss */
+body, html {
+  font-size: 100%;
+  padding: 0;
+  margin: 0;
+  height: 100%;
 }
 
-body, html { font-size: 100%; padding: 0; margin: 0; height: 100%;}
-
+/* line 363, ../../app/styles/main.scss */
 *,
 *:after,
 *:before {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
+/* line 371, ../../app/styles/main.scss */
 body {
-    font-family: 'Lato', Calibri, Arial, sans-serif;
-    color: #f2ede3;
-    font-size: 0.9em;
-    font-weight: 300;
+  font-family: 'Lato', Calibri, Arial, sans-serif;
+  color: #f2ede3;
+  font-size: 0.9em;
+  font-weight: 300;
 }
 
+/* line 378, ../../app/styles/main.scss */
 a {
-	color: #f0f0f0;
-	text-decoration: none;
-	font-weight: 700;
-	letter-spacing: 2px;
-	padding: 0 5px;
-	text-transform: uppercase;
-	font-size: 80%;
+  color: #f0f0f0;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 0 5px;
+  text-transform: uppercase;
+  font-size: 80%;
 }
 
-
+/* line 389, ../../app/styles/main.scss */
 .bl-main {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
+/* line 397, ../../app/styles/main.scss */
 .bl-main > section {
-	position: absolute;
-	width: 50%;
-	height: 50%;
+  position: absolute;
+  width: 33.3%;
+  height: 50%;
+  background: #ff5a00;
+  border: 0.1rem solid white;
 }
 
-.bl-main > section:first-child {
-	top: 0;
-	left: 0;
-	background: #F06060;
-}
-
+/* line 405, ../../app/styles/main.scss */
 .bl-main > section:nth-child(2) {
-	top: 0;
-	left: 50%;
-	background: #FA987D;
+  top: 0;
+  left: 0;
 }
 
+/* line 410, ../../app/styles/main.scss */
 .bl-main > section:nth-child(3) {
-	top: 50%;
-	left: 0;
-	background: #72CCA7;
+  top: 0;
+  left: 33.3%;
 }
 
+/* line 415, ../../app/styles/main.scss */
 .bl-main > section:nth-child(4) {
-	top: 50%;
-	left: 50%;
-	background: #10A296;
+  top: 0;
+  left: 66.6%;
 }
 
+/* line 420, ../../app/styles/main.scss */
+.bl-main > section:nth-child(5) {
+  top: 50%;
+  left: 0;
+}
+
+/* line 425, ../../app/styles/main.scss */
+.bl-main > section:nth-child(6) {
+  top: 50%;
+  left: 33.3%;
+}
+
+/* line 430, ../../app/styles/main.scss */
+.bl-main > section:nth-child(7) {
+  top: 50%;
+  left: 66.6%;
+}
+
+/* line 435, ../../app/styles/main.scss */
+#bioUnderline {
+  height: 0.5rem;
+  background-color: white;
+  opacity: 0.5;
+  width: 10rem;
+  position: absolute;
+  z-index: 1;
+}
+
+/* line 444, ../../app/styles/main.scss */
 .bl-box {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	cursor: pointer;
-	opacity: 1;
-	/* Centering with flexbox */
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row;
-    flex-direction: row;
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-align-items: center;
-    align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  opacity: 1;
+  /* Centering with flexbox */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
+/* line 474, ../../app/styles/main.scss */
+.bl-box img {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0.14;
+}
+
+/* line 482, ../../app/styles/main.scss */
 .bl-box h2 {
-    -webkit-transform:scale(1,1.5);
-    transform:scale(1,1.5);
-	text-align: center;
-	margin: 0;
-	padding: 20px;
-	width: 100%;
-	font-size: 2.5em;
-	letter-spacing: 2px;
-	font-weight: 700;
-	text-transform: uppercase;
+  transform: scale(1, 1.5);
+  text-align: center;
+  margin: 0;
+  padding: 0.5em;
+  width: 100%;
+  font-size: 2.5em;
+  letter-spacing: 2px;
+  font-weight: 400;
+  text-transform: uppercase;
 }
 
+/* line 494, ../../app/styles/main.scss */
 .bl-icon {
-
-
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-	cursor: pointer;
-	-webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased;
 }
 
-
-
+/* line 508, ../../app/styles/main.scss */
 .bl-main > section .bl-icon-close {
-	position: absolute;
-	top: 20px;
-	right: 20px;
-	cursor: pointer;
-	z-index: 100;
-	opacity: 0;
-	pointer-events: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
 }
 
+/* line 518, ../../app/styles/main.scss */
 .bl-icon-close:before {
-	content: "\e005";
+  content: "\e005";
 }
 
+/* line 522, ../../app/styles/main.scss */
 .bl-content,
 div.bl-panel-items > div > div {
-	opacity: 0;
-	pointer-events: none;
-	position: absolute;
-	top: 60px;
-	left: 30px;
-	right: 30px;
-	bottom: 30px;
-	padding: 0 20px;
-	overflow: hidden;
-	overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 60px;
+  left: 30px;
+  right: 0px;
+  bottom: 0px;
+  padding: 0 0 0 20px;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
+/* line 536, ../../app/styles/main.scss */
+.bl-content {
+  overflow: hidden;
+}
 
 /* Custom content */
-
+/* line 542, ../../app/styles/main.scss */
 .bl-content p {
-	margin: 0 auto;
-	padding-bottom: 15px;
-	font-size: 1.7em;
-	line-height: 1.8;
+  margin: 0 auto;
+  padding-bottom: 15px;
+  font-size: 1.7em;
+  line-height: 1.8;
+  font-family: 'Ek Mukta', sans-serif;
+  font-weight: 200;
+  max-height: 75%;
+  overflow: hidden;
 }
 
+/* line 553, ../../app/styles/main.scss */
 .bl-content h2 {
-	font-size: 3em;
-	font-weight: 300;
-	margin: 0 0 20px 0;
+  font-size: 3em;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  font-family: 'Ek Mukta', sans-serif;
 }
 
+/* line 560, ../../app/styles/main.scss */
 .bl-content article {
-	padding: 20px 40px 20px 0px;
+  padding: 20px 40px 20px 0px;
 }
 
+/* line 564, ../../app/styles/main.scss */
 .bl-content article h3 {
-	font-weight: 700;
-	letter-spacing: 2px;
-	text-transform: uppercase;
-	margin: 0 0 10px 0;
-	padding-top: 20px;
-	font-size: 1.4em;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0 0 10px 0;
+  padding-top: 20px;
+  font-size: 1.4em;
 }
 
+/* line 573, ../../app/styles/main.scss */
 .bl-content article a {
-	color: rgba(0,0,0,0.2);
+  color: rgba(0, 0, 0, 0.2);
 }
 
+/* line 577, ../../app/styles/main.scss */
 .bl-content > ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
+/* line 583, ../../app/styles/main.scss */
 .bl-content > ul li {
-	display: inline-block;
-	width: 20%;
-	margin: 1%;
+  display: inline-block;
+  width: 20%;
+  margin: 1%;
 }
 
+/* line 589, ../../app/styles/main.scss */
 .bl-content > ul li a {
-	display: block;
-	padding: 0;
-	border: 8px solid rgba(0,0,0,0.1);
+  display: block;
+  padding: 0;
+  border: 8px solid rgba(0, 0, 0, 0.1);
 }
 
+/* line 595, ../../app/styles/main.scss */
 .bl-content > ul li a img {
-	display: block;
-	max-width: 100%;
+  display: block;
+  max-width: 100%;
 }
 
+/* line 600, ../../app/styles/main.scss */
+.bl-content div {
+  float: left;
+  position: relative;
+  width: 60%;
+}
+
+/* line 606, ../../app/styles/main.scss */
+.bl-content > div:first-of-type {
+  height: 100%;
+}
+
+/* line 610, ../../app/styles/main.scss */
+.bl-content img {
+  height: 100%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+/* line 617, ../../app/styles/main.scss */
+.bl-content .teamMemberFullPhoto {
+  width: 40%;
+  height: 100%;
+}
 
 /* Transition classes and properties */
 /* Separated for a better overview and control */
-
+/* line 626, ../../app/styles/main.scss */
 .bl-main > section {
-	transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
+/* line 632, ../../app/styles/main.scss */
 .bl-main > section.bl-expand {
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
 }
 
+/* line 639, ../../app/styles/main.scss */
 .bl-main > section.bl-expand-top {
-	z-index: 100;
+  z-index: 100;
 }
 
-.bl-main > section:first-child.bl-expand {
-	background: #EE4444;
-}
-.bl-main > section:nth-child(2).bl-expand {
-	background: #F98262;
-}
-.bl-main > section:nth-child(3).bl-expand {
-	background: #4BBE8E;
-}
-.bl-main > section:nth-child(4).bl-expand {
-	background: #0D8278;
+/* line 643, ../../app/styles/main.scss */
+.bl-main > section.bl-expand {
+  background-color: #ff5a00;
 }
 
+/* line 647, ../../app/styles/main.scss */
 .bl-main.bl-expand-item > section:not(.bl-expand),
 .bl-main.bl-expand-item > section.bl-scale-down {
-	-webkit-transform: scale(0.5);
-	transform: scale(0.5);
-	opacity: 0;
+  transform: scale(0.5);
+  opacity: 0;
 }
 
+/* line 656, ../../app/styles/main.scss */
 .bl-box {
-	transition: opacity 0.2s linear 0.5s;
+  transition: opacity 0.2s linear 0.5s;
 }
 
+/* line 662, ../../app/styles/main.scss */
 section.bl-expand .bl-box {
-	opacity: 0;
-	transition: opacity 0s linear;
+  opacity: 0;
+  transition: opacity 0s linear;
 }
 
+/* line 669, ../../app/styles/main.scss */
 .bl-box h2 {
-	transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
-
-
+/* line 677, ../../app/styles/main.scss */
 .bl-content,
 .bl-icon-close {
-	transition: opacity 0.1s linear 0s;
+  transition: opacity 0.1s linear 0s;
 }
 
+/* line 684, ../../app/styles/main.scss */
 section.bl-expand .bl-content,
 section.bl-expand .bl-icon-close {
-	pointer-events: auto;
-	opacity: 1;
-	transition: opacity 0.3s linear 0.5s;
+  pointer-events: auto;
+  opacity: 1;
+  transition: opacity 0.3s linear 0.5s;
 }
 
 @media screen and (max-width: 46.5em) {
-	.bl-content,
-	.bl-box {
-		font-size: 75%;
-	}
+  /* line 694, ../../app/styles/main.scss */
+  .bl-content,
+  .bl-box {
+    font-size: 75%;
+  }
 
-	.bl-expand .bl-box {
-		height: 130px;
-	}
+  /* line 699, ../../app/styles/main.scss */
+  .bl-expand .bl-box {
+    height: 130px;
+  }
 
-	.bl-content > ul li {
-		width: 40%;
-	}
+  /* line 703, ../../app/styles/main.scss */
+  .bl-content > ul li {
+    width: 40%;
+  }
 }
+/* line 708, ../../app/styles/main.scss */
+.hidden {
+  display: none;
+}
+
+/* line 712, ../../app/styles/main.scss */
+.fullscreen {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+/* line 719, ../../app/styles/main.scss */
+.picture p {
+  bottom: 1rem;
+  color: white;
+  font-family: serif;
+  font-size: 2.5em;
+  left: 0;
+  letter-spacing: 2px;
+  line-height: 102%;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  width: 65%;
+  z-index: 1;
+}
+
+/* line 735, ../../app/styles/main.scss */
+.box {
+  z-index: 1;
+}
+
+/* line 739, ../../app/styles/main.scss */
+.ecTeamMemberBanner {
+  background-color: lightgrey;
+  color: #555555;
+  font-weight: 700;
+  font-family: 'Ek Mukta', sans-serif;
+  width: initial !important;
+  padding: 0.8rem 1rem;
+  font-size: 1.2rem;
+}
+
+/* line 749, ../../app/styles/main.scss */
+.ecTeamMemberDate {
+  position: relative !important;
+  float: left !important;
+  width: 30% !important;
+  background-color: #555555;
+  font-weight: 700;
+  font-family: 'Ek Mukta', sans-serif;
+  width: initial !important;
+  padding: 0.8rem 1rem;
+  font-size: 1.2rem;
+}
+
+/* line 761, ../../app/styles/main.scss */
+.ub-fade {
+  transition-timing-function: linear;
+  opacity: 1;
+}
+
+/* line 766, ../../app/styles/main.scss */
+.ub-fade.ng-hide {
+  transition-timing-function: linear;
+  opacity: 0;
+}
+
+/*// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower*/
+
+/*# sourceMappingURL=main.css.map */
