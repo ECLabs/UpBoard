@@ -10,8 +10,8 @@
     angular.module('upBoardApp')
       .directive('picture', picture);
     
-    picture.$inject = ['$log'];
-    function picture($log) {
+    picture.$inject = ['$log', 'utility'];
+    function picture($log, utility) {
         return {
           templateUrl: '/scripts/directives/picture.tpl.html',
           restrict: 'E',
@@ -39,16 +39,13 @@
                       element.find('p')[0].innerHTML = scope.data.content.caption; // set caption
                       element.find('img')[0].src = scope.data.content.imageUrl; // set image
                       
-                      element.removeClass('ub-' + scope.data.transitions.exit);
-                      element.addClass('ub-' + scope.data.transitions.entry);
-                      element.attr('style', 'transition-duration:' + scope.data.timing.transitionTime + 'ms');
+                      utility.setEntryTransition(element, scope.data);
 
                       savedData = scope.data;
                   }
                   else if(scope.data != null){
                       $log.debug('about to hide picture, next type on deck: ' + scope.data.type);
-                      element.removeClass('ub-' + savedData.transitions.entry);
-                      element.addClass('ub-' + savedData.transitions.exit)
+                      utility.setExitTransition(element, savedData);
                   }
               });
           }

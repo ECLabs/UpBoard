@@ -10,8 +10,8 @@
     angular.module('upBoardApp')
       .directive('staticVideoOverlay', staticVideoOverlay);
     
-    staticVideoOverlay.$inject = ['$log'];
-    function staticVideoOverlay($log) {
+    staticVideoOverlay.$inject = ['$log', 'utility'];
+    function staticVideoOverlay($log, utility) {
         return {
           templateUrl: '/scripts/directives/staticvideooverlay.tpl.html',
           restrict: 'E',
@@ -49,16 +49,13 @@
                       video.src = scope.data.content.videoUrl;
                       video.play();
                       
-                      element.removeClass('ub-' + scope.data.transitions.exit);
-                      element.addClass('ub-' + scope.data.transitions.entry);
-                      element.attr('style', 'transition-duration:' + scope.data.timing.transitionTime + 'ms');
+                      utility.setEntryTransition(element, scope.data);
 
                       savedData = scope.data;
                   }
                   else if(scope.data != null){
                       $log.debug('about to hide video, next type on deck: ' + scope.data.type);
-                      element.removeClass('ub-' + savedData.transitions.entry);
-                      element.addClass('ub-' + savedData.transitions.exit)
+                      utility.setExitTransition(element, savedData);
                   }
               });
           }
