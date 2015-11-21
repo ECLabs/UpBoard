@@ -7,7 +7,7 @@
      * @name upBoardApp.openWeatherMap
      * @description
      * # openWeatherMap
-     * Service in the upBoardApp.
+     * Factory in the upBoardApp.
      */
     angular.module('upBoardApp')
       .factory('openWeatherMap', openWeatherMap);
