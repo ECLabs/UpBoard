@@ -34,13 +34,17 @@
           },
             
           setEntryTransition: function (element, data) {
-              element.removeClass('ub-' + data.transitions.exit);
+              
+              // remove previous exit transition style if it exists
+              element.removeClass (function (index, css) {return (css.match (/(^|\s)ub-\S+/g) || []).join(' ');});
               element.addClass('ub-' + data.transitions.entry);
-              element.attr('style', 'transition-duration:' + data.timing.transitionTime + 'ms');
+              element.attr('style', 'animation-duration:' + data.timing.transitionTime + 'ms');
           },
             
           setExitTransition: function (element, data){
-              element.removeClass('ub-' + data.transitions.entry);
+              
+              // remove previous entry transition style if it exists
+              element.removeClass (function (index, css) {return (css.match (/(^|\s)ub-\S+/g) || []).join(' ');});
               element.addClass('ub-' + data.transitions.exit);
           },
             

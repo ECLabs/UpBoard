@@ -25,7 +25,6 @@
 
               scope.$watch(attrs.ngShow, function(){
 
-                  var localStream;
                   var isShown = scope.$eval(attrs.ngShow);
 
                   if(isShown){
@@ -50,9 +49,10 @@
 
                       savedData = scope.data;
                   }
-                  else if(scope.data != null){
+                  else if(savedData != null){
                       $log.debug('about to hide weather, next type on deck: ' + scope.data.type);
                       utility.setExitTransition(element, savedData);
+                      savedData = null;
                   }
               });
           }

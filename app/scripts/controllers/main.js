@@ -11,37 +11,17 @@
     angular.module('upBoardApp')
       .controller('MainCtrl', mainCtrl);
 
-    mainCtrl.$inject = ['$firebaseArray', 'Ref', '$timeout', '$log', '$compile', '$scope'];
-    function mainCtrl($firebaseArray, Ref, $timeout, $log, $compile, $scope) {
+    mainCtrl.$inject = ['$firebaseArray', 'Ref', '$timeout', '$log'];
+    function mainCtrl($firebaseArray, Ref, $timeout, $log) {
         
         var vm = this;
         
         vm.currentIndex = 0;
         vm.loop = true;
         vm.currentSlide;
-        vm.nextSlide; // slide on deck
-//        vm.data;
         
         vm.slides = $firebaseArray(Ref);
-//        vm.slides.$loaded().then(loadSlideShow);
         vm.slides.$loaded().then(startSlideShow);
-        
-//
-//            // dynamically add slide types
-//            for(var i = 0; i < vm.slides.length; i++){
-//                var slide = vm.slides[i];
-//                vm.data = slide;
-//                var el = document.createElement(slide.type);
-//                var slideDirective = angular.element(el);
-//                
-//                //$scope.data = slide;
-//                //var slideDirective = '<' + slide.type + ' data="' + slide + '"></' + slide.type + '>';
-//                
-//                $compile( slideDirective )( $scope );
-//                angular.element('#slideshow').append(slideDirective);
-//            }
-//            startSlideShow();
-//        }
         
         function isEnd(){
             return vm.currentIndex > vm.slides.length;
@@ -53,54 +33,34 @@
         }
         
         function nextSlide(){
+
+            $log.debug(vm.currentSlide);
             
-            
-            var delay = vm.currentSlide.timing.slideTime + (Number(vm.currentSlide.timing.transitionTime) * 2);
+            var delay = vm.currentSlide.timing.slideTime + vm.currentSlide.timing.transitionTime + 2000;
             $log.debug('delay: ' + delay);
+            
             $timeout(function(){
 
-//                vm.nextSlide = vm.slides[vm.currentIndex];
-                
-                //$(vm.currentSlide.type).addClass("ub-" + vm.currentSlide.transitions.exit)
-                //$('#ub-' + vm.currentSlide.type).addClass('ng-hide');
-                console.log('initiate hide');
-                
-                
-                //$('.container').fadeOut('slow');
+//                $log.debug('initiate hide');
                 
                 $timeout(function(){
                     
-                    //$('.container').show();
                     vm.currentSlide = vm.slides[vm.currentIndex++];
-                    if(!isEnd()) {
-//                        vm.nextSlide = vm.slides[vm.currentIndex];
-                        nextSlide();
-                    }
+                    if(!isEnd()) nextSlide();
                     else if(vm.loop) restart();
+                    
                 }, Number(vm.currentSlide.timing.transitionTime) + 2000);  // compensate for transition slide time
                 
+                // go to transition slide
                 vm.currentSlide = {type:'transition'};
                 
             }, vm.currentSlide.timing.slideTime);
-//                }, delay);
         }
         
         function startSlideShow(){
-//            var slides = angular.element('#slideshow').children();
-//            console.log(slides.length);
-//            
-//            for(var i = 0; i < slides.length; i++){
-//                console.log(slides[i]);
-//            }
+
             vm.currentSlide = vm.slides[vm.currentIndex++];
-            
-            // don't move on if only one slide
-            if(!isEnd()) {
-//                vm.nextSlide = vm.slides[vm.currentIndex];
-                nextSlide();
-            }
-//            vm.currentSlide = slides[vm.currentIndex++];
-            
+            if(!isEnd()) nextSlide();
         }
     }
     

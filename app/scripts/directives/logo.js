@@ -32,9 +32,10 @@
                       utility.setEntryTransition(element, scope.data);
                       savedData = scope.data;
                   }
-                  else if(scope.data != null){
+                  else if(savedData != null){
                       $log.debug('about to hide logo, next type on deck: ' + scope.data.type);
                       utility.setExitTransition(element, savedData);
+                      savedData = null;
                   }
               });
           }
