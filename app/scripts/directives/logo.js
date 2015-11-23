@@ -28,12 +28,12 @@
                   var isShown = scope.$eval(attrs.ngShow);
 
                   if(isShown){
-                      $log.debug('about to show logo');
+                      $log.debug('about to show ' + scope.data.type);
                       utility.setEntryTransition(element, scope.data);
                       savedData = scope.data;
                   }
                   else if(savedData != null){
-                      $log.debug('about to hide logo, next type on deck: ' + scope.data.type);
+                      $log.debug('about to hide ' + savedData.type + ', next type on deck: ' + scope.data.type);
                       utility.setExitTransition(element, savedData);
                       savedData = null;
                   }

@@ -28,7 +28,7 @@
                   var isShown = scope.$eval(attrs.ngShow);
 
                   if(isShown){
-                      $log.debug('about to show picture');
+                      $log.debug('about to show ' + scope.data.type);
                       
                       //reset data first    
                       element.find('p')[0].innerHTML = ''
@@ -44,7 +44,7 @@
                       savedData = scope.data;
                   }
                   else if(savedData != null){
-                      $log.debug('about to hide picture, next type on deck: ' + scope.data.type);
+                      $log.debug('about to hide ' + savedData.type + ', next type on deck: ' + scope.data.type);
                       utility.setExitTransition(element, savedData);
                       savedData = null;
                   }

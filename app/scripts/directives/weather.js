@@ -28,7 +28,7 @@
                   var isShown = scope.$eval(attrs.ngShow);
 
                   if(isShown){
-                      $log.debug('about to show weather');
+                      $log.debug('about to show ' + scope.data.type);
 
                       var overlay = element.find('p')[0];
                       var video = element.find('video')[0];
@@ -50,7 +50,7 @@
                       savedData = scope.data;
                   }
                   else if(savedData != null){
-                      $log.debug('about to hide weather, next type on deck: ' + scope.data.type);
+                      $log.debug('about to hide ' + savedData.type + ', next type on deck: ' + scope.data.type);
                       utility.setExitTransition(element, savedData);
                       savedData = null;
                   }

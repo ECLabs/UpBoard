@@ -1,5 +1,3 @@
- {{ main.currentSlide }}
-
 <!--news-->
 <div class="news hidden">
     <div class="centerBox">
@@ -52,18 +50,6 @@
           </p>
         </div>
       </div>
-    </div>
-</div>
-
-<div>
-    <!--webcam background-->
-    <video src="" autoplay="true" class="hidden" id="videoElement"></video>
-
-    <!--weather -->
-    <div class="weather hidden">
-        <p>
-            <!--weather information Injected Here -->
-        </p>
     </div>
 </div>
 
