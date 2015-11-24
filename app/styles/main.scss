@@ -423,7 +423,7 @@ a {
 
 .bl-box h2 {
     transform:scale(1,1.5);
-	text-align: center;
+//	text-align: center;
 	margin: 0;
 	padding: 0.5em;
 	width: 100%;
@@ -437,7 +437,7 @@ a {
 .bl-icon {
     position: absolute;
     left:0;
-    top:35%;
+    top:0;
 	font-style: normal;
 	font-weight: normal;
 	font-variant: normal;
@@ -473,13 +473,13 @@ a {
 }
 
 @keyframes expand-in{
-    0% { display:none; transform: scale(0);}
-    100% { display:block; transform:scale(1);}
+    0% { opacity: 0; display:none; transform: scale(0);}
+    100% { opacity: 1; display:block; height:100%; width:100%; transform:scale(1);}
 }
 
 @keyframes expand-out {
-    0% { display:block; transform: scale(1);}
-    100% { display:none; transform:scale(0);}
+    0% { opacity: 1; display:block; transform: scale(1);}
+    100% { opacity: 0; display:none; transform:scale(0);}
 }
 
 .bl-content {
@@ -487,22 +487,25 @@ a {
     top: 0;
     left: 0;
     background: #ff5a00;
-    display: block;
+//    display: none;
     height: 100%;
     width: 100%;
     animation-name: expand-in;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
-    animation-duration: 2s;
+    animation-duration: 0.5s;
     transform-origin: 0 0;
+    color: white;
+    padding: 5%;
+    opacity: 0;
 }
 
 .bl-content.ng-hide {
     animation-name: expand-out;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
-    animation-duration: 2s;
-    transform-origin: 0 0;
+    animation-duration: 0.5s;
+    transform-origin: 100% 100%;
 }
 
 //
@@ -542,24 +545,25 @@ a {
 //
 ///* Custom content */
 //
-//.bl-content p {
+.bl-content p {
 //	margin: 0 auto;
-//	padding-bottom: 15px;
-//	font-size: 1.7em;
-//	line-height: 1.8;
-//  font-family: 'Ek Mukta', sans-serif;
-//  font-weight: 200;
-//  max-height: 75%;
-//  overflow: hidden;
-//}
-//
-//.bl-content h2 {
-//	font-size: 3em;
-//	font-weight: 700;
-//	margin: 0 0 20px 0;
-//  font-family: 'Ek Mukta', sans-serif;
-//}
-//
+	padding-bottom: 15px;
+	font-size: 1.7em;
+	line-height: 1.8;
+    font-family: 'Ek Mukta', sans-serif;
+    font-weight: 200;
+//    max-height: 75%;
+//    width: 75%;
+    overflow: hidden;
+}
+
+.bl-content h2 {
+	font-size: 3em;
+	font-weight: 700;
+	margin: 0 0 20px 0;
+    font-family: 'Ek Mukta', sans-serif;
+}
+
 //.bl-content article {
 //	padding: 20px 40px 20px 0px;
 //}
@@ -610,19 +614,19 @@ a {
 //  height: 100%;
 //}
 //
-//.bl-content img {
+.bl-content img {
 //    height: 100%;
-//    position: absolute;
-//    right: 0;
+    position: absolute;
+    right: 0;
 //    bottom: 0;
-//}
-//
+}
+
 //.bl-content .teamMemberFullPhoto {
 //  width: 40%;
 //  height: 100%;
 //}
-//
-//
+
+
 ///* Transition classes and properties */
 ///* Separated for a better overview and control */
 //
@@ -739,27 +743,25 @@ a {
   z-index: 1;
 }
 
-//.ecTeamMemberBanner {
-//  background-color: lightgrey;
-//  color: #555555;
-//  font-weight: 700;
-//  font-family: 'Ek Mukta', sans-serif;
-//  width: initial !important;
-//  padding: 0.8rem 1rem;
-//  font-size: 1.2rem;
-//}
-//
-//.ecTeamMemberDate {
-//  position: relative !important;
-//  float: left !important;
-//  width: 30% !important;
-//  background-color: #555555;
-//  font-weight: 700;
-//  font-family: 'Ek Mukta', sans-serif;
-//  width: initial !important;
-//  padding: 0.8rem 1rem;
-//  font-size: 1.2rem;
-//}
+.ecTeamMemberBanner {
+  background-color: lightgrey;
+  color: #555555;
+  font-weight: 700;
+  font-family: 'Ek Mukta', sans-serif;
+  width: initial !important;
+  padding: 0.8rem 1rem;
+  font-size: 2.2rem;
+}
+
+.ecTeamMemberDate {
+  width: 30% !important;
+  background-color: #555555;
+  font-weight: 700;
+  font-family: 'Ek Mukta', sans-serif;
+  width: initial !important;
+  padding: 0.8rem 1rem;
+  font-size: 2.2rem;
+}
 
 /*** TRANSITION EFFECTS ***/
 

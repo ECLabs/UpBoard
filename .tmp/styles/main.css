@@ -392,7 +392,6 @@ a {
 /* line 424, ../../app/styles/main.scss */
 .bl-box h2 {
   transform: scale(1, 1.5);
-  text-align: center;
   margin: 0;
   padding: 0.5em;
   width: 100%;
@@ -407,7 +406,7 @@ a {
 .bl-icon {
   position: absolute;
   left: 0;
-  top: 35%;
+  top: 0;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -454,20 +453,26 @@ a {
 
 @keyframes expand-in {
   0% {
+    opacity: 0;
     display: none;
     transform: scale(0);
   }
   100% {
+    opacity: 1;
     display: block;
+    height: 100%;
+    width: 100%;
     transform: scale(1);
   }
 }
 @keyframes expand-out {
   0% {
+    opacity: 1;
     display: block;
     transform: scale(1);
   }
   100% {
+    opacity: 0;
     display: none;
     transform: scale(0);
   }
@@ -478,31 +483,57 @@ a {
   top: 0;
   left: 0;
   background: #ff5a00;
-  display: block;
   height: 100%;
   width: 100%;
   animation-name: expand-in;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
-  animation-duration: 2s;
+  animation-duration: 0.5s;
   transform-origin: 0 0;
+  color: white;
+  padding: 5%;
+  opacity: 0;
 }
 
-/* line 500, ../../app/styles/main.scss */
+/* line 503, ../../app/styles/main.scss */
 .bl-content.ng-hide {
   animation-name: expand-out;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
-  animation-duration: 2s;
-  transform-origin: 0 0;
+  animation-duration: 0.5s;
+  transform-origin: 100% 100%;
 }
 
-/* line 711, ../../app/styles/main.scss */
+/* line 548, ../../app/styles/main.scss */
+.bl-content p {
+  padding-bottom: 15px;
+  font-size: 1.7em;
+  line-height: 1.8;
+  font-family: 'Ek Mukta', sans-serif;
+  font-weight: 200;
+  overflow: hidden;
+}
+
+/* line 560, ../../app/styles/main.scss */
+.bl-content h2 {
+  font-size: 3em;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  font-family: 'Ek Mukta', sans-serif;
+}
+
+/* line 617, ../../app/styles/main.scss */
+.bl-content img {
+  position: absolute;
+  right: 0;
+}
+
+/* line 715, ../../app/styles/main.scss */
 .hidden {
   display: none;
 }
 
-/* line 715, ../../app/styles/main.scss */
+/* line 719, ../../app/styles/main.scss */
 .fullscreen {
   position: absolute;
   left: 0;
@@ -510,7 +541,7 @@ a {
   width: 100%;
 }
 
-/* line 722, ../../app/styles/main.scss */
+/* line 726, ../../app/styles/main.scss */
 .picture p {
   bottom: 1rem;
   color: white;
@@ -527,9 +558,31 @@ a {
   z-index: 1;
 }
 
-/* line 738, ../../app/styles/main.scss */
+/* line 742, ../../app/styles/main.scss */
 .box {
   z-index: 1;
+}
+
+/* line 746, ../../app/styles/main.scss */
+.ecTeamMemberBanner {
+  background-color: lightgrey;
+  color: #555555;
+  font-weight: 700;
+  font-family: 'Ek Mukta', sans-serif;
+  width: initial !important;
+  padding: 0.8rem 1rem;
+  font-size: 2.2rem;
+}
+
+/* line 756, ../../app/styles/main.scss */
+.ecTeamMemberDate {
+  width: 30% !important;
+  background-color: #555555;
+  font-weight: 700;
+  font-family: 'Ek Mukta', sans-serif;
+  width: initial !important;
+  padding: 0.8rem 1rem;
+  font-size: 2.2rem;
 }
 
 /*** TRANSITION EFFECTS ***/
@@ -549,14 +602,14 @@ a {
     opacity: 0;
   }
 }
-/* line 777, ../../app/styles/main.scss */
+/* line 779, ../../app/styles/main.scss */
 .ub-fade {
   animation-name: fade-in;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 }
 
-/* line 783, ../../app/styles/main.scss */
+/* line 785, ../../app/styles/main.scss */
 .ub-fade.ng-hide {
   animation-name: fade-out;
   animation-timing-function: linear;
@@ -583,14 +636,14 @@ a {
     transform: translateX(100%);
   }
 }
-/* line 800, ../../app/styles/main.scss */
+/* line 802, ../../app/styles/main.scss */
 .ub-slide {
   animation-name: slide-in;
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
 }
 
-/* line 806, ../../app/styles/main.scss */
+/* line 808, ../../app/styles/main.scss */
 .ub-slide.ng-hide {
   animation-name: slide-out;
   animation-timing-function: ease-in;
@@ -9279,5 +9332,3 @@ button.close {
     display: none !important;
   }
 }
-
-/*# sourceMappingURL=main.css.map */

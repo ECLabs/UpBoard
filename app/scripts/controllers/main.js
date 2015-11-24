@@ -65,7 +65,7 @@
         function startSlideShow(){
 
             vm.currentSlide = vm.slides[vm.currentIndex++];
-            //if(!isEnd()) nextSlide();
+            if(!isEnd()) nextSlide();
         }
     }
     

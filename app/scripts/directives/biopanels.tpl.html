@@ -1,24 +1,16 @@
-<div ng-show="data.type === 'bioPanels'" id="bl-main" class="container-fluid bl-main">
+<div ng-show="data.type === 'bioPanels'" class="container-fluid bl-main">
+    <div id="bioPanels"><!-- content dynamicall added --></div>
     
-    <div id="bioPanels"></div>
-s    
-    <div ng-show="showContent" class="bl-content">
-      <div>
-        <h2>
-            <!--bioPanels top left name Injected Here -->
-            {{panel.name}}
-        </h2>
-        <p>
-            <!--bioPanels top left text Injected Here -->
-            {{panel.bio}}
-        </p>
-        <div>
-          <div class="ecTeamMemberBanner">EC Team Member since</div>
-          <div class="ecTeamMemberDate">{{panel.hireYear}}</div>
+    <div ng-show="showContent" class="container-fluid bl-content">
+        <div class="row">
+          <div class="col-lg-6" style="padding-left:3%;">
+            <h2><!--bioPanels top left name Injected Here --></h2>
+            <p><!--bioPanels top left text Injected Here --></p>
+            <span class="ecTeamMemberBanner">EC Team Member since</span><span class="ecTeamMemberDate">{{panel.hireYear}}</span>
+          </div>
+          <div class="col-lg-6">
+            <img src="{{panel.imageUrlContent}}"/>  
+          </div>
         </div>
-      </div>
-      <div class="teamMemberFullPhoto">
-        <img src="{{panel.imageUrlContent}}"/>
-      </div>
     </div>
 </div>
