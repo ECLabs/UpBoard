@@ -62,7 +62,7 @@
                           var row = document.createElement('div');
                           row.setAttribute('class', 'row');
 
-                          for(var k = 0; k < numCols; i++, k++){
+                          for(var k = 0; i < contentLength && k < numCols; i++, k++){
 
                               var col = document.createElement('div');
                               col.setAttribute('class', 'bl-panel col-lg-' + columnSize);
@@ -146,6 +146,8 @@
 
                               row.appendChild(col);
                               
+                              bioPanels.appendChild(row);
+                              
                               // fire transition effects with delays
                                   
                               // show underline in
@@ -200,7 +202,7 @@
                               // initial slide open      first section delay
                           }
                           
-                          bioPanels.appendChild(row);
+                          
                       }
                       
                       utility.setEntryTransition(element, scope.data);
