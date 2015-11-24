@@ -356,10 +356,65 @@ a {
   font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
-/* line 397, ../../app/styles/main.scss */
-.bl-main > div > div {
+/* line 394, ../../app/styles/main.scss */
+.bl-panel {
+  padding: 0 !important;
+  margin: 0 !important;
   background: #ff5a00;
   border: 0.1rem solid white;
+}
+
+/* line 401, ../../app/styles/main.scss */
+.bl-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  opacity: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+/* line 414, ../../app/styles/main.scss */
+.bl-box img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0.14;
+  overflow: hidden;
+}
+
+/* line 424, ../../app/styles/main.scss */
+.bl-box h2 {
+  transform: scale(1, 1.5);
+  text-align: center;
+  margin: 0;
+  padding: 0.5em;
+  width: 100%;
+  font-size: 2.5em;
+  letter-spacing: 2px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: white;
+}
+
+/* line 437, ../../app/styles/main.scss */
+.bl-icon {
+  position: absolute;
+  left: 0;
+  top: 35%;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  cursor: pointer;
+  width: 100%;
 }
 
 @keyframes slide-line-in {
@@ -382,76 +437,72 @@ a {
     transform: translateX(100%);
   }
 }
-/* line 445, ../../app/styles/main.scss */
-#bioUnderline {
+/* line 460, ../../app/styles/main.scss */
+.bioUnderline {
   height: 0.5rem;
   background-color: white;
   opacity: 0;
   width: 20%;
   animation: slide-line-in 5s forwards;
   position: absolute;
-  z-index: 1;
 }
 
-/* line 456, ../../app/styles/main.scss */
-.bl-box {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  opacity: 1;
-  /* Centering with flexbox */
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+/* line 471, ../../app/styles/main.scss */
+.bioUnderline.ng-hide {
+  animation: slide-line-out 5s forwards;
 }
 
-/* line 486, ../../app/styles/main.scss */
-.bl-box img {
+@keyframes expand-in {
+  0% {
+    display: none;
+    transform: scale(0);
+  }
+  100% {
+    display: block;
+    transform: scale(1);
+  }
+}
+@keyframes expand-out {
+  0% {
+    display: block;
+    transform: scale(1);
+  }
+  100% {
+    display: none;
+    transform: scale(0);
+  }
+}
+/* line 485, ../../app/styles/main.scss */
+.bl-content {
   position: absolute;
-  width: 100%;
+  top: 0;
+  left: 0;
+  background: #ff5a00;
+  display: block;
   height: 100%;
-  left: 0;
-  top: 0;
-  opacity: 0.14;
-  overflow: hidden;
-}
-
-/* line 496, ../../app/styles/main.scss */
-.bl-box h2 {
-  transform: scale(1, 1.5);
-  text-align: center;
-  margin: 0;
-  padding: 0.5em;
   width: 100%;
-  font-size: 2.5em;
-  letter-spacing: 2px;
-  font-weight: 400;
-  text-transform: uppercase;
+  animation-name: expand-in;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-duration: 2s;
+  transform-origin: 0 0;
 }
 
-/* line 508, ../../app/styles/main.scss */
-.bl-icon {
-  position: absolute;
-  left: 0;
-  top: 0;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  cursor: pointer;
-  -webkit-font-smoothing: antialiased;
+/* line 500, ../../app/styles/main.scss */
+.bl-content.ng-hide {
+  animation-name: expand-out;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-duration: 2s;
+  transform-origin: 0 0;
 }
 
-/* line 723, ../../app/styles/main.scss */
+/* line 711, ../../app/styles/main.scss */
 .hidden {
   display: none;
 }
 
-/* line 727, ../../app/styles/main.scss */
+/* line 715, ../../app/styles/main.scss */
 .fullscreen {
   position: absolute;
   left: 0;
@@ -459,7 +510,7 @@ a {
   width: 100%;
 }
 
-/* line 734, ../../app/styles/main.scss */
+/* line 722, ../../app/styles/main.scss */
 .picture p {
   bottom: 1rem;
   color: white;
@@ -476,7 +527,7 @@ a {
   z-index: 1;
 }
 
-/* line 750, ../../app/styles/main.scss */
+/* line 738, ../../app/styles/main.scss */
 .box {
   z-index: 1;
 }
@@ -498,14 +549,14 @@ a {
     opacity: 0;
   }
 }
-/* line 789, ../../app/styles/main.scss */
+/* line 777, ../../app/styles/main.scss */
 .ub-fade {
   animation-name: fade-in;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 }
 
-/* line 795, ../../app/styles/main.scss */
+/* line 783, ../../app/styles/main.scss */
 .ub-fade.ng-hide {
   animation-name: fade-out;
   animation-timing-function: linear;
@@ -532,14 +583,14 @@ a {
     transform: translateX(100%);
   }
 }
-/* line 812, ../../app/styles/main.scss */
+/* line 800, ../../app/styles/main.scss */
 .ub-slide {
   animation-name: slide-in;
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
 }
 
-/* line 818, ../../app/styles/main.scss */
+/* line 806, ../../app/styles/main.scss */
 .ub-slide.ng-hide {
   animation-name: slide-out;
   animation-timing-function: ease-in;
@@ -9228,3 +9279,5 @@ button.close {
     display: none !important;
   }
 }
+
+/*# sourceMappingURL=main.css.map */
