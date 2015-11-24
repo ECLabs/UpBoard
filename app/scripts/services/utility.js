@@ -33,6 +33,23 @@
               }
           },
             
+          calculateSlideTime: function(data){
+            
+              var slideTime = 0; // default
+            
+              if(data.timing.slideTime != null) {
+                  
+                  // majority of slide types
+                  slideTime = data.timing.slideTime;
+              }
+              else if(data.timing.openFirstSection) {
+               
+                  // bio panel section has different time parameters
+                  slideTime = data.timing.openFirstSection + ((data.timing.openSection + data.timing.sectionTime) * data.content.content.length);
+              }
+              return slideTime;
+          },
+            
           setEntryTransition: function (element, data) {
               
               // remove previous exit transition style if it exists

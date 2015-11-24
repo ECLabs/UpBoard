@@ -11,8 +11,8 @@
     angular.module('upBoardApp')
       .controller('MainCtrl', mainCtrl);
 
-    mainCtrl.$inject = ['$firebaseArray', 'Ref', '$timeout', '$log'];
-    function mainCtrl($firebaseArray, Ref, $timeout, $log) {
+    mainCtrl.$inject = ['$firebaseArray', 'Ref', '$timeout', '$log', 'utility'];
+    function mainCtrl($firebaseArray, Ref, $timeout, $log, utility) {
         
         var vm = this;
         
@@ -36,7 +36,12 @@
 
             $log.debug(vm.currentSlide);
             
-            var delay = vm.currentSlide.timing.slideTime + vm.currentSlide.timing.transitionTime + 2000;
+            var slideTime = utility.calculateSlideTime(vm.currentSlide);
+            
+            // TODO - remove this temporary time!!
+            //slideTime = 10000;
+            
+            var delay = slideTime + vm.currentSlide.timing.transitionTime + 2000;
             $log.debug('delay: ' + delay);
             
             $timeout(function(){
@@ -54,13 +59,13 @@
                 // go to transition slide
                 vm.currentSlide = {type:'transition'};
                 
-            }, vm.currentSlide.timing.slideTime);
+            }, slideTime);
         }
         
         function startSlideShow(){
 
             vm.currentSlide = vm.slides[vm.currentIndex++];
-            if(!isEnd()) nextSlide();
+            //if(!isEnd()) nextSlide();
         }
     }
     

@@ -1,0 +1,18 @@
+<div ng-show="data.type === 'bioPanels'" id="bl-main" class="container bl-main">
+    
+    <div id="bioUnderline"></div>
+
+<!--    style="margin:0;height:{{100 / numRows}}%;width:100%;top:{{(100 / numRows) * row}}%;"-->
+    <div class="row" ng-repeat="row in range(numRows)" >
+        <div ng-repeat="panel in chunk(data.content.content, row * numCols , (row + 1) * numCols)" class=col-lg-{{columnSize}} style="padding:0;margin:0;">
+            <div class="bl-box" style="position:relative;padding:{{100 / numRows}}%">
+                <img src="{{panel.imageUrlCover}}" />
+                <div class="bl-icon bl-icon-about">
+                    <!-- bioPanels top left first name Injected Here -->
+                   <h2>{{panel.name.split(' ')[0]}}</h2>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
