@@ -487,12 +487,11 @@ a {
   animation-duration: 0.5s;
   transform-origin: 0 0;
   color: white;
-  padding: 5%;
   opacity: 0;
   overflow-y: scroll;
 }
 
-/* line 494, ../../app/styles/main.scss */
+/* line 493, ../../app/styles/main.scss */
 .bl-content.ng-hide {
   animation-name: expand-out;
   animation-timing-function: linear;
@@ -501,7 +500,7 @@ a {
   transform-origin: 100% 100%;
 }
 
-/* line 502, ../../app/styles/main.scss */
+/* line 501, ../../app/styles/main.scss */
 .bl-content p {
   padding-bottom: 15px;
   font-size: 1.7em;
@@ -511,7 +510,7 @@ a {
   overflow: hidden;
 }
 
-/* line 511, ../../app/styles/main.scss */
+/* line 510, ../../app/styles/main.scss */
 .bl-content h2 {
   font-size: 3em;
   font-weight: 700;
@@ -519,18 +518,23 @@ a {
   font-family: 'Ek Mukta', sans-serif;
 }
 
-/* line 518, ../../app/styles/main.scss */
-.bl-content img {
-  position: absolute;
-  right: 0;
+/* line 517, ../../app/styles/main.scss */
+.bl-content-img {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-size: contain;
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  padding-top: 100vh;
 }
 
-/* line 523, ../../app/styles/main.scss */
+/* line 527, ../../app/styles/main.scss */
 .hidden {
   display: none;
 }
 
-/* line 527, ../../app/styles/main.scss */
+/* line 531, ../../app/styles/main.scss */
 .fullscreen {
   position: absolute;
   left: 0;
@@ -538,7 +542,7 @@ a {
   width: 100%;
 }
 
-/* line 534, ../../app/styles/main.scss */
+/* line 538, ../../app/styles/main.scss */
 .picture p {
   bottom: 1rem;
   color: white;
@@ -555,12 +559,12 @@ a {
   z-index: 1;
 }
 
-/* line 550, ../../app/styles/main.scss */
+/* line 554, ../../app/styles/main.scss */
 .box {
   z-index: 1;
 }
 
-/* line 554, ../../app/styles/main.scss */
+/* line 558, ../../app/styles/main.scss */
 .ecTeamMemberBanner {
   background-color: lightgrey;
   color: #555555;
@@ -571,7 +575,7 @@ a {
   font-size: 2.2rem;
 }
 
-/* line 564, ../../app/styles/main.scss */
+/* line 568, ../../app/styles/main.scss */
 .ecTeamMemberDate {
   width: 30% !important;
   background-color: #555555;
@@ -599,14 +603,14 @@ a {
     opacity: 0;
   }
 }
-/* line 587, ../../app/styles/main.scss */
+/* line 591, ../../app/styles/main.scss */
 .ub-fade {
   animation-name: fade-in;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 }
 
-/* line 593, ../../app/styles/main.scss */
+/* line 597, ../../app/styles/main.scss */
 .ub-fade.ng-hide {
   animation-name: fade-out;
   animation-timing-function: linear;
@@ -633,14 +637,14 @@ a {
     transform: translateX(100%);
   }
 }
-/* line 610, ../../app/styles/main.scss */
+/* line 614, ../../app/styles/main.scss */
 .ub-slide {
   animation-name: slide-in;
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
 }
 
-/* line 616, ../../app/styles/main.scss */
+/* line 620, ../../app/styles/main.scss */
 .ub-slide.ng-hide {
   animation-name: slide-out;
   animation-timing-function: ease-in;
@@ -9329,5 +9333,3 @@ button.close {
     display: none !important;
   }
 }
-
-/*# sourceMappingURL=main.css.map */

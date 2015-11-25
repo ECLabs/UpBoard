@@ -123,7 +123,7 @@
                                       var name = element.find('.bl-content h2')[0];
                                       var bio = element.find('.bl-content p')[0];
                                       var hireYear = element.find('.bl-content .ecTeamMemberDate')[0];
-                                      var imgCover = element.find('.bl-content img')[0];
+                                      var imgCover = element.find('.bl-content-img')[0];
 
                                       // reset
                                       name.innerHTML = '';
@@ -134,7 +134,7 @@
                                       name.innerHTML = content[scope.count].name;
                                       bio.innerHTML = content[scope.count].bio;
                                       hireYear.innerHTML = content[scope.count].hireYear;
-                                      imgCover.src = content[scope.count].imageUrlContent;
+                                      imgCover.setAttribute('style', "background-image:url('" + content[scope.count].imageUrlContent + "');");
 
                                       scope.showContent = true;
                                   }, timeToNextPanelShow);

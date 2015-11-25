@@ -486,7 +486,6 @@ a {
     animation-duration: 0.5s;
     transform-origin: 0 0;
     color: white;
-    padding: 5%;
     opacity: 0;
     overflow-y: scroll;
 }
@@ -515,9 +514,14 @@ a {
     font-family: 'Ek Mukta', sans-serif;
 }
 
-.bl-content img {
-    position: absolute;
-    right: 0;
+.bl-content-img {
+    position:relative;
+    height: 100%;
+    width: 100%;
+    background-size: contain;
+    background-position: right bottom;
+    background-repeat: no-repeat;
+    padding-top: 100vh;
 }
 
 .hidden{
