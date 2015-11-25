@@ -73,8 +73,8 @@
 
                                   var bioBox = document.createElement('div');
                                   bioBox.setAttribute('class', 'bl-box');
-                                  bioBox.setAttribute('style', 
-                                                      'padding:' + (100 / numRows) + "%;background-image:url('" + content[i].imageUrlCover + "')");
+                                  bioBox.setAttribute('style', 'padding-top:' + (100 / numRows) + 
+                                                      "vh;background-image:url('" + content[i].imageUrlCover + "')");
                                   bioBox.innerHTML = '&nbsp;'; // need some content, everything else is absolute
                                   
                                   var filter = document.createElement('div');
@@ -157,7 +157,7 @@
 
                                   var bioBox = document.createElement('div');
                                   bioBox.setAttribute('class', 'bl-box');
-                                  bioBox.setAttribute('style', 'padding:' + (100 / numRows) + '%;');
+                                  bioBox.setAttribute('style', 'padding-top:' + (100 / numRows) + 'vh;');
                                   bioBox.innerHTML = '&nbsp;';
                                   
                                   var filter = document.createElement('div');
