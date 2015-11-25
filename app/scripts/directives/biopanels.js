@@ -11,8 +11,8 @@
     angular.module('upBoardApp')
       .directive('bioPanels', bioPanels);
     
-    bioPanels.$inject = ['$log', '$timeout', 'utility'];
-    function bioPanels($log, $timeout, utility) {
+    bioPanels.$inject = ['$log', '$timeout', '$compile', 'utility'];
+    function bioPanels($log, $timeout, $compile, utility) {
         return {
           templateUrl: '/scripts/directives/biopanels.tpl.html',
           restrict: 'E',
@@ -26,7 +26,9 @@
 
               scope.count = 0;           // bio content counter
               scope.showContent = false; // use to show/hide bio content
-              scope.showLine = false;    // use to show/hide the underline
+//              scope.showLine = false;    // use to show/hide the underline
+              
+              
               
               scope.$watch(attrs.ngShow, function(){
 
@@ -81,8 +83,8 @@
                               firstName.innerHTML = content[i].name.split(' ')[0]; // get first name
 
                               var underline = document.createElement('div');
-                              underline.setAttribute('ng-show', 'showLine');
-                              underline.setAttribute('class', 'bioUnderLine');
+                              underline.setAttribute('ng-show', 'showLine' + i);
+                              underline.setAttribute('class', 'bioUnderline');
 
                               about.appendChild(firstName);
                               about.appendChild(underline);
@@ -145,12 +147,22 @@
 //    </div>
 
                               row.appendChild(col);
-                              
                               bioPanels.appendChild(row);
                               
+                              $compile(element.contents())(scope); // compile row for angular to pick up bindings
+                              
                               // fire transition effects with delays
-                                  
+                              var timeToNextPanelShow = timing.transitionTime + timing.openFirstSection + 
+                                                        ((timing.openSection + timing.sectionTime) * i);
+                              
+                              var timeToNextPanelHide = timing.transitionTime + timing.openFirstSection + 
+                                                        ((timing.openSection + timing.sectionTime) * i) + 
+                                                        timing.sectionTime;
+                              
                               // show underline in
+                              $timeout(function(){
+                                  scope['showLine' + scope.count] = true;
+                              }, timeToNextPanelShow - 1000);
                               
                               // show bio content
                               $timeout(function(){
@@ -174,8 +186,8 @@
                                   hireYear.innerHTML = content[scope.count].hireYear;
                                   imgCover.src = content[scope.count].imageUrlContent;
                                   
-                                  var bioPanel = angular.element('#bioPanels')[0];
-                                  var name = bioPanel.getElementsByTagName('h2')[scope.count];
+//                                  var bioPanel = angular.element('#bioPanels')[0];
+//                                  var name = bioPanel.getElementsByTagName('h2')[scope.count];
                                   
 //                                  $log.debug(name.getBoundingClientRect().left);
 //                                  $log.debug(name.getBoundingClientRect().top);
@@ -185,24 +197,28 @@
 //                                  bioContent.style.transformOrigin = name.getBoundingClientRect().left + 'px ' + name.getBoundingClientRect().top + 'px';
                                   
 //                                  scope['showContent' + scope.count] = true;
+//                                  scope['showLine' + scope.count] = true;
+//                                  $log.debug(scope);
+//                                  $log.debug(scope.count);
                                   scope.showContent = true;
-                              }, timing.transitionTime + timing.openFirstSection + ((timing.openSection + timing.sectionTime) * i));
+                              }, timeToNextPanelShow);
                               
                               // hide bio content
                               $timeout(function(){
 //                                  scope['showContent' + scope.count] = false;
                                   scope.showContent = false;
-                                  scope.count++;
-                              }, timing.transitionTime + timing.openFirstSection + 
-                                  ((timing.openSection + timing.sectionTime) * i) + timing.sectionTime);
-                                       
-                                       
+//                                  scope['showLine' + scope.count] = false;
+//                                  $log.debug(scope);
+//                                  scope.count++;
+//                                  $log.debug(scope.count);
+                              }, timeToNextPanelHide);
+                            
                               // show underline out
-                                       
-                              // initial slide open      first section delay
+                              $timeout(function(){
+                                  scope['showLine' + scope.count] = false;
+                                  scope.count++;
+                              }, timeToNextPanelHide + 1000);
                           }
-                          
-                          
                       }
                       
                       utility.setEntryTransition(element, scope.data);

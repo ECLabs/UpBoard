@@ -419,21 +419,21 @@ a {
 @keyframes slide-line-in {
   0% {
     opacity: 0;
-    transform: translateX(-200%);
+    transform: translateX(-100%);
   }
   100% {
     opacity: 0.5;
-    transform: translateX(-100%);
+    transform: translateX(10%);
   }
 }
 @keyframes slide-line-out {
   0% {
     opacity: 0.5;
-    transform: translateX(-100%);
+    transform: translateX(10%);
   }
   100% {
     opacity: 0;
-    transform: translateX(100%);
+    transform: translateX(200%);
   }
 }
 /* line 460, ../../app/styles/main.scss */
@@ -441,14 +441,13 @@ a {
   height: 0.5rem;
   background-color: white;
   opacity: 0;
-  width: 20%;
-  animation: slide-line-in 5s forwards;
-  position: absolute;
+  width: 30%;
+  animation: slide-line-in 1s forwards;
 }
 
 /* line 471, ../../app/styles/main.scss */
 .bioUnderline.ng-hide {
-  animation: slide-line-out 5s forwards;
+  animation: slide-line-out 1s forwards;
 }
 
 @keyframes expand-in {
@@ -483,8 +482,8 @@ a {
   top: 0;
   left: 0;
   background: #ff5a00;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   animation-name: expand-in;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
