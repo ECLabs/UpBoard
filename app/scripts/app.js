@@ -19,5 +19,6 @@ angular.module('upBoardApp', [
     'ngTouch',
     'firebase',
     'firebase.ref',
-    'firebase.auth'
+    'firebase.auth',
+    'duScroll'
   ]);

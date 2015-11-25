@@ -14,7 +14,8 @@
     "angular-route": "^1.4.0",
     "angular-sanitize": "^1.4.0",
     "angular-touch": "^1.4.0",
-    "jquery-ui": "~1.11.4"
+    "jquery-ui": "~1.11.4",
+    "angular-scroll": "~1.0.0"
   },
   "devDependencies": {
     "mockfirebase": "0.11.0",

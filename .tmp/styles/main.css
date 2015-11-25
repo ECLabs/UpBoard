@@ -8,7 +8,7 @@ body {
   font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
-/* line 10, ../../app/styles/main.scss */
+/* line 11, ../../app/styles/main.scss */
 .ub-container {
   background-color: white;
   position: relative;
@@ -18,7 +18,7 @@ body {
   width: 100% !important;
 }
 
-/* line 20, ../../app/styles/main.scss */
+/* line 21, ../../app/styles/main.scss */
 .noAnimate {
   animation: none !important;
 }
@@ -32,7 +32,7 @@ body {
     background-position: 0 100vh;
   }
 }
-/* line 50, ../../app/styles/main.scss */
+/* line 51, ../../app/styles/main.scss */
 .movingBackground {
   position: relative;
   width: 100%;
@@ -47,7 +47,7 @@ body {
   -o-animation: animatedBackground 20s linear infinite;
 }
 
-/* line 68, ../../app/styles/main.scss */
+/* line 69, ../../app/styles/main.scss */
 .logo {
   position: absolute;
   top: 0;
@@ -62,7 +62,7 @@ body {
 }
 
 /*News Slide */
-/* line 82, ../../app/styles/main.scss */
+/* line 83, ../../app/styles/main.scss */
 .news {
   position: relative;
   width: 100%;
@@ -73,7 +73,7 @@ body {
   align-items: center;
 }
 
-/* line 91, ../../app/styles/main.scss */
+/* line 92, ../../app/styles/main.scss */
 .centerBox {
   width: 90%;
   height: 80%;
@@ -81,13 +81,13 @@ body {
   align-items: center;
 }
 
-/* line 97, ../../app/styles/main.scss */
+/* line 98, ../../app/styles/main.scss */
 .newsSection {
   height: 100%;
   width: calc(100% / 3);
 }
 
-/* line 113, ../../app/styles/main.scss */
+/* line 114, ../../app/styles/main.scss */
 .innerTop {
   color: black;
   margin-left: auto;
@@ -101,7 +101,7 @@ body {
   overflow: hidden;
 }
 
-/* line 125, ../../app/styles/main.scss */
+/* line 126, ../../app/styles/main.scss */
 .innerBottom {
   color: black;
   border-left-style: solid;
@@ -113,19 +113,19 @@ body {
   background-color: white;
 }
 
-/* line 136, ../../app/styles/main.scss */
+/* line 137, ../../app/styles/main.scss */
 .leftSide {
   border-left-style: none;
 }
 
-/* line 140, ../../app/styles/main.scss */
+/* line 141, ../../app/styles/main.scss */
 .logoImg {
   margin-left: 70px;
   display: block;
   opacity: 0;
 }
 
-/* line 145, ../../app/styles/main.scss */
+/* line 146, ../../app/styles/main.scss */
 .washingtonPostArticleTitle {
   font-weight: bold;
   font-size: 1.7em;
@@ -135,13 +135,13 @@ body {
   margin: 0px;
 }
 
-/* line 153, ../../app/styles/main.scss */
+/* line 154, ../../app/styles/main.scss */
 .washingtonPostArticleContent {
   font-size: 1.2em;
   padding: 5px;
 }
 
-/* line 158, ../../app/styles/main.scss */
+/* line 159, ../../app/styles/main.scss */
 .washingtonPostArticleAuthor {
   font-size: 1.2em;
   font-weight: bold;
@@ -150,7 +150,7 @@ body {
   padding: 5px;
 }
 
-/* line 165, ../../app/styles/main.scss */
+/* line 166, ../../app/styles/main.scss */
 .washingtonPostArticleDate {
   font-size: 1.2em;
   display: inline-block;
@@ -170,7 +170,7 @@ body {
     opacity: 1;
   }
 }
-/* line 222, ../../app/styles/main.scss */
+/* line 220, ../../app/styles/main.scss */
 #videoElement {
   /*animation-name: webcamBlur;*/
   animation-duration: 5s;
@@ -183,7 +183,7 @@ body {
   -webkit-transition: all 2s;
 }
 
-/* line 233, ../../app/styles/main.scss */
+/* line 231, ../../app/styles/main.scss */
 video {
   /*animation-name: webcamBlur;*/
   animation-delay: 2s;
@@ -194,7 +194,7 @@ video {
   -webkit-transition: all 2s;
 }
 
-/* line 244, ../../app/styles/main.scss */
+/* line 242, ../../app/styles/main.scss */
 .box {
   /*animation-name: overlay;*/
   animation-duration: 5s;
@@ -222,7 +222,7 @@ video {
   align-items: center;
 }
 
-/* line 269, ../../app/styles/main.scss */
+/* line 267, ../../app/styles/main.scss */
 .boxBottomLeft {
   position: absolute;
   height: 0;
@@ -233,7 +233,7 @@ video {
   display: inline-block;
 }
 
-/* line 278, ../../app/styles/main.scss */
+/* line 276, ../../app/styles/main.scss */
 .boxBottomRight {
   position: absolute;
   height: 0;
@@ -244,7 +244,7 @@ video {
   display: inline-block;
 }
 
-/* line 288, ../../app/styles/main.scss */
+/* line 286, ../../app/styles/main.scss */
 #star {
   position: absolute;
   background: url(../images/star.png);
@@ -256,7 +256,7 @@ video {
   margin-left: -15px;
 }
 
-/* line 298, ../../app/styles/main.scss */
+/* line 296, ../../app/styles/main.scss */
 .box p {
   display: table-cell;
   text-align: center;
@@ -270,7 +270,7 @@ video {
 }
 
 /* weather */
-/* line 312, ../../app/styles/main.scss */
+/* line 310, ../../app/styles/main.scss */
 .weather {
   display: table;
   color: #FAFCFA;
@@ -288,7 +288,7 @@ video {
   align-items: center;
 }
 
-/* line 328, ../../app/styles/main.scss */
+/* line 326, ../../app/styles/main.scss */
 .weather p {
   display: table-cell;
   text-align: center;
@@ -301,7 +301,7 @@ video {
   margin-right: auto;
 }
 
-/* line 340, ../../app/styles/main.scss */
+/* line 338, ../../app/styles/main.scss */
 .weather div {
   border-bottom: 4px solid white;
   padding-bottom: 11px;
@@ -315,7 +315,7 @@ video {
   font-weight: normal;
   font-style: normal;
 }
-/* line 360, ../../app/styles/main.scss */
+/* line 358, ../../app/styles/main.scss */
 body, html {
   font-size: 100%;
   padding: 0;
@@ -323,14 +323,14 @@ body, html {
   height: 100%;
 }
 
-/* line 362, ../../app/styles/main.scss */
+/* line 360, ../../app/styles/main.scss */
 *,
 *:after,
 *:before {
   box-sizing: border-box;
 }
 
-/* line 370, ../../app/styles/main.scss */
+/* line 368, ../../app/styles/main.scss */
 body {
   font-family: 'Lato', Calibri, Arial, sans-serif;
   color: #f2ede3;
@@ -338,7 +338,7 @@ body {
   font-weight: 300;
 }
 
-/* line 377, ../../app/styles/main.scss */
+/* line 375, ../../app/styles/main.scss */
 a {
   color: #f0f0f0;
   text-decoration: none;
@@ -349,22 +349,21 @@ a {
   font-size: 80%;
 }
 
-/* line 388, ../../app/styles/main.scss */
+/* line 386, ../../app/styles/main.scss */
 .bl-main {
   width: 100%;
   height: 100%;
   font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
-/* line 394, ../../app/styles/main.scss */
+/* line 392, ../../app/styles/main.scss */
 .bl-panel {
   padding: 0 !important;
   margin: 0 !important;
-  background: #ff5a00;
   border: 0.1rem solid white;
 }
 
-/* line 401, ../../app/styles/main.scss */
+/* line 398, ../../app/styles/main.scss */
 .bl-box {
   position: relative;
   width: 100%;
@@ -376,17 +375,20 @@ a {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* line 414, ../../app/styles/main.scss */
-.bl-box img {
+.bl-box-filter {
   position: absolute;
-  width: 100%;
-  height: 100%;
   left: 0;
   top: 0;
-  opacity: 0.14;
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+  background: #ff5a00;
 }
 
 /* line 424, ../../app/styles/main.scss */
@@ -402,7 +404,7 @@ a {
   color: white;
 }
 
-/* line 437, ../../app/styles/main.scss */
+/* line 436, ../../app/styles/main.scss */
 .bl-icon {
   position: absolute;
   left: 0;
@@ -436,7 +438,7 @@ a {
     transform: translateX(200%);
   }
 }
-/* line 460, ../../app/styles/main.scss */
+/* line 459, ../../app/styles/main.scss */
 .bioUnderline {
   height: 0.5rem;
   background-color: white;
@@ -445,7 +447,7 @@ a {
   animation: slide-line-in 1s forwards;
 }
 
-/* line 471, ../../app/styles/main.scss */
+/* line 467, ../../app/styles/main.scss */
 .bioUnderline.ng-hide {
   animation: slide-line-out 1s forwards;
 }
@@ -476,9 +478,9 @@ a {
     transform: scale(0);
   }
 }
-/* line 485, ../../app/styles/main.scss */
+/* line 481, ../../app/styles/main.scss */
 .bl-content {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background: #ff5a00;
@@ -492,9 +494,10 @@ a {
   color: white;
   padding: 5%;
   opacity: 0;
+  overflow-y: scroll;
 }
 
-/* line 503, ../../app/styles/main.scss */
+/* line 499, ../../app/styles/main.scss */
 .bl-content.ng-hide {
   animation-name: expand-out;
   animation-timing-function: linear;
@@ -503,7 +506,7 @@ a {
   transform-origin: 100% 100%;
 }
 
-/* line 548, ../../app/styles/main.scss */
+/* line 507, ../../app/styles/main.scss */
 .bl-content p {
   padding-bottom: 15px;
   font-size: 1.7em;
@@ -513,7 +516,7 @@ a {
   overflow: hidden;
 }
 
-/* line 560, ../../app/styles/main.scss */
+/* line 516, ../../app/styles/main.scss */
 .bl-content h2 {
   font-size: 3em;
   font-weight: 700;
@@ -521,18 +524,18 @@ a {
   font-family: 'Ek Mukta', sans-serif;
 }
 
-/* line 617, ../../app/styles/main.scss */
+/* line 523, ../../app/styles/main.scss */
 .bl-content img {
   position: absolute;
   right: 0;
 }
 
-/* line 715, ../../app/styles/main.scss */
+/* line 528, ../../app/styles/main.scss */
 .hidden {
   display: none;
 }
 
-/* line 719, ../../app/styles/main.scss */
+/* line 532, ../../app/styles/main.scss */
 .fullscreen {
   position: absolute;
   left: 0;
@@ -540,7 +543,7 @@ a {
   width: 100%;
 }
 
-/* line 726, ../../app/styles/main.scss */
+/* line 539, ../../app/styles/main.scss */
 .picture p {
   bottom: 1rem;
   color: white;
@@ -557,12 +560,12 @@ a {
   z-index: 1;
 }
 
-/* line 742, ../../app/styles/main.scss */
+/* line 555, ../../app/styles/main.scss */
 .box {
   z-index: 1;
 }
 
-/* line 746, ../../app/styles/main.scss */
+/* line 559, ../../app/styles/main.scss */
 .ecTeamMemberBanner {
   background-color: lightgrey;
   color: #555555;
@@ -573,7 +576,7 @@ a {
   font-size: 2.2rem;
 }
 
-/* line 756, ../../app/styles/main.scss */
+/* line 569, ../../app/styles/main.scss */
 .ecTeamMemberDate {
   width: 30% !important;
   background-color: #555555;
@@ -601,14 +604,14 @@ a {
     opacity: 0;
   }
 }
-/* line 779, ../../app/styles/main.scss */
+/* line 592, ../../app/styles/main.scss */
 .ub-fade {
   animation-name: fade-in;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 }
 
-/* line 785, ../../app/styles/main.scss */
+/* line 598, ../../app/styles/main.scss */
 .ub-fade.ng-hide {
   animation-name: fade-out;
   animation-timing-function: linear;
@@ -635,14 +638,14 @@ a {
     transform: translateX(100%);
   }
 }
-/* line 802, ../../app/styles/main.scss */
+/* line 615, ../../app/styles/main.scss */
 .ub-slide {
   animation-name: slide-in;
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
 }
 
-/* line 808, ../../app/styles/main.scss */
+/* line 621, ../../app/styles/main.scss */
 .ub-slide.ng-hide {
   animation-name: slide-out;
   animation-timing-function: ease-in;

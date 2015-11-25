@@ -11,8 +11,8 @@
     angular.module('upBoardApp')
       .directive('bioPanels', bioPanels);
     
-    bioPanels.$inject = ['$log', '$timeout', '$compile', 'utility'];
-    function bioPanels($log, $timeout, $compile, utility) {
+    bioPanels.$inject = ['$log', '$timeout', '$compile', '$document', 'utility'];
+    function bioPanels($log, $timeout, $compile, $document, utility) {
         return {
           templateUrl: '/scripts/directives/biopanels.tpl.html',
           restrict: 'E',
@@ -26,7 +26,6 @@
 
               scope.count = 0;           // bio content counter
               scope.showContent = false; // use to show/hide bio content
-//              scope.showLine = false;    // use to show/hide the underline
               
               
               
@@ -64,162 +63,111 @@
                           var row = document.createElement('div');
                           row.setAttribute('class', 'row');
 
-                          for(var k = 0; i < contentLength && k < numCols; i++, k++){
+                          for(var k = 0; k < numCols; i++, k++){
 
-                              var col = document.createElement('div');
-                              col.setAttribute('class', 'bl-panel col-lg-' + columnSize);
-
-                              var bioBox = document.createElement('div');
-                              bioBox.setAttribute('class', 'bl-box');
-                              bioBox.setAttribute('style', 'padding:' + (100 / numRows) + '%;');
-
-                              var img = document.createElement('img');
-                              img.setAttribute('src', content[i].imageUrlCover);
-
-                              var about = document.createElement('div');
-                              about.setAttribute('class', 'bl-icon bl-icon-about');
-
-                              var firstName = document.createElement('h2');
-                              firstName.innerHTML = content[i].name.split(' ')[0]; // get first name
-
-                              var underline = document.createElement('div');
-                              underline.setAttribute('ng-show', 'showLine' + i);
-                              underline.setAttribute('class', 'bioUnderline');
-
-                              about.appendChild(firstName);
-                              about.appendChild(underline);
-                              bioBox.appendChild(img);
-                              bioBox.appendChild(about);
-
-                              // add bio content
-//                              var bioContent = document.createElement('div');
-//                              bioContent.setAttribute('ng-show', 'showContent' + i);
-//                              bioContent.setAttribute('class', 'bl-content');
-//                              
-//                              var name = document.createElement('h2');
-//                              name.innerHTML = content[i].name;
-//                              
-//                              var bio = document.createElement('p');
-//                              bio.innerHTML = content[i].bio;
-//                              
-//                              var memberBanner = document.createElement('div');
-//                              memberBanner.setAttribute('class', 'ecTeamMemberBanner');
-//                              memberBanner.innerHTML = 'EC Team Member since';
-//                              
-//                              var memberDate = document.createElement('div');
-//                              memberDate.setAttribute('class', 'ecTeamMemberDate');
-//                              memberDate.innerHTML = content[i].hireYear;
-//                              
-//                              var imgContent = document.createElement('img');
-//                              imgContent.setAttribute('class', 'teamMemberFullPhoto');
-//                              imgContent.src = content[i].imageUrlContent;
-//                              
-//                              bioContent.appendChild(name);
-//                              bioContent.appendChild(bio);
-//                              bioContent.appendChild(memberBanner);
-//                              bioContent.appendChild(memberDate);
-//                              bioContent.appendChild(imgContent);
-                              
-                              col.appendChild(bioBox);
-//                              col.appendChild(bioContent);
-                              
-                              
-//                              <div id="bioPanels"></div>
-//    
-//    <div ng-show="showContent" class="bl-content">
-//      <div>
-//        <h2>
-//            <!--bioPanels top left name Injected Here -->
-//            {{panel.name}}
-//        </h2>
-//        <p>
-//            <!--bioPanels top left text Injected Here -->
-//            {{panel.bio}}
-//        </p>
-//        <div>
-//          <div class="ecTeamMemberBanner">EC Team Member since</div>
-//          <div class="ecTeamMemberDate">{{panel.hireYear}}</div>
-//        </div>
-//      </div>
-//      <div class="teamMemberFullPhoto">
-//        <img src="{{panel.imageUrlContent}}"/>
-//      </div>
-//    </div>
-
-                              row.appendChild(col);
-                              bioPanels.appendChild(row);
-                              
-                              $compile(element.contents())(scope); // compile row for angular to pick up bindings
-                              
-                              // fire transition effects with delays
-                              var timeToNextPanelShow = timing.transitionTime + timing.openFirstSection + 
-                                                        ((timing.openSection + timing.sectionTime) * i);
-                              
-                              var timeToNextPanelHide = timing.transitionTime + timing.openFirstSection + 
-                                                        ((timing.openSection + timing.sectionTime) * i) + 
-                                                        timing.sectionTime;
-                              
-                              // show underline in
-                              $timeout(function(){
-                                  scope['showLine' + scope.count] = true;
-                              }, timeToNextPanelShow - 1000);
-                              
-                              // show bio content
-                              $timeout(function(){
+                              if(i < contentLength){
                                   
-                                  var content = scope.data.content.content;
+                                  var col = document.createElement('div');
+                                  col.setAttribute('class', 'bl-panel col-lg-' + columnSize);
+                                  col.setAttribute('id', 'bioPanel' + i);
+
+                                  var bioBox = document.createElement('div');
+                                  bioBox.setAttribute('class', 'bl-box');
+                                  bioBox.setAttribute('style', 
+                                                      'padding:' + (100 / numRows) + "%;background-image:url('" + content[i].imageUrlCover + "')");
+                                  bioBox.innerHTML = '&nbsp;'; // need some content, everything else is absolute
                                   
-                                  var bioContent = element.find('.bl-content')[0];
-                                  var name = element.find('.bl-content h2')[0];
-                                  var bio = element.find('.bl-content p')[0];
-                                  var hireYear = element.find('.bl-content .ecTeamMemberDate')[0];
-                                  var imgCover = element.find('.bl-content img')[0];
+                                  var filter = document.createElement('div');
+                                  filter.setAttribute('class', 'bl-box-filter');
+                                  filter.innerHTML = '&nbsp;';
+
+                                  var about = document.createElement('div');
+                                  about.setAttribute('class', 'bl-icon bl-icon-about');
+
+                                  var firstName = document.createElement('h2');
+                                  firstName.innerHTML = content[i].name.split(' ')[0]; // get first name
+
+                                  var underline = document.createElement('div');
+                                  underline.setAttribute('ng-show', 'showLine' + i); // dynamic binding
+                                  underline.setAttribute('class', 'bioUnderline');
+
+                                  about.appendChild(firstName);
+                                  about.appendChild(underline);
+                                  bioBox.appendChild(filter);
+                                  bioBox.appendChild(about);
+
+                                  col.appendChild(bioBox);
+                                  row.appendChild(col);
+                                  bioPanels.appendChild(row);
+
+                                  // fire transition effects with delays
+                                  var timeToNextPanelShow = timing.transitionTime + timing.openFirstSection + 
+                                                            ((timing.openSection + timing.sectionTime) * i);
+
+                                  var timeToNextPanelHide = timing.transitionTime + timing.openFirstSection + 
+                                                            ((timing.openSection + timing.sectionTime) * i) + 
+                                                            timing.sectionTime;
+
+                                  // show underline in
+                                  $timeout(function(){
+                                      $document.duScrollToElement(angular.element('#bioPanel' + scope.count), 0, 1000);
+                                      scope['showLine' + scope.count] = true;
+                                  }, timeToNextPanelShow - 1000);
+
+                                  // show bio content
+                                  $timeout(function(){
+
+                                      var content = scope.data.content.content;
+
+                                      var bioContent = element.find('.bl-content')[0];
+                                      var name = element.find('.bl-content h2')[0];
+                                      var bio = element.find('.bl-content p')[0];
+                                      var hireYear = element.find('.bl-content .ecTeamMemberDate')[0];
+                                      var imgCover = element.find('.bl-content img')[0];
+
+                                      // reset
+                                      name.innerHTML = '';
+                                      bio.innerHTML = '';
+                                      hireYear.innerHTML = '';
+                                      imgCover.src = '';
+
+                                      name.innerHTML = content[scope.count].name;
+                                      bio.innerHTML = content[scope.count].bio;
+                                      hireYear.innerHTML = content[scope.count].hireYear;
+                                      imgCover.src = content[scope.count].imageUrlContent;
+
+                                      scope.showContent = true;
+                                  }, timeToNextPanelShow);
+
+                                  // hide bio content
+                                  $timeout(function(){
+                                      scope.showContent = false;
+                                  }, timeToNextPanelHide);
+
+                                  // show underline out
+                                  $timeout(function(){
+                                      scope['showLine' + scope.count] = false;
+                                      scope.count++;
+                                  }, timeToNextPanelHide + 1000);
+                              }
+                              else{
+                                  // add blank columns to fill space
+                                  var col = document.createElement('div');
+                                  col.setAttribute('class', 'bl-panel col-lg-' + columnSize);
+
+                                  var bioBox = document.createElement('div');
+                                  bioBox.setAttribute('class', 'bl-box');
+                                  bioBox.setAttribute('style', 'padding:' + (100 / numRows) + '%;');
+                                  bioBox.innerHTML = '&nbsp;';
                                   
-                                  // reset
-                                  name.innerHTML = '';
-                                  bio.innerHTML = '';
-                                  hireYear.innerHTML = '';
-                                  imgCover.src = '';
-                                  
-                                  name.innerHTML = content[scope.count].name;
-                                  bio.innerHTML = content[scope.count].bio;
-                                  hireYear.innerHTML = content[scope.count].hireYear;
-                                  imgCover.src = content[scope.count].imageUrlContent;
-                                  
-//                                  var bioPanel = angular.element('#bioPanels')[0];
-//                                  var name = bioPanel.getElementsByTagName('h2')[scope.count];
-                                  
-//                                  $log.debug(name.getBoundingClientRect().left);
-//                                  $log.debug(name.getBoundingClientRect().top);
-//                                  $log.debug(bioContent);
-                                  
-//                                  element.style.transformOrigin = name.getBoundingClientRect().left + ' ' + name.getBoundingClientRect().top;
-//                                  bioContent.style.transformOrigin = name.getBoundingClientRect().left + 'px ' + name.getBoundingClientRect().top + 'px';
-                                  
-//                                  scope['showContent' + scope.count] = true;
-//                                  scope['showLine' + scope.count] = true;
-//                                  $log.debug(scope);
-//                                  $log.debug(scope.count);
-                                  scope.showContent = true;
-                              }, timeToNextPanelShow);
-                              
-                              // hide bio content
-                              $timeout(function(){
-//                                  scope['showContent' + scope.count] = false;
-                                  scope.showContent = false;
-//                                  scope['showLine' + scope.count] = false;
-//                                  $log.debug(scope);
-//                                  scope.count++;
-//                                  $log.debug(scope.count);
-                              }, timeToNextPanelHide);
-                            
-                              // show underline out
-                              $timeout(function(){
-                                  scope['showLine' + scope.count] = false;
-                                  scope.count++;
-                              }, timeToNextPanelHide + 1000);
+                                  col.appendChild(bioBox);
+                                  row.appendChild(col);
+                                  bioPanels.appendChild(row);
+                              }
                           }
                       }
+                      
+                      $compile(element.contents())(scope); // compile for angular to pick up new bindings
                       
                       utility.setEntryTransition(element, scope.data);
                       savedData = scope.data;
