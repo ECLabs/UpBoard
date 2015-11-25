@@ -160,6 +160,11 @@
                                   bioBox.setAttribute('style', 'padding:' + (100 / numRows) + '%;');
                                   bioBox.innerHTML = '&nbsp;';
                                   
+                                  var filter = document.createElement('div');
+                                  filter.setAttribute('class', 'bl-box-filter');
+                                  filter.innerHTML = '&nbsp;';
+                                  
+                                  bioBox.appendChild(filter);
                                   col.appendChild(bioBox);
                                   row.appendChild(col);
                                   bioPanels.appendChild(row);
