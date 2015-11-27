@@ -12,13 +12,13 @@ function init(){
                     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
 
                     if (navigator.getUserMedia) {
-                        navigator.getUserMedia({video: true, audio: true}, handleVideo, videoError);
+                        navigator.getUserMedia({video: true, audio: false}, handleVideo, videoError);
                     }
 
                     function handleVideo(stream) {
 
-                        video.src = window.URL.createObjectURL(stream);
-                        video.volume = 0;
+                        document.querySelector('#videoElement').setAttribute('src', window.URL.createObjectURL(stream));
+                        document.querySelector('#videoElement').setAttribute('volume', 0);
 
                     }
 

@@ -1,122 +1,178 @@
 # UpBoard
 Digital Signage for Corporations
 
-##Getting Started:
+#### Getting Started:
 
-Uses Grunt & Bower
+Requires **npm**, **grunt**, **bower**, and **compass**
+* npm - see https://docs.npmjs.com/getting-started/installing-node
+* grunt - see http://gruntjs.com/getting-started
+* bower - see http://bower.io
+* compass - see http://compass-style.org/install
 
-see http://gruntjs.com/getting-started for info on setting up grunt 
+After you've pulled the project down and installed the required tools above, in the project root run the following commands:
 
-all data for the slideshow is stored at https://boiling-heat-9947.firebaseio.com/
-this can be easily updated by changing the URL in index.html
+**npm install** - to load necessary node modules
 
-to add a slide make a new node with the number the slide will be (slides added directly to firebase can only be added at the end without deleting and re-writing the previous slides). If you wish to add many new slides I suggest uncommenting and using the function I provide in index.html. If you wish to add a slide manually to firebase then be sure to follow the format of the slide type you wish. These are listed below
+**grunt build** - to create a dist folder for distribution
 
-slides will be shown in the order in which they appear in the database. not their number, however the number is important and must match the order they appear in the database.
+**grunt serve** - to run the app locally
 
-a slide type must then be specified. The types are logo, liveVideoOverlay, fourPanel, and weather.
-each of these types has a specific set of parameters to be filled out.
+All data for the slideshow is stored at https://boiling-heat-9947.firebaseio.com/.
+This can be changed in the config.js file located in app/scripts/angularfire.
 
-with the exception of the logo slide & weather the slide must also have a timing,transitions, and content field.
+To add a slide make a new node with the number the slide will be (slides added directly to firebase can only be added at the end without deleting and re-writing the previous slides). If you wish to add a slide manually to firebase then be sure to follow the format of the slide type you wish. These are listed below.
 
-##IMPORTANT
+Slides will be shown in the order in which they appear in the database and not by their number. However, the number is important and must match the order they appear in the database.
 
-Because each slide must call the next slide function from within itself, each slide function will not complete until the *final* slide function completes. This means if you have a lot of slides in the show then you will use a lot of memory. **You have been warned**
+A slide type must then be specified. The types are:
+* **logo**
+* **picture**
+* **liveVideoOverlay**
+* **staticVideoOverlay**
+* **bioPanels**
+* **weather**
 
-##Logo slide data structure:
+Each of these types has a specific set of parameters to be filled out.
 
-    1: {
+Transition types currently supported are *fade* and *slide*.
+
+#### logo slide data structure:
+
+    {
           type: "logo",
           transitions: {
-              entry: 'fade', //currently fade is the only type supported
-              exit: 'fade' //currently fade is the only type supported
+              entry: 'fade',
+              exit: 'fade'
           },
           timing: {
-              slideTime:10000 , //Time spent on the slide
-              transitionTime: 2000, //Total Transition fade time
+              slideTime:10000 , // Time spent on the slide
+              transitionTime: 2000, // Total Transition fade time
           }
     },
 
-##liveVideoOverlay data structure:
+#### picture slide data structure:
 
-    2: {
+    {
+          type: "picture",
+          transitions: {
+              entry: 'fade',
+              exit: 'fade'
+          },
+          timing: {
+              slideTime:10000 , // Time spent on the slide
+              transitionTime: 2000, // Total Transition fade time
+          },
+          content: {
+            caption: "Test Innovation, Leadership, Expertise",
+            imageUrl: "https://s3.amazonaws.com/upboard/buisinessImage.jpg"
+          }
+    },
+    
+#### liveVideoOverlay data structure:
+
+    {
         type: "liveVideoOverlay",
         transitions: {
-            entry: 'fade', //currently fade is the only type supported
-            exit: 'fade' //currently fade is the only type supported
+            entry: 'fade',
+            exit: 'fade'
         },
         timing: {
-            slideTime: 10000, //Time spent on slide
-            transitionTime: 2000, //Total transition time
-            audioFadeTime: 2000, //Time between slide fading in and audio beginning to fade
+            slideTime: 10000, // Time spent on slide
+            transitionTime: 2000, // Total transition time
+            audioFadeTime: 2000, // Time between slide fading in and audio beginning to fade
         },
         content: {
-            overlay: 'Customer-driven software <br/> development for government <br/> and commercial enterprises.', //Note this section takes html, it may be necessary to include the <br/> tags to get the text spacing correct
-
-            overlayColor: '#FAFCFA',
+            overlay: 'Customer-driven software <br/> development for government <br/> and commercial enterprises.', // Note this section takes html, it may be necessary to include the <br/> tags to get the text spacing correct,
+            overlayColor: '#FAFCFA'
         }
     },
+    
+#### staticVideoOverlay data structure:
 
-##fourPanel Slide data structure:
-
-    3: {
-        type: "fourPanel",
+    {
+        type: "staticVideoOverlay",
         transitions: {
-            entry: 'fade', //currently fade is the only type supported
-            exit: 'fade' //currently fade is the only type supported
+            entry: 'fade',
+            exit: 'fade'
         },
         timing: {
-            openFirstSection: 3000, //Time between the fourpanel fading in and opening the first section
-            openSection: 1000, //Time between previous closing and next opening
-            sectionTime: 20000, //Time spent on each slide
-            transitionTime:1000, //Time to fade the page away
+            slideTime: 10000, // Time spent on slide
+            transitionTime: 2000, // Total transition time
+            audioFadeTime: 2000, // Time between slide fading in and audio beginning to fade
         },
         content: {
-            content: array of json objects format shown below
+            overlay: 'Customer-driven software <br/> development for government <br/> and commercial enterprises.', // Note this section takes html, it may be necessary to include the <br/> tags to get the text spacing correct,
+            overlayColor: '#FAFCFA',
+            videoUrl: 'http://www.w3schools.com/HTML/mov_bbb.mp4' // url to static video to play in the background
+        }
+    },
+    
+#### bioPanels data structure:
+
+    {
+        type: "bioPanels",
+        transitions: {
+            entry: 'fade',
+            exit: 'fade'
+        },
+        timing: {
+            openFirstSection: 3000, // Time between the fourpanel fading in and opening the first section
+            openSection: 1000, // Time between previous closing and next opening
+            sectionTime: 20000, // Time spent on each slide
+            transitionTime:1000, // Time to fade the page away
+        },
+        content: {
+            content: array of arbitrary number of json objects, format shown below
         }
     },
 
 
-###fourPanel slide info stored in an array of JSON objects of the form
+##### bioPanels content format:
 
     [
         {
-            //This will be diplayed in the Upper-Left Corner of the four panels
             name:'Jamil Evans',
+            hireYear: '2001',
+            imageUrlContent: 'https://s3.amazonaws.com/upboard/BioFullShots/jamil_full.png', // path to image to display in the bio content
+            imageUrlCover: 'https://s3.amazonaws.com/upboard/BioHeadShots/jamil_headshot.jpg',   // path to image to display in the main cover page 
             bio: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
         },
         {
-            //This will be diplayed in the Upper-Right Corner of the four panels
             name: 'Kole Myers',
+            hireYear: '2010',
+            imageUrlContent: 'https://s3.amazonaws.com/upboard/BioFullShots/kole_full.png',
+            imageUrlCover: 'https://s3.amazonaws.com/upboard/BioHeadShots/kole_headshot.jpg',
             bio: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
         },
         {
-            //This will be diplayed in the Lower-Left Corner of the four panels
             name: 'Spike Spiegel',
+            hireYear: '2012',
+            imageUrlContent: 'https://s3.amazonaws.com/upboard/BioFullShots/spike_full.png',
+            imageUrlCover: 'https://s3.amazonaws.com/upboard/BioHeadShots/spike_headshot.jpg',
             bio: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
         },
         {
-            //This will be diplayed in the Lower-Right Corner of the four panels
             name: 'Tyrion Lannister',
+            hireYear: '2015',
+            imageUrlContent: 'https://s3.amazonaws.com/upboard/BioFullShots/tyrion_full.png',
+            imageUrlCover: 'https://s3.amazonaws.com/upboard/BioHeadShots/tyrion_headshot.jpg',
             bio: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
         }
     ]
 
-##Weather slide data structure:
-    4: {
+#### weather slide data structure:
+    {
         type: "weather",
         transitions: {
-            entry: 'fade', //still only supported type
+            entry: 'fade',
             exit: 'fade'
         },
         timing: {
-            slideTime: 10000, //same as liveVideoOverlay, time spent on slide
-            transitionTime: 2000, ////transition time
+            slideTime: 10000, // same as liveVideoOverlay, time spent on slide
+            transitionTime: 2000, // transition time
         },
         content: {
-            overlayColor: '#FAFCFA', //text color
-            zip: '20001' //set zip code for weather, US only
+            overlayColor: '#FAFCFA', // text color
+            zip: '20001' // set zip code for weather, US only
         }
     }
-
-Thanks to [Mary Lou](http://tympanus.net/codrops/author/crnacura/) for the [fourPanel Page Transitions](http://tympanus.net/codrops/2013/04/23/fullscreen-layout-with-page-transitions/)
