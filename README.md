@@ -38,7 +38,7 @@ Transition types currently supported are *fade* and *slide*.
 
 #### logo slide data structure:
 
-    1: {
+    {
           type: "logo",
           transitions: {
               entry: 'fade',
@@ -52,7 +52,7 @@ Transition types currently supported are *fade* and *slide*.
 
 #### picture slide data structure:
 
-    1: {
+    {
           type: "picture",
           transitions: {
               entry: 'fade',
@@ -70,7 +70,7 @@ Transition types currently supported are *fade* and *slide*.
     
 #### liveVideoOverlay data structure:
 
-    2: {
+    {
         type: "liveVideoOverlay",
         transitions: {
             entry: 'fade',
@@ -89,7 +89,7 @@ Transition types currently supported are *fade* and *slide*.
     
 #### staticVideoOverlay data structure:
 
-    2: {
+    {
         type: "staticVideoOverlay",
         transitions: {
             entry: 'fade',
@@ -109,7 +109,7 @@ Transition types currently supported are *fade* and *slide*.
     
 #### bioPanels data structure:
 
-    3: {
+    {
         type: "bioPanels",
         transitions: {
             entry: 'fade',
@@ -161,7 +161,7 @@ Transition types currently supported are *fade* and *slide*.
     ]
 
 #### weather slide data structure:
-    4: {
+    {
         type: "weather",
         transitions: {
             entry: 'fade',
