@@ -13,7 +13,7 @@
     weather.$inject = ['$log', 'utility', 'openWeatherMap'];
     function weather($log, utility, openWeatherMap) {
         return {
-          templateUrl: '/scripts/directives/weather.tpl.html',
+          templateUrl: 'scripts/directives/weather.tpl.html',
           restrict: 'E',
           replace: true,
           scope:{

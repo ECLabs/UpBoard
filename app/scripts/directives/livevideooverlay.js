@@ -13,7 +13,7 @@
     liveVideoOverlay.$inject = ['$log', 'utility'];
     function liveVideoOverlay($log, utility) {
         return {
-          templateUrl: '/scripts/directives/livevideooverlay.tpl.html',
+          templateUrl: 'scripts/directives/livevideooverlay.tpl.html',
           restrict: 'E',
           replace: true,
           scope:{

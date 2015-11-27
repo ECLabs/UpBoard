@@ -13,7 +13,7 @@
     staticVideoOverlay.$inject = ['$log', 'utility'];
     function staticVideoOverlay($log, utility) {
         return {
-          templateUrl: '/scripts/directives/staticvideooverlay.tpl.html',
+          templateUrl: 'scripts/directives/staticvideooverlay.tpl.html',
           restrict: 'E',
           replace: true,
           scope:{
