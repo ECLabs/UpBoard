@@ -14,7 +14,7 @@
     bioPanels.$inject = ['$log', '$timeout', '$compile', '$document', 'utility'];
     function bioPanels($log, $timeout, $compile, $document, utility) {
         return {
-          templateUrl: '/scripts/directives/biopanels.tpl.html',
+          templateUrl: 'scripts/directives/biopanels.tpl.html',
           restrict: 'E',
           replace: true,
           scope: {
