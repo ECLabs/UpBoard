@@ -87,9 +87,11 @@
                                   var firstName = document.createElement('h2');
                                   firstName.innerHTML = content[i].name.split(' ')[0]; // get first name
 
+                                  // dynamically sized based on name length
                                   var underline = document.createElement('div');
                                   underline.setAttribute('ng-show', 'showLine' + i); // dynamic binding
                                   underline.setAttribute('class', 'bioUnderline');
+                                  underline.setAttribute('style', 'width:' + (firstName.innerHTML.length * 1.4) + 'em'); 
 
                                   about.appendChild(firstName);
                                   about.appendChild(underline);
