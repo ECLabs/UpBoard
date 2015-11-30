@@ -3,21 +3,21 @@
 
     /**
      * @ngdoc directive
-     * @name upBoardApp.directive:logo
+     * @name upBoardApp.directive:ubPicture
      * @description
-     * # logo
+     * # picture
      */
     angular.module('upBoardApp')
-      .directive('logo', logo);
+      .directive('ubPicture', picture);
     
-    logo.$inject = ['$log', 'utility'];
-    function logo($log, utility) {
+    picture.$inject = ['$log', 'utility'];
+    function picture($log, utility) {
         return {
-          templateUrl: 'scripts/directives/logo.tpl.html',
+          templateUrl: 'scripts/directives/ub-picture.tpl.html',
           restrict: 'E',
           replace: true,
           scope:{
-              data: "="
+              data: '='
           },
           link: function(scope, element, attrs){
 
@@ -29,7 +29,18 @@
 
                   if(isShown){
                       $log.debug('about to show ' + scope.data.type);
+                      
+                      //reset data first    
+                      element.find('p')[0].innerHTML = ''
+                      element.find('img')[0].src = '';
+                      
+                      // need to set this way instead of using angular two way data bind
+                      // data was switching out before the animation was finished
+                      element.find('p')[0].innerHTML = scope.data.content.caption; // set caption
+                      element.find('img')[0].src = scope.data.content.imageUrl; // set image
+                      
                       utility.setEntryTransition(element, scope.data);
+
                       savedData = scope.data;
                   }
                   else if(savedData != null){

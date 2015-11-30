@@ -4,17 +4,17 @@
 
     /**
      * @ngdoc directive
-     * @name upBoardApp.directive:bioPanels
+     * @name upBoardApp.directive:ubBioPanels
      * @description
      * # bioPanels
      */
     angular.module('upBoardApp')
-      .directive('bioPanels', bioPanels);
+      .directive('ubBioPanels', bioPanels);
     
     bioPanels.$inject = ['$log', '$timeout', '$compile', '$document', 'utility'];
     function bioPanels($log, $timeout, $compile, $document, utility) {
         return {
-          templateUrl: 'scripts/directives/biopanels.tpl.html',
+          templateUrl: 'scripts/directives/ub-bio-panels.tpl.html',
           restrict: 'E',
           replace: true,
           scope: {
