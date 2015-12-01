@@ -26,7 +26,7 @@
               function updateWeather(){
                   if(scope.zip != null){
                       openWeatherMap.getWeather(scope.zip).success(function(data){
-                          scope.weather = data.main.temp + "º | " + data.weather[0].main;
+                          scope.weather = data.main.temp + 'º';
                       });
                   }
               }
@@ -46,6 +46,14 @@
               
               $interval(tick, 1000); // update the clock every second
               $interval(updateWeather, 60000); // update weather every minute
+              
+              scope.$watch(attrs.ngShow, function(){
+                 
+                  var isShown = scope.$eval(attrs.ngShow);
+                  if(isShown){
+                      scope.caption = scope.data.content.caption != null ? scope.data.content.caption : null;
+                  }
+              });
           }
         };
       }

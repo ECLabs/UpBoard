@@ -36,7 +36,12 @@
                       
                       // need to set this way instead of using angular two way data bind
                       // data was switching out before the animation was finished
-                      element.find('p')[0].innerHTML = scope.data.content.caption; // set caption
+                      if(!scope.data.showFooter) {
+                          
+                          // show caption in page if the footer isn't displayed since it has 
+                          // its own place for caption text
+                          element.find('p')[0].innerHTML = scope.data.content.caption;
+                      }
                       element.find('img')[0].src = scope.data.content.imageUrl; // set image
                       
                       utility.setEntryTransition(element, scope.data);

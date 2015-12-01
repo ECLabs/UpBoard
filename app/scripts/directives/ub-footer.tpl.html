@@ -1,10 +1,10 @@
-<div class="ub-footer">
+<div ng-show="data.showFooter" class="ub-footer ub-fade" style="animation-duration:1000ms;">
     <div class="ub-footer-bg"></div>
     <div class="ub-footer-content">
         <div class="ub-footer-logo">&nbsp;</div>
         <div class="ub-footer-time-weather">
-            <span style="font-size:5vh;">{{ clock | date:'shortTime'}}</span> <br/>
-            <span style="font-size:3vh;">{{ weather }}</span>
+            <span style="font-size:5vh;white-space:nowrap;">{{ clock | date:'shortTime'}} | {{ weather }}</span><br/>
+            <span style="font-size:3vh;white-space:nowrap;">{{ caption }}</span>
         </div>
     </div>
 </div>
