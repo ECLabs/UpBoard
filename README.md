@@ -47,7 +47,8 @@ Transition types currently supported are *fade* and *slide*.
           timing: {
               slideTime:10000 , // Time spent on the slide
               transitionTime: 2000, // Total Transition fade time
-          }
+          },
+          showFooter: true // optional
     },
 
 #### picture slide data structure:
@@ -65,7 +66,8 @@ Transition types currently supported are *fade* and *slide*.
           content: {
             caption: "Test Innovation, Leadership, Expertise",
             imageUrl: "https://s3.amazonaws.com/upboard/buisinessImage.jpg"
-          }
+          },
+          showFooter: true // optional
     },
     
 #### liveVideoOverlay data structure:
@@ -84,7 +86,8 @@ Transition types currently supported are *fade* and *slide*.
         content: {
             overlay: 'Customer-driven software <br/> development for government <br/> and commercial enterprises.', // Note this section takes html, it may be necessary to include the <br/> tags to get the text spacing correct,
             overlayColor: '#FAFCFA'
-        }
+        },
+        showFooter: true // optional
     },
     
 #### staticVideoOverlay data structure:
@@ -104,7 +107,8 @@ Transition types currently supported are *fade* and *slide*.
             overlay: 'Customer-driven software <br/> development for government <br/> and commercial enterprises.', // Note this section takes html, it may be necessary to include the <br/> tags to get the text spacing correct,
             overlayColor: '#FAFCFA',
             videoUrl: 'http://www.w3schools.com/HTML/mov_bbb.mp4' // url to static video to play in the background
-        }
+        },
+        showFooter: true // optional
     },
     
 #### bioPanels data structure:
@@ -123,7 +127,8 @@ Transition types currently supported are *fade* and *slide*.
         },
         content: {
             content: array of arbitrary number of json objects, format shown below
-        }
+        },
+        showFooter: true // optional
     },
 
 
@@ -174,5 +179,6 @@ Transition types currently supported are *fade* and *slide*.
         content: {
             overlayColor: '#FAFCFA', // text color
             zip: '20001' // set zip code for weather, US only
-        }
+        },
+        showFooter: true
     }
