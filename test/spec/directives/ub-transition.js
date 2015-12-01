@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: transition', function () {
+describe('Directive: ubTransition', function () {
 
   // load the directive's module
   beforeEach(module('upBoardApp'));
@@ -13,8 +13,8 @@ describe('Directive: transition', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<transition></transition>');
+    element = angular.element('<ub-transition></ub-transition>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the transition directive');
+    expect(element.text()).toBe('this is the ubTransition directive');
   }));
 });

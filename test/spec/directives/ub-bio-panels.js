@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: logo', function () {
+describe('Directive: ubBioPanels', function () {
 
   // load the directive's module
   beforeEach(module('upBoardApp'));
@@ -13,8 +13,8 @@ describe('Directive: logo', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<logo></logo>');
+    element = angular.element('<ub-bio-panels></ub-bio-panels>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the logo directive');
+    expect(element.text()).toBe('this is the ubBioPanels directive');
   }));
 });
