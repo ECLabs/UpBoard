@@ -50,6 +50,16 @@
               return slideTime;
           },
             
+          extractFromAddress: function(components, type){
+              
+              for(var i = 0; i < components.length; i++){
+                  for(var j = 0; j < components[i].types.length; j++){
+                      if(components[i].types[j] == type) return components[i].long_name;
+                  }
+              }
+              return '';
+          },
+            
           setEntryTransition: function (element, data) {
               
               // remove previous exit transition style if it exists

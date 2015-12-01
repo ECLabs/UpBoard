@@ -11,8 +11,8 @@
     angular.module('upBoardApp')
       .directive('ubFooter', ubFooter);
     
-    ubFooter.$inject = ['$log', '$interval', 'openMapQuest']
-    function ubFooter($log, $interval, openMapQuest) {
+    ubFooter.$inject = ['$log', '$interval', 'mapsGoogleApis', 'openWeatherMap'];
+    function ubFooter($log, $interval, mapsGoogleApis, openWeatherMap) {
         return {
           templateUrl: 'scripts/directives/ub-footer.tpl.html',
           restrict: 'E',
@@ -22,14 +22,30 @@
           },
           link: function postLink(scope, element, attrs) {
               
-              scope.zip = openMapQuest.getZip();
-              scope.clock = null;
+              // update the weather
+              function updateWeather(){
+                  if(scope.zip != null){
+                      openWeatherMap.getWeather(scope.zip).success(function(data){
+                          scope.weather = data.main.temp + "º | " + data.weather[0].main;
+                      });
+                  }
+              }
               
-              var tick = function() { scope.clock = Date.now(); }
+              // set zip with callback function
+              function setZip(postalCode){
+                  $log.debug(postalCode);
+                  scope.zip = postalCode;
+                  updateWeather();
+              };
+              
+              mapsGoogleApis.getPostalCode(setZip);
+              
+              // set clock
+              function tick() { scope.clock = Date.now(); }
               tick();
-              $interval(tick, 60000); // update the clock every minute
               
-              scope.weather = '55 º'; // TODO - switch to use navigator geolocation and openWeatherMap service
+              $interval(tick, 1000); // update the clock every second
+              $interval(updateWeather, 60000); // update weather every minute
           }
         };
       }
