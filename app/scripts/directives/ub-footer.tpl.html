@@ -3,7 +3,7 @@
     <div class="ub-footer-content">
         <div class="ub-footer-logo">&nbsp;</div>
         <div class="ub-footer-time-weather">
-            <span style="font-size:5vh;white-space:nowrap;">{{ clock | date:'shortTime'}}{{ caption != null ? ' | ' + weather : '' }}</span><br/>
+            <span style="font-size:5vh;white-space:nowrap;">{{ clock | date:'shortTime'}}{{ caption != null && weather != null ? ' | ' + weather : '' }}</span><br/>
             <span style="font-size:3vh;white-space:nowrap;">{{ caption != null ? caption : weather }}</span>
         </div>
     </div>
