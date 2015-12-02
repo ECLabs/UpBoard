@@ -27,7 +27,52 @@
               scope.count = 0;           // bio content counter
               scope.showContent = false; // use to show/hide bio content
               
-              
+              function showBioContent(show){
+                  
+                  // set transform origin to show, using jQuery for better css() support
+                  var currentBioPanel = $('#bioPanel' + scope.count);
+                  var scrollTop = $(window).scrollTop();
+                  var xAxis = currentBioPanel.position().left;
+                  var yAxis = currentBioPanel.position().top - scrollTop; // compensate for scroll
+                  var bpHeight = currentBioPanel.outerHeight();
+                  var bpWidth = currentBioPanel.outerWidth();
+                  
+                  var bioContent = $('#bioContent'); 
+                  bioContent.css('height', bpHeight + 'px');
+                  bioContent.css('width', bpWidth + 'px');
+                  bioContent.css('transform-origin', xAxis + 'px ' + yAxis + 'px');
+                  
+                  var bioPanels = element.find('.bl-panel');
+                  if(show){
+                      
+                      // place content window over current bio panel, hide will start in top left corner
+                      bioContent.css('left', xAxis + 'px');
+                      bioContent.css('top', yAxis + 'px');
+                      
+                      // scale down other panels
+                      for(var i = 0; i < bioPanels.length; i++){
+                          
+                          if(i != scope.count){
+                              $(bioPanels[i]).css('transform', 'scale(0)');
+                              $(bioPanels[i]).css('transition-duration', '0.5s');
+                          }
+                      }
+                      
+                      // delay showing inside of content to give some time for transition effect
+                      $timeout(function(){$('#bioContent .row').css('opacity', '1')}, 500);
+                  }
+                  else {
+                      // scale up other panels
+                      for(var i = 0; i < bioPanels.length; i++){
+                          
+                          if(i != scope.count){
+                              $(bioPanels[i]).css('transform', 'scale(1)');
+                              $(bioPanels[i]).css('transition-duration', '0.5s');
+                          }
+                      }
+                      $('#bioContent .row').css('opacity', '0');
+                  }
+              }
               
               scope.$watch(attrs.ngShow, function(){
 
@@ -114,14 +159,13 @@
                                   $timeout(function(){
                                       $document.duScrollToElement(angular.element('#bioPanel' + scope.count), 0, 1000);
                                       scope['showLine' + scope.count] = true;
-                                  }, timeToNextPanelShow - 1000);
+                                  }, timeToNextPanelShow - 1500);
 
                                   // show bio content
                                   $timeout(function(){
 
                                       var content = scope.data.content.content;
 
-                                      var bioContent = element.find('.bl-content')[0];
                                       var name = element.find('.bl-content h2')[0];
                                       var bio = element.find('.bl-content p')[0];
                                       var hireYear = element.find('.bl-content .ecTeamMemberDate')[0];
@@ -138,11 +182,13 @@
                                       hireYear.innerHTML = content[scope.count].hireYear;
                                       imgCover.setAttribute('style', "background-image:url('" + content[scope.count].imageUrlContent + "');");
 
+                                      showBioContent(true);
                                       scope.showContent = true;
                                   }, timeToNextPanelShow);
 
                                   // hide bio content
                                   $timeout(function(){
+                                      showBioContent(false);
                                       scope.showContent = false;
                                   }, timeToNextPanelHide);
 
@@ -150,7 +196,7 @@
                                   $timeout(function(){
                                       scope['showLine' + scope.count] = false;
                                       scope.count++;
-                                  }, timeToNextPanelHide + 1000);
+                                  }, timeToNextPanelHide + 1500);
                               }
                               else{
                                   // add blank columns to fill space

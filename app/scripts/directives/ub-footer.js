@@ -26,7 +26,7 @@
               function updateWeather(){
                   if(scope.zip != null){
                       openWeatherMap.getWeather(scope.zip).success(function(data){
-                          scope.weather = data.main.temp + 'º';
+                          scope.weather = Math.floor(data.main.temp) + ' ºF';
                       });
                   }
               }
