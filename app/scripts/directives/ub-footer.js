@@ -18,7 +18,8 @@
           restrict: 'E',
           replace: true,
           scope: {
-              data: '='
+              data: '=',
+              logo: '='
           },
           link: function postLink(scope, element, attrs) {
               
@@ -51,7 +52,7 @@
                  
                   var isShown = scope.$eval(attrs.ngShow);
                   if(isShown){
-                      scope.caption = scope.data.content.caption != null ? scope.data.content.caption : null;
+                      scope.caption = scope.data.content.caption != null ? scope.data.content.caption : null; // need to clear out if caption is null
                   }
               });
           }

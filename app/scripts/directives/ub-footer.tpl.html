@@ -1,7 +1,7 @@
 <div ng-show="data.showFooter" class="ub-footer ub-fade" style="animation-duration:1000ms;">
     <div class="ub-footer-bg"></div>
     <div class="ub-footer-content">
-        <div class="ub-footer-logo">&nbsp;</div>
+        <div class="ub-footer-logo" style="background-image:url('{{logo.url}}');background-size:{{logo.dimensions.width}} {{logo.dimensions.height}}">&nbsp;</div>
         <div class="ub-footer-time-weather">
             <span style="font-size:5vh;white-space:nowrap;">{{ clock | date:'shortTime'}}{{ caption != null && weather != null ? ' | ' + weather : '' }}</span><br/>
             <span style="font-size:3vh;white-space:nowrap;">{{ caption != null ? caption : weather }}</span>

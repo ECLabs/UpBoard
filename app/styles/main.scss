@@ -41,7 +41,7 @@ body {
 
 .ub-footer-logo {
     float: left;
-    background-image: url('../images/logo_ec_white2.png');
+    background-image: url('../images/logo_ec_white2.png'); // default image if one is not specified in data
     background-size: contain;
     background-repeat: no-repeat;
     height: 100%;
@@ -531,7 +531,7 @@ a {
     animation-fill-mode: forwards;
     animation-duration: 1s;
     color: white;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .bl-content.ng-hide {
