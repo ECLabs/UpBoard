@@ -22,8 +22,21 @@ This can be changed in the config.js file located in app/scripts/angularfire.
 
 To add a slide make a new node with the number the slide will be (slides added directly to firebase can only be added at the end without deleting and re-writing the previous slides). If you wish to add a slide manually to firebase then be sure to follow the format of the slide type you wish. These are listed below.
 
-Slides will be shown in the order in which they appear in the database and not by their number. However, the number is important and must match the order they appear in the database.
+The logo will display in the optional footer that can be displayed on top of each slide.  The slides will be shown in the order in which they appear in the database and not by their number. However, the number is important and must match the order they appear in the database.
 
+    {
+        logo: {
+            url: "https://s3.amazonaws.com/upboard/logo.png",
+            dimensions: { // optional, default behavior is to do background-size:contain
+                height: "100px",
+                width: "100px"
+            }
+        },
+        slides: {
+            // array of slide types described below
+        }
+    }
+                
 A slide type must then be specified. The types are:
 * **logo**
 * **picture**
