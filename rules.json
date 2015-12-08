@@ -1,0 +1,23 @@
+{
+    "rules": {
+      
+      // firebase security rules
+      // default rules are false if not specified
+      // setting these to true would make ALL CHILD PATHS readable/writable
+      // ".read": false,
+      // ".write": false,
+      
+      "users": {
+        "$user_id": {
+          // grants write access to the owner of this user account
+          // whose uid must exactly match the key ($user_id)
+          ".read": "$user_id === auth.uid",
+          ".write": "$user_id === auth.uid",
+          
+          "decks":{
+            ".indexOn": "active" 
+          }
+        }
+      }
+    }
+}
