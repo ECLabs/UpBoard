@@ -34,19 +34,9 @@ body {
 .ub-footer-bg {
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 15vh;
     bottom: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.3), rgba(0,0,0,0));
-}
-
-.ub-footer-logo {
-    float: left;
-    background-image: url('../images/logo_ec_white2.png'); // default image if one is not specified in data
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: 100%;
-    width: 10%;
-    opacity: 0.7;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
 }
 
 .ub-footer-content {
@@ -55,13 +45,34 @@ body {
     height: 15%;
     padding: 1%;
     bottom: 0;
+    text-align: center;
+}
+
+.ub-footer-logo {
+    float: left;
+    background-image: url('../images/logo_ec_white2.png'); // default image if one is not specified in data
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 15%;
+    opacity: 0.7;
+}
+
+.ub-footer-caption {
+    float: left;
+    height: 100%;
+    width: 70%;
+    opacity: 1;
+    font-size:4vh;
+    margin: 0 auto;
+    padding-top: 1%;
 }
 
 .ub-footer-time-weather {
     float: right;
     text-align: right;
     height: 100%;
-    width: 90%;
+    width: 15%;
     padding-right:1%;
     opacity: 1;
 }
@@ -538,7 +549,7 @@ a {
     animation-name: expand-out;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
-    animation-duration: 0.4s;
+    animation-duration: 0.3s;
 }
 
 .bl-content .row {
