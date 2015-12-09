@@ -43,7 +43,8 @@ The data model has undergone significant changes to support authentication, mult
                         title: "Evans and Chambers",
                         updatedDate: 1444881600000 // timestamp in milliseconds
                     }
-                }
+                },
+                email: "ubadmin@evanschambers.com"
             }
         }
 
