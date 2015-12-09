@@ -20,23 +20,38 @@ After you've pulled the project down and installed the required tools above, in 
 All data for the slideshow is stored at https://boiling-heat-9947.firebaseio.com/.
 This can be changed in the config.js file located in app/scripts/angularfire.
 
+The data model has undergone significant changes to support authentication, multiple users, and multiple slide decks.  Note that Firebase does not natively support arrays and converts everything to objects. The current model is as follows:
+
+       users: {
+            $user_id: { // generated id created on registration
+                decks: { // array of slide decks
+                    0: {
+                        active: true, // boolean flag to indicate if this is the active slide deck
+                        createdDate: 1444881600000, // timestamp in milliseconds
+                        description: "slide deck for Evans and Chambers",
+                        logo: {
+                            url: "https://s3.amazonaws.com/upboard/logo.png",
+                            dimensions: { // optional, default behavior is to do background-size:contain
+                                height: "100px",
+                                width: "100px"
+                            }
+                        },
+                        slides: {
+                            // array of slide types described below
+                        },
+                        thumbnail: "https://s3.amazonaws.com/upboard/logo.png",
+                        title: "Evans and Chambers",
+                        updatedDate: 1444881600000 // timestamp in milliseconds
+                    }
+                },
+                email: "ubadmin@evanschambers.com"
+            }
+        }
+
 To add a slide make a new node with the number the slide will be (slides added directly to firebase can only be added at the end without deleting and re-writing the previous slides). If you wish to add a slide manually to firebase then be sure to follow the format of the slide type you wish. These are listed below.
 
 The logo will display in the optional footer that can be displayed on top of each slide.  The slides will be shown in the order in which they appear in the database and not by their number. However, the number is important and must match the order they appear in the database.
 
-    {
-        logo: {
-            url: "https://s3.amazonaws.com/upboard/logo.png",
-            dimensions: { // optional, default behavior is to do background-size:contain
-                height: "100px",
-                width: "100px"
-            }
-        },
-        slides: {
-            // array of slide types described below
-        }
-    }
-                
 A slide type must then be specified. The types are:
 * **logo**
 * **picture**

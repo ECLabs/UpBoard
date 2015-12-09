@@ -11,21 +11,32 @@
     angular.module('upBoardApp')
       .controller('MainCtrl', mainCtrl);
 
-    mainCtrl.$inject = ['$firebaseObject', 'Ref', '$timeout', '$log', 'utility'];
-    function mainCtrl($firebaseObject, Ref, $timeout, $log, utility) {
+    mainCtrl.$inject = ['$firebaseArray', 'Auth', 'Ref', '$timeout', '$log', '$location', 'utility'];
+    function mainCtrl($firebaseArray, Auth, Ref, $timeout, $log, $location, utility) {
         
         var vm = this;
         
         vm.currentIndex = 0;
         vm.loop = true;
+        vm.activeDeck;
         vm.currentSlide;
         vm.logo;
         
-        vm.data = $firebaseObject(Ref);
-        vm.data.$loaded().then(startSlideShow);
+        (function init(){
+            var auth = Auth.$getAuth();
+
+            // go to login page 
+            if(auth == null) $location.path('/login');
+
+            else{
+                // retrieve active slide deck 
+                vm.data = $firebaseArray(Ref.child('users/' + auth.uid + '/decks').orderByChild('active').equalTo(true));
+                vm.data.$loaded().then(startSlideShow);
+            }
+        })();
         
         function isEnd(){
-            return vm.currentIndex > vm.data.slides.length;
+            return vm.currentIndex > vm.activeDeck.slides.length;
         }
         
         function restart(){
@@ -35,19 +46,19 @@
         
         function nextSlide(){
 
-            $log.debug(vm.currentSlide);
+//            $log.debug(vm.currentSlide);
             
             var slideTime = utility.calculateSlideTime(vm.currentSlide);
             
             var delay = slideTime + vm.currentSlide.timing.transitionTime + 2000;
-            $log.debug('delay: ' + delay);
+//            $log.debug('delay: ' + delay);
             
             $timeout(function(){
 
                 // get ready to go to next slide
                 $timeout(function(){
                     
-                    vm.currentSlide = vm.data.slides[vm.currentIndex++];
+                    vm.currentSlide = vm.activeDeck.slides[vm.currentIndex++];
                     if(!isEnd()) nextSlide();
                     else if(vm.loop) restart();
                     
@@ -60,9 +71,15 @@
         }
         
         function startSlideShow(){
-            vm.logo = vm.data.logo;
-            vm.currentSlide = vm.data.slides[vm.currentIndex++];
-            if(!isEnd()) nextSlide();
+            if(vm.data != null && vm.data[0] != null){
+                
+                vm.activeDeck = vm.data[0];
+//                $log.debug(vm.activeDeck);
+                
+                vm.logo = vm.activeDeck.logo;
+                vm.currentSlide = vm.activeDeck.slides[vm.currentIndex++];
+                if(!isEnd()) nextSlide();
+            }
         }
     }
     
