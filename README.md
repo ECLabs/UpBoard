@@ -20,7 +20,7 @@ After you've pulled the project down and installed the required tools above, in 
 All data for the slideshow is stored at https://boiling-heat-9947.firebaseio.com/.
 This can be changed in the config.js file located in app/scripts/angularfire.
 
-The data model has undergone significant changes to support authentication, multiple users, and multiple slide decks:  Note that Firebase does not natively support arrays and converts everything to objects. The current model is as follows:
+The data model has undergone significant changes to support authentication, multiple users, and multiple slide decks.  Note that Firebase does not natively support arrays and converts everything to objects. The current model is as follows:
 
        users: {
             $user_id: { // generated id created on registration
