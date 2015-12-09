@@ -22,8 +22,21 @@ This can be changed in the config.js file located in app/scripts/angularfire.
 
 To add a slide make a new node with the number the slide will be (slides added directly to firebase can only be added at the end without deleting and re-writing the previous slides). If you wish to add a slide manually to firebase then be sure to follow the format of the slide type you wish. These are listed below.
 
-Slides will be shown in the order in which they appear in the database and not by their number. However, the number is important and must match the order they appear in the database.
+The logo will display in the optional footer that can be displayed on top of each slide.  The slides will be shown in the order in which they appear in the database and not by their number. However, the number is important and must match the order they appear in the database.
 
+    {
+        logo: {
+            url: "https://s3.amazonaws.com/upboard/logo.png",
+            dimensions: { // optional, default behavior is to do background-size:contain
+                height: "100px",
+                width: "100px"
+            }
+        },
+        slides: {
+            // array of slide types described below
+        }
+    }
+                
 A slide type must then be specified. The types are:
 * **logo**
 * **picture**
@@ -47,7 +60,8 @@ Transition types currently supported are *fade* and *slide*.
           timing: {
               slideTime:10000 , // Time spent on the slide
               transitionTime: 2000, // Total Transition fade time
-          }
+          },
+          showFooter: true // optional
     },
 
 #### picture slide data structure:
@@ -65,7 +79,8 @@ Transition types currently supported are *fade* and *slide*.
           content: {
             caption: "Test Innovation, Leadership, Expertise",
             imageUrl: "https://s3.amazonaws.com/upboard/buisinessImage.jpg"
-          }
+          },
+          showFooter: true // optional
     },
     
 #### liveVideoOverlay data structure:
@@ -84,7 +99,8 @@ Transition types currently supported are *fade* and *slide*.
         content: {
             overlay: 'Customer-driven software <br/> development for government <br/> and commercial enterprises.', // Note this section takes html, it may be necessary to include the <br/> tags to get the text spacing correct,
             overlayColor: '#FAFCFA'
-        }
+        },
+        showFooter: true // optional
     },
     
 #### staticVideoOverlay data structure:
@@ -104,7 +120,8 @@ Transition types currently supported are *fade* and *slide*.
             overlay: 'Customer-driven software <br/> development for government <br/> and commercial enterprises.', // Note this section takes html, it may be necessary to include the <br/> tags to get the text spacing correct,
             overlayColor: '#FAFCFA',
             videoUrl: 'http://www.w3schools.com/HTML/mov_bbb.mp4' // url to static video to play in the background
-        }
+        },
+        showFooter: true // optional
     },
     
 #### bioPanels data structure:
@@ -123,7 +140,8 @@ Transition types currently supported are *fade* and *slide*.
         },
         content: {
             content: array of arbitrary number of json objects, format shown below
-        }
+        },
+        showFooter: true // optional
     },
 
 
@@ -174,5 +192,6 @@ Transition types currently supported are *fade* and *slide*.
         content: {
             overlayColor: '#FAFCFA', // text color
             zip: '20001' // set zip code for weather, US only
-        }
+        },
+        showFooter: true
     }

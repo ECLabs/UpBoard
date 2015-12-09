@@ -3,17 +3,17 @@
 
     /**
      * @ngdoc directive
-     * @name upBoardApp.directive:liveVideoOverlay
+     * @name upBoardApp.directive:ubWeather
      * @description
-     * # liveVideoOverlay
+     * # weather
      */
     angular.module('upBoardApp')
-      .directive('liveVideoOverlay', liveVideoOverlay);
+      .directive('ubWeather', weather);
     
-    liveVideoOverlay.$inject = ['$log', 'utility'];
-    function liveVideoOverlay($log, utility) {
+    weather.$inject = ['$log', 'utility', 'openWeatherMap'];
+    function weather($log, utility, openWeatherMap) {
         return {
-          templateUrl: 'scripts/directives/livevideooverlay.tpl.html',
+          templateUrl: 'scripts/directives/ub-weather.tpl.html',
           restrict: 'E',
           replace: true,
           scope:{
@@ -31,7 +31,6 @@
                       $log.debug('about to show ' + scope.data.type);
 
                       var overlay = element.find('p')[0];
-                      var box = element.find('.box')[0];
                       var video = element.find('video')[0];
                       
                       //reset data first    
@@ -39,11 +38,12 @@
                       video.src = '';
                       
                       utility.activateWebCam(video);
-
-                      overlay.innerHTML = scope.data.content.overlay; 
                       
-                      box.style.color = scope.data.content.overlayColor;
-                      box.style.animationName = 'overlay';
+                      openWeatherMap.getWeather(scope.data.content.zip).success(function(data){
+                          overlay.innerHTML = "<div>" + data.name + "</div>" + 
+                                              data.main.temp + "º | " +
+                                              data.weather[0].description;
+                      });
                       
                       utility.setEntryTransition(element, scope.data);
 
@@ -58,4 +58,5 @@
           }
         };
     }
+
 })();

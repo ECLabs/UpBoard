@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: slideshow', function () {
+describe('Directive: ubBioPanels', function () {
 
   // load the directive's module
   beforeEach(module('upBoardApp'));
@@ -13,8 +13,8 @@ describe('Directive: slideshow', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<slideshow></slideshow>');
+    element = angular.element('<ub-bio-panels></ub-bio-panels>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the slideshow directive');
+    expect(element.text()).toBe('this is the ubBioPanels directive');
   }));
 });

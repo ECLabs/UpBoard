@@ -3,17 +3,17 @@
 
     /**
      * @ngdoc directive
-     * @name upBoardApp.directive:logo
+     * @name upBoardApp.directive:ubLogo
      * @description
      * # logo
      */
     angular.module('upBoardApp')
-      .directive('logo', logo);
+      .directive('ubLogo', logo);
     
     logo.$inject = ['$log', 'utility'];
     function logo($log, utility) {
         return {
-          templateUrl: 'scripts/directives/logo.tpl.html',
+          templateUrl: 'scripts/directives/ub-logo.tpl.html',
           restrict: 'E',
           replace: true,
           scope:{

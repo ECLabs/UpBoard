@@ -3,16 +3,16 @@
 
     /**
      * @ngdoc directive
-     * @name upBoardApp.directive:transition
+     * @name upBoardApp.directive:ubTransition
      * @description
      * # transition
      */
     angular.module('upBoardApp')
-      .directive('transition', transition);
+      .directive('ubTransition', transition);
     
     function transition() {
         return {
-          templateUrl: 'scripts/directives/transition.tpl.html',
+          templateUrl: 'scripts/directives/ub-transition.tpl.html',
           restrict: 'E',
           replace: true,
           scope:{

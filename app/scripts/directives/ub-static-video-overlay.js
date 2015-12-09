@@ -3,17 +3,17 @@
 
     /**
      * @ngdoc directive
-     * @name upBoardApp.directive:staticVideoOverlay
+     * @name upBoardApp.directive:ubStaticVideoOverlay
      * @description
      * # staticVideoOverlay
      */
     angular.module('upBoardApp')
-      .directive('staticVideoOverlay', staticVideoOverlay);
+      .directive('ubStaticVideoOverlay', staticVideoOverlay);
     
     staticVideoOverlay.$inject = ['$log', 'utility'];
     function staticVideoOverlay($log, utility) {
         return {
-          templateUrl: 'scripts/directives/staticvideooverlay.tpl.html',
+          templateUrl: 'scripts/directives/ub-static-video-overlay.tpl.html',
           restrict: 'E',
           replace: true,
           scope:{

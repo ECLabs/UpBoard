@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: weather', function () {
+describe('Directive: ubFooter', function () {
 
   // load the directive's module
   beforeEach(module('upBoardApp'));
@@ -13,8 +13,8 @@ describe('Directive: weather', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<weather></weather>');
+    element = angular.element('<ub-footer></ub-footer>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the weather directive');
+    expect(element.text()).toBe('this is the ubFooter directive');
   }));
 });

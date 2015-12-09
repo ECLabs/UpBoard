@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: liveVideoOverlay', function () {
+describe('Directive: ubTransition', function () {
 
   // load the directive's module
   beforeEach(module('upBoardApp'));
@@ -13,8 +13,8 @@ describe('Directive: liveVideoOverlay', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<live-video-overlay></live-video-overlay>');
+    element = angular.element('<ub-transition></ub-transition>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the liveVideoOverlay directive');
+    expect(element.text()).toBe('this is the ubTransition directive');
   }));
 });

@@ -18,10 +18,15 @@
         
             getWeather: function(zip){
 
-                var url = 'http://api.openweathermap.org/data/2.5/weather?zip=' + zip +                 
-                          ',us&units=imperial&APPID=8cbe87b8668498c44b0ade0ce19afd6b&callback=JSON_CALLBACK'
+                var promise = null;
+                
+                if(zip != null){
+                    var url = 'http://api.openweathermap.org/data/2.5/weather?zip=' + zip +                 
+                              ',us&units=imperial&APPID=8cbe87b8668498c44b0ade0ce19afd6b&callback=JSON_CALLBACK'
 
-                return $http.jsonp(url);
+                    promise = $http.jsonp(url);
+                }
+                return promise;
             }
         }
     }

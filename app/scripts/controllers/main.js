@@ -11,20 +11,21 @@
     angular.module('upBoardApp')
       .controller('MainCtrl', mainCtrl);
 
-    mainCtrl.$inject = ['$firebaseArray', 'Ref', '$timeout', '$log', 'utility'];
-    function mainCtrl($firebaseArray, Ref, $timeout, $log, utility) {
+    mainCtrl.$inject = ['$firebaseObject', 'Ref', '$timeout', '$log', 'utility'];
+    function mainCtrl($firebaseObject, Ref, $timeout, $log, utility) {
         
         var vm = this;
         
         vm.currentIndex = 0;
         vm.loop = true;
         vm.currentSlide;
+        vm.logo;
         
-        vm.slides = $firebaseArray(Ref);
-        vm.slides.$loaded().then(startSlideShow);
+        vm.data = $firebaseObject(Ref);
+        vm.data.$loaded().then(startSlideShow);
         
         function isEnd(){
-            return vm.currentIndex > vm.slides.length;
+            return vm.currentIndex > vm.data.slides.length;
         }
         
         function restart(){
@@ -38,19 +39,15 @@
             
             var slideTime = utility.calculateSlideTime(vm.currentSlide);
             
-            // TODO - remove this temporary time!!
-            //slideTime = 10000;
-            
             var delay = slideTime + vm.currentSlide.timing.transitionTime + 2000;
             $log.debug('delay: ' + delay);
             
             $timeout(function(){
 
-//                $log.debug('initiate hide');
-                
+                // get ready to go to next slide
                 $timeout(function(){
                     
-                    vm.currentSlide = vm.slides[vm.currentIndex++];
+                    vm.currentSlide = vm.data.slides[vm.currentIndex++];
                     if(!isEnd()) nextSlide();
                     else if(vm.loop) restart();
                     
@@ -63,8 +60,8 @@
         }
         
         function startSlideShow(){
-
-            vm.currentSlide = vm.slides[vm.currentIndex++];
+            vm.logo = vm.data.logo;
+            vm.currentSlide = vm.data.slides[vm.currentIndex++];
             if(!isEnd()) nextSlide();
         }
     }

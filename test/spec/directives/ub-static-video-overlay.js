@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: bioPanels', function () {
+describe('Directive: ubStaticVideoOverlay', function () {
 
   // load the directive's module
   beforeEach(module('upBoardApp'));
@@ -13,8 +13,8 @@ describe('Directive: bioPanels', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<bio-panels></bio-panels>');
+    element = angular.element('<ub-static-video-overlay></ub-static-video-overlay>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the bioPanels directive');
+    expect(element.text()).toBe('this is the ubStaticVideoOverlay directive');
   }));
 });

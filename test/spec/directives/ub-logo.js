@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: staticVideoOverlay', function () {
+describe('Directive: ubLogo', function () {
 
   // load the directive's module
   beforeEach(module('upBoardApp'));
@@ -13,8 +13,8 @@ describe('Directive: staticVideoOverlay', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<static-video-overlay></static-video-overlay>');
+    element = angular.element('<ub-logo></ub-logo>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the staticVideoOverlay directive');
+    expect(element.text()).toBe('this is the ubLogo directive');
   }));
 });

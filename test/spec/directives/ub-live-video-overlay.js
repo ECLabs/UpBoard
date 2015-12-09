@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: picture', function () {
+describe('Directive: ubLiveVideoOverlay', function () {
 
   // load the directive's module
   beforeEach(module('upBoardApp'));
@@ -13,8 +13,8 @@ describe('Directive: picture', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<picture></picture>');
+    element = angular.element('<ub-live-video-overlay></ub-live-video-overlay>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the picture directive');
+    expect(element.text()).toBe('this is the ubLiveVideoOverlay directive');
   }));
 });
