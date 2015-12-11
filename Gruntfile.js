@@ -18,7 +18,8 @@ module.exports = function (grunt) {
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
-    dist: 'dist'
+    dist: 'dist',
+    moduleName: require('./bower.json').moduleName
   };
 
   // Define the configuration for all the tasks
@@ -26,6 +27,7 @@ module.exports = function (grunt) {
 
     // Project settings
     yeoman: appConfig,
+    pkg: grunt.file.readJSON('package.json'),
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
@@ -379,8 +381,7 @@ module.exports = function (grunt) {
             '*.html',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'styles/fonts/{,*/}*.*',
-            'scripts/{,*/}*.html' // need angular html templates
+            'styles/fonts/{,*/}*.*'
           ]
         }, {
           expand: true,
@@ -423,9 +424,69 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+
+    // Compression settings
+    compress:{
+      zip: {
+        options: {
+          archive: 'tmp/<%= pkg.name%>.zip'
+        },
+        files: [
+          {expand: true, cwd: '<%= yeoman.dist%>', src: ['**/*']}
+        ]
+      },
+      tar: {
+        options: {
+          archive: 'tmp/<%= pkg.name%>.tar'
+        },
+        files: [
+          {expand: true, cwd: '<%= yeoman.dist%>', src: ['**/*']}
+        ]
+      },
+      tgz: {
+        options: {
+          archive: 'tmp/<%= pkg.name%>.tgz'
+        },
+        files: [
+          {expand: true, cwd: '<%= yeoman.dist%>', src: ['**/*']}
+        ]
+      }
+    },
+
+    // SFTP deployment settings
+    'sftp-deploy': {
+      build: {
+        auth: {
+          host: 'ec2-52-23-225-157.compute-1.amazonaws.com',
+          port: 22,
+          authKey: 'key1' // defined in .ftppass - reference grunt-sftp-deploy project for file format
+        },
+        cache: false,
+        src: 'tmp',
+        dest: '/tmp',
+        serverSep: '/',
+        concurrency: 4,
+        progress: true
+      }
+    },
+      
+      
+    ngtemplates: {
+      app: {
+        src:      ['app/scripts/directives/**/*.html', 'app/views/**/*.html'], 
+        dest:     '.tmp/scripts/templates.js', // single file for $templateCache
+        options: {
+            module: '<%= yeoman.moduleName %>',
+            prefix: '/'
+        }
+      }
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-compress');
+  grunt.loadNpmTasks('grunt-sftp-deploy');
+  grunt.loadNpmTasks('grunt-angular-templates');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -435,6 +496,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'wiredep',
+      'ngtemplates',
       'concurrent:server',
       'autoprefixer:server',
       'connect:livereload',
@@ -459,6 +521,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
+    'ngtemplates',  
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
@@ -477,5 +540,11 @@ module.exports = function (grunt) {
     'newer:jshint',
     'test',
     'build'
+  ]);
+
+  grunt.registerTask('deploy', [
+    'build',
+    'compress:tgz',
+    'sftp-deploy'
   ]);
 };

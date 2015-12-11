@@ -12,7 +12,7 @@
     
     function transition() {
         return {
-          templateUrl: 'scripts/directives/ub-transition.tpl.html',
+          templateUrl: '/app/scripts/directives/ub-transition.tpl.html',
           restrict: 'E',
           replace: true,
           scope:{

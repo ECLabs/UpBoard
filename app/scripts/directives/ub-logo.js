@@ -13,7 +13,7 @@
     logo.$inject = ['$log', 'utility'];
     function logo($log, utility) {
         return {
-          templateUrl: 'scripts/directives/ub-logo.tpl.html',
+          templateUrl: '/app/scripts/directives/ub-logo.tpl.html',
           restrict: 'E',
           replace: true,
           scope:{

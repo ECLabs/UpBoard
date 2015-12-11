@@ -58,20 +58,20 @@ angular.module('upBoardApp')
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
+        templateUrl: '/app/views/main.html',
         controller: 'MainCtrl as main'
       })
 
       .when('/chat', {
-        templateUrl: 'views/chat.html',
+        templateUrl: '/app/views/chat.html',
         controller: 'ChatCtrl'
       })
       .when('/login', {
-        templateUrl: 'views/login.html',
+        templateUrl: '/app/views/login.html',
         controller: 'LoginCtrl'
       })
       .whenAuthenticated('/account', {
-        templateUrl: 'views/account.html',
+        templateUrl: '/app/views/account.html',
         controller: 'AccountCtrl'
       })
       .otherwise({redirectTo: '/'});

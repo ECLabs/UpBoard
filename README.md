@@ -1,6 +1,8 @@
 # UpBoard
 Digital Signage for Corporations
 
+[Demo available on AWS](http://upboardlb-2027375028.us-east-1.elb.amazonaws.com/upboard)
+
 #### Getting Started:
 
 Requires **npm**, **grunt**, **bower**, and **compass**
