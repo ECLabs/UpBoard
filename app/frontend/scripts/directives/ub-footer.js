@@ -14,7 +14,7 @@
     ubFooter.$inject = ['$log', '$interval', 'mapsGoogleApis', 'openWeatherMap'];
     function ubFooter($log, $interval, mapsGoogleApis, openWeatherMap) {
         return {
-          templateUrl: '/app/scripts/directives/ub-footer.tpl.html',
+          templateUrl: '/app/frontend/scripts/directives/ub-footer.tpl.html',
           restrict: 'E',
           replace: true,
           scope: {

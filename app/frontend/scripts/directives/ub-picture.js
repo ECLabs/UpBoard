@@ -13,7 +13,7 @@
     picture.$inject = ['$log', 'utility'];
     function picture($log, utility) {
         return {
-          templateUrl: '/app/scripts/directives/ub-picture.tpl.html',
+          templateUrl: '/app/frontend/scripts/directives/ub-picture.tpl.html',
           restrict: 'E',
           replace: true,
           scope:{

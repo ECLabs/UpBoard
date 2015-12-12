@@ -3,21 +3,21 @@
 
     /**
      * @ngdoc directive
-     * @name upBoardApp.directive:ubLiveVideoOverlay
+     * @name upBoardApp.directive:ubLogo
      * @description
-     * # liveVideoOverlay
+     * # logo
      */
     angular.module('upBoardApp')
-      .directive('ubLiveVideoOverlay', liveVideoOverlay);
+      .directive('ubLogo', logo);
     
-    liveVideoOverlay.$inject = ['$log', 'utility'];
-    function liveVideoOverlay($log, utility) {
+    logo.$inject = ['$log', 'utility'];
+    function logo($log, utility) {
         return {
-          templateUrl: '/app/scripts/directives/ub-live-video-overlay.tpl.html',
+          templateUrl: '/app/frontend/scripts/directives/ub-logo.tpl.html',
           restrict: 'E',
           replace: true,
           scope:{
-              data: '='
+              data: "="
           },
           link: function(scope, element, attrs){
 
@@ -29,24 +29,7 @@
 
                   if(isShown){
                       $log.debug('about to show ' + scope.data.type);
-
-                      var overlay = element.find('p')[0];
-                      var box = element.find('.box')[0];
-                      var video = element.find('video')[0];
-                      
-                      //reset data first    
-                      overlay.innerHTML = '';
-                      video.src = '';
-                      
-                      utility.activateWebCam(video);
-
-                      overlay.innerHTML = scope.data.content.overlay; 
-                      
-                      box.style.color = scope.data.content.overlayColor;
-                      box.style.animationName = 'overlay';
-                      
                       utility.setEntryTransition(element, scope.data);
-
                       savedData = scope.data;
                   }
                   else if(savedData != null){

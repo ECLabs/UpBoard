@@ -1,0 +1,97 @@
+{
+	"development": {
+
+		"host": "localhost",
+
+		"port": 8080,
+
+		"cookieSecret": "cookieSecret",
+
+		"sessionSecret": "sessionSecret",
+
+		"database": {
+
+			"name": "test",
+
+			"host": "localhost",
+
+			"port": 27017,
+
+			"user": "",
+
+			"password": ""
+		}
+	},
+
+
+	"production": {
+
+		"host": "localhost",
+
+		"port": 8080,
+
+		"cookieSecret": "cookieSecret",
+
+		"sessionSecret": "sessionSecret",
+
+		"database": {
+
+			"name": "test",
+
+			"host": "localhost",
+
+			"port": 27017,
+
+			"user": "",
+
+			"password": ""
+		}
+	},
+
+	
+	"oauth": {
+
+		"facebook": {
+
+			"clientID": "",
+
+			"clientSecret": ""
+
+		},
+
+		"google": {
+
+			"consumerKey": "",
+
+			"consumerSecret": ""
+
+		},
+
+		"github": {
+
+			"clientID": "",
+
+			"clientSecret": ""
+
+		},
+
+		"twitter": {
+
+			"consumerKey": "",
+
+			"consumerSecret": ""
+
+		},
+
+		"linkedin": {
+
+			"consumerKey": "",
+
+			"consumerSecret": ""
+			
+		}
+
+	}
+
+
+}

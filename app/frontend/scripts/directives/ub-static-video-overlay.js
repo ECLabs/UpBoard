@@ -3,17 +3,17 @@
 
     /**
      * @ngdoc directive
-     * @name upBoardApp.directive:ubWeather
+     * @name upBoardApp.directive:ubStaticVideoOverlay
      * @description
-     * # weather
+     * # staticVideoOverlay
      */
     angular.module('upBoardApp')
-      .directive('ubWeather', weather);
+      .directive('ubStaticVideoOverlay', staticVideoOverlay);
     
-    weather.$inject = ['$log', 'utility', 'openWeatherMap'];
-    function weather($log, utility, openWeatherMap) {
+    staticVideoOverlay.$inject = ['$log', 'utility'];
+    function staticVideoOverlay($log, utility) {
         return {
-          templateUrl: '/app/scripts/directives/ub-weather.tpl.html',
+          templateUrl: '/app/frontend/scripts/directives/ub-static-video-overlay.tpl.html',
           restrict: 'E',
           replace: true,
           scope:{
@@ -31,19 +31,23 @@
                       $log.debug('about to show ' + scope.data.type);
 
                       var overlay = element.find('p')[0];
-                      var video = element.find('video')[0];
+                      var box = element.find('.box')[0];
+                      var video = element.find('video')[0];  
                       
                       //reset data first    
                       overlay.innerHTML = '';
+                      box.style.color = '';
+                      box.style.animationName = '';
                       video.src = '';
                       
-                      utility.activateWebCam(video);
+                      // set video data
+                      overlay.innerHTML = scope.data.content.overlay; 
                       
-                      openWeatherMap.getWeather(scope.data.content.zip).success(function(data){
-                          overlay.innerHTML = "<div>" + data.name + "</div>" + 
-                                              data.main.temp + "º | " +
-                                              data.weather[0].description;
-                      });
+                      box.style.color = scope.data.content.overlayColor;
+                      box.style.animationName = 'overlay';
+                      
+                      video.src = scope.data.content.videoUrl;
+                      video.play();
                       
                       utility.setEntryTransition(element, scope.data);
 
@@ -57,6 +61,5 @@
               });
           }
         };
-    }
-
+      }   
 })();
