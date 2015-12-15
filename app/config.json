@@ -11,15 +11,15 @@
 
 		"database": {
 
-			"name": "test",
+			"name": "dev",
 
-			"host": "localhost",
+			"host": "https://boiling-heat-9947.firebaseio.com",
 
-			"port": 27017,
+			"port": 443,
 
-			"user": "",
+			"user": "jamil.evans@evanschambers.com",
 
-			"password": ""
+			"password": "UpBoard123"
 		}
 	},
 

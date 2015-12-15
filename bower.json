@@ -21,6 +21,6 @@
     "mockfirebase": "0.11.0",
     "angular-mocks": "^1.4.0"
   },
-  "appPath": "app",
+  "appPath": "app/frontend",
   "moduleName": "upBoardApp"
 }

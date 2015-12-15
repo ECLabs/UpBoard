@@ -3,21 +3,21 @@
 
     /**
      * @ngdoc directive
-     * @name upBoardApp.directive:ubPicture
+     * @name upBoardApp.directive:ubSms
      * @description
-     * # picture
+     * # logo
      */
     angular.module('upBoardApp')
-      .directive('ubPicture', picture);
+      .directive('ubSms', logo);
     
-    picture.$inject = ['$log', 'utility'];
-    function picture($log, utility) {
+    logo.$inject = ['$log', 'utility'];
+    function logo($log, utility) {
         return {
-          templateUrl: '/app/frontend/scripts/directives/ub-picture.tpl.html',
+          templateUrl: '/app/frontend/scripts/directives/ub-sms.tpl.html',
           restrict: 'E',
           replace: true,
           scope:{
-              data: '='
+              data: "="
           },
           link: function(scope, element, attrs){
 
@@ -26,26 +26,16 @@
               scope.$watch(attrs.ngShow, function(){
 
                   var isShown = scope.$eval(attrs.ngShow);
-
+                  
                   if(isShown){
                       $log.debug('about to show ' + scope.data.type);
-                      
+                    
                       //reset data first    
                       element.find('p')[0].innerHTML = '';
-                      element.find('img')[0].src = '';
-                      
-                      // need to set this way instead of using angular two way data bind
-                      // data was switching out before the animation was finished
-                      if(!scope.data.showFooter) {
-                          
-                          // show caption in page if the footer isn't displayed since it has 
-                          // its own place for caption text
-                          element.find('p')[0].innerHTML = scope.data.content.caption;
-                      }
-                      element.find('img')[0].src = scope.data.content.imageUrl; // set image
+                    
+                      element.find('p')[0].innerHTML = scope.data.content.message;
                       
                       utility.setEntryTransition(element, scope.data);
-
                       savedData = scope.data;
                   }
                   else if(savedData != null){
