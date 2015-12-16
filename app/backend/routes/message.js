@@ -12,8 +12,8 @@ var TWILIO_MSGSRVC_SID = 'MGbb4b73977ca0fdb73137280fdf6c716d' ;
 
 /* POST message sent from Twilio */
 router.post('/', function(req, res, next){
-  console.log('message received: ' + req.query.message);
-  console.log('message body: ' + req.body);
+//  console.log('message received: ' + req.query.message);
+//  console.log('message body: ' + req.body);
   
   // authenticate with firebase token
   ref.authWithCustomToken(FB_AUTH_TOKEN, function(error, authData) {
@@ -24,7 +24,7 @@ router.post('/', function(req, res, next){
 //      console.log("Authenticated successfully with payload:", authData);
 
       var acctSid = req.body.AccountSid;
-      var msgSrvcSid = req.body.MessageServiceSid;
+      var msgSrvcSid = req.body.MessagingServiceSid;
       
       // validate twilio account and message service
       if(acctSid == null || msgSrvcSid == null) {
@@ -39,7 +39,7 @@ router.post('/', function(req, res, next){
       console.log('*** user passed account validation, continue');
       
       ref.child('users').once("value", function(snapshot){
-        console.log(snapshot.val());
+//        console.log(snapshot.val());
         
         var validUserAuthId; // store validated user id here, need for set
         
@@ -53,7 +53,6 @@ router.post('/', function(req, res, next){
           
           var user = users[userAuthIds[i]];
           
-          console.log(req.body.From)
           if(user.phone != null && user.phone == req.body.From) {
             console.log('user phone number: ' + user.phone + ' found');
             validUserAuthId = userAuthIds[i];
@@ -78,9 +77,9 @@ router.post('/', function(req, res, next){
         // validate user has an active deck with an sms slide
         ref.child('users/' + validUserAuthId + '/decks').orderByChild('active').equalTo(true).limitToFirst(1).once("value", function(snapshot){
 
-          console.log(snapshot.key());
-          console.log(snapshot.val());
-          console.log(snapshot.val().length);
+//          console.log(snapshot.key());
+//          console.log(snapshot.val());
+//          console.log(snapshot.val().length);
           
           var activeDecks = snapshot.val();
           if(activeDecks == null || activeDecks.length == 0){
@@ -88,7 +87,7 @@ router.post('/', function(req, res, next){
             return;
           }
 
-          console.log('*** user passed active slide deck exists validation, contine');
+          console.log('*** user passed active slide deck exists validation, continue');
           
           // retrieve id in decks array, should only be one
           var activeDeckId;
@@ -114,10 +113,10 @@ router.post('/', function(req, res, next){
             return;
           }
           
-          console.log('*** user passed sms slide exists validation, contine');
+          console.log('*** user passed sms slide exists validation, continue');
           
           
-          console.log('*** update sms slide message');
+          console.log('*** update sms slide message: ' + req.body.Body);
           ref.child('users/' + validUserAuthId + '/decks/' + activeDeckId + '/slides/' + smsSlideId + '/content/message').set(req.body.Body);
         });
       });
