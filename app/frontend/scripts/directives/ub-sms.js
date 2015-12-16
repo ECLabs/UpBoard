@@ -10,8 +10,8 @@
     angular.module('upBoardApp')
       .directive('ubSms', logo);
     
-    logo.$inject = ['$log', 'utility'];
-    function logo($log, utility) {
+    logo.$inject = ['$log', '$filter', 'utility'];
+    function logo($log, $filter, utility) {
         return {
           templateUrl: '/app/frontend/scripts/directives/ub-sms.tpl.html',
           restrict: 'E',
@@ -31,9 +31,13 @@
                       $log.debug('about to show ' + scope.data.type);
                     
                       //reset data first    
-                      element.find('p')[0].innerHTML = '';
+                      element.find('#smsFrom')[0].innerHTML = '';
+                      element.find('#smsMessage')[0].innerHTML = '';
+                      element.find('#smsTimestamp')[0].innerHTML = '';
                     
-                      element.find('p')[0].innerHTML = scope.data.content.message;
+                      element.find('#smsFrom')[0].innerHTML = scope.data.content.from;
+                      element.find('#smsMessage')[0].innerHTML = scope.data.content.message;
+                      element.find('#smsTimestamp')[0].innerHTML = $filter('date')(new Date(scope.data.content.timestamp), 'medium');
                       
                       utility.setEntryTransition(element, scope.data);
                       savedData = scope.data;

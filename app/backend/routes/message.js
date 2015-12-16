@@ -7,8 +7,6 @@ var router = express.Router();
 
 var ref = new Firebase('https://boiling-heat-9947.firebaseio.com');
 var FB_AUTH_TOKEN = 'BBwlPFTEMISGXNTvQz5nheil1SC3PgyPqIWxEvIV';
-var TWILIO_ACCT_SID = 'ACb9118122c1cbe97d5c0d3c412990f192'; // TODO switch to jamil's account
-var TWILIO_MSGSRVC_SID = 'MGbb4b73977ca0fdb73137280fdf6c716d' ;
 
 /* POST message sent from Twilio */
 router.post('/', function(req, res, next){
@@ -23,49 +21,37 @@ router.post('/', function(req, res, next){
     else {
 //      console.log("Authenticated successfully with payload:", authData);
 
-      var acctSid = req.body.AccountSid;
-      var msgSrvcSid = req.body.MessagingServiceSid;
-      
-      // validate twilio account and message service
-      if(acctSid == null || msgSrvcSid == null) {
-        console.error('account sid: ' + acctSid + ' or message service sid: ' + msgSrvcSid + ' missing');
-        return;
-      }
-      else if(acctSid !== TWILIO_ACCT_SID || msgSrvcSid !== TWILIO_MSGSRVC_SID){
-        console.error('wrong twilio account id: ' + acctSid + ' or message service sid: ' + msgSrvcSid);
-        return;
-      }
-      
-      console.log('*** user passed account validation, continue');
-      
       ref.child('users').once("value", function(snapshot){
 //        console.log(snapshot.val());
         
         var validUserAuthId; // store validated user id here, need for set
         
-        // loop through users to
+        // loop through users
         var users = snapshot.val();
         var userAuthIds = Object.keys(users);
         
-        // validate from phone number
+        // validate To phone number
+        // TODO twilio number can be associated with multiple users
+        
+//        console.log(req.body.To);
         var phoneNumberFound = false;
         for(var i = 0; i < userAuthIds.length; i++){
           
           var user = users[userAuthIds[i]];
           
-          if(user.phone != null && user.phone == req.body.From) {
-            console.log('user phone number: ' + user.phone + ' found');
+          if(user.twilioPhoneNumber != null && user.twilioPhoneNumber == req.body.To) {
+            console.log('user twilio phone number: ' + user.twilioPhoneNumber + ' found');
             validUserAuthId = userAuthIds[i];
             phoneNumberFound = true;
             break;
           }
         }
         if(!phoneNumberFound) {
-          console.error('sending phone number: ' + req.body.From + ' not associated with any user');
+          console.error('twilio phone number: ' + req.body.To + ' not associated with any user');
           return;
         }
         
-        console.log('*** user passed phone number validation, continue');
+        console.log('*** user passed twilio phone number validation, continue');
         
         if(req.body.Body == null){
           console.error('no message in the body');
@@ -115,15 +101,15 @@ router.post('/', function(req, res, next){
           
           console.log('*** user passed sms slide exists validation, continue');
           
+          console.log('--> update sms slide message: ' + req.body.From + ', ' + req.body.Body + ', ' + new Date().getTime());
+          ref.child('users/' + validUserAuthId + '/decks/' + activeDeckId + '/slides/' + smsSlideId + '/content').set({from:req.body.From, message:req.body.Body, timestamp:new Date().getTime()});
           
-          console.log('*** update sms slide message: ' + req.body.Body);
-          ref.child('users/' + validUserAuthId + '/decks/' + activeDeckId + '/slides/' + smsSlideId + '/content/message').set(req.body.Body);
         });
       });
     }
   });
-  
-  res.send('message received')
+
+  res.send('message received');
 });
 
 module.exports = router;
