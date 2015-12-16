@@ -84,6 +84,7 @@ router.post('/', function(req, res, next){
           var activeDeck = activeDecks[activeDeckId];
           
           // find first sms slide - modify later to send to different sms slides?
+          var smsSlide;
           var smsSlideId;
           for(var i = 0; i < activeDeck.slides.length; i++){
             var slide = activeDeck.slides[i];
