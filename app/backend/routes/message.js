@@ -83,7 +83,7 @@ router.post('/', function(req, res, next){
           
           var activeDeck = activeDecks[activeDeckId];
           
-          // find first sms slide - modify later to send to different sms slides?
+          // find first sms slide - TODO modify later to send to different sms slides?
           var smsSlide;
           var smsSlideId;
           for(var i = 0; i < activeDeck.slides.length; i++){
@@ -103,7 +103,12 @@ router.post('/', function(req, res, next){
           console.log('*** user passed sms slide exists validation, continue');
           
           console.log('--> update sms slide message: ' + req.body.From + ', ' + req.body.Body + ', ' + new Date().getTime());
-          ref.child('users/' + validUserAuthId + '/decks/' + activeDeckId + '/slides/' + smsSlideId + '/content').set({from:req.body.From, message:req.body.Body, timestamp:new Date().getTime()});
+          
+          // have to set values individually, doing in one shot overwrites all of content
+          var contentPath = 'users/' + validUserAuthId + '/decks/' + activeDeckId + '/slides/' + smsSlideId + '/content';
+          ref.child(contentPath + '/from').set(req.body.From);
+          ref.child(contentPath + '/message').set(req.body.Body);
+          ref.child(contentPath + '/timestamp').set(new Date().getTime());
           
         });
       });
