@@ -10,8 +10,8 @@
     angular.module('upBoardApp')
       .directive('ubSms', logo);
     
-    logo.$inject = ['Auth', 'Ref', '$firebaseObject', '$log', '$filter', 'utility', 'toaster'];
-    function logo(Auth, Ref, $firebaseObject, $log, $filter, utility, toaster) {
+    logo.$inject = ['Auth', 'Ref', '$firebaseObject', '$log', '$filter', '$timeout', 'utility', 'toaster'];
+    function logo(Auth, Ref, $firebaseObject, $log, $filter, $timeout, utility, toaster) {
         return {
           templateUrl: '/app/frontend/scripts/directives/ub-sms.tpl.html',
           restrict: 'E',
@@ -22,6 +22,7 @@
           link: function(scope, element, attrs){
 
             var savedData = null; // use to remember for exit transition
+            scope.startupTime = new Date().getTime();
             
             scope.messages = [];
 
@@ -33,9 +34,9 @@
                 $log.debug('about to show ' + scope.data.type);
 
                 //reset data first
-                element.find('#defaultMessage')[0].innerHTML = '';
+                element.find('#smsDefaultMessage')[0].innerHTML = '';
 
-                element.find('#defaultMessage')[0].innerHTML = scope.data.content.default;
+                element.find('#smsDefaultMessage')[0].innerHTML = scope.data.content.default;
                 
                 // if last message is expired, clear out messages
                 var now = new Date().getTime();
@@ -73,12 +74,17 @@
                 
                 // get the latest message content
                 var contentPath = 'users/' + Auth.$getAuth().uid + '/decks/' + scope.activeDeckId + 
-                                    '/slides/' + scope.slideId + '/content';
+                                  '/slides/' + scope.slideId + '/content';
                 
                 var content = $firebaseObject(Ref.child(contentPath));
                 content.$loaded().then(function(){
                   $log.debug(content);
                   scope.messages.push({body:content.message,timestamp:content.timestamp});  
+                  $log.debug($('#smsDisplay'));
+                  $timeout(function(){
+                    // keep scrolling down if messages overflow
+                    $('#smsDisplay')[0].scrollTop = $('#smsDisplay')[0].scrollHeight;
+                  }, 1000);
                 });
               }
             });
