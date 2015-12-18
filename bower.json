@@ -15,7 +15,8 @@
     "angular-sanitize": "^1.4.0",
     "angular-touch": "^1.4.0",
     "jquery-ui": "~1.11.4",
-    "angular-scroll": "~1.0.0"
+    "angular-scroll": "~1.0.0",
+    "AngularJS-Toaster": "angularjs-toaster#~0.4.181"
   },
   "devDependencies": {
     "mockfirebase": "0.11.0",

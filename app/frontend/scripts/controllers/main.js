@@ -11,8 +11,8 @@
     angular.module('upBoardApp')
       .controller('MainCtrl', mainCtrl);
 
-    mainCtrl.$inject = ['$firebaseArray', 'Auth', 'Ref', '$timeout', '$log', '$location', 'utility'];
-    function mainCtrl($firebaseArray, Auth, Ref, $timeout, $log, $location, utility) {
+    mainCtrl.$inject = ['$firebaseArray', '$firebaseObject', 'Auth', 'Ref', '$timeout', '$log', '$scope', '$location', 'utility'];
+    function mainCtrl($firebaseArray, $firebaseObject, Auth, Ref, $timeout, $log, $scope, $location, utility) {
         
         var vm = this;
         
@@ -36,7 +36,7 @@
         })();
         
         function isEnd(){
-            return vm.currentIndex > vm.activeDeck.slides.length;
+            return vm.currentIndex >= vm.activeDeck.slides.length;
         }
         
         function restart(){
@@ -58,7 +58,7 @@
                 // get ready to go to next slide
                 $timeout(function(){
                     
-                    vm.currentSlide = vm.activeDeck.slides[vm.currentIndex++];
+                    setCurrentSlide(vm);
                     if(!isEnd()) nextSlide();
                     else if(vm.loop) restart();
                     
@@ -69,16 +69,23 @@
                 
             }, slideTime);
         }
+      
+        function setCurrentSlide(vm){
+          
+            // pass active deck id and slide id for firebase ref binding
+            vm.currentSlide = vm.activeDeck.slides[vm.currentIndex];
+            vm.currentSlide.activeDeckId = vm.activeDeck.$id;
+            vm.currentSlide.slideId = vm.currentIndex++;
+        }
         
         function startSlideShow(){
             if(vm.data != null && vm.data[0] != null){
                 
-                vm.activeDeck = vm.data[0];
-//                $log.debug(vm.activeDeck);
-                
-                vm.logo = vm.activeDeck.logo;
-                vm.currentSlide = vm.activeDeck.slides[vm.currentIndex++];
-                if(!isEnd()) nextSlide();
+              vm.activeDeck = vm.data[0];
+              vm.logo = vm.activeDeck.logo;
+              
+              setCurrentSlide(vm);
+              if(!isEnd()) nextSlide();
             }
         }
     }

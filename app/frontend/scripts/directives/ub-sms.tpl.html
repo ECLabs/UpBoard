@@ -1,9 +1,8 @@
-<div ng-show="data.type === 'sms'">
-  <div class="movingBackground" style="position:absolute;"></div>
+<div ng-show="data.type === 'sms'" timestamp="{{timestamp.$value}}">
   <div style="position:relative;">
     <div style="width:100vw;height:100vh;border-radius:20px;background:black;padding-top:12vh;border:3px solid black;">
-      <div class="movingBackground" style="width:90vw;height:70vh;border-radius:10px;border:1px solid black;margin:0 auto;padding:2vh;">
-        <div style="background:rgba(255,90,0,0.25);border-radius:20px;padding:0 2vw;border:1px solid #999999;display:inline-block;">
+      <div style="width:90vw;height:70vh;background:white;border-radius:10px;border:1px solid black;margin:0 auto;padding:2vh;">
+        <div style="background:rgba(173,216,230,0.5);border-radius:20px;padding:0 2vw;border:1px solid #999999;display:inline-block;">
           <span id="smsMessage" style="font-size:5vmin"></span><br/>
           <span id="smsTimestamp" style="float:right;font-size:4vmin;"></span>
         </div>

@@ -20,5 +20,6 @@ angular.module('upBoardApp', [
     'firebase',
     'firebase.ref',
     'firebase.auth',
-    'duScroll'
+    'duScroll',
+    'toaster'
   ]);
