@@ -49,7 +49,7 @@
                 var timestampPath = 'users/' + Auth.$getAuth().uid + '/decks/' + scope.data.activeDeckId + 
                                     '/slides/' + scope.data.slideId + '/content/timestamp';
                 
-                scope.timestamp = $firebaseObject(Ref.child(timestampPath));
+                $firebaseObject(Ref.child(timestampPath)).$bindTo(scope, 'timestamp');
                 
                 // save active deck id and slide id for future bindings
                 scope.activeDeckId = scope.data.activeDeckId;
@@ -73,24 +73,26 @@
             // watch for new message
             scope.$watch(function(){return attrs.timestamp;}, function(){
               
-              if((Number(attrs.timestamp) + 1000) > new Date().getTime()){
-                $log.debug('message received!');
-                toaster.pop('success', '', 'Message received!');
-                
-                // get the latest message content
-                var contentPath = 'users/' + Auth.$getAuth().uid + '/decks/' + scope.activeDeckId + 
-                                  '/slides/' + scope.slideId + '/content';
-                
-                var content = $firebaseObject(Ref.child(contentPath));
-                content.$loaded().then(function(){
-                  scope.messages.push({body:content.message,timestamp:content.timestamp});  
-                  
-                  // keep scrolling down if messages overflow
-                  $timeout(function(){
-                    angular.element('#smsDisplay').duScrollToElement(angular.element('#smsDisplayEnd'), 0, 500);
-                  }, 500);
-                });
-              }
+              utility.getServerTime().success(function(serverTime){
+                if((Number(attrs.timestamp) + 1000) > serverTime.now){
+                  $log.debug('message received!');
+                  toaster.pop('success', '', 'Message received!');
+
+                  // get the latest message content
+                  var contentPath = 'users/' + Auth.$getAuth().uid + '/decks/' + scope.activeDeckId + 
+                                    '/slides/' + scope.slideId + '/content';
+
+                  var content = $firebaseObject(Ref.child(contentPath));
+                  content.$loaded().then(function(){
+                    scope.messages.push({body:content.message,timestamp:content.timestamp});  
+
+                    // keep scrolling down if messages overflow
+                    $timeout(function(){
+                      angular.element('#smsDisplay').duScrollToElement(angular.element('#smsDisplayEnd'), 0, 500);
+                    }, 500);
+                  });
+                }
+              });
             });
           }
         };

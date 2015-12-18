@@ -10,4 +10,9 @@ router.get('/', function(req, res, next) {
   res.sendFile('index.html', options);
 });
 
+router.get('/time', function(req, res, next){
+  res.header("Content-Type", "application/json");
+  res.send({now:new Date().getTime()});
+})
+
 module.exports = router;

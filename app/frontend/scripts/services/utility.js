@@ -10,7 +10,10 @@
      * Factory in the upBoardApp.
      */
     angular.module('upBoardApp')
-      .factory('utility', function () {
+      .factory('utility', utility);
+  
+    utility.$inject = ['$http', '$log'];
+    function utility($http, $log) {
 
         return {
           activateWebCam: function(video){
@@ -59,6 +62,10 @@
               }
               return '';
           },
+          
+          getServerTime: function(){
+            return $http.get('/time');
+          },
             
           setEntryTransition: function (element, data) {
               
@@ -87,5 +94,5 @@
               return camelCasedString;
           }
         };
-      });
+      }
 })();
