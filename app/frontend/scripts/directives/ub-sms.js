@@ -54,6 +54,11 @@
                 // save active deck id and slide id for future bindings
                 scope.activeDeckId = scope.data.activeDeckId;
                 scope.slideId = scope.data.slideId;
+
+                // keep scrolling down if messages overflow
+                $timeout(function(){
+                    angular.element('#smsDisplay').duScrollToElement(angular.element('#smsDisplayEnd'), 0, 500);
+                  }, 500);
                 
                 utility.setEntryTransition(element, scope.data);
                 savedData = scope.data;
@@ -78,13 +83,12 @@
                 
                 var content = $firebaseObject(Ref.child(contentPath));
                 content.$loaded().then(function(){
-                  $log.debug(content);
                   scope.messages.push({body:content.message,timestamp:content.timestamp});  
-                  $log.debug($('#smsDisplay'));
+                  
+                  // keep scrolling down if messages overflow
                   $timeout(function(){
-                    // keep scrolling down if messages overflow
-                    $('#smsDisplay')[0].scrollTop = $('#smsDisplay')[0].scrollHeight;
-                  }, 1000);
+                    angular.element('#smsDisplay').duScrollToElement(angular.element('#smsDisplayEnd'), 0, 500);
+                  }, 500);
                 });
               }
             });
