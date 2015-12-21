@@ -1,17 +1,17 @@
 <div ng-show="data.type === 'sms'" timestamp="{{timestamp.$value}}">
-  <div style="width:100vw;height:100vh;border-radius:20px;background:black;padding-top:12vh;border:3px solid black;">
-    <div id="smsDisplay" style="width:90vw;height:70vh;background:white;border-radius:10px;border:1px solid black;margin:0 auto;padding:2vh;overflow-y:scroll;">
-      <div style="background:rgba(173,216,230,0.5);border-radius:20px;padding:0 2vw;border:1px solid #999999;display:inline-block;">
-        <span id="smsDefaultMessage" style="font-size:5vmin"></span><br/>
-        <span style="float:right;font-size:4vmin;">{{startupTime | date:'shortTime'}}</span>
+  <div class="ub-sms">
+    <div id="smsDisplay" class="ub-sms-display">
+      <div class="ub-sms-default-msg">
+        <span id="smsDefaultMessage" class="ub-sms-body"></span><br/>
+        <span class="ub-sms-timestamp">{{startupTime | date:'shortTime'}}</span>
       </div>
       <div>
         <div style="float:right;text-align:right;">
-          <div ng-repeat="message in messages" style="background:rgba(232, 232, 110, 0.5);border-radius:20px;padding:0 2vw;margin-top:1vh;margin-left:auto;margin-right:0;border:1px solid #999999;display:table;">
-            <span style="font-size:5vmin">{{message.body}}</span><br/>
-            <span style="float:right;font-size:4vmin;">{{message.timestamp | date:'shortTime'}}</span>
+          <div ng-repeat="message in messages" class="ub-sms-message">
+            <span class="ub-sms-body">{{message.body}}</span><br/>
+            <span class="ub-sms-timestamp">{{message.timestamp | date:'shortTime'}}</span>
           </div>
-          <a id="smsDisplayEnd"></a>
+          <a id="smsDisplayEnd"><!-- used for scroll --></a>
         </div>
       </div>
     </div>

@@ -77,15 +77,7 @@ body {
     opacity: 1;
 }
 
-.noAnimate{
-    -webkit-animation: none !important;
-    -moz-animation: none !important;
-    -o-animation: none !important;
-    -ms-animation: none !important;
-    animation: none !important;
-}
 /* logo */
-
 
 @keyframes animatedBackground {
 	0% { background-position: 0 0; }
@@ -400,7 +392,7 @@ video {
 }
 
 
-/* Fourpanel */
+/* bioPanels */
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 
 @font-face {
@@ -634,6 +626,86 @@ a {
   font-size: 2.2rem;
 }
 
+
+/*** sms ***/
+.ub-sms {
+  width:100vw;
+  height:100vh;
+  border-radius:20px;
+  background:black;
+  padding-top:12vh;
+  border:3px solid black;
+}
+
+.ub-sms-display {
+  width:90vw;
+  height:70vh;
+  background:white;
+  border-radius:10px;
+  border:1px solid black;
+  margin:0 auto;
+  padding:2vh;
+  overflow-y:scroll;
+}
+
+.ub-sms-default-msg {
+  position:relative;
+  background:#BFEDFB;
+  border-radius:15px;
+  border-color:#BFEDFB;
+  padding:0 2vw;
+//  border:1px solid #999999;
+  display:inline-block;
+}
+
+.ub-sms-default-msg::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    border: 3vmin solid black;
+    margin-left: 3vw;
+    top: 95%;
+    border-bottom: 3vmin solid transparent;
+    border-left: 3vmin solid transparent;
+    border-right: 3vmin solid transparent;
+    border-top-color: inherit;
+}
+
+.ub-sms-message {
+  position:relative;
+  background:#FFE279;
+  border-radius:15px;
+  border-color:#FFE279;
+  padding:0 2vw;
+  margin-top:3vh;
+  margin-left:auto;
+  margin-right:0;
+//  border:1px solid #999999;
+  display:table;
+}
+
+.ub-sms-message::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    border: 3vmin solid black;
+    margin-right: 3vw;
+    top: 95%;
+    border-bottom: 3vmin solid transparent;
+    border-left: 3vmin solid transparent;
+    border-right: 3vmin solid transparent;
+    border-top-color: inherit;
+}
+
+.ub-sms-body {
+  font-size:5vmin;
+}
+
+.ub-sms-timestamp {
+  float:right;
+  font-size:4vmin;
+}
+
 /*** TRANSITION EFFECTS ***/
 
 // fade in/out effect
@@ -685,91 +757,3 @@ a {
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
-//
-//.browsehappy {
-//  margin: 0.2em 0;
-//  background: #ccc;
-//  color: #000;
-//  padding: 0.2em 0;
-//}
-//
-//body {
-//  padding: 0;
-//}
-//
-///* Everything but the jumbotron gets side spacing for mobile first views */
-//.header,
-//.marketing,
-//.footer {
-//  padding-left: 15px;
-//  padding-right: 15px;
-//}
-//
-///* Custom page header */
-//.header {
-//  border-bottom: 1px solid #e5e5e5;
-//  margin-bottom: 10px;
-//
-//  /* Make the masthead heading the same height as the navigation */
-//  h3 {
-//    margin-top: 0;
-//    margin-bottom: 0;
-//    line-height: 40px;
-//    padding-bottom: 19px;
-//  }
-//}
-//
-///* Custom page footer */
-//.footer {
-//  padding-top: 19px;
-//  color: #777;
-//  border-top: 1px solid #e5e5e5;
-//}
-//
-//.container-narrow > hr {
-//  margin: 30px 0;
-//}
-//
-///* Main marketing message and sign up button */
-//.jumbotron {
-//  text-align: center;
-//  border-bottom: 1px solid #e5e5e5;
-//
-//  .btn {
-//    font-size: 21px;
-//    padding: 14px 24px;
-//  }
-//}
-//
-///* Supporting marketing content */
-//.marketing {
-//  margin: 40px 0;
-//
-//  p + h4 {
-//    margin-top: 28px;
-//  }
-//}
-//
-///* Responsive: Portrait tablets and up */
-//@media screen and (min-width: 768px) {
-//  .container {
-//    max-width: 730px;
-//  }
-//
-//  /* Remove the padding we set earlier */
-//  .header,
-//  .marketing,
-//  .footer {
-//    padding-left: 0;
-//    padding-right: 0;
-//  }
-//  /* Space out the masthead */
-//  .header {
-//    margin-bottom: 30px;
-//  }
-//  /* Remove the bottom border on the jumbotron for visual effect */
-//  .jumbotron {
-//    border-bottom: 0;
-//  }
-//}
-
