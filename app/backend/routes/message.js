@@ -22,94 +22,92 @@ router.post('/', function(req, res, next){
 //      console.log("Authenticated successfully with payload:", authData);
 
       ref.child('users').once("value", function(snapshot){
-//        console.log(snapshot.val());
         
-        var validUserAuthId; // store validated user id here, need for set
-        
-        // loop through users
-        var users = snapshot.val();
-        var userAuthIds = Object.keys(users);
-        
-        // validate To phone number
-        // TODO twilio number can be associated with multiple users
-        
-//        console.log(req.body.To);
-        var phoneNumberFound = false;
-        for(var i = 0; i < userAuthIds.length; i++){
+        // loop through users, return true aborts loop
+        snapshot.forEach(function(childSnapshot){
           
-          var user = users[userAuthIds[i]];
+          var userAuthId = childSnapshot.key();
+          var userData = childSnapshot.val();
           
-          if(user.twilioPhoneNumber != null && user.twilioPhoneNumber == req.body.To) {
-            console.log('user twilio phone number: ' + user.twilioPhoneNumber + ' found');
-            validUserAuthId = userAuthIds[i];
-            phoneNumberFound = true;
-            break;
+          console.log(userAuthId);
+          
+          // validate message
+          if(req.body.Body === null){
+            console.error('no Body specified, abort');
+            return true;
           }
-        }
-        if(!phoneNumberFound) {
-          console.error('twilio phone number: ' + req.body.To + ' not associated with any user');
-          return;
-        }
-        
-        console.log('*** user passed twilio phone number validation, continue');
-        
-        if(req.body.Body == null){
-          console.error('no message in the body');
-          return;
-        }
-        
-        console.log('*** user passed body message exists validation, continue');
-
-        // validate user has an active deck with an sms slide
-        ref.child('users/' + validUserAuthId + '/decks').orderByChild('active').equalTo(true).limitToFirst(1).once("value", function(snapshot){
-
-//          console.log(snapshot.key());
-//          console.log(snapshot.val());
-//          console.log(snapshot.val().length);
+          console.log('[*] message passed Body exists validation, continue');
           
-          var activeDecks = snapshot.val();
-          if(activeDecks == null || activeDecks.length == 0){
-            console.error("user has no active slide deck")
+          if(req.body.To === null) {
+            console.error('no To user specified, abort');
+            return true;
+          }
+          console.log('[*] message passed To exists validation, continue');
+          
+          if(req.body.From === null) {
+            console.error('no From user specified, abort');
+            return true;
+          }
+          console.log('[*] message passed From exists validation, continue');
+          
+          // validate To number
+          if(userData.twilioPhoneNumber === null || userData.twilioPhoneNumber !== req.body.To){
+            console.log('user twilio number does not exist or does not match');
             return;
           }
+          console.log('[*] message passed twilio phone number validation, continue');
+          
+          // validate user has an active deck with an sms slide
+          ref.child('users/' + userAuthId + '/decks').orderByChild('active').equalTo(true).limitToFirst(1).once("value", function(snapshot){
 
-          console.log('*** user passed active slide deck exists validation, continue');
-          
-          // retrieve id in decks array, should only be one
-          var activeDeckId;
-          for(var id in activeDecks){
-            activeDeckId = id;
-          }
-          
-          var activeDeck = activeDecks[activeDeckId];
-          
-          // find first sms slide - TODO modify later to send to different sms slides?
-          var smsSlide;
-          var smsSlideId;
-          for(var i = 0; i < activeDeck.slides.length; i++){
-            var slide = activeDeck.slides[i];
-            if(slide.type === 'sms'){
-              smsSlide = slide;
-              smsSlideId = i;
-              break;
+  //          console.log(snapshot.key());
+  //          console.log(snapshot.val());
+  //          console.log(snapshot.val().length);
+
+            var activeDecks = snapshot.val();
+            if(activeDecks == null || activeDecks.length == 0){
+              console.error("user has no active slide deck")
+              return;
             }
-          }
-          
-          if(smsSlide == null){
-            console.error("user has no sms slide in the active deck");
-            return;
-          }
-          
-          console.log('*** user passed sms slide exists validation, continue');
-          
-          console.log('--> update sms slide message: ' + req.body.From + ', ' + req.body.Body + ', ' + new Date().getTime());
-          
-          // have to set values individually, doing in one shot overwrites all of content
-          var contentPath = 'users/' + validUserAuthId + '/decks/' + activeDeckId + '/slides/' + smsSlideId + '/content';
-          ref.child(contentPath + '/from').set(req.body.From);
-          ref.child(contentPath + '/message').set(req.body.Body);
-          ref.child(contentPath + '/timestamp').set(new Date().getTime());
-          
+
+            console.log('[*] user passed active slide deck exists validation, continue');
+
+            // retrieve id in decks array, should only be one
+            var activeDeckId;
+            for(var id in activeDecks){
+              activeDeckId = id;
+            }
+
+            var activeDeck = activeDecks[activeDeckId];
+
+            // find first sms slide - TODO modify later to send to different sms slides?
+            var smsSlide;
+            var smsSlideId;
+            for(var i = 0; i < activeDeck.slides.length; i++){
+              var slide = activeDeck.slides[i];
+              if(slide.type === 'sms'){
+                smsSlide = slide;
+                smsSlideId = i;
+                break;
+              }
+            }
+
+            if(smsSlide == null){
+              console.error("user has no sms slide in the active deck");
+              return;
+            }
+
+            console.log('[*] user passed sms slide exists validation, continue');
+
+            console.log('--> update sms slide message: ' + req.body.From + ', ' + req.body.Body + ', ' + new Date().getTime());
+
+            // have to set values individually, doing in one shot overwrites all of content
+            var contentPath = 'users/' + userAuthId + '/decks/' + activeDeckId + '/slides/' + smsSlideId + '/content';
+            ref.child(contentPath + '/from').set(req.body.From);
+            ref.child(contentPath + '/message').set(req.body.Body);
+            ref.child(contentPath + '/timestamp').set(new Date().getTime());
+
+          });
         });
       });
     }
