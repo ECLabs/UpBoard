@@ -32,26 +32,26 @@ router.post('/', function(req, res, next){
           console.log(userAuthId);
           
           // validate message
-          if(req.body.Body === null){
+          if(req.body.Body == null){
             console.error('no Body specified, abort');
             return true;
           }
           console.log('[*] message passed Body exists validation, continue');
           
-          if(req.body.To === null) {
+          if(req.body.To == null) {
             console.error('no To user specified, abort');
             return true;
           }
           console.log('[*] message passed To exists validation, continue');
           
-          if(req.body.From === null) {
+          if(req.body.From == null) {
             console.error('no From user specified, abort');
             return true;
           }
           console.log('[*] message passed From exists validation, continue');
           
           // validate To number
-          if(userData.twilioPhoneNumber === null || userData.twilioPhoneNumber !== req.body.To){
+          if(userData.twilioPhoneNumber == null || userData.twilioPhoneNumber != req.body.To){
             console.log('user twilio number does not exist or does not match');
             return;
           }
