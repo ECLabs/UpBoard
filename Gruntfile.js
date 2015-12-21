@@ -39,9 +39,9 @@ module.exports = function (grunt) {
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
-//      options:{
-//        livereload: true
-//      },
+      options:{
+        livereload: true
+      },
       backend: { 
 				files: [
 					'<%= yeoman.app.backend %>/{,*/}*.js',
@@ -103,6 +103,12 @@ module.exports = function (grunt) {
         options: {
           script: '<%= yeoman.app.base %>/server.js'
         }
+      }
+    },
+    
+    open: {
+      all: {
+          path: 'http://localhost:8080'
       }
     },
 
@@ -541,6 +547,7 @@ module.exports = function (grunt) {
   });
 
   grunt.loadNpmTasks('grunt-express-server');
+  grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-sftp-deploy');
   grunt.loadNpmTasks('grunt-angular-templates');
@@ -562,6 +569,7 @@ module.exports = function (grunt) {
       'autoprefixer:server',
 //      'connect:livereload',
       'express:dev',
+      'open',
       'watch'
     ]);
   });
