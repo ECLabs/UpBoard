@@ -41,7 +41,7 @@
         
         function restart(){
             vm.currentIndex = 0;
-            startSlideShow();
+            nextSlide();
         }
         
         function nextSlide(){

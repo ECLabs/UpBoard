@@ -23,7 +23,6 @@
 
             var savedData = null; // use to remember for exit transition
             scope.startupTime = new Date().getTime();
-            
             scope.messages = [];
 
             scope.$watch(attrs.ngShow, function(){
@@ -38,22 +37,50 @@
 
                 element.find('#smsDefaultMessage')[0].innerHTML = scope.data.content.default;
                 
+                // save active deck id and slide id for bindings, generate unique messages array and timestamp ids
+                scope.activeDeckId = scope.data.activeDeckId;
+                scope.slideId = scope.data.slideId;
+                scope.messagesId = 'messages_' + scope.activeDeckId + '_' + scope.slideId;
+                scope.timestampId = 'timestamp_' + scope.activeDeckId + '_' + scope.slideId;
+
                 // if last message is expired, clear out messages
                 var now = new Date().getTime();
                 var messageExpireTime = scope.data.content.timestamp + scope.data.content.timeout;
                 if(messageExpireTime < now){
-                  scope.messages = [];
+                  scope[scope.messagesId]  = [];
                 }
+                scope.messages = utility.cloneArray(scope[scope.messagesId]);
 
                 // bind sms slide timestamp to directive scope
                 var timestampPath = 'users/' + Auth.$getAuth().uid + '/decks/' + scope.data.activeDeckId + 
                                     '/slides/' + scope.data.slideId + '/content/timestamp';
                 
-                $firebaseObject(Ref.child(timestampPath)).$bindTo(scope, 'timestamp');
-                
-                // save active deck id and slide id for future bindings
-                scope.activeDeckId = scope.data.activeDeckId;
-                scope.slideId = scope.data.slideId;
+                $firebaseObject(Ref.child(timestampPath)).$bindTo(scope, scope.timestampId);
+
+                // watch for new messages
+                scope.$watch(function(scope){return scope[scope.timestampId];}, function(){
+                  utility.getServerTime().success(function(serverTime){
+                    if((Number(scope[scope.timestampId].$value) + 1000) > serverTime.now){
+                      $log.debug('message received!');
+                      toaster.pop('success', '', 'Message received!');
+
+                      // get the latest message content
+                      var contentPath = 'users/' + Auth.$getAuth().uid + '/decks/' + scope.activeDeckId +
+                                        '/slides/' + scope.slideId + '/content';
+
+                      var content = $firebaseObject(Ref.child(contentPath));
+                      content.$loaded().then(function(){
+                        scope[scope.messagesId].push({body:content.message,timestamp:content.timestamp});
+                        scope.messages = utility.cloneArray(scope[scope.messagesId]);
+
+                        // keep scrolling down if messages overflow
+                        $timeout(function(){
+                          angular.element('#smsDisplay').duScrollToElement(angular.element('#smsDisplayEnd'), 0, 500);
+                        }, 500);
+                      });
+                    }
+                  });
+                });
 
                 // keep scrolling down if messages overflow
                 $timeout(function(){
@@ -68,31 +95,6 @@
                 utility.setExitTransition(element, savedData);
                 savedData = null;
               }
-            });
-            
-            // watch for new message
-            scope.$watch(function(){return attrs.timestamp;}, function(){
-              
-              utility.getServerTime().success(function(serverTime){
-                if((Number(attrs.timestamp) + 1000) > serverTime.now){
-                  $log.debug('message received!');
-                  toaster.pop('success', '', 'Message received!');
-
-                  // get the latest message content
-                  var contentPath = 'users/' + Auth.$getAuth().uid + '/decks/' + scope.activeDeckId + 
-                                    '/slides/' + scope.slideId + '/content';
-
-                  var content = $firebaseObject(Ref.child(contentPath));
-                  content.$loaded().then(function(){
-                    scope.messages.push({body:content.message,timestamp:content.timestamp});  
-
-                    // keep scrolling down if messages overflow
-                    $timeout(function(){
-                      angular.element('#smsDisplay').duScrollToElement(angular.element('#smsDisplayEnd'), 0, 500);
-                    }, 500);
-                  });
-                }
-              });
             });
           }
         };

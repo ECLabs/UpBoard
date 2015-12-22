@@ -29,7 +29,7 @@ router.post('/', function(req, res, next){
           var userAuthId = childSnapshot.key();
           var userData = childSnapshot.val();
           
-          console.log(userAuthId);
+          //console.log(userAuthId);
           
           // validate message
           if(req.body.Body == null){
@@ -52,7 +52,7 @@ router.post('/', function(req, res, next){
           
           // validate To number
           if(userData.twilioPhoneNumber == null || userData.twilioPhoneNumber != req.body.To){
-            console.log('user twilio number does not exist or does not match');
+            console.log('user twilio number does not exist or does not match, skip');
             return;
           }
           console.log('[*] message passed twilio phone number validation, continue');
@@ -66,7 +66,7 @@ router.post('/', function(req, res, next){
 
             var activeDecks = snapshot.val();
             if(activeDecks == null || activeDecks.length == 0){
-              console.error("user has no active slide deck")
+              console.log("user has no active slide deck, skip")
               return;
             }
 
@@ -93,7 +93,7 @@ router.post('/', function(req, res, next){
             }
 
             if(smsSlide == null){
-              console.error("user has no sms slide in the active deck");
+              console.log("user has no sms slide in the active deck, skip");
               return;
             }
 
