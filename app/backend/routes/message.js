@@ -21,13 +21,13 @@ router.post('/', function(req, res, next){
     else {
 //      console.log("Authenticated successfully with payload:", authData);
 
-      ref.child('users').once("value", function(snapshot){
+      ref.child('users').once("value", function(users){
         
         // loop through users, return true aborts loop
-        snapshot.forEach(function(childSnapshot){
+        users.forEach(function(user){
           
-          var userAuthId = childSnapshot.key();
-          var userData = childSnapshot.val();
+          var userAuthId = user.key();
+          var userData = user.val();
           
           //console.log(userAuthId);
           
@@ -58,14 +58,14 @@ router.post('/', function(req, res, next){
           console.log('[*] message passed twilio phone number validation, continue');
           
           // validate user has an active deck with an sms slide
-          ref.child('users/' + userAuthId + '/decks').orderByChild('active').equalTo(true).limitToFirst(1).once("value", function(snapshot){
+          ref.child('users/' + userAuthId + '/decks').orderByChild('active').equalTo(true).limitToFirst(1).once("value", function(activeDecks){
 
   //          console.log(snapshot.key());
   //          console.log(snapshot.val());
   //          console.log(snapshot.val().length);
 
-            var activeDecks = snapshot.val();
-            if(activeDecks == null || activeDecks.length == 0){
+            var activeDeckData = activeDecks.val();
+            if(activeDeckData == null || activeDeckData.length == 0){
               console.log("user has no active slide deck, skip")
               return;
             }
@@ -74,39 +74,78 @@ router.post('/', function(req, res, next){
 
             // retrieve id in decks array, should only be one
             var activeDeckId;
-            for(var id in activeDecks){
+            for(var id in activeDeckData){
               activeDeckId = id;
             }
 
-            var activeDeck = activeDecks[activeDeckId];
+            ref.child('users/' + userAuthId + '/decks/' + activeDeckId + '/slides').once("value", function(slides){
 
-            // find first sms slide - TODO modify later to send to different sms slides?
-            var smsSlide;
-            var smsSlideId;
-            for(var i = 0; i < activeDeck.slides.length; i++){
-              var slide = activeDeck.slides[i];
-              if(slide.type === 'sms'){
-                smsSlide = slide;
-                smsSlideId = i;
-                break;
+              var smsSlideFound = false;
+              
+              // loop through slides
+              slides.forEach(function(slide){
+              
+                var slideId = slide.key();
+                var slideData = slide.val();
+//                console.log(slideId);
+//                console.log(slideData);
+                
+                // find sms slides
+                if(slideData.type === 'sms'){
+
+  //                var smsSlideId = i;
+                  smsSlideFound = true;
+
+                  console.log('[*] user passed sms slide exists validation, continue');
+
+                  // have to set values individually, doing in one shot overwrites all of content
+                  var contentPath = 'users/' + userAuthId + '/decks/' + activeDeckId + '/slides/' + slideId + '/content';
+
+                  console.log('content path: ' + contentPath);
+                  
+                  // check if a prefix exists
+                  var prefix = slideData.content.prefix;
+                  if(prefix != null){
+
+                    console.log('prefix ' + prefix + ' expected');
+
+                    // sms slide configured to expect a prefix, parse Body for prefix code
+                    var prefixMatch = req.body.Body.match('^' + prefix);
+                    if(prefixMatch !== null){
+
+                      console.log('prefix found: ' + prefixMatch);
+
+                      var msgBody = req.body.Body.replace(prefixMatch[0], ''); // remove prefix from message body
+
+                      console.log('--> update sms slide message: ' + req.body.From + ', ' + msgBody + ', ' + new Date().getTime());
+                      ref.child(contentPath + '/from').set(req.body.From);
+                      ref.child(contentPath + '/message').set(msgBody);
+                      ref.child(contentPath + '/timestamp').set(new Date().getTime());
+                    }
+                    else{
+                      console.log('sms slide configured to expect a prefix ' + prefix + ', none found in message body, skip');
+                    }
+                  }
+                  else{
+
+                    // sms slide not configured to expect a prefix, send message
+                    console.log('--> update sms slide message: ' + req.body.From + ', ' + req.body.Body + ', ' + new Date().getTime());
+                    ref.child(contentPath + '/from').set(req.body.From);
+                    ref.child(contentPath + '/message').set(req.body.Body);
+                    ref.child(contentPath + '/timestamp').set(new Date().getTime());
+                  }
+                }
+              });
+              
+              if(!smsSlideFound){
+                console.log("user has no sms slide in the active deck, skip");
+                return;
               }
-            }
-
-            if(smsSlide == null){
-              console.log("user has no sms slide in the active deck, skip");
-              return;
-            }
-
-            console.log('[*] user passed sms slide exists validation, continue');
-
-            console.log('--> update sms slide message: ' + req.body.From + ', ' + req.body.Body + ', ' + new Date().getTime());
-
-            // have to set values individually, doing in one shot overwrites all of content
-            var contentPath = 'users/' + userAuthId + '/decks/' + activeDeckId + '/slides/' + smsSlideId + '/content';
-            ref.child(contentPath + '/from').set(req.body.From);
-            ref.child(contentPath + '/message').set(req.body.Body);
-            ref.child(contentPath + '/timestamp').set(new Date().getTime());
-
+              
+            });
+              
+            
+            
           });
         });
       });

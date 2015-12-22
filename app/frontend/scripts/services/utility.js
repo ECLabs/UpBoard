@@ -56,9 +56,13 @@
           cloneArray: function(a){
             
             // performance test says this is the fastest way
-            var b = new Array(a.length);
-            var i = a.length;
-            while(i--) { b[i] = a[i]; }
+            var b = [];
+            
+            if(a != null){
+              var b = new Array(a.length);
+              var i = a.length;
+              while(i--) { b[i] = a[i]; }
+            }
             return b;
           },
             
