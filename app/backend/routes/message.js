@@ -3,8 +3,6 @@ var Firebase = require('firebase');
 
 var router = express.Router();
 
-//var config		= JSON.parse(fs.readFileSync(path.join(__dirname, '/../../config.json'), 'utf8'));
-
 var ref = new Firebase('https://boiling-heat-9947.firebaseio.com');
 var FB_AUTH_TOKEN = 'BBwlPFTEMISGXNTvQz5nheil1SC3PgyPqIWxEvIV';
 
@@ -93,7 +91,6 @@ router.post('/', function(req, res, next){
                 // find sms slides
                 if(slideData.type === 'sms'){
 
-  //                var smsSlideId = i;
                   smsSlideFound = true;
 
                   console.log('[*] user passed sms slide exists validation, continue');
@@ -139,11 +136,7 @@ router.post('/', function(req, res, next){
                 console.log("user has no sms slide in the active deck, skip");
                 return;
               }
-              
             });
-              
-            
-            
           });
         });
       });

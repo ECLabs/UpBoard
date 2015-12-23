@@ -22,4 +22,8 @@ angular.module('upBoardApp', [
     'firebase.auth',
     'duScroll',
     'toaster'
-  ]);
+  ])
+
+  .config(['$logProvider', function($logProvider){ 
+    $logProvider.debugEnabled(true); // set to false for production
+  }]);
