@@ -46,7 +46,8 @@ The data model has undergone significant changes to support authentication, mult
                         updatedDate: 1444881600000 // timestamp in milliseconds
                     }
                 },
-                email: "ubadmin@evanschambers.com"
+                email: "ubadmin@evanschambers.com",
+                twilioPhoneNumber: "+15715555555" // optional, set to send text messages to an sms slide
             }
         }
 
@@ -61,6 +62,7 @@ A slide type must then be specified. The types are:
 * **staticVideoOverlay**
 * **bioPanels**
 * **weather**
+* **sms**
 
 Each of these types has a specific set of parameters to be filled out.
 
@@ -211,4 +213,27 @@ Transition types currently supported are *fade* and *slide*.
             zip: '20001' // set zip code for weather, US only
         },
         showFooter: true
+    }
+    
+#### sms slide data structure:
+    
+    {
+        "type" : "sms",
+        "transitions" : {
+            "entry" : "fade",
+            "exit" : "fade"
+        },
+        "timing" : {
+            "slideTime" : 10000,
+            "transitionTime" : 2000
+        },
+        "content" : {
+            "default" : "Send a text message to me with prefix SMS1 at 571-555-5555",
+            "from" : "+15712222222",          // set by incoming message
+            "message" : "Sending from phone", // set by incoming message
+            "prefix" : "SMS1", // optional, set to enable slide targeting
+            "timeout" : 60000, // time til displayed messages expire, based on timestamp
+            "timestamp" : 1450885300786       // set by incoming message
+        },
+        "showFooter" : true,
     }
