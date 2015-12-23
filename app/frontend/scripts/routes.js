@@ -59,7 +59,12 @@ angular.module('upBoardApp')
     $routeProvider
       .when('/', {
         templateUrl: '/app/frontend/views/main.html',
-        controller: 'MainCtrl as main'
+        controller: 'MainCtrl as main',
+        resolve: {
+          "currentAuth": ["Auth", function(Auth) {
+            return Auth.$waitForAuth();
+          }]
+        }
       })
 
       .when('/chat', {
@@ -72,7 +77,12 @@ angular.module('upBoardApp')
       })
       .whenAuthenticated('/account', {
         templateUrl: '/app/frontend/views/account.html',
-        controller: 'AccountCtrl'
+        controller: 'AccountCtrl',
+        resolve: {
+          "currentAuth": ["Auth", function(Auth) {
+            return Auth.$requireAuth();
+          }]
+        }
       })
       .otherwise({redirectTo: '/'});
   }])

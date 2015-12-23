@@ -101,13 +101,11 @@ router.post('/', function(req, res, next){
                   // have to set values individually, doing in one shot overwrites all of content
                   var contentPath = 'users/' + userAuthId + '/decks/' + activeDeckId + '/slides/' + slideId + '/content';
 
-                  console.log('content path: ' + contentPath);
+//                  console.log('content path: ' + contentPath);
                   
                   // check if a prefix exists
                   var prefix = slideData.content.prefix;
                   if(prefix != null){
-
-                    console.log('prefix ' + prefix + ' expected');
 
                     // sms slide configured to expect a prefix, parse Body for prefix code
                     var prefixMatch = req.body.Body.match('^' + prefix);

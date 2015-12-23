@@ -34,7 +34,7 @@
               
               // set zip with callback function
               function setZip(postalCode){
-                  $log.debug(postalCode);
+                  //$log.debug(postalCode);
                   scope.zip = postalCode;
                   updateWeather();
               };
