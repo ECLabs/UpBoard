@@ -6,13 +6,13 @@
      * @ngdoc directive
      * @name upBoardApp.directive:ubFooter
      * @description
-     * # ubFooter
+     * # footer
      */
     angular.module('upBoardApp')
-      .directive('ubFooter', ubFooter);
+      .directive('ubFooter', footer);
     
-    ubFooter.$inject = ['$log', '$interval', 'mapsGoogleApis', 'openWeatherMap'];
-    function ubFooter($log, $interval, mapsGoogleApis, openWeatherMap) {
+    footer.$inject = ['$log', '$interval', 'mapsGoogleApis', 'openWeatherMap'];
+    function footer($log, $interval, mapsGoogleApis, openWeatherMap) {
         return {
           templateUrl: '/app/frontend/scripts/directives/ub-footer.tpl.html',
           restrict: 'E',

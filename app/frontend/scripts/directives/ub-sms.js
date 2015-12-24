@@ -5,13 +5,13 @@
      * @ngdoc directive
      * @name upBoardApp.directive:ubSms
      * @description
-     * # logo
+     * # sms
      */
     angular.module('upBoardApp')
-      .directive('ubSms', logo);
+      .directive('ubSms', sms);
     
-    logo.$inject = ['Auth', 'Ref', '$firebaseObject', '$log', '$filter', '$timeout', 'utility', 'toaster'];
-    function logo(Auth, Ref, $firebaseObject, $log, $filter, $timeout, utility, toaster) {
+    sms.$inject = ['Auth', 'Ref', '$firebaseObject', '$log', '$filter', '$timeout', 'utility', 'toaster'];
+    function sms(Auth, Ref, $firebaseObject, $log, $filter, $timeout, utility, toaster) {
         return {
           templateUrl: '/app/frontend/scripts/directives/ub-sms.tpl.html',
           restrict: 'E',

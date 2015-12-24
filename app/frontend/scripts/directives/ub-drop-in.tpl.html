@@ -1,0 +1,18 @@
+<div ng-show="data.type === 'dropIn'">
+  
+  <div class="container-fluid" style="background:#333333;height:100vh;">
+    <div class="row">
+      <div id="dropInPoint" class="col-xs-6" style="color:white;height:100vh;">
+        <h2><i class="glyphicon glyphicon-arrow-down"></i></h2>
+      </div>
+      <div class="col-xs-6" style="color:white;height:100vh;border-left:1px dashed #aaaaaa;padding:4vmin;">
+        <div id="messageDrop" style="max-height:75vh;overflow:scroll;">
+          <div ng-repeat="message in messages">
+            <span>{{ message.id }}) {{ message.text }}</span><br/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
