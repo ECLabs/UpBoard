@@ -10,8 +10,8 @@
     angular.module('upBoardApp')
       .directive('ubDropIn', dropIn);
     
-    dropIn.$inject = ['$log', '$document', 'utility'];
-    function dropIn($log, $document, utility) {
+    dropIn.$inject = ['$log', '$timeout', '$document', 'utility'];
+    function dropIn($log, $timeout, $document, utility) {
         return {
           templateUrl: '/app/frontend/scripts/directives/ub-drop-in.tpl.html',
           restrict: 'E',
@@ -35,9 +35,34 @@
                   Events = Matter.Events,
                   MouseConstraint = Matter.MouseConstraint;
             
-              // create a Matter.js engine
+              // extend base Render class, modify how body ids are displayed
+              var CustomRender = {};
+              angular.extend(CustomRender, Matter.Render);
+            
+              CustomRender.bodyIds = function(engine, bodies, context) {
+                  var c = context,
+                      i,
+                      j;
+
+                  for (i = 0; i < bodies.length; i++) {
+                      if (!bodies[i].render.visible)
+                          continue;
+
+                      var parts = bodies[i].parts;
+                      for (j = parts.length > 1 ? 1 : 0; j < parts.length; j++) {
+                          var part = parts[j];
+                          c.font = '14px Helvetica';
+                          c.textAlign = 'center';
+                          c.fillStyle = 'rgba(255,255,255,1)';
+                          c.fillText(part.id - 5, part.position.x, part.position.y);
+                      }
+                  }
+              };
+            
+              // create a Matter.js engine, use CustomRender
               var engine = Engine.create(document.getElementById('dropInPoint'), {
                 render: {
+                  controller: CustomRender,
                   options: {
                     showAngleIndicator: false,
                     wireframes: false,
@@ -159,11 +184,21 @@
               
               var x = 400, y = 0;
               var body;
-              var colorArr = ['red', 'orange', 'blue', 'yellow', 'green'];
               
+              // TODO pick better colors
+              var colorArr = ['#CF4858','#F6624A','#1B6A81','#16A79D','#80628B','#DC557A','#F4AC42','#4F8598','#69B1CB'];
+              
+              var fillColor = Common.choose(colorArr);
+              
+              // TODO add another random polygon
               if (Common.random() > 0.35) {
                 var randDim = Common.random(50, 70);
-                body = Bodies.rectangle(x, y, randDim, randDim);
+                body = Bodies.rectangle(x, y, randDim, randDim,{
+                  render:{
+                    fillStyle: fillColor,
+                    strokeStyle: '#ffffff'
+                  }
+                });
               } 
               else {
                 body = Bodies.circle(x, y, Common.random(30,50), {
@@ -171,17 +206,21 @@
                     frictionAir: 0.06,
                     restitution: 0.3,
                     friction: 0.01,
-//                      render: {
-//                        fillStyle: Common.choose(colorArr),
-//                        fillText: 'test'
-//                      }
+                    render:{
+                      fillStyle: fillColor,
+                      strokeStyle: '#ffffff'
+                    }
                 });
               }
               
+              // TODO - track color to correlate object body with data on right
+              
               scope.world.add(scope.engine.world, body);
               $log.debug(scope.engine.world.bodies.length - 4); // don't count borders
-              scope.messages.push({id: scope.engine.world.bodies.length + 1, text: 'This is just random text over and over'});
-              $('#messageDrop')[0].scrollTop = $('#messageDrop')[0].scrollHeight;
+              scope.messages.push({id: scope.engine.world.bodies.length - 4, text: 'This is just random text over and over', color:fillColor});
+              $timeout(function(){
+                $('#messageDrop')[0].scrollTop = 0;
+              }, 500);
             });
             
           }
