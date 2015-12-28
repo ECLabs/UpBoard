@@ -61,7 +61,7 @@
               };
             
               // create a Matter.js engine, use CustomRender
-              var engine = Engine.create(document.getElementById('dropInPoint'), {
+              var engine = Engine.create(element.find('.ub-drop-in-point')[0], {
                 render: {
                   controller: CustomRender,
                   options: {
@@ -158,7 +158,7 @@
                                    text: 'This is just random text over and over', 
                                    color:fillColor});
               $timeout(function(){
-                $('#messageDrop')[0].scrollTop = 0;
+                element.find('.ub-drop-in-message')[0].scrollTop = 0;
               }, 500);
             });
             

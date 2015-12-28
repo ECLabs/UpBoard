@@ -31,14 +31,14 @@
               function showBioContent(show){
                   
                   // set transform origin to show, using jQuery for better css() support
-                  var currentBioPanel = $('#bioPanel' + scope.count);
+                  var currentBioPanel = $(element.find('.bl-panel')[scope.count]);
                   var scrollTop = $(window).scrollTop();
                   var xAxis = currentBioPanel.position().left;
                   var yAxis = currentBioPanel.position().top - scrollTop; // compensate for scroll
                   var bpHeight = currentBioPanel.outerHeight();
                   var bpWidth = currentBioPanel.outerWidth();
                   
-                  var bioContent = $('#bioContent'); 
+                  var bioContent = $(element.find('.bl-content')[0]); 
                   bioContent.css('height', bpHeight + 'px');
                   bioContent.css('width', bpWidth + 'px');
                   bioContent.css('transform-origin', xAxis + 'px ' + yAxis + 'px');
@@ -60,7 +60,7 @@
                       }
                       
                       // delay showing inside of content to give some time for transition effect
-                      $timeout(function(){$('#bioContent .row').css('opacity', '1')}, 500);
+                      $timeout(function(){$('.bl-content .row').css('opacity', '1')}, 500);
                   }
                   else {
                       // scale up other panels
@@ -71,7 +71,7 @@
                               $(bioPanels[i]).css('transition-duration', '0.5s');
                           }
                       }
-                      $('#bioContent .row').css('opacity', '0');
+                      $(element.find('.bl-content .row')[0]).css('opacity', '0');
                   }
               }
               
@@ -82,11 +82,9 @@
                   if(isShown){
                       $log.debug('about to show ' + scope.data.type);
                       
-                      var bioPanels = element.find('#bioPanels')[0];
-                      
-                      // reset data
-                      scope.count = 0;
-                      bioPanels.innerHTML = '';
+                      scope.count = 0; // reset before each run
+                    
+                      var bioPanels = element.find('div')[0];
                       
                       var content = scope.data.content.content;
                       var timing = scope.data.timing;
@@ -115,7 +113,6 @@
                                   
                                   var col = document.createElement('div');
                                   col.setAttribute('class', 'bl-panel col-lg-' + columnSize);
-                                  col.setAttribute('id', 'bioPanel' + i);
 
                                   var bioBox = document.createElement('div');
                                   bioBox.setAttribute('class', 'bl-box');
@@ -158,7 +155,8 @@
 
                                   // show underline in
                                   $timeout(function(){
-                                      $document.duScrollToElement(angular.element('#bioPanel' + scope.count), 0, 1000);
+                                      var bioPanelEl = angular.element(element.find('.bl-panel')[scope.count]);
+                                      $document.duScrollToElement(bioPanelEl, 0, 1000);
                                       scope['showLine' + scope.count] = true;
                                   }, timeToNextPanelShow - 1500);
 

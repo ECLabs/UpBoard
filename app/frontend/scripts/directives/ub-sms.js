@@ -34,7 +34,7 @@
               if(isShown){
                 $log.debug('about to show ' + scope.data.type);
 
-                element.find('#smsDefaultMessage')[0].innerHTML = scope.data.content.default;
+                element.find('.ub-sms-default-msg .ub-sms-body')[0].innerHTML = scope.data.content.default;
                 
                 // save active deck id and slide id for bindings
                 scope.activeDeckId = scope.data.activeDeckId;
@@ -54,7 +54,9 @@
                   
                 // scroll down for message overflow
                 $timeout(function(){
-                    angular.element('#smsDisplay').duScrollToElement(angular.element('#smsDisplayEnd'), 0, 500);
+                    var smsDisplayEl = angular.element(element.find('.ub-sms-display')[0]);
+                    var scrollAnchorEl = angular.element(element.find('a')[0]);
+                    smsDisplayEl.duScrollToElement(scrollAnchorEl, 0, 500);
                   }, 500);
                 
                 utility.setEntryTransition(element, scope.data);
@@ -84,7 +86,7 @@
                     var contentPath = 'users/' + Auth.$getAuth().uid + '/decks/' + scope.activeDeckId +
                                       '/slides/' + scope.slideId + '/content';
 
-                    $log.debug(contentPath);
+                    //$log.debug(contentPath);
 
                     var content = $firebaseObject(Ref.child(contentPath));
                     content.$loaded().then(function(){
@@ -92,7 +94,9 @@
 
                         // keep scrolling down if messages overflow
                         $timeout(function(){
-                          angular.element('#smsDisplay').duScrollToElement(angular.element('#smsDisplayEnd'), 0, 500);
+                          var smsDisplayEl = angular.element(element.find('.ub-sms-display')[0]);
+                          var scrollAnchorEl = angular.element(element.find('a')[0]);
+                          smsDisplayEl.duScrollToElement(scrollAnchorEl, 0, 500);
                         }, 500);
                     });
                   }
