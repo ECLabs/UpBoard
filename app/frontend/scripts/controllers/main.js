@@ -11,17 +11,19 @@
     angular.module('upBoardApp')
       .controller('MainCtrl', mainCtrl);
 
-    mainCtrl.$inject = ['$firebaseArray', '$firebaseObject', 'Auth', 'Ref', '$timeout', '$log', '$scope', '$location', 'utility'];
-    function mainCtrl($firebaseArray, $firebaseObject, Auth, Ref, $timeout, $log, $scope, $location, utility) {
+    mainCtrl.$inject = ['$firebaseArray', '$firebaseObject', 'Auth', 'Ref', 
+                        '$timeout', '$log', '$scope', '$location', '$compile', 'utility'];
+    function mainCtrl($firebaseArray, $firebaseObject, Auth, Ref, 
+                      $timeout, $log, $scope, $location, $compile, utility) {
         
         var vm = this;
         
         vm.currentIndex = 0;
         vm.loop = true;
-        vm.activeDeck;
-        vm.currentSlide;
-        vm.logo;
-        
+        vm.activeDeck = null;
+        vm.currentSlide = null;
+        vm.logo = null;
+      
         (function init(){
             var auth = Auth.$getAuth();
 
