@@ -122,54 +122,54 @@
               });
             
             
-            element.on('click', function(event){
-              
-              var x = 400, y = 0;
-              var body;
-              
-              var colorArr = ['#CF4858','#F6624A','#1B6A81','#16A79D',
-                              '#80628B','#DC557A','#F4AC42','#4F8598','#69B1CB'];
-              
-              var fillColor = Common.choose(colorArr);
-              
-              //$log.debug(scope.engine.world.bodies.length - 4); // don't count borders
-              scope.messages.push({id: scope.messages.length + 1,
-                                   text: 'This is just random text over and over',
-                                   color:fillColor});
+              element.on('click', function(event){
 
-              // TODO add another random polygon
-              // pass additional body id option to display
-              if (Common.random() > 0.35) {
-                var randDim = Common.random(50, 70);
-                body = Bodies.rectangle(x, y, randDim, randDim, {
-                  bodyId: scope.messages.length,
-                  render:{
-                    fillStyle: fillColor,
-                    strokeStyle: '#ffffff'
-                  }
-                });
-              } 
-              else {
-                body = Bodies.circle(x, y, Common.random(30, 50), {
+                var x = 400, y = 0;
+                var body;
+
+                var colorArr = ['#CF4858','#F6624A','#1B6A81','#16A79D',
+                                '#80628B','#DC557A','#F4AC42','#4F8598','#69B1CB'];
+
+                var fillColor = Common.choose(colorArr);
+
+                //$log.debug(scope.engine.world.bodies.length - 4); // don't count borders
+                scope.messages.push({id: scope.messages.length + 1,
+                                     text: 'This is just random text over and over',
+                                     color:fillColor});
+
+                // TODO add another random polygon
+                // pass additional body id option to display
+                if (Common.random() > 0.35) {
+                  var randDim = Common.random(50, 70);
+                  body = Bodies.rectangle(x, y, randDim, randDim, {
                     bodyId: scope.messages.length,
-                    density: 0.0005,
-                    frictionAir: 0.06,
-                    restitution: 0.3,
-                    friction: 0.01,
                     render:{
                       fillStyle: fillColor,
                       strokeStyle: '#ffffff'
                     }
-                });
-              }
-              scope.world.add(scope.engine.world, body);
+                  });
+                } 
+                else {
+                  body = Bodies.circle(x, y, Common.random(30, 50), {
+                      bodyId: scope.messages.length,
+                      density: 0.0005,
+                      frictionAir: 0.06,
+                      restitution: 0.3,
+                      friction: 0.01,
+                      render:{
+                        fillStyle: fillColor,
+                        strokeStyle: '#ffffff'
+                      }
+                  });
+                }
+                scope.world.add(scope.engine.world, body);
 
-              $timeout(function(){
-                element.find('.ub-drop-in-message')[0].scrollTop = 0;
-              }, 500);
-            });
-            
-          }
+                $timeout(function(){
+                  element.find('.ub-drop-in-message')[0].scrollTop = 0;
+                }, 500);
+              });
+
+            }
         };
     }
 })();

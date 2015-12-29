@@ -82,9 +82,10 @@
                   if(isShown){
                       $log.debug('about to show ' + scope.data.type);
                       
-                      scope.count = 0; // reset before each run
-                    
+                      //reset data first
                       var bioPanels = element.find('div')[0];
+                      bioPanels.innerHTML = '';
+                      scope.count = 0;
                       
                       var content = scope.data.content.content;
                       var timing = scope.data.timing;
