@@ -58,7 +58,7 @@
                           c.fillStyle = 'rgba(255,255,255,1)';
 
                           // *** changed to display passed in body id instead *** //
-                          c.fillText(bodies[i].bodyId, part.position.x, part.position.y);
+                          c.fillText(bodies[i].bodyId != null ? bodies[i].bodyId : '', part.position.x, part.position.y);
                       }
                   }
               };
@@ -84,7 +84,7 @@
                   options = { 
                       isStatic: true,
                       render: {
-                          visible: false
+                          visible: true
                       }
                   };
 
@@ -92,10 +92,12 @@
 
               // static walls will not be rendered due to options setting
               World.add(engine.world, [
-                  Bodies.rectangle(400, -offset, 800.5 + 2 * offset, 5, options),
-                  Bodies.rectangle(400, 600 + offset, 800.5 + 2 * offset, 5, options),
-                  Bodies.rectangle(800 + offset, 300, 5, 600.5 + 2 * offset, options),
-                  Bodies.rectangle(-offset, 300, 5, 600.5 + 2 * offset, options)
+                  Bodies.rectangle(600, 250, 600, 5, { isStatic: true, angle: -Math.PI * 0.06 }),
+                  Bodies.rectangle(240, 580, 600, 5, { isStatic: true, angle: Math.PI * 0.06 }),
+                  Bodies.rectangle(400, -offset, 800.5 + 2 * offset, 1, options),      // top
+                  Bodies.rectangle(300, 600 + offset, 700.5 + 2 * offset, 5, options),
+                  Bodies.rectangle(800 + offset, 300, 1, 600.5 + 2 * offset, options),
+                  Bodies.rectangle(-offset, 300, 1, 600.5 + 2 * offset, options)
               ]);
 
               scope.engine = engine;
@@ -124,7 +126,7 @@
             
               element.on('click', function(event){
 
-                var x = 400, y = 0;
+                var x = 700, y = 0;
                 var body;
 
                 var colorArr = ['#CF4858','#F6624A','#1B6A81','#16A79D',
@@ -140,9 +142,12 @@
                 // TODO add another random polygon
                 // pass additional body id option to display
                 if (Common.random() > 0.35) {
-                  var randDim = Common.random(50, 70);
+                  var randDim = Common.random(50, 60);
                   body = Bodies.rectangle(x, y, randDim, randDim, {
                     bodyId: scope.messages.length,
+                    friction: 0.0001,
+                    restitution: 0.5,
+                    density: 0.001,
                     render:{
                       fillStyle: fillColor,
                       strokeStyle: '#ffffff'
@@ -150,12 +155,11 @@
                   });
                 } 
                 else {
-                  body = Bodies.circle(x, y, Common.random(30, 50), {
+                  body = Bodies.circle(x, y, Common.random(30, 40), {
                       bodyId: scope.messages.length,
-                      density: 0.0005,
-                      frictionAir: 0.06,
-                      restitution: 0.3,
-                      friction: 0.01,
+                      friction: 0.0001,
+                      restitution: 0.5,
+                      density: 0.001,
                       render:{
                         fillStyle: fillColor,
                         strokeStyle: '#ffffff'
