@@ -40,6 +40,7 @@
               var CustomRender = {};
               angular.extend(CustomRender, Matter.Render);
             
+              // method override
               CustomRender.bodyIds = function(engine, bodies, context) {
                   var c = context,
                       i,
@@ -55,7 +56,9 @@
                           c.font = '14px Helvetica';
                           c.textAlign = 'center';
                           c.fillStyle = 'rgba(255,255,255,1)';
-                          c.fillText(part.id - 5, part.position.x, part.position.y);
+
+                          // *** changed to display passed in body id instead *** //
+                          c.fillText(bodies[i].bodyId, part.position.x, part.position.y);
                       }
                   }
               };
@@ -119,7 +122,7 @@
               });
             
             
-            $document.on('click', function(event){
+            element.on('click', function(event){
               
               var x = 400, y = 0;
               var body;
@@ -129,10 +132,17 @@
               
               var fillColor = Common.choose(colorArr);
               
+              //$log.debug(scope.engine.world.bodies.length - 4); // don't count borders
+              scope.messages.push({id: scope.messages.length + 1,
+                                   text: 'This is just random text over and over',
+                                   color:fillColor});
+
               // TODO add another random polygon
+              // pass additional body id option to display
               if (Common.random() > 0.35) {
                 var randDim = Common.random(50, 70);
-                body = Bodies.rectangle(x, y, randDim, randDim,{
+                body = Bodies.rectangle(x, y, randDim, randDim, {
+                  bodyId: scope.messages.length,
                   render:{
                     fillStyle: fillColor,
                     strokeStyle: '#ffffff'
@@ -140,7 +150,8 @@
                 });
               } 
               else {
-                body = Bodies.circle(x, y, Common.random(30,50), {
+                body = Bodies.circle(x, y, Common.random(30, 50), {
+                    bodyId: scope.messages.length,
                     density: 0.0005,
                     frictionAir: 0.06,
                     restitution: 0.3,
@@ -151,12 +162,8 @@
                     }
                 });
               }
-              
               scope.world.add(scope.engine.world, body);
-              $log.debug(scope.engine.world.bodies.length - 4); // don't count borders
-              scope.messages.push({id: scope.engine.world.bodies.length - 4, 
-                                   text: 'This is just random text over and over', 
-                                   color:fillColor});
+
               $timeout(function(){
                 element.find('.ub-drop-in-message')[0].scrollTop = 0;
               }, 500);
