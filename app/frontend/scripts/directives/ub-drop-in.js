@@ -72,7 +72,8 @@
                   showAngleIndicator: false,
                   wireframes: false,
                   background: '#ffffff',
-                  showIds: true
+                  showIds: true,
+                  hasBounds: true
                 }
               }
             });
@@ -118,17 +119,44 @@
               var colorArr = ['#CF4858','#F6624A','#1B6A81','#16A79D',
                               '#80628B','#DC557A','#F4AC42','#4F8598','#69B1CB'];
 
-              var fillColor = Common.choose(colorArr);
+              var fillColor = data.source === 'twitter' ? '#81cdff' :
+                              data.source === 'reddit'  ? '#fa7f53' : 
+                              Common.choose(colorArr);
 
               //$log.debug(scope.engine.world.bodies.length - 4); // don't count borders
               scope.messages.push({id: scope.messages.length + 1,
                                    text: data.source + ' - ' + data.content,
                                    color:fillColor});
 
-              // TODO add another random polygon
               // pass additional body id option to display
-              if (Common.random() > 0.35) {
-                var randDim = Common.random(50, 60);
+              if (data.source === 'twitter') {
+                body = Bodies.rectangle(x, y, 70, 70, {
+                  bodyId: scope.messages.length,
+                  friction: 0.0001,
+                  restitution: 0.5,
+                  density: 0.001,
+                  render:{
+                    sprite:{
+                      texture: '/images/twitter_smlogo_texture.png'
+                    }
+                  }
+                });
+              }
+              else if (data.source === 'reddit') {
+                body = Bodies.rectangle(x, y, 70, 70, {
+                  bodyId: scope.messages.length,
+                  friction: 0.0001,
+                  restitution: 0.5,
+                  density: 0.001,
+                  render:{
+                    sprite:{
+                      texture: '/images/reddit_smlogo_texture.png'
+                    }
+                  }
+                });
+              }
+              else if (Common.random() > 0.35) {
+                var randDim = Common.random(60, 70);
                 body = Bodies.rectangle(x, y, randDim, randDim, {
                   bodyId: scope.messages.length,
                   friction: 0.0001,
