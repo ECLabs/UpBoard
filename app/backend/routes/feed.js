@@ -8,7 +8,11 @@ module.exports = function(io){
     //console.log('feed called');
     console.log(req.body);
     
-    io.emit(req.body.event, {feed: 'hello from the feed server'});
+    var events = req.body.event !== null ? req.body.event.split(',') : [];
+    
+    for(var i = 0; i < events.length; i++){
+      io.emit(events[i], {feed: 'hello from the feed server'});  
+    }
     
     res.send('feed received');
   });
