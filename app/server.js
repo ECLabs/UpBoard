@@ -64,8 +64,11 @@ else {
 	});
 }
 
-
 // All configuration is done, gonna listen to hostname:port...
-app.listen(app.get('port'), app.get('host'), function (){
-	console.log('Server in '+app.get('env')+' environment running at '+app.get('host')+':'+app.get('port'));
+var server = app.listen(app.get('port'), app.get('host'), function (){
+  console.log('Server in '+app.get('env')+' environment running at '+app.get('host')+':'+app.get('port'));
 });
+
+// Attach socket.io to server
+var io = app.io;
+io.attach(server);

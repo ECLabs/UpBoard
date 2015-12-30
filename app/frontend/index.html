@@ -94,5 +94,18 @@
         <script src="scripts/lib/matter.js"></script>
         <!-- endbuild -->
 
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+          var socket = io('http://localhost:8080');
+          socket.on('connect', function (data) {
+            console.log(data);
+            socket.emit('join', { my: 'data' });
+          });
+
+          socket.on('messages', function(data) {
+            console.log(data);
+          });
+        </script>
+
 </body>
 </html>
