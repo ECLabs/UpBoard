@@ -24,6 +24,7 @@
 
               var savedData; // use to remember for exit transition
               scope.messages = [];
+              scope.socketEvent = null;
             
               // Matter module aliases
               var Engine = Matter.Engine,
@@ -107,58 +108,6 @@
               // run the engine
               Engine.run(engine);
             
-              // open socket
-              var socket = io(location.origin);
-              socket.on('feed', function(data) {
-                console.log(data);
-                console.log(scope);
-                
-                var x = 700, y = 0;
-                var body;
-
-                var colorArr = ['#CF4858','#F6624A','#1B6A81','#16A79D',
-                                '#80628B','#DC557A','#F4AC42','#4F8598','#69B1CB'];
-
-                var fillColor = Common.choose(colorArr);
-
-                //$log.debug(scope.engine.world.bodies.length - 4); // don't count borders
-                scope.messages.push({id: scope.messages.length + 1,
-                                     text: 'This is just random text over and over',
-                                     color:fillColor});
-
-                // TODO add another random polygon
-                // pass additional body id option to display
-                if (Common.random() > 0.35) {
-                  var randDim = Common.random(50, 60);
-                  body = Bodies.rectangle(x, y, randDim, randDim, {
-                    bodyId: scope.messages.length,
-                    friction: 0.0001,
-                    restitution: 0.5,
-                    density: 0.001,
-                    render:{
-                      fillStyle: fillColor,
-                      strokeStyle: '#ffffff'
-                    }
-                  });
-                } 
-                else {
-                  body = Bodies.circle(x, y, Common.random(30, 40), {
-                      bodyId: scope.messages.length,
-                      friction: 0.0001,
-                      restitution: 0.5,
-                      density: 0.001,
-                      render:{
-                        fillStyle: fillColor,
-                        strokeStyle: '#ffffff'
-                      }
-                  });
-                }
-                scope.world.add(scope.engine.world, body);
-
-                $timeout(function(){
-                  element.find('.ub-drop-in-message')[0].scrollTop = 0;
-                }, 500);
-              });
             
               scope.$watch(attrs.ngShow, function(){
 
@@ -166,6 +115,64 @@
 
                 if(isShown){
                   $log.debug('about to show ' + scope.data.type);
+
+                  // only open socket once per event, event name could change dynamically
+                  if(scope.socketEvent === null || scope.socketEvent !== scope.data.content.event){
+
+                    var socket = io(location.origin);
+                    socket.on(scope.data.content.event, function(data) {
+                      console.log(data);
+                      console.log(scope);
+
+                      var x = 700, y = 0;
+                      var body;
+
+                      var colorArr = ['#CF4858','#F6624A','#1B6A81','#16A79D',
+                                      '#80628B','#DC557A','#F4AC42','#4F8598','#69B1CB'];
+
+                      var fillColor = Common.choose(colorArr);
+
+                      //$log.debug(scope.engine.world.bodies.length - 4); // don't count borders
+                      scope.messages.push({id: scope.messages.length + 1,
+                                           text: 'This is just random text over and over',
+                                           color:fillColor});
+
+                      // TODO add another random polygon
+                      // pass additional body id option to display
+                      if (Common.random() > 0.35) {
+                        var randDim = Common.random(50, 60);
+                        body = Bodies.rectangle(x, y, randDim, randDim, {
+                          bodyId: scope.messages.length,
+                          friction: 0.0001,
+                          restitution: 0.5,
+                          density: 0.001,
+                          render:{
+                            fillStyle: fillColor,
+                            strokeStyle: '#ffffff'
+                          }
+                        });
+                      }
+                      else {
+                        body = Bodies.circle(x, y, Common.random(30, 40), {
+                            bodyId: scope.messages.length,
+                            friction: 0.0001,
+                            restitution: 0.5,
+                            density: 0.001,
+                            render:{
+                              fillStyle: fillColor,
+                              strokeStyle: '#ffffff'
+                            }
+                        });
+                      }
+                      scope.world.add(scope.engine.world, body);
+
+                      $timeout(function(){
+                        element.find('.ub-drop-in-message')[0].scrollTop = 0;
+                      }, 500);
+                    });
+
+                    scope.socketEvent = scope.data.content.event;
+                  }
                   utility.setEntryTransition(element, scope.data);
                   savedData = scope.data;
                 }

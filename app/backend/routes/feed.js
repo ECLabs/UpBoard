@@ -5,9 +5,10 @@ module.exports = function(io){
 
   router.post('/', function(req, res, next){
     
-    console.log('feed called');
+    //console.log('feed called');
+    console.log(req.body);
     
-    io.emit('feed', {feed: 'hello from the feed server'});
+    io.emit(req.body.event, {feed: 'hello from the feed server'});
     
     res.send('feed received');
   });
