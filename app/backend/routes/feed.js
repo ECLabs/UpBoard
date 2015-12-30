@@ -11,7 +11,7 @@ module.exports = function(io){
     var events = req.body.event !== null ? req.body.event.split(',') : [];
     
     for(var i = 0; i < events.length; i++){
-      io.emit(events[i], {feed: 'hello from the feed server'});  
+      io.emit(events[i], {source: req.body.source, content: req.body.content});
     }
     
     res.send('feed received');

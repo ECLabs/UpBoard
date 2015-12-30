@@ -134,7 +134,7 @@
 
                       //$log.debug(scope.engine.world.bodies.length - 4); // don't count borders
                       scope.messages.push({id: scope.messages.length + 1,
-                                           text: 'This is just random text over and over',
+                                           text: data.source + ' - ' + data.content,
                                            color:fillColor});
 
                       // TODO add another random polygon
