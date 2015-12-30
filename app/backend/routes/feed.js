@@ -7,9 +7,9 @@ module.exports = function(io){
     
     console.log('feed called');
     
-    io.emit('messages', 'hello from the feed server');
+    io.emit('feed', {feed: 'hello from the feed server'});
     
-    res.send('message received');
+    res.send('feed received');
   });
   
   return router;

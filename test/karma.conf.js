@@ -38,6 +38,7 @@ module.exports = function(config) {
       'bower_components/jquery-ui/jquery-ui.js',
       'bower_components/angular-scroll/angular-scroll.js',
       'bower_components/AngularJS-Toaster/toaster.js',
+      'bower_components/socket.io-client/socket.io.js',
       'bower_components/mockfirebase/browser/mockfirebase.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower

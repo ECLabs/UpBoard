@@ -107,25 +107,12 @@
               // run the engine
               Engine.run(engine);
             
-              scope.$watch(attrs.ngShow, function(){
-
-                var isShown = scope.$eval(attrs.ngShow);
-
-                if(isShown){
-                  $log.debug('about to show ' + scope.data.type);
-                  utility.setEntryTransition(element, scope.data);
-                  savedData = scope.data;
-                }
-                else if(savedData != null){
-                  $log.debug('about to hide ' + savedData.type + ', next type on deck: ' + scope.data.type);
-                  utility.setExitTransition(element, savedData);
-                  savedData = null;
-                }
-              });
-            
-            
-              element.on('click', function(event){
-
+              // open socket
+              var socket = io(location.origin);
+              socket.on('feed', function(data) {
+                console.log(data);
+                console.log(scope);
+                
                 var x = 700, y = 0;
                 var body;
 
@@ -172,7 +159,22 @@
                   element.find('.ub-drop-in-message')[0].scrollTop = 0;
                 }, 500);
               });
+            
+              scope.$watch(attrs.ngShow, function(){
 
+                var isShown = scope.$eval(attrs.ngShow);
+
+                if(isShown){
+                  $log.debug('about to show ' + scope.data.type);
+                  utility.setEntryTransition(element, scope.data);
+                  savedData = scope.data;
+                }
+                else if(savedData != null){
+                  $log.debug('about to hide ' + savedData.type + ', next type on deck: ' + scope.data.type);
+                  utility.setExitTransition(element, savedData);
+                  savedData = null;
+                }
+              });
             }
         };
     }

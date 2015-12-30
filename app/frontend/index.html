@@ -59,53 +59,41 @@
     <script src="bower_components/jquery-ui/jquery-ui.js"></script>
     <script src="bower_components/angular-scroll/angular-scroll.js"></script>
     <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
+    <script src="bower_components/socket.io-client/socket.io.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app/frontend}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/templates.js"></script>
-        <script src="scripts/routes.js"></script>
-        <script src="scripts/angularfire/config.js"></script>
-        <script src="scripts/angularfire/firebase.ref.js"></script>
-        <script src="scripts/angularfire/auth.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/chat.js"></script>
-        <script src="scripts/controllers/login.js"></script>
-        <script src="scripts/controllers/account.js"></script>
-        <script src="scripts/directives/ngShowAuth.js"></script>
-        <script src="scripts/directives/ngHideAuth.js"></script>
-        <script src="scripts/directives/ub-bio-panels.js"></script>
-        <script src="scripts/directives/ub-drop-in.js"></script>
-        <script src="scripts/directives/ub-footer.js"></script>
-        <script src="scripts/directives/ub-live-video-overlay.js"></script>
-        <script src="scripts/directives/ub-logo.js"></script>
-        <script src="scripts/directives/ub-picture.js"></script>
-        <script src="scripts/directives/ub-slide-loader.js"></script>
-        <script src="scripts/directives/ub-sms.js"></script>
-        <script src="scripts/directives/ub-static-video-overlay.js"></script>
-        <script src="scripts/directives/ub-transition.js"></script>
-        <script src="scripts/directives/ub-weather.js"></script>
-        <script src="scripts/filters/reverse.js"></script>
-        <script src="scripts/filters/startFrom.js"></script>
-        <script src="scripts/services/mapsGoogleApis.js"></script>
-        <script src="scripts/services/openWeatherMap.js"></script>
-        <script src="scripts/services/utility.js"></script>
-        <script src="scripts/lib/matter.js"></script>
-        <!-- endbuild -->
-
-        <script src="/socket.io/socket.io.js"></script>
-        <script>
-          var socket = io('http://localhost:8080');
-          socket.on('connect', function (data) {
-            console.log(data);
-            socket.emit('join', { my: 'data' });
-          });
-
-          socket.on('messages', function(data) {
-            console.log(data);
-          });
-        </script>
+    <!-- build:js({.tmp,app/frontend}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/templates.js"></script>
+    <script src="scripts/routes.js"></script>
+    <script src="scripts/angularfire/config.js"></script>
+    <script src="scripts/angularfire/firebase.ref.js"></script>
+    <script src="scripts/angularfire/auth.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/chat.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/account.js"></script>
+    <script src="scripts/directives/ngShowAuth.js"></script>
+    <script src="scripts/directives/ngHideAuth.js"></script>
+    <script src="scripts/directives/ub-bio-panels.js"></script>
+    <script src="scripts/directives/ub-drop-in.js"></script>
+    <script src="scripts/directives/ub-footer.js"></script>
+    <script src="scripts/directives/ub-live-video-overlay.js"></script>
+    <script src="scripts/directives/ub-logo.js"></script>
+    <script src="scripts/directives/ub-picture.js"></script>
+    <script src="scripts/directives/ub-slide-loader.js"></script>
+    <script src="scripts/directives/ub-sms.js"></script>
+    <script src="scripts/directives/ub-static-video-overlay.js"></script>
+    <script src="scripts/directives/ub-transition.js"></script>
+    <script src="scripts/directives/ub-weather.js"></script>
+    <script src="scripts/filters/reverse.js"></script>
+    <script src="scripts/filters/startFrom.js"></script>
+    <script src="scripts/services/mapsGoogleApis.js"></script>
+    <script src="scripts/services/openWeatherMap.js"></script>
+    <script src="scripts/services/utility.js"></script>
+    <script src="scripts/lib/matter.js"></script>
+    <!-- endbuild -->
 
 </body>
 </html>
