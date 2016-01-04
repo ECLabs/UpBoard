@@ -10,8 +10,8 @@
     angular.module('upBoardApp')
       .directive('ubDropIn', dropIn);
     
-    dropIn.$inject = ['$log', '$timeout', '$document', 'utility'];
-    function dropIn($log, $timeout, $document, utility) {
+    dropIn.$inject = ['$log', '$timeout', '$document', 'ubSocketIo', 'utility'];
+    function dropIn($log, $timeout, $document, ubSocketIo, utility) {
         return {
           templateUrl: '/app/frontend/scripts/directives/ub-drop-in.tpl.html',
           restrict: 'E',
@@ -24,7 +24,7 @@
 
             var savedData; // use to remember for exit transition
             scope.messages = [];
-            scope.socketEvents = [];
+            scope.socketEvent = null;
 
             // Matter module aliases
             var Engine = Matter.Engine,
@@ -195,16 +195,18 @@
                 $log.debug('about to show ' + scope.data.type);
 
                 // only open socket once per event, event name could change dynamically
-                if(scope.socketEvents.indexOf(scope.data.content.event) === -1){
+                if(scope.socketEvent !== scope.data.content.event){
 
-                  var socket = io(location.origin);
-                  socket.on(scope.data.content.event, function(data) {
-                    console.log(data);
-                    console.log(scope);
+                  // remove previous listener if event name changes
+                  if(scope.socketEvent !== null) ubSocketIo.removeListener(scope.socketEvent);
+                  
+                  ubSocketIo.on(scope.data.content.event, function(data) {
+                    $log.debug(data);
+                    $log.debug(scope);
                     addBody(data);
                   });
 
-                  scope.socketEvents.push(scope.data.content.event);
+                  scope.socketEvent = scope.data.content.event;
                 }
                 utility.setEntryTransition(element, scope.data);
                 savedData = scope.data;
