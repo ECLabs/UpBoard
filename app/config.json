@@ -1,0 +1,97 @@
+{
+	"development": {
+
+		"host": "localhost",
+
+		"port": 8080,
+
+		"cookieSecret": "cookieSecret",
+
+		"sessionSecret": "sessionSecret",
+
+		"database": {
+
+			"name": "dev",
+
+			"host": "https://boiling-heat-9947.firebaseio.com",
+
+			"port": 443,
+
+			"user": "jamil.evans@evanschambers.com",
+
+			"password": "UpBoard123"
+		}
+	},
+
+
+	"production": {
+
+		"host": "",
+
+		"port": 8080,
+
+		"cookieSecret": "cookieSecret",
+
+		"sessionSecret": "sessionSecret",
+
+		"database": {
+
+			"name": "test",
+
+			"host": "localhost",
+
+			"port": 27017,
+
+			"user": "",
+
+			"password": ""
+		}
+	},
+
+	
+	"oauth": {
+
+		"facebook": {
+
+			"clientID": "",
+
+			"clientSecret": ""
+
+		},
+
+		"google": {
+
+			"consumerKey": "",
+
+			"consumerSecret": ""
+
+		},
+
+		"github": {
+
+			"clientID": "",
+
+			"clientSecret": ""
+
+		},
+
+		"twitter": {
+
+			"consumerKey": "",
+
+			"consumerSecret": ""
+
+		},
+
+		"linkedin": {
+
+			"consumerKey": "",
+
+			"consumerSecret": ""
+			
+		}
+
+	}
+
+
+}

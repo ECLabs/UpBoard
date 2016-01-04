@@ -1,0 +1,19 @@
+<div ng-show="data.type === 'sms'">
+  <div class="ub-sms">
+    <div id="smsDisplay" class="ub-sms-display">
+      <div class="ub-sms-default-msg">
+        <span id="smsDefaultMessage" class="ub-sms-body"></span><br/>
+        <span class="ub-sms-timestamp">{{startupTime | date:'shortTime'}}</span>
+      </div>
+      <div>
+        <div style="float:right;text-align:right;">
+          <div ng-repeat="message in messages" class="ub-sms-message">
+            <span class="ub-sms-body">{{message.body}}</span><br/>
+            <span class="ub-sms-timestamp">{{message.timestamp | date:'shortTime'}}</span>
+          </div>
+          <a id="smsDisplayEnd"><!-- used for scroll --></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

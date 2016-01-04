@@ -29,5 +29,8 @@ node_modules
 .sass-cache
 .DS_Store
 .tmp
+.ftppass
 
 dist
+tmp
+
