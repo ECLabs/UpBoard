@@ -84,7 +84,7 @@ angular.module('upBoardApp')
           }]
         }
       })
-      .otherwise({redirectTo: '/'});
+      .otherwise({redirectTo: '/login'});
   }])
 
   /**
