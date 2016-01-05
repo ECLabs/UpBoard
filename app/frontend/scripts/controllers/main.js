@@ -73,7 +73,8 @@
               description: 'Restart slideshow',
               callback: function(){
                 cancelTimeouts();
-                restart();
+                vm.currentIndex = 0;
+                startSlideShow();
                 toaster.pop('info', '', 'Slideshow restarted');
               }
             });
@@ -148,7 +149,7 @@
       
         function cancelTimeouts(){
           
-          $log.debug('canceling ' + vm.timeoutPromises.length + ' promises');
+          //$log.debug('canceling ' + vm.timeoutPromises.length + ' promises');
           
           // loop through promises and cancel them all
           while(vm.timeoutPromises.length > 0){
