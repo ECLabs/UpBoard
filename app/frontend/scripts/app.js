@@ -22,7 +22,8 @@ angular.module('upBoardApp', [
     'firebase.auth',
     'duScroll',
     'toaster',
-    'btford.socket-io'
+    'btford.socket-io',
+    'cfp.hotkeys'
   ])
 
   .config(['$logProvider', function($logProvider){ 
