@@ -44,8 +44,12 @@
               combo: 'ctrl+space',
               description: 'Pause/Stop slideshow',
               callback: function(){
-                cancelTimeouts();
-                toaster.pop('error', '', 'Slideshow stopped');
+                
+                if(vm.timeoutPromises.length > 0){
+                  cancelTimeouts();
+                  toaster.pop('error', '', 'Slideshow stopped');
+                }
+                else toaster.pop('warn', '', 'Slideshow already stopped');
               }
             });
           
@@ -53,8 +57,14 @@
               combo: 'ctrl+enter',
               description: 'Resume slideshow',
               callback: function(){
-                startSlideShow();
-                toaster.pop('info', '', 'Slideshow resumed');
+
+                if(vm.timeoutPromises.length === 0){
+
+                  if(!isEnd()) nextSlide();
+                  else if(vm.loop) restart();
+                  toaster.pop('info', '', 'Slideshow resumed');
+                }
+                else toaster.pop('warning', '', 'Slideshow already running');
               }
             });
           
@@ -63,9 +73,7 @@
               description: 'Restart slideshow',
               callback: function(){
                 cancelTimeouts();
-                vm.currentIndex = 0;
-                goToTransitionSlide();
-                $timeout(function(){startSlideShow();},1000);
+                restart();
                 toaster.pop('info', '', 'Slideshow restarted');
               }
             });
@@ -78,14 +86,12 @@
                 cancelTimeouts();
                 
                 if(vm.currentSlide.slideId !== 0){
-                  vm.currentIndex = vm.currentSlide.slideId - 1;
-                  goToTransitionSlide();
-                  $timeout(function(){setCurrentSlide();},1000);
+                  vm.currentIndex = vm.currentSlide.slideId != null ?
+                                    vm.currentSlide.slideId - 1 : vm.currentIndex - 1;
+                  setCurrentSlide();
                   toaster.pop('info', '', 'Previous slide');
                 }
-                else{
-                  toaster.pop('warning', '', 'First slide');
-                }
+                else toaster.pop('warning', '', 'First slide');
               }
             });
           
@@ -97,14 +103,12 @@
                 cancelTimeouts();
                 
                 if(!isEnd()) {
-                  vm.currentIndex = vm.currentSlide.slideId + 1;
-                  goToTransitionSlide();
-                  $timeout(function(){setCurrentSlide();},1000);
+                  vm.currentIndex = vm.currentSlide.slideId != null ?
+                                    vm.currentSlide.slideId + 1 : vm.currentIndex + 1;
+                  setCurrentSlide();
                   toaster.pop('info', '', 'Next slide');
                 }
-                else{
-                  toaster.pop('warning', '', 'Last slide');
-                }
+                else toaster.pop('warning', '', 'Last slide');
               }
             });
           
@@ -117,13 +121,10 @@
                 
                 if(!isEnd()){
                   vm.currentIndex = vm.activeDeck.slides.length - 1;
-                  goToTransitionSlide();
-                  $timeout(function(){setCurrentSlide();},1000);
+                  setCurrentSlide();
                   toaster.pop('info', '', 'Last slide');
                 }
-                else{
-                  toaster.pop('warning', '', 'Last slide already');
-                }
+                else toaster.pop('warning', '', 'Last slide already');
               }
             });
           
@@ -136,33 +137,23 @@
 
                 if(vm.currentSlide.slideId !== 0){
                   vm.currentIndex = 0;
-                  goToTransitionSlide();
-                  $timeout(function(){setCurrentSlide();},1000);
+                  setCurrentSlide();
                   toaster.pop('info', '', 'First slide');
                 }
-                else{
-                  toaster.pop('warning', '', 'First slide already');
-                }
+                else toaster.pop('warning', '', 'First slide already');
               }
             });
           
         })();
       
-        function goToTransitionSlide(){
-          
-          // displays white screen and clears out data in ub-footer
-          vm.currentSlide = {type:'transition'};
-        }
-      
         function cancelTimeouts(){
           
-          // loop through promises and cancel them all
-          for(var i = 0; i < vm.timeoutPromises.length; i++){
-            $timeout.cancel(vm.timeoutPromises[i]);
-          }
+          $log.debug('canceling ' + vm.timeoutPromises.length + ' promises');
           
-          // TODO cancel current slide's timeouts (bioPanels)
-          // vm.currentSlide.cancelTimeouts(); 
+          // loop through promises and cancel them all
+          while(vm.timeoutPromises.length > 0){
+            $timeout.cancel(vm.timeoutPromises.pop());
+          }
         }
         
         function isEnd(){
@@ -194,7 +185,8 @@
                     
                 }, Number(vm.currentSlide.timing.transitionTime) + 2000));  // compensate for transition slide time
                 
-                goToTransitionSlide();
+                // go to transition slide
+                vm.currentSlide = {type:'transition'};
                 
             }, slideTime));
         }
@@ -205,6 +197,7 @@
             vm.currentSlide = vm.activeDeck.slides[vm.currentIndex];
             vm.currentSlide.activeDeckId = vm.activeDeck.$id;
             vm.currentSlide.slideId = vm.currentIndex++;
+            vm.currentSlide.timeoutPromises = vm.timeoutPromises;
         }
         
         function startSlideShow(){

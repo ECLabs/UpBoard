@@ -154,15 +154,17 @@
                                                             ((timing.openSection + timing.sectionTime) * i) + 
                                                             timing.sectionTime;
 
+                                  // add timeout promises to controller passed array to handle canceling
+                                
                                   // show underline in
-                                  $timeout(function(){
+                                  scope.data.timeoutPromises.push($timeout(function(){
                                       var bioPanelEl = angular.element(element.find('.bl-panel')[scope.count]);
                                       $document.duScrollToElement(bioPanelEl, 0, 1000);
                                       scope['showLine' + scope.count] = true;
-                                  }, timeToNextPanelShow - 1500);
+                                  }, timeToNextPanelShow - 1500));
 
                                   // show bio content
-                                  $timeout(function(){
+                                  scope.data.timeoutPromises.push($timeout(function(){
 
                                       var content = scope.data.content.content;
 
@@ -184,19 +186,19 @@
 
                                       showBioContent(true);
                                       scope.showContent = true;
-                                  }, timeToNextPanelShow);
+                                  }, timeToNextPanelShow));
 
                                   // hide bio content
-                                  $timeout(function(){
+                                  scope.data.timeoutPromises.push($timeout(function(){
                                       showBioContent(false);
                                       scope.showContent = false;
-                                  }, timeToNextPanelHide);
+                                  }, timeToNextPanelHide));
 
                                   // show underline out
-                                  $timeout(function(){
+                                  scope.data.timeoutPromises.push($timeout(function(){
                                       scope['showLine' + scope.count] = false;
                                       scope.count++;
-                                  }, timeToNextPanelHide + 1500);
+                                  }, timeToNextPanelHide + 1500));
                               }
                               else{
                                   // add blank columns to fill space
