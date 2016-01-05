@@ -49,7 +49,7 @@
                   cancelTimeouts();
                   toaster.pop('error', '', 'Slideshow stopped');
                 }
-                else toaster.pop('warn', '', 'Slideshow already stopped');
+                else toaster.pop('warning', '', 'Slideshow already stopped');
               }
             });
           
