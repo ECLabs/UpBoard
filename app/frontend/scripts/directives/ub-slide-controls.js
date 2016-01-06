@@ -39,7 +39,7 @@
           
           timeoutPromise = $timeout(function(){
             scope.hover = false;
-          }, 30000);
+          }, 5000);
           
         });
       }
