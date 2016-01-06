@@ -3,4 +3,14 @@
 <ub-slide-loader deck="main.activeDeck" current-slide="main.currentSlide"></ub-slide-loader>
 
 <ub-transition data="main.currentSlide"></ub-transition>
+
+<ub-slide-controls first="main.goToFirstSlide()"
+                   previous="main.goToPreviousSlide()"
+                   play="main.resumeSlideshow()"
+                   pause="main.pauseSlideshow()"
+                   next="main.goToNextSlide()"
+                   last="main.goToLastSlide()"
+                   repeat="main.loop"
+                   paused="main.paused"></ub-slide-controls>
+
 <ub-footer data="main.currentSlide" logo="main.logo"></ub-footer>

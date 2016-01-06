@@ -22,6 +22,7 @@
         
         vm.currentIndex = 0;
         vm.loop = true;
+        vm.paused = false;
         vm.activeDeck = null;
         vm.currentSlide = null;
         vm.logo = null;
@@ -43,9 +44,9 @@
             hotkeys.add({
               combo: 'ctrl+space',
               description: 'Pause/Stop slideshow',
-              callback: function(){
+              callback: vm.pauseSlideshow = function(){
                 
-                if(vm.timeoutPromises.length > 0){
+                if(!vm.paused){
                   cancelTimeouts();
                   toaster.pop('error', '', 'Slideshow stopped');
                 }
@@ -56,12 +57,13 @@
             hotkeys.add({
               combo: 'ctrl+enter',
               description: 'Resume slideshow',
-              callback: function(){
+              callback: vm.resumeSlideshow = function(){
 
-                if(vm.timeoutPromises.length === 0){
+                if(vm.paused){
 
-                  if(!isEnd()) nextSlide();
-                  else if(vm.loop) restart();
+                  if(isEnd()) vm.currentIndex = 0;
+                  startSlideShow();
+                  vm.paused = false;
                   toaster.pop('info', '', 'Slideshow resumed');
                 }
                 else toaster.pop('warning', '', 'Slideshow already running');
@@ -71,10 +73,11 @@
             hotkeys.add({
               combo: 'ctrl+r',
               description: 'Restart slideshow',
-              callback: function(){
+              callback: vm.restartSlideshow = function(){
                 cancelTimeouts();
                 vm.currentIndex = 0;
                 startSlideShow();
+                vm.paused = false;
                 toaster.pop('info', '', 'Slideshow restarted');
               }
             });
@@ -82,7 +85,7 @@
             hotkeys.add({
               combo: 'ctrl+b',
               description: 'Back to previous slide, slideshow stopped',
-              callback: function(){
+              callback: vm.goToPreviousSlide = function(){
                 
                 cancelTimeouts();
                 
@@ -99,7 +102,7 @@
             hotkeys.add({
               combo: 'ctrl+n',
               description: 'Skip to next slide, slideshow stopped',
-              callback: function(){
+              callback: vm.goToNextSlide = function(){
                 
                 cancelTimeouts();
                 
@@ -116,7 +119,7 @@
             hotkeys.add({
               combo: 'ctrl+l',
               description: 'Jump to last slide, slideshow stopped',
-              callback: function(){
+              callback: vm.goToLastSlide = function(){
                 
                 cancelTimeouts();
                 
@@ -132,7 +135,7 @@
             hotkeys.add({
               combo: 'ctrl+k',
               description: 'Jump to first slide, slideshow stopped',
-              callback: function(){
+              callback: vm.goToFirstSlide = function(){
                 
                 cancelTimeouts();
 
@@ -155,6 +158,7 @@
           while(vm.timeoutPromises.length > 0){
             $timeout.cancel(vm.timeoutPromises.pop());
           }
+          vm.paused = true;
         }
         
         function isEnd(){
@@ -183,6 +187,7 @@
                     setCurrentSlide();
                     if(!isEnd()) nextSlide();
                     else if(vm.loop) restart();
+                    else vm.paused = true;
                     
                 }, Number(vm.currentSlide.timing.transitionTime) + 2000));  // compensate for transition slide time
                 
