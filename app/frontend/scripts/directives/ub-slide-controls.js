@@ -71,6 +71,10 @@
         scope.$watch(function(){ return scope.slideTime }, function(){
           scope.count = 0;
         });
+
+//        scope.$watch(function(){ return scope.paused }, function(){
+//          $log.debug(scope.paused);
+//        });
       }
     };
   }

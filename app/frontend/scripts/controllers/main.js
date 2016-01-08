@@ -55,7 +55,7 @@
             });
           
             hotkeys.add({
-              combo: 'ctrl+enter',
+              combo: 'ctrl+e',
               description: 'Resume slideshow',
               callback: vm.resumeSlideshow = function(){
 
@@ -72,10 +72,14 @@
               combo: 'ctrl+r',
               description: 'Restart slideshow',
               callback: vm.restartSlideshow = function(){
+
                 cancelTimeouts();
-                vm.currentIndex = 0;
-                startSlideShow();
-                toaster.pop('info', '', 'Slideshow restarted');
+
+                vm.timeoutPromises.push($timeout(function(){
+                  vm.currentIndex = 0;
+                  startSlideShow();
+                  toaster.pop('info', '', 'Slideshow restarted');
+                }, 500));
               }
             });
           
@@ -208,10 +212,9 @@
         
         function startSlideShow(){
             if(vm.data != null && vm.data[0] != null){
-                
+              vm.paused = false;
               vm.activeDeck = vm.data[0];
               vm.logo = vm.activeDeck.logo;
-              vm.paused = false;
               run();
             }
         }

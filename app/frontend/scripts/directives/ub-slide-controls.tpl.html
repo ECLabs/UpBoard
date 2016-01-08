@@ -3,12 +3,12 @@
       <div class="ub-slide-controls">
         <a href="" ng-click="firstFn()" title="First"><i class="glyphicon glyphicon-step-backward"></i></a>
         <a href="" ng-click="previousFn()" title="Previous"><i class="glyphicon glyphicon-backward"></i></a>
-        <a ng-show="paused" href="" ng-click="playFn();" title="Play"><i class="glyphicon glyphicon-play"></i></a>
-        <a ng-show="!paused" href="" ng-click="pauseFn();" title="Pause"><i class="glyphicon glyphicon-pause"></i></a>
+        <a ng-show="paused" href="" ng-click="playFn()" title="Play"><i class="glyphicon glyphicon-play"></i></a>
+        <a ng-show="!paused" href="" ng-click="pauseFn()" title="Pause"><i class="glyphicon glyphicon-pause"></i></a>
         <a href="" ng-click="nextFn()" title="Next"><i class="glyphicon glyphicon-forward"></i></a>
         <a href="" ng-click="lastFn()" title="Last"><i class="glyphicon glyphicon-step-forward"></i></a>
-        <a ng-show="!repeat" href="" ng-click="repeat = true" title="Loop"><i class="glyphicon glyphicon-refresh"></i></a>
-        <a ng-show="repeat" href="" ng-click="repeat = false" title="Run once"><i class="glyphicon glyphicon-repeat"></i></a>
+        <a ng-show="!repeat" href="" ng-click="repeat=true" title="Loop"><i class="glyphicon glyphicon-refresh"></i></a>
+        <a ng-show="repeat" href="" ng-click="repeat=false" title="Run once"><i class="glyphicon glyphicon-repeat"></i></a>
         <uib-progressbar ng-show="!paused" class="progress active" animate="false" max="slideTime" value="count" style="height:3px;"></uib-progressbar>
       </div>
     </div>
