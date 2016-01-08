@@ -60,10 +60,8 @@
               callback: vm.resumeSlideshow = function(){
 
                 if(vm.paused){
-
                   if(isEnd()) vm.currentIndex = 0;
                   startSlideShow();
-                  vm.paused = false;
                   toaster.pop('info', '', 'Slideshow resumed');
                 }
                 else toaster.pop('warning', '', 'Slideshow already running');
@@ -77,7 +75,6 @@
                 cancelTimeouts();
                 vm.currentIndex = 0;
                 startSlideShow();
-                vm.paused = false;
                 toaster.pop('info', '', 'Slideshow restarted');
               }
             });
@@ -174,27 +171,21 @@
 
 //            $log.debug(vm.currentSlide);
             
-            var delay = vm.currentSlide.slideTime + vm.currentSlide.timing.transitionTime + 2000;
+            var transitionSlideTime = 2000; // compensate for transition slide time
+            var delay = vm.currentSlide.slideTime + vm.currentSlide.timing.transitionTime + transitionSlideTime;
 //            $log.debug('delay: ' + delay);
             
             vm.timeoutPromises.push($timeout(function(){
 
                 // get ready to go to next slide
-                vm.timeoutPromises.push($timeout(function(){
-                    
-                    setCurrentSlide();
-                    if(!isEnd()) nextSlide();
-                    else if(vm.loop) restart();
-                    else vm.paused = true;
-                    
-                }, Number(vm.currentSlide.timing.transitionTime) + 2000));  // compensate for transition slide time
+                vm.timeoutPromises.push($timeout(run, Number(vm.currentSlide.timing.transitionTime) + transitionSlideTime));
                 
                 // go to transition slide
                 vm.currentSlide = {type:'transition'};
                 
             }, vm.currentSlide.slideTime));
         }
-      
+
         function setCurrentSlide(){
           
             // pass active deck id and slide id for firebase ref binding
@@ -204,15 +195,21 @@
             vm.currentSlide.timeoutPromises = vm.timeoutPromises;
             vm.currentSlide.slideTime = utility.calculateSlideTime(vm.currentSlide);
         }
+      
+        function run(){
+          setCurrentSlide();
+          if(!isEnd()) nextSlide();
+          else if(vm.loop) restart();
+          else vm.paused = true;
+        }
         
         function startSlideShow(){
             if(vm.data != null && vm.data[0] != null){
                 
               vm.activeDeck = vm.data[0];
               vm.logo = vm.activeDeck.logo;
-              
-              setCurrentSlide();
-              if(!isEnd()) nextSlide();
+              vm.paused = false;
+              run();
             }
         }
     }

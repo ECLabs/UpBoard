@@ -33,15 +33,15 @@
         scope.hover = false;
         scope.count = 0;
         scope.idleTime = 0;
-        scope.pauseTick = false;
-        scope.pauseIncrement = false;
+        scope.stopIncrement = false;
 
         function tickProgress(){
-          if(!scope.pauseTick) scope.count += 10;
+          if(!scope.paused) scope.count += 10;
+          else scope.count = 0;
         }
         
         function timerIncrement(){
-          if(!scope.pauseIncrement) scope.idleTime++;
+          if(!scope.stopIncrement) scope.idleTime++;
           if(scope.idleTime > 5)scope.hover = false;
         }
 
@@ -60,11 +60,11 @@
         scope.mouseenter = function(){
           scope.idleTime = 0;
           scope.hover = true;
-          scope.pauseIncrement = true;
+          scope.stopIncrement = true;
         }
 
         scope.mouseleave = function(){
-          scope.pauseIncrement = false;
+          scope.stopIncrement = false;
         }
 
         // scope watch for new slide
