@@ -136,12 +136,14 @@
                 
                 cancelTimeouts();
 
-                if(vm.currentSlide.slideId !== 0){
+                if(vm.currentSlide.slideId === 0){
+                  toaster.pop('warning', '', 'First slide already');
+                }
+                else if(vm.currentIndex !== 0){
                   vm.currentIndex = 0;
                   setCurrentSlide();
                   toaster.pop('info', '', 'First slide');
                 }
-                else toaster.pop('warning', '', 'First slide already');
               }
             });
           
@@ -149,13 +151,14 @@
       
         function cancelTimeouts(){
           
+          vm.paused = true; // call first, order seems to matter to get UI updated
+
           //$log.debug('canceling ' + vm.timeoutPromises.length + ' promises');
           
           // loop through promises and cancel them all
           while(vm.timeoutPromises.length > 0){
             $timeout.cancel(vm.timeoutPromises.pop());
           }
-          vm.paused = true;
         }
         
         function isEnd(){
