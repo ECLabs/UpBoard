@@ -22,6 +22,7 @@
         previousFn: '&previous',
         playFn: '&play',
         pauseFn: '&pause',
+        restartFn: '&restart',
         nextFn: '&next',
         lastFn: '&last',
         repeat: '=',
