@@ -23,7 +23,8 @@ angular.module('upBoardApp', [
     'duScroll',
     'toaster',
     'btford.socket-io',
-    'cfp.hotkeys'
+    'cfp.hotkeys',
+    'ui.bootstrap'
   ])
 
   .config(['$logProvider', function($logProvider){ 

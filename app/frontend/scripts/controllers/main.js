@@ -174,9 +174,7 @@
 
 //            $log.debug(vm.currentSlide);
             
-            var slideTime = utility.calculateSlideTime(vm.currentSlide);
-            
-            var delay = slideTime + vm.currentSlide.timing.transitionTime + 2000;
+            var delay = vm.currentSlide.slideTime + vm.currentSlide.timing.transitionTime + 2000;
 //            $log.debug('delay: ' + delay);
             
             vm.timeoutPromises.push($timeout(function(){
@@ -194,7 +192,7 @@
                 // go to transition slide
                 vm.currentSlide = {type:'transition'};
                 
-            }, slideTime));
+            }, vm.currentSlide.slideTime));
         }
       
         function setCurrentSlide(){
@@ -204,6 +202,7 @@
             vm.currentSlide.activeDeckId = vm.activeDeck.$id;
             vm.currentSlide.slideId = vm.currentIndex++;
             vm.currentSlide.timeoutPromises = vm.timeoutPromises;
+            vm.currentSlide.slideTime = utility.calculateSlideTime(vm.currentSlide);
         }
         
         function startSlideShow(){

@@ -36,9 +36,19 @@ canvas:active {
   max-height:80vh;
   overflow-y:scroll;
 }
-  
-.ub-container{
 
+.ub-slide-controls {
+  margin:0 auto;
+  width:50vw;
+  border-radius:20px;
+  background:linear-gradient(to top, #222222, #555555);
+  color:#cccccc;
+  font-size:3vw;
+  padding:1vh;
+  white-space: nowrap;
+}
+
+.ub-container{
     background-color:white;
     position:relative;
     padding:0;

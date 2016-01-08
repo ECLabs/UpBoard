@@ -1,14 +1,15 @@
-<div ng-show="hover" class="ub-fade" style="animation-duration:250ms;">
+<div ng-show="hover === true" class="ub-fade" style="animation-duration:250ms;" ng-mouseenter="mouseenter()" ng-mouseleave="mouseleave()">
     <div style="position:fixed;text-align:center;bottom:15vh;width:100%;height:10%;z-index:1000;">
-      <div style="margin:0 auto;width:50vw;border-radius:20px;background:linear-gradient(to top, #222222, #555555);color:#cccccc;font-size:3vw;padding:1vh;white;whitespace:nowrap;">
+      <div class="ub-slide-controls">
         <a href="" ng-click="firstFn()" title="First"><i class="glyphicon glyphicon-step-backward"></i></a>
         <a href="" ng-click="previousFn()" title="Previous"><i class="glyphicon glyphicon-backward"></i></a>
-        <a ng-show="paused" href="" ng-click="playFn();" title="Play"><i class="glyphicon glyphicon-play"></i></a>
-        <a ng-show="!paused" href="" ng-click="pauseFn();" title="Pause"><i class="glyphicon glyphicon-pause"></i></a>
+        <a ng-show="paused" href="" ng-click="playFn();pauseTick=false;count = 0;" title="Play"><i class="glyphicon glyphicon-play"></i></a>
+        <a ng-show="!paused" href="" ng-click="pauseFn();pauseTick=true;" title="Pause"><i class="glyphicon glyphicon-pause"></i></a>
         <a href="" ng-click="nextFn()" title="Next"><i class="glyphicon glyphicon-forward"></i></a>
         <a href="" ng-click="lastFn()" title="Last"><i class="glyphicon glyphicon-step-forward"></i></a>
         <a ng-show="!repeat" href="" ng-click="repeat = true" title="Loop"><i class="glyphicon glyphicon-refresh"></i></a>
         <a ng-show="repeat" href="" ng-click="repeat = false" title="Run once"><i class="glyphicon glyphicon-repeat"></i></a>
+        <uib-progressbar class="progress-striped active" animate="false" max="slideTime" value="count" style="height:.25em;"></uib-progressbar>
       </div>
     </div>
 </div>
