@@ -54,10 +54,6 @@
           scope.hover = true;
         });
 
-        element.parent().on('click', function(){
-          scope.idleTime = 5;
-        });
-
         scope.mouseenter = function(){
           scope.idleTime = 0;
           scope.hover = true;
@@ -72,10 +68,6 @@
         scope.$watch(function(){ return scope.slideTime }, function(){
           scope.count = 0;
         });
-
-//        scope.$watch(function(){ return scope.paused }, function(){
-//          $log.debug(scope.paused);
-//        });
       }
     };
   }
