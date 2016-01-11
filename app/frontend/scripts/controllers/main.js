@@ -60,7 +60,7 @@
               callback: vm.resumeSlideshow = function(){
 
                 if(vm.paused){
-                  if(isEnd()) vm.currentIndex = 0;
+                  if(vm.currentIndex !== 0) vm.currentIndex--;
                   startSlideShow();
                   toaster.pop('info', '', 'Slideshow resumed');
                 }
