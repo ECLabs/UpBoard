@@ -12,10 +12,10 @@
       .controller('MainCtrl', mainCtrl);
 
     mainCtrl.$inject = ['$firebaseArray', 'Auth', 'Ref',
-                        '$timeout', '$log', '$location', 
+                        '$timeout', '$log', '$location',
                         'hotkeys', 'toaster', 'utility'];
     function mainCtrl($firebaseArray, Auth, Ref,
-                      $timeout, $log, $location, 
+                      $timeout, $log, $location,
                       hotkeys, toaster, utility) {
         
         var vm = this;
@@ -40,7 +40,7 @@
                 vm.data.$loaded().then(startSlideShow);
             }
           
-            // add key controls
+            // add slide controls
             hotkeys.add({
               combo: 'ctrl+space',
               description: 'Pause/Stop slideshow',
@@ -48,6 +48,13 @@
                 
                 if(!vm.paused){
                   cancelTimeouts();
+
+                  // slide duration left may be from a previous pause
+                  var duration = vm.currentSlide.remainingTime != null ?
+                                 vm.currentSlide.remainingTime :
+                                 vm.currentSlide.slideTime;
+
+                  vm.currentSlide.remainingTime = duration - (new Date().getTime() - vm.currentSlide.startTime);
                   toaster.pop('error', '', 'Slideshow stopped');
                 }
                 else toaster.pop('warning', '', 'Slideshow already stopped');
@@ -156,7 +163,7 @@
       
         function cancelTimeouts(){
           
-          vm.paused = true; // call first, order seems to matter to get UI updated
+          vm.paused = true;
 
           //$log.debug('canceling ' + vm.timeoutPromises.length + ' promises');
           
@@ -178,30 +185,34 @@
         
         function nextSlide(){
 
-//            $log.debug(vm.currentSlide);
-            
+            var slideDelay = vm.currentSlide.remainingTime != null ?
+                             vm.currentSlide.remainingTime : vm.currentSlide.slideTime;
+
             var transitionSlideTime = 2000; // compensate for transition slide time
-            var delay = vm.currentSlide.slideTime + vm.currentSlide.timing.transitionTime + transitionSlideTime;
-//            $log.debug('delay: ' + delay);
-            
+            var transitionDelay = Number(vm.currentSlide.timing.transitionTime) + transitionSlideTime;
+
             vm.timeoutPromises.push($timeout(function(){
 
                 // get ready to go to next slide
-                vm.timeoutPromises.push($timeout(run, Number(vm.currentSlide.timing.transitionTime) + transitionSlideTime));
-                
+                vm.timeoutPromises.push($timeout(run, transitionDelay));
+
+                // clear out current slide remainingTime attribute
+                vm.currentSlide.remainingTime = null;
+
                 // go to transition slide
                 vm.currentSlide = {type:'transition'};
-                
-            }, vm.currentSlide.slideTime));
+
+            }, slideDelay));
         }
 
         function setCurrentSlide(){
-          
+
             // pass active deck id and slide id for firebase ref binding
             vm.currentSlide = vm.activeDeck.slides[vm.currentIndex];
             vm.currentSlide.activeDeckId = vm.activeDeck.$id;
             vm.currentSlide.slideId = vm.currentIndex++;
             vm.currentSlide.timeoutPromises = vm.timeoutPromises;
+            vm.currentSlide.startTime = new Date().getTime();
             vm.currentSlide.slideTime = utility.calculateSlideTime(vm.currentSlide);
         }
       

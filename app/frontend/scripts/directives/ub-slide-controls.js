@@ -27,7 +27,8 @@
         lastFn: '&last',
         repeat: '=',
         paused: '=',
-        slideTime: '@time'
+        slideTime: '@time',
+        id: '@'
       },
       link: function postLink(scope, element, attrs) {
 
@@ -38,7 +39,6 @@
 
         function tickProgress(){
           if(!scope.paused) scope.count += 10;
-          else scope.count = 0;
         }
         
         function timerIncrement(){
@@ -65,7 +65,7 @@
         }
 
         // scope watch for new slide
-        scope.$watch(function(){ return scope.slideTime }, function(){
+        scope.$watch(function(){ return scope.id }, function(){
           scope.count = 0;
         });
       }
