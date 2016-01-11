@@ -1,7 +1,7 @@
 # UpBoard
 Digital Signage for Corporations
 
-[Demo available on AWS](http://upboardlb-2027375028.us-east-1.elb.amazonaws.com/upboard)
+[Demo available on AWS](http://upboardlb-2027375028.us-east-1.elb.amazonaws.com:8080)
 
 #### Getting Started:
 
@@ -55,7 +55,7 @@ To add a slide make a new node with the number the slide will be (slides added d
 
 The logo will display in the optional footer that can be displayed on top of each slide.  The slides will be shown in the order in which they appear in the database and not by their number. However, the number is important and must match the order they appear in the database.
 
-A slide type must then be specified. The types are:
+A slide type must then be specified. The current types are:
 * **logo**
 * **picture**
 * **liveVideoOverlay**
@@ -63,10 +63,13 @@ A slide type must then be specified. The types are:
 * **bioPanels**
 * **weather**
 * **sms**
+* **dropIn**
 
 Each of these types has a specific set of parameters to be filled out.
 
 Transition types currently supported are *fade* and *slide*.
+
+Keyboard hotkeys (enter ? to access the shortcut menu options) and mouse controls (appears on mouse move) are available to control the slideshow.
 
 #### logo slide data structure:
 
@@ -235,5 +238,23 @@ Transition types currently supported are *fade* and *slide*.
             "timeout" : 60000, // time til displayed messages expire, based on timestamp
             "timestamp" : 1450885300786       // set by incoming message
         },
-        "showFooter" : true,
+        "showFooter" : true
+    }
+    
+#### dropIn slide data structure:
+
+    {
+        "type" : "dropIn",
+        "transitions" : {
+            "entry" : "fade",
+            "exit" : "fade"
+        },
+        "timing" : {
+            "slideTime" : 30000,
+            "transitionTime" : 2000
+        },
+        "content" : {
+            "event" : "event1"  // socket message event to listen on
+        },
+        "showFooter" : true
     }
