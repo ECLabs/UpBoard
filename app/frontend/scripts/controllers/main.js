@@ -93,6 +93,7 @@
                 if(vm.currentSlide.slideId !== 0){
                   vm.currentIndex = vm.currentSlide.slideId != null ?
                                     vm.currentSlide.slideId - 1 : vm.currentIndex - 1;
+
                   setCurrentSlide();
                   toaster.pop('info', '', 'Previous slide');
                 }
@@ -107,9 +108,9 @@
                 
                 cancelTimeouts();
                 
-                if(!isEnd()) {
-                  vm.currentIndex = vm.currentSlide.slideId != null ?
-                                    vm.currentSlide.slideId + 1 : vm.currentIndex + 1;
+                // check to make sure the next slide exists
+                if(!isEnd() && (vm.currentSlide.slideId != null && !isEnd(vm.currentSlide.slideId + 1))) {
+                  vm.currentIndex = vm.currentSlide.slideId + 1;
                   setCurrentSlide();
                   toaster.pop('info', '', 'Next slide');
                 }
@@ -143,7 +144,7 @@
                 if(vm.currentSlide.slideId === 0){
                   toaster.pop('warning', '', 'First slide already');
                 }
-                else if(vm.currentIndex !== 0){
+                else {
                   vm.currentIndex = 0;
                   setCurrentSlide();
                   toaster.pop('info', '', 'First slide');
@@ -165,8 +166,9 @@
           }
         }
         
-        function isEnd(){
-            return vm.currentIndex >= vm.activeDeck.slides.length;
+        function isEnd(index){
+            var compareIndex = index != null ? index : vm.currentIndex;
+            return compareIndex > vm.activeDeck.slides.length - 1;
         }
         
         function restart(){
