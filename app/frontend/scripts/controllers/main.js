@@ -67,7 +67,7 @@
               callback: vm.resumeSlideshow = function(){
 
                 if(vm.paused){
-                  if(vm.currentIndex !== 0) vm.currentIndex--;
+                  if(vm.currentSlide.slideId != null) vm.currentIndex = vm.currentSlide.slideId;
                   startSlideShow();
                   toaster.pop('info', '', 'Slideshow resumed');
                 }
@@ -81,9 +81,11 @@
               callback: vm.restartSlideshow = function(){
 
                 cancelTimeouts();
+                clearRemainingTime();
+
+                vm.currentIndex = 0;
 
                 vm.timeoutPromises.push($timeout(function(){
-                  vm.currentIndex = 0;
                   startSlideShow();
                   toaster.pop('info', '', 'Slideshow restarted');
                 }, 500));
@@ -96,12 +98,13 @@
               callback: vm.goToPreviousSlide = function(){
                 
                 cancelTimeouts();
+                clearRemainingTime();
                 
                 if(vm.currentSlide.slideId !== 0){
                   vm.currentIndex = vm.currentSlide.slideId != null ?
                                     vm.currentSlide.slideId - 1 : vm.currentIndex - 1;
 
-                  setCurrentSlide();
+                  setCurrentSlide(true);
                   toaster.pop('info', '', 'Previous slide');
                 }
                 else toaster.pop('warning', '', 'First slide');
@@ -114,11 +117,12 @@
               callback: vm.goToNextSlide = function(){
                 
                 cancelTimeouts();
+                clearRemainingTime();
                 
                 // check to make sure the next slide exists
                 if(!isEnd() && (vm.currentSlide.slideId != null && !isEnd(vm.currentSlide.slideId + 1))) {
                   vm.currentIndex = vm.currentSlide.slideId + 1;
-                  setCurrentSlide();
+                  setCurrentSlide(true);
                   toaster.pop('info', '', 'Next slide');
                 }
                 else toaster.pop('warning', '', 'Last slide');
@@ -131,10 +135,11 @@
               callback: vm.goToLastSlide = function(){
                 
                 cancelTimeouts();
+                clearRemainingTime();
                 
                 if(!isEnd()){
                   vm.currentIndex = vm.activeDeck.slides.length - 1;
-                  setCurrentSlide();
+                  setCurrentSlide(true);
                   toaster.pop('info', '', 'Last slide');
                 }
                 else toaster.pop('warning', '', 'Last slide already');
@@ -147,13 +152,14 @@
               callback: vm.goToFirstSlide = function(){
                 
                 cancelTimeouts();
+                clearRemainingTime();
 
                 if(vm.currentSlide.slideId === 0){
                   toaster.pop('warning', '', 'First slide already');
                 }
                 else {
                   vm.currentIndex = 0;
-                  setCurrentSlide();
+                  setCurrentSlide(true);
                   toaster.pop('info', '', 'First slide');
                 }
               }
@@ -172,17 +178,21 @@
             $timeout.cancel(vm.timeoutPromises.pop());
           }
         }
-        
+
+        function clearRemainingTime(){
+            vm.currentSlide.remainingTime = null;
+        }
+
         function isEnd(index){
             var compareIndex = index != null ? index : vm.currentIndex;
             return compareIndex > vm.activeDeck.slides.length - 1;
         }
-        
+
         function restart(){
             vm.currentIndex = 0;
             nextSlide();
         }
-        
+
         function nextSlide(){
 
             var slideDelay = vm.currentSlide.remainingTime != null ?
@@ -196,8 +206,7 @@
                 // get ready to go to next slide
                 vm.timeoutPromises.push($timeout(run, transitionDelay));
 
-                // clear out current slide remainingTime attribute
-                vm.currentSlide.remainingTime = null;
+                clearRemainingTime();
 
                 // go to transition slide
                 vm.currentSlide = {type:'transition'};
@@ -207,22 +216,24 @@
 
         function setCurrentSlide(){
 
-            // pass active deck id and slide id for firebase ref binding
             vm.currentSlide = vm.activeDeck.slides[vm.currentIndex];
+
+            // pass active deck id and slide id for firebase ref binding
             vm.currentSlide.activeDeckId = vm.activeDeck.$id;
             vm.currentSlide.slideId = vm.currentIndex++;
+
             vm.currentSlide.timeoutPromises = vm.timeoutPromises;
             vm.currentSlide.startTime = new Date().getTime();
             vm.currentSlide.slideTime = utility.calculateSlideTime(vm.currentSlide);
         }
-      
+
         function run(){
-          setCurrentSlide();
-          if(!isEnd()) nextSlide();
-          else if(vm.loop) restart();
-          else vm.paused = true;
+            setCurrentSlide();
+            if(!isEnd()) nextSlide();
+            else if(vm.loop) restart();
+            else vm.paused = true;
         }
-        
+
         function startSlideShow(){
             if(vm.data != null && vm.data[0] != null){
               vm.paused = false;
@@ -232,5 +243,5 @@
             }
         }
     }
-    
+
 })();
