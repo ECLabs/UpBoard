@@ -12,10 +12,10 @@
       .controller('MainCtrl', mainCtrl);
 
     mainCtrl.$inject = ['$firebaseArray', 'Auth', 'Ref',
-                        '$timeout', '$log', '$location',
+                        '$timeout', '$log', '$location', '$window',
                         'hotkeys', 'toaster', 'utility'];
     function mainCtrl($firebaseArray, Auth, Ref,
-                      $timeout, $log, $location,
+                      $timeout, $log, $location, $window,
                       hotkeys, toaster, utility) {
         
         var vm = this;
@@ -167,6 +167,13 @@
                 }
               }
             });
+
+            // user has switched windows/tabs, pause the slideshow
+            function handleBlur(){
+              vm.pauseSlideshow();
+            }
+
+            angular.element( $window ).on( "blur", handleBlur );
           
         })();
       
