@@ -120,8 +120,11 @@
                 clearRemainingTime();
                 
                 // check to make sure the next slide exists
-                if(!isEnd() && (vm.currentSlide.slideId != null && !isEnd(vm.currentSlide.slideId + 1))) {
-                  vm.currentIndex = vm.currentSlide.slideId + 1;
+                if(!isEnd()) {
+
+                  if(vm.currentSlide.slideId != null && !isEnd(vm.currentSlide.slideId + 1)) {
+                     vm.currentIndex = vm.currentSlide.slideId + 1;
+                  }
                   setCurrentSlide(true);
                   toaster.pop('info', '', 'Next slide');
                 }
@@ -171,11 +174,11 @@
           
           vm.paused = true;
 
-          //$log.debug('canceling ' + vm.timeoutPromises.length + ' promises');
+          $log.debug('canceling ' + vm.timeoutPromises.length + ' promises');
           
           // loop through promises and cancel them all
           while(vm.timeoutPromises.length > 0){
-            $timeout.cancel(vm.timeoutPromises.pop());
+            $timeout.cancel(vm.timeoutPromises.shift());
           }
         }
 
@@ -222,7 +225,7 @@
             vm.currentSlide.activeDeckId = vm.activeDeck.$id;
             vm.currentSlide.slideId = vm.currentIndex++;
 
-            vm.currentSlide.timeoutPromises = vm.timeoutPromises;
+            // capture slide start time to determine remaining time if/when paused
             vm.currentSlide.startTime = new Date().getTime();
             vm.currentSlide.slideTime = utility.calculateSlideTime(vm.currentSlide);
         }

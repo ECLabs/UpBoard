@@ -43,7 +43,7 @@
         
         function timerIncrement(){
           if(!scope.stopIncrement) scope.idleTime++;
-          if(scope.idleTime > 5)scope.hover = false;
+          if(scope.idleTime > 5) scope.hover = false;
         }
 
         $interval(tickProgress, 10);     // progress bar

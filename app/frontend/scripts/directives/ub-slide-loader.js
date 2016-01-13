@@ -19,7 +19,8 @@
         replace: true,
         scope:{
           deck: '=',
-          currentSlide: '='
+          currentSlide: '=',
+          paused: '@'
         },
         link: function postLink(scope, element, attrs) {
           
@@ -38,7 +39,7 @@
                 
                 // build tag name with slide type, convert camel cased names to be hyphen separated
                 var tag = 'ub-' + utility.camelToHyphen(slide.type);
-                htm += '<' + tag + ' data="currentSlide" index="' + i + '"></' + tag + '>';
+                htm += '<' + tag + ' data="currentSlide" index="' + i + '" paused="{{paused}}"></' + tag + '>';
               }
 
               var compiled = $compile(htm)(scope);
