@@ -174,7 +174,7 @@
           
           vm.paused = true;
 
-          $log.debug('canceling ' + vm.timeoutPromises.length + ' promises');
+          //$log.debug('canceling ' + vm.timeoutPromises.length + ' promises');
           
           // loop through promises and cancel them all
           while(vm.timeoutPromises.length > 0){

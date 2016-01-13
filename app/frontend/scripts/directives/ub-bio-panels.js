@@ -31,15 +31,17 @@
 
               function init(){
                   scope.count = 0;           // bio content counter
-                  scope.startTime = null;          // use to track current step when transitioning to show content
-                  scope.remainingTimes = {};
                   scope.showContent = false; // use to show/hide bio content
                   scope.timeoutPromises = [];
+                  scope.startTime = null;
+                  scope.remainingTimes = {};
               }
 
               function clear(){
               
+                  // clear out transition state if the slide is left early
                   scope['showLine' + scope.count] = false;
+                  scope.showContent = false;
 
                   while(scope.timeoutPromises.length > 0){
                       $timeout.cancel(scope.timeoutPromises.shift());
@@ -118,8 +120,8 @@
 
                   var tableProps = getTableProps();
 
-                  $log.debug('begin saveRemainingTimes')
-                  $log.debug(scope.remainingTimes)
+//                  $log.debug('begin saveRemainingTimes')
+//                  $log.debug(scope.remainingTimes)
 
                   var timePassed = new Date().getTime() - scope.startTime;
                   var underlineTime = tableProps.timing.openSection / 3;
@@ -161,8 +163,8 @@
                                                  underlineOut: underlineOutDuration};
                   }
 
-                $log.debug('end saveRemainingTimes')
-                $log.debug(scope.remainingTimes);
+//                $log.debug('end saveRemainingTimes')
+//                $log.debug(scope.remainingTimes);
               }
 
               function run(){
@@ -347,7 +349,7 @@
                   if(scope.data != null && scope.data.type === 'bioPanels') {
 
                       if(scope.paused === 'true'){
-                          $log.debug('slideshow was paused!');
+                          //$log.debug('slideshow was paused!');
 
                           while(scope.timeoutPromises.length > 0){
                               $timeout.cancel(scope.timeoutPromises.shift());
@@ -358,7 +360,7 @@
                       }
                       else if(scope.timeoutPromises.length === 0 && scope.paused === 'false'){
 
-                          $log.debug('slideshow was started!');
+                          //$log.debug('slideshow was started!');
 
                           // no remaining times have been saved, need to initialize
                           if(Object.keys(scope.remainingTimes).length === 0) {
