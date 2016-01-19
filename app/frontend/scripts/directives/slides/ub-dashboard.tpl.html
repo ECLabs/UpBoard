@@ -1,0 +1,115 @@
+<div ng-show="data.type === 'dashboard' && data.slideId == index">
+
+  <style>
+    
+    .ub-dashboard {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .ub-dashboard .widget {
+      padding: 10px;
+      margin: 10px 10px 0 0;
+      background: #303030;
+      font-size: 50px;
+      color: white;
+      height: 170px;
+      width: 250px;
+    }
+    
+    .ub-dashboard .width-2x {
+      width: 510px;
+    }
+    
+    .ub-dashboard .width-3x {
+      width: 770px;
+    }
+    
+    .ub-dashboard .dim-2x {
+      height: 350px;
+      width: 510px;
+    }
+    
+    .ub-dashboard .height-2x {
+      height: 350px;
+    }
+    
+    .ub-dashboard .header {
+      color: #d3d3d3;
+      font-size: 15px;
+      text-align: left;
+    }
+  
+  </style>
+  <div style="background:black;width:100vw;height:100vh;">
+    <table class="ub-dashboard">
+      <tr>
+        <td colspan="3">
+          <div class="widget width-3x">
+            <div class="header">Documents Ingested</div>
+          </div>
+        </td>
+        <td>
+          <div class="widget width-2x">
+            <div class="header">Documents ingested per source</div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div class="widget width-2x">
+            <div class="header">Twitter Error Rate and Count</div>  
+          </div>
+          <div class="widget width-2x">
+            <div class="header">Reddit Error Rate and Count</div>  
+          </div>
+        </td>
+        <td>
+          <div class="widget">
+            <div class="header">Twitter Ingest Rate</div>  
+          </div>
+          <div class="widget">
+            <div class="header">Reddit Ingest Rate</div>  
+          </div>
+        </td>
+        <td rowspan="2">
+          <div class="widget dim-2x">
+            <div class="header">Document List</div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="widget height-2x">
+            <div class="header">Activity</div>  
+          </div>
+        </td>
+        <td>
+          <div class="widget height-2x">
+            <div class="header">Uptime</div>  
+          </div>
+        </td>
+        <td>
+          <div class="widget height-2x">
+            <div class="header">Status</div>  
+          </div>
+        </td>
+        <td>
+          <div class="widget dim-2x">
+            <div class="header">Drop In</div>
+          </div>
+        </td>
+      
+      </tr>
+    </table>
+  </div>
+</div>

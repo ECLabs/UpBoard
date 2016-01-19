@@ -58,7 +58,7 @@ module.exports = function (grunt) {
         tasks: ['wiredep']
       },
       frontend: {
-        files: ['<%= yeoman.app.frontend %>/{scripts,views}/{,*/}*.{js,html}'],
+        files: ['<%= yeoman.app.frontend %>/{scripts,views}/{,**/}*.{js,html}'],
         tasks: ['newer:jshint:all', 'ngtemplates']
       },
       jsTest: {
