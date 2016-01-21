@@ -1,0 +1,172 @@
+<div ng-show="data.type === 'dashboard' && data.slideId == index">
+
+  <style>
+    
+    body {
+      overflow: auto !important;
+    }
+    
+    .ub-dashboard {
+      font-family: 'Questrial', sans-serif;
+      background:black;
+      min-width: 100vw;
+      min-height: 100vh;
+      width:100%;
+      height:100%;
+      padding: 0 3vw;
+    }
+    
+    .ub-dashboard .widget {
+      padding: 10px;
+      margin: 10px 10px 0 0;
+      background: #303030;
+      font-size: 50px;
+      color: white;
+      height: 100%;
+      width: 100%;
+      min-height: 175px;
+    }
+    
+    .ub-dashboard > .row > div {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+    
+    .ub-dashboard .widget .wd-content {
+      text-align: center;
+    }
+    
+    .ub-dashboard .widget .wd-label {
+      font-size: 18px;
+      color: #d3d3d3;
+      text-align: center;
+    }
+    
+    .ub-dashboard .widget .wd-delta {
+      font-size: 35px;
+      color: #51e534;
+      text-align: center;
+    }
+    
+    .ub-dashboard .widget .wd-error-cnt {
+      font-size: 65px;
+      color: #e3524f;
+    }
+    
+    .ub-dashboard .height-2x {
+      min-height: 360px;
+    }
+    
+    .ub-dashboard .wd-header {
+      color: #d3d3d3;
+      font-size: 15px;
+      text-align: left;
+      padding-bottom: 15px;
+    }
+  
+  </style>
+  <div class="ub-dashboard">
+      <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-6">
+          <div class="widget">
+            <div class="wd-header">Documents Ingested</div>
+            <div class="wd-content">
+              <div class="col-md-4">
+                <div>{{ 1032 | number:0 }}</div>
+                <div class="wd-label">Today</div>
+              </div>
+              <div class="col-md-4">
+                <div>{{ 5378 | number:0 }}</div>
+                <div class="wd-label">Yesterday</div>
+              </div>
+              <div class="col-md-4">
+                <div>19%</div>
+                <div class="wd-label">Delta (24 hrs)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="widget">
+            <div class="wd-header">Documents Ingested / Source</div>
+          </div>
+        </div>
+        <div class="col-lg-1"></div>
+      </div>
+      <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-4">
+          <div class="widget">
+            <div class="wd-header">Twitter Error Rate and Count</div>
+            <div class="wd-content">
+              <div class="col-md-6">
+                <div>.02</div>
+                <div class="wd-delta"><i class="glyphicon glyphicon-arrow-down" style="font-size:0.7em;"></i>13%</div>
+              </div>
+              <div class="col-md-6">
+                <div class="wd-error-cnt">21</div>
+              </div>
+            </div>
+          </div>
+          <div class="widget">
+            <div class="wd-header">Reddit Error Rate and Count</div>
+            <div class="wd-content">
+              <div class="col-md-6">
+                <div>.003</div>
+                <div class="wd-delta"><i class="glyphicon glyphicon-arrow-down" style="font-size:0.7em;"></i>29%</div>
+              </div>
+              <div class="col-md-6">
+                <div class="wd-error-cnt">7</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2">
+          <div class="widget">
+            <div class="wd-header">Twitter Ingest Rate</div>
+            <div class="wd-content">
+              <div class="col-md-12">
+                <div>103</div>
+                <div style="text-align:center;width:100%;margin:0 auto;">
+                  <highchart id="twitterIngestRate" config="twitterIngestRateConfig"></highchart>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="widget">
+            <div class="wd-header">Reddit Ingest Rate</div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="widget height-2x">
+          </div>
+        </div>
+        <div class="col-lg-1"></div>
+      </div>
+      <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-2">
+          <div class="widget height-2x">
+            <div class="wd-header">Activity</div>
+          </div>
+        </div>
+        <div class="col-lg-2">
+          <div class="widget height-2x">
+            <div class="wd-header">Uptime</div>
+          </div>
+        </div>
+        <div class="col-lg-2">
+          <div class="widget height-2x">
+            <div class="wd-header">Status</div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="widget height-2x">
+            
+          </div>
+        </div>
+        <div class="col-lg-1"></div>
+      </div>
+  </div>
+</div>

@@ -24,9 +24,15 @@ angular.module('upBoardApp', [
     'toaster',
     'btford.socket-io',
     'cfp.hotkeys',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'highcharts-ng'
   ])
 
   .config(['$logProvider', function($logProvider){ 
     $logProvider.debugEnabled(true); // set to false for production
   }]);
+
+//  .config(['highchartsNGProvider', function (highchartsNGProvider) {
+//    highchartsNGProvider.lazyLoad();
+//    highchartsNGProvider.basePath("/scripts/");
+//  }]);;
