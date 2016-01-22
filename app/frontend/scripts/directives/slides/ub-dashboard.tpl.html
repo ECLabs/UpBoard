@@ -53,6 +53,10 @@
       color: #e3524f;
     }
     
+    .ub-dashboard .widget .wd-error-percentage {
+      color: #e3524f;
+    }
+    
     .ub-dashboard .height-2x {
       min-height: 360px;
     }
@@ -81,7 +85,7 @@
                 <div class="wd-label">Yesterday</div>
               </div>
               <div class="col-md-4">
-                <div>19%</div>
+                <div class="wd-error-percentage"><i class="glyphicon glyphicon-arrow-down" style="font-size:0.7em;"></i>19%</div>
                 <div class="wd-label">Delta (24 hrs)</div>
               </div>
             </div>
@@ -90,6 +94,11 @@
         <div class="col-lg-4">
           <div class="widget">
             <div class="wd-header">Documents Ingested / Source</div>
+            <div class="wd-content">
+              <div>
+                <highchart config="docsIngestedPerSrcConfig"></highchart>
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-lg-1"></div>
@@ -127,19 +136,29 @@
             <div class="wd-header">Twitter Ingest Rate</div>
             <div class="wd-content">
               <div class="col-md-12">
-                <div>103</div>
-                <div style="text-align:center;width:100%;margin:0 auto;">
-                  <highchart id="twitterIngestRate" config="twitterIngestRateConfig"></highchart>
+                <div>{{ twitterIngestRateCurrent }}</div>
+                <div>
+                  <highchart config="twitterIngestRateConfig"></highchart>
                 </div>
               </div>
             </div>
           </div>
           <div class="widget">
             <div class="wd-header">Reddit Ingest Rate</div>
+            <div class="wd-content">
+              <div class="col-md-12">
+                <div>{{ redditIngestRateCurrent }}</div>
+                <div>
+                  <highchart config="redditIngestRateConfig"></highchart>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-lg-4">
           <div class="widget height-2x">
+            <div class="wd-header">Document Feed</div>
+            <div class="wd-content"></div>
           </div>
         </div>
         <div class="col-lg-1"></div>
@@ -149,21 +168,40 @@
         <div class="col-lg-2">
           <div class="widget height-2x">
             <div class="wd-header">Activity</div>
+            <div class="wd-content">
+              <div style="margin-top:2vh;">idle</div>
+              <div class="wd-label">> 5 min</div>
+              <div style="margin-top:5vh;">low</div>
+              <div class="wd-label">Error rate</div>
+            </div>
           </div>
         </div>
         <div class="col-lg-2">
           <div class="widget height-2x">
             <div class="wd-header">Uptime</div>
+            <div class="wd-content">
+              <div style="margin-top:2vh;">35</div>
+              <div class="wd-label">hours</div>
+              <div style="margin-top:2vh;">
+                <highchart config="uptimeHoursConfig"></highchart>
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-lg-2">
           <div class="widget height-2x">
             <div class="wd-header">Status</div>
+            <div class="wd-content">
+              <div style="margin-top:2vh;color:#51e534;">running</div>
+              <div class="wd-label">Twitter</div>
+              <div style="margin-top:5vh;color:#e3524f;">stopped</div>
+              <div class="wd-label">Reddit</div>
+            </div>
           </div>
         </div>
         <div class="col-lg-4">
           <div class="widget height-2x">
-            
+            <ubw-drop-in data="data"></ubw-drop-in>
           </div>
         </div>
         <div class="col-lg-1"></div>

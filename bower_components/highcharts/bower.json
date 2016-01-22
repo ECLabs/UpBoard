@@ -4,6 +4,7 @@
   "main": [
     "highcharts.js",
     "highcharts-more.js",
-    "modules/exporting.js"
+    "modules/exporting.js",
+    "modules/solid-gauge.js"
   ]
 }
