@@ -10,8 +10,8 @@
     angular.module('upBoardApp')
       .directive('ubwDropIn', dropIn);
     
-    dropIn.$inject = ['$log', '$timeout', '$document', 'ubSocketIo', 'utility'];
-    function dropIn($log, $timeout, $document, ubSocketIo, utility) {
+    dropIn.$inject = ['$log', '$timeout', '$document', '$http', 'ubSocketIo', 'utility'];
+    function dropIn($log, $timeout, $document, $http, ubSocketIo, utility) {
         return {
           templateUrl: '/app/frontend/scripts/directives/widgets/ubw-drop-in.tpl.html',
           restrict: 'E',
@@ -181,45 +181,53 @@
               }
               scope.world.add(scope.engine.world, body);
 
-              $timeout(function(){
-                element.find('.ubw-drop-in-message')[0].scrollTop = 0;
-              }, 500);
+//              $timeout(function(){
+//                element.find('.ubw-drop-in-message')[0].scrollTop = 0;
+//              }, 500);
             }
 
-            scope.$watch(attrs.ngShow, function(){
+//            scope.$watch(attrs.ngShow, function(){
 
-              var isShown = scope.$eval(attrs.ngShow);
-
-              if(isShown){
-                $log.debug('about to show ' + scope.data.type);
+//              var isShown = scope.$eval(attrs.ngShow);
+//
+//              if(isShown){
+//                $log.debug('about to show ' + scope.data.type);
 
                 // only open socket once per event, event name could change dynamically
-                if(scope.socketEvent !== scope.data.content.event){
+//                if(scope.socketEvent !== scope.data.content.event){
 
                   // remove previous listener if event name changes
-                  if(scope.socketEvent !== null) ubSocketIo.removeListener(scope.socketEvent);
+//                  if(scope.socketEvent !== null) ubSocketIo.removeListener(scope.socketEvent);
                   
-                  ubSocketIo.on(scope.data.content.event, function(data) {
-                    $log.debug(data);
-                    $log.debug(scope);
+                  // TODO change to pull socket event to listen on from DB
+                  ubSocketIo.on('testEvent', function(data) {
+//                    $log.debug(data);
+//                    $log.debug(scope);
                     addBody(data);
                   });
 
-                  scope.socketEvent = scope.data.content.event;
-                }
-                utility.setEntryTransition(element, scope.data);
-                savedData = scope.data;
-              }
-              else if(savedData != null){
-                $log.debug('about to hide ' + savedData.type + ', next type on deck: ' + scope.data.type);
-                utility.setExitTransition(element, savedData);
-                savedData = null;
-              }
-            });
+//                  scope.socketEvent = scope.data.content.event;
+//                }
+//                utility.setEntryTransition(element, scope.data);
+//                savedData = scope.data;
+//              }
+//              else if(savedData != null){
+//                $log.debug('about to hide ' + savedData.type + ', next type on deck: ' + scope.data.type);
+//                utility.setExitTransition(element, savedData);
+//                savedData = null;
+//              }
+//            });
 
             // for DEMO purposes, remove eventually
             element.on('click', function(event){
-              addBody({source:'N/A', content:'random text over and over again'});
+              
+              var rand = Math.round(Math.random());  // pick a random source
+              var dummyData = {source: rand === 0 ? 'twitter' : 'reddit', content:'random text over and over again'};
+              addBody(dummyData);
+              
+              $http.post('/feed', {'event':'testEvent', 'source':dummyData.source, 'content':dummyData.content}).then(function(){
+                $log.debug('post to server');
+              });
             });
           }
         };
