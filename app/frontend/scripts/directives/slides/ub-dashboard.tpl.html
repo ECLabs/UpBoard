@@ -42,9 +42,15 @@
       text-align: center;
     }
     
-    .ub-dashboard .widget .wd-delta {
+    .ub-dashboard .widget .wd-error-down {
       font-size: 35px;
       color: #51e534;
+      text-align: center;
+    }
+    
+    .ub-dashboard .widget .wd-error-up {
+      font-size: 35px;
+      color: #e3524f;
       text-align: center;
     }
     
@@ -53,7 +59,19 @@
       color: #e3524f;
     }
     
-    .ub-dashboard .widget .wd-error-percentage {
+    .ub-dashboard .widget .wd-ingest-percentage-down {
+      color: #e3524f;
+    }
+    
+    .ub-dashboard .widget .wd-ingest-percentage-up {
+      color: #51e534;
+    }
+    
+    .ub-dashboard .widget .wd-status-up {
+      color: #51e534;
+    }
+    
+    .ub-dashboard .widget .wd-status-down {
       color: #e3524f;
     }
     
@@ -85,7 +103,7 @@
                 <div class="wd-label">Yesterday</div>
               </div>
               <div class="col-md-4">
-                <div class="wd-error-percentage"><i class="glyphicon glyphicon-arrow-down" style="font-size:0.7em;"></i>{{ totalDocsIngestedDelta * 100 | number:0 }}%</div>
+                <div class="{{ totalDocsIngestedDelta < 1 ? 'wd-ingest-percentage-down' : 'wd-ingest-percentage-up' }}"><i class="{{ totalDocsIngestedDelta < 1 ? 'glyphicon glyphicon-arrow-down' : 'glyphicon glyphicon-arrow-up'}}" style="font-size:0.7em;"></i>{{ totalDocsIngestedDelta * 100 | number:0 }}%</div>
                 <div class="wd-label">Delta (24 hrs)</div>
               </div>
             </div>
@@ -111,7 +129,7 @@
             <div class="wd-content">
               <div class="col-md-6">
                 <div>{{ twitterErrorRate | number:2 }}</div>
-                <div class="wd-delta"><i class="glyphicon glyphicon-arrow-down" style="font-size:0.7em;"></i>{{ twitterErrorDelta * 100 | number:0 }}%</div>
+                <div class="{{ twitterErrorDelta < 1 ? 'wd-error-down' : 'wd-error-up' }}"><i class="{{ twitterErrorDelta < 1 ? 'glyphicon glyphicon-arrow-down' : 'glyphicon glyphicon-arrow-up'}}" style="font-size:0.7em;"></i>{{ twitterErrorDelta * 100 | number:0 }}%</div>
               </div>
               <div class="col-md-6">
                 <div class="wd-error-cnt">{{ twitterErrorCountToday }}</div>
@@ -123,7 +141,7 @@
             <div class="wd-content">
               <div class="col-md-6">
                 <div>{{ redditErrorRate | number:2 }}</div>
-                <div class="wd-delta"><i class="glyphicon glyphicon-arrow-down" style="font-size:0.7em;"></i>{{ redditErrorDelta * 100 | number:0 }}%</div>
+                <div class="{{ redditErrorDelta < 1 ? 'wd-error-down' : 'wd-error-up' }}"><i class="{{ redditErrorDelta < 1 ? 'glyphicon glyphicon-arrow-down' : 'glyphicon glyphicon-arrow-up'}}" style="font-size:0.7em;"></i>{{ redditErrorDelta * 100 | number:0 }}%</div>
               </div>
               <div class="col-md-6">
                 <div class="wd-error-cnt">{{ redditErrorCountToday }}</div>
@@ -195,9 +213,9 @@
           <div class="widget height-2x">
             <div class="wd-header">Status</div>
             <div class="wd-content">
-              <div style="margin-top:2vh;color:#51e534;">{{ twitterStatus }}</div>
+              <div class="{{ twitterStatus === 'running' ? 'wd-status-up' : 'wd-status-down'}}" style="margin-top:2vh;">{{ twitterStatus }}</div>
               <div class="wd-label">Twitter</div>
-              <div style="margin-top:5vh;color:#e3524f;">{{ redditStatus }}</div>
+              <div class="{{ redditStatus === 'running' ? 'wd-status-up' : 'wd-status-down'}}" style="margin-top:5vh;">{{ redditStatus }}</div>
               <div class="wd-label">Reddit</div>
             </div>
           </div>
