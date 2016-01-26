@@ -223,7 +223,6 @@
               
               var rand = Math.round(Math.random());  // pick a random source
               var dummyData = {source: rand === 0 ? 'twitter' : 'reddit', content:'random text over and over again'};
-              addBody(dummyData);
               
               $http.post('/feed', {'event':'testEvent', 'source':dummyData.source, 'content':dummyData.content}).then(function(){
                 $log.debug('post to server');

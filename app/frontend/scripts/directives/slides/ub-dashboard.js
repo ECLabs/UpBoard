@@ -11,8 +11,8 @@
   angular.module('upBoardApp')
     .directive('ubDashboard', ubDashboard);
   
-  ubDashboard.$inject = ['$log', '$timeout', '$interval', 'highchartsNG'];
-  function ubDashboard($log, $timeout, $interval, highchartsNG) {
+  ubDashboard.$inject = ['$log', '$timeout', '$interval', '$filter', 'highchartsNG', 'ubSocketIo'];
+  function ubDashboard($log, $timeout, $interval, $filter, highchartsNG, ubSocketIo) {
     return {
       templateUrl: '/app/frontend/scripts/directives/slides/ub-dashboard.tpl.html',
       restrict: 'E',
@@ -324,22 +324,168 @@
       }],
       link: function postLink(scope, element, attrs) {
         
-        // TODO switch to have socket event listeners, interval will be handled by frequency of POSTS
-        $interval(function () {
+        function updateTotalIngest(){
+          
+          scope.totalDocsIngestedToday = 0;
+          scope.totalDocsIngestedYesterday = 0;
+          
+          // add up counts from all sources, calculate delta
+          for(var i = 0; i < scope.sources.length; i++){
+            scope.totalDocsIngestedToday += scope[scope.sources[i] + 'IngestCountToday'];
+            scope.totalDocsIngestedYesterday += scope[scope.sources[i] + 'IngestCountYesterday'];
+          }
+          
+          // calculate delta
+          scope.totalDocsIngestedDelta = scope.totalDocsIngestedYesterday !== 0 ?
+                                         scope.totalDocsIngestedToday / scope.totalDocsIngestedYesterday : 0;
+        }
+        
+        function updateErrorRateAndDelta(source){
+          
+          scope[source + 'ErrorRate'] = scope[source + 'IngestCountToday'] !== 0 ?
+                                        scope[source + 'ErrorCountToday'] / scope[source + 'IngestCountToday'] : 'N/A';
+          scope[source + 'ErrorDelta'] = scope[source + 'ErrorCountYesterday'] !== 0 ?
+                                         scope[source + 'ErrorCountToday'] / scope[source + 'ErrorCountYesterday'] : 'N/A';
+        }
+        
+        function updateIngestRate(source, rate){
+          
+          scope[source + 'IngestRateToday'] = rate;
+          
+          // update sparkline chart
+          var data = scope[source + 'IngestRateConfig'].series[0].data;
+          data.push(rate);
+          if(data.length > 20) data.shift();
+        }
+        
+        
+        // initial pull from scope.data, after that use socket event listeners to update via POSTS
+        
+        // TODO pull this saved data from scope.data.content.snapshot?
+        scope.sources = ['twitter', 'reddit'];
+        for(var i = 0; i < scope.sources.length; i++){
+          
+          var source = scope.sources[i];
+          
+          if(source === 'twitter'){
+            scope[source + 'ErrorCountToday'] = 21;
+            scope[source + 'ErrorCountYesterday'] = 101;
+            scope[source + 'IngestCountToday'] = 420;
+            scope[source + 'IngestCountYesterday'] = 4500;
+            scope[source + 'IngestRateToday'] = 103;
+          }
+          else if(source === 'reddit'){
+            scope[source + 'ErrorCountToday'] = 7;
+            scope[source + 'ErrorCountYesterday'] = 21;
+            scope[source + 'IngestCountToday'] = 192;
+            scope[source + 'IngestCountYesterday'] = 1250;
+            scope[source + 'IngestRateToday'] = 51;
+          }
+          updateErrorRateAndDelta(source);
+        }
+        
+        updateTotalIngest();
+        
+        
+       /* Incoming JSON Data
+        source: 'twitter,
+        content: {
+          today:{
+            errorCount: 21,
+            ingestCount: 420,
+            ingestRate: 103
+          }
+          yesterday:{
+            errorCount: 150
+            ingestCount: 4500
+          },
+          status: 'running'
+        }
+        */
+        // make event configurable via scope data
+        ubSocketIo.on('ingestEvent', function(data){
+
+          $log.debug(data)
+          $log.debug(JSON.parse(data.content));
+          
+          var source = data.source;
+          var content = JSON.parse(data.content);
+          
+          // TODO update to handle array of source data
+          if(content != null){
+
+            if(content.today != null){
+
+              var errorCountToday = content.today.errorCount;
+              if(errorCountToday != null){
+                scope[source + 'ErrorCountToday'] = errorCountToday;
+                updateErrorRateAndDelta(source);
+              }
+              
+              var ingestCountToday = content.today.ingestCount;
+              if(ingestCountToday != null){
+                scope[source + 'IngestCountToday'] = ingestCountToday;
+                updateTotalIngest();
+              }
+              
+              var ingestRateToday = content.today.ingestRate;
+              if(ingestRateToday != null){
+                updateIngestRate(source, ingestRateToday);
+              }
+            }
+
+            if(content.yesterday != null){
+
+              var errorCountYesterday = content.yesterday.errorCount;
+              if(errorCountYesterday != null){
+                scope[source + 'ErrorCountYesterday'] = errorCountYesterday;
+                updateErrorRateAndDelta(source);
+              }
+              
+              var ingestCountYesterday = content.yesterday.ingestCount;
+              if(ingestCountYesterday != null){
+                scope[source + 'IngestCountYesterday'] = ingestCountYesterday;
+                updateTotalIngest();
+              }
+            }
+          }
+
+          else {
+            $log.warn('no content specified, ignoring');
+          }
+
+        });
+            
+        
+        
+        // ingest rates
+        // TODO for DEMO only - remove eventually, interval will be handled by frequency of POSTS
+        
+        function updateSparklineChartDemo(source){
+          
           var y = Math.round(Math.random() * 100);
-          var data = scope.twitterIngestRateConfig.series[0].data;
+          var data = scope[source + 'IngestRateConfig'].series[0].data;
           data.push(y);
-          scope.twitterIngestRateCurrent = y;
-          //if(data.length > 0) data.shift();
+          scope[source + 'IngestRateToday'] = y;
+          if(data.length > 20) data.shift();
+        }
+        
+        $interval(function () {
+          updateSparklineChartDemo('twitter');
         }, 5000);
 
         $interval(function () {
-          var y = Math.round(Math.random() * 100);
-          var data = scope.redditIngestRateConfig.series[0].data;
-          data.push(y);
-          scope.redditIngestRateCurrent = y;
-          //if(data.length > 0) data.shift();
+          updateSparklineChartDemo('reddit');
         }, 5000);
+        
+        // activity
+        
+        // uptime
+        
+        // status
+        
+        // docs/source
+        
       }
     };
   }
