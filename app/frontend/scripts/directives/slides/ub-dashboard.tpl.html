@@ -169,23 +169,24 @@
         <div class="col-lg-1"></div>
         <div class="col-lg-2">
           <div class="widget height-2x">
-            <div class="wd-header">Activity</div>
+            <div class="wd-header">Twitter Uptime</div>
             <div class="wd-content">
-              <div style="margin-top:2vh;">idle</div>
-              <div class="wd-label">> 5 min</div>
-              <div style="margin-top:5vh;">low</div>
-              <div class="wd-label">Error rate</div>
+              <div style="margin-top:2vh;">{{ twitterUptimeHours }}</div>
+              <div class="wd-label">hours</div>
+              <div style="margin-top:2vh;">
+                <highchart config="twitterUptimeHoursConfig"></highchart>
+              </div>
             </div>
           </div>
         </div>
         <div class="col-lg-2">
           <div class="widget height-2x">
-            <div class="wd-header">Uptime</div>
+            <div class="wd-header">Reddit Uptime</div>
             <div class="wd-content">
-              <div style="margin-top:2vh;">35</div>
+              <div style="margin-top:2vh;">{{ redditUptimeHours }}</div>
               <div class="wd-label">hours</div>
               <div style="margin-top:2vh;">
-                <highchart config="uptimeHoursConfig"></highchart>
+                <highchart config="redditUptimeHoursConfig"></highchart>
               </div>
             </div>
           </div>
@@ -194,9 +195,9 @@
           <div class="widget height-2x">
             <div class="wd-header">Status</div>
             <div class="wd-content">
-              <div style="margin-top:2vh;color:#51e534;">running</div>
+              <div style="margin-top:2vh;color:#51e534;">{{ twitterStatus }}</div>
               <div class="wd-label">Twitter</div>
-              <div style="margin-top:5vh;color:#e3524f;">stopped</div>
+              <div style="margin-top:5vh;color:#e3524f;">{{ redditStatus }}</div>
               <div class="wd-label">Reddit</div>
             </div>
           </div>
