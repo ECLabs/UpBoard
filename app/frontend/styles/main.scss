@@ -760,6 +760,86 @@ a > i:hover {
   font-size:4vmin;
 }
 
+.ub-dashboard {
+  font-family: 'Questrial', sans-serif;
+  background:black;
+  min-width: 100vw;
+  min-height: 100vh;
+  width:100%;
+  height:100%;
+  padding: 0 3vw;
+}
+
+.ub-dashboard .widget {
+  padding: 10px;
+  margin: 10px 10px 0 0;
+  background: #303030;
+  font-size: 50px;
+  color: white;
+  height: 100%;
+  width: 100%;
+  min-height: 175px;
+}
+
+.ub-dashboard > .row > div {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.ub-dashboard .widget .wd-content {
+  text-align: center;
+}
+
+.ub-dashboard .widget .wd-label {
+  font-size: 18px;
+  color: #d3d3d3;
+  text-align: center;
+}
+
+.ub-dashboard .widget .wd-error-down {
+  font-size: 35px;
+  color: #51e534;
+  text-align: center;
+}
+
+.ub-dashboard .widget .wd-error-up {
+  font-size: 35px;
+  color: #e3524f;
+  text-align: center;
+}
+
+.ub-dashboard .widget .wd-error-cnt {
+  font-size: 65px;
+  color: #e3524f;
+}
+
+.ub-dashboard .widget .wd-percentage-down {
+  color: #e3524f;
+}
+
+.ub-dashboard .widget .wd-percentage-up {
+  color: #51e534;
+}
+
+.ub-dashboard .widget .wd-status-up {
+  color: #51e534;
+}
+
+.ub-dashboard .widget .wd-status-down {
+  color: #e3524f;
+}
+
+.ub-dashboard .height-2x {
+  min-height: 360px;
+}
+
+.ub-dashboard .wd-header {
+  color: #d3d3d3;
+  font-size: 15px;
+  text-align: left;
+  padding-bottom: 15px;
+}
+
 /*** TRANSITION EFFECTS ***/
 
 // fade in/out effect

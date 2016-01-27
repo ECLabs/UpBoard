@@ -1,0 +1,12 @@
+<div class="widget">
+  <div class="wd-header">{{ header }}</div>
+  <div class="wd-content">
+    <div class="col-md-6">
+      <div>{{ rate | number:2 }}</div>
+      <div class="{{ delta < 1 ? 'wd-error-down' : 'wd-error-up' }}"><i class="{{ delta < 1 ? 'glyphicon glyphicon-arrow-down' : 'glyphicon glyphicon-arrow-up'}}" style="font-size:0.7em;"></i>{{ delta * 100 | number:0 }}%</div>
+    </div>
+    <div class="col-md-6">
+      <div class="wd-error-cnt">{{ count }}</div>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,13 @@
-<div style="color:white;height:100%;">
-  <div class="ub-drop-in-message" style="overflow:scroll;font-size:11px;max-height:300px;text-align:left;margin:0 15px;">
-    <div class="row" ng-repeat="message in messages | orderBy:id:true" style="padding:2vh 0;border-bottom:1px solid #aaaaaa;">
-      <div class="col-xs-2" style="color:{{message.color}};"><i class="glyphicon glyphicon-log-out" style="padding-right:5px;"></i>{{ message.id }}</div>
-      <div class="col-xs-10">{{ message.text }}</span></div>
+<div class="widget height-2x">
+  <div class="wd-header">{{ header }}</div>
+  <div class="wd-content">
+    <div style="color:white;height:100%;">
+      <div class="ub-drop-in-message" style="overflow:scroll;font-size:11px;max-height:300px;text-align:left;margin:0 15px;">
+        <div class="row" ng-repeat="message in messages | orderBy:id:true" style="padding:2vh 0;border-bottom:1px solid #aaaaaa;">
+          <div class="col-xs-2" style="color:{{ message.color }};"><i class="glyphicon glyphicon-log-out" style="padding-right:5px;"></i>{{ message.id }}</div>
+          <div class="col-xs-10">{{ message.text }}</span></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

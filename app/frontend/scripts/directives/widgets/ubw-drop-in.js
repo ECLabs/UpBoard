@@ -17,14 +17,17 @@
           restrict: 'E',
           replace: true,
           scope:{
-            data: '='
+            header: '@',
+            sources: '@',
+            imagePaths: '@',
+            event: '@'
           },
           link: function(scope, element, attrs){
 
-            var savedData; // use to remember for exit transition
             scope.messages = [];
-            scope.socketEvent = null;
-
+            scope.sourcesArr = scope.sources.split(',');
+            scope.imagePathsArr = scope.imagePaths.split(',');
+            
             // Matter module aliases
             var Engine = Matter.Engine,
                 World = Matter.World,
@@ -118,17 +121,14 @@
               var colorArr = ['#CF4858','#F6624A','#1B6A81','#16A79D',
                               '#80628B','#DC557A','#F4AC42','#4F8598','#69B1CB'];
 
-              var fillColor = data.source === 'twitter' ? '#81cdff' :
-                              data.source === 'reddit'  ? '#fa7f53' : 
-                              Common.choose(colorArr);
+              var fillColor = Common.choose(colorArr);
 
-              //$log.debug(scope.engine.world.bodies.length - 4); // don't count borders
-              scope.messages.push({id: scope.messages.length + 1,
-                                   text: data.source + ' - ' + data.content,
-                                   color:fillColor});
+              scope.messages.push(data.toString()); // use to keep track of doc id's
 
+              var index = scope.sourcesArr.indexOf(data.source);
+              
               // pass additional body id option to display
-              if (data.source === 'twitter') {
+              if (index !== -1 && scope.imagePathsArr[index] != null) {
                 body = Bodies.rectangle(x, y, 70, 70, {
                   bodyId: scope.messages.length,
                   friction: 0.0001,
@@ -136,20 +136,7 @@
                   density: 0.001,
                   render:{
                     sprite:{
-                      texture: '/images/twitter_smlogo_texture.png'
-                    }
-                  }
-                });
-              }
-              else if (data.source === 'reddit') {
-                body = Bodies.rectangle(x, y, 70, 70, {
-                  bodyId: scope.messages.length,
-                  friction: 0.0001,
-                  restitution: 0.5,
-                  density: 0.001,
-                  render:{
-                    sprite:{
-                      texture: '/images/reddit_smlogo_texture.png'
+                      texture: scope.imagePathsArr[index]
                     }
                   }
                 });
@@ -180,44 +167,12 @@
                 });
               }
               scope.world.add(scope.engine.world, body);
-
-//              $timeout(function(){
-//                element.find('.ubw-drop-in-message')[0].scrollTop = 0;
-//              }, 500);
             }
-
-//            scope.$watch(attrs.ngShow, function(){
-
-//              var isShown = scope.$eval(attrs.ngShow);
-//
-//              if(isShown){
-//                $log.debug('about to show ' + scope.data.type);
-
-                // only open socket once per event, event name could change dynamically
-//                if(scope.socketEvent !== scope.data.content.event){
-
-                  // remove previous listener if event name changes
-//                  if(scope.socketEvent !== null) ubSocketIo.removeListener(scope.socketEvent);
-                  
-                  // TODO change to pull socket event to listen on from DB
-                  ubSocketIo.on('testEvent', function(data) {
-//                    $log.debug(data);
-//                    $log.debug(scope);
-                    addBody(data);
-                  });
-
-//                  scope.socketEvent = scope.data.content.event;
-//                }
-//                utility.setEntryTransition(element, scope.data);
-//                savedData = scope.data;
-//              }
-//              else if(savedData != null){
-//                $log.debug('about to hide ' + savedData.type + ', next type on deck: ' + scope.data.type);
-//                utility.setExitTransition(element, savedData);
-//                savedData = null;
-//              }
-//            });
-
+            
+            ubSocketIo.on(scope.event, function(data) {
+              addBody(data);
+            });
+            
             // for DEMO purposes, remove eventually
             element.on('click', function(event){
               

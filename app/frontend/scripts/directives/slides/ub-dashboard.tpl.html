@@ -2,228 +2,80 @@
 
   <style>
     
+    /* need this when showing responsiveness of dashboard */
     body {
       overflow: auto !important;
     }
     
-    .ub-dashboard {
-      font-family: 'Questrial', sans-serif;
-      background:black;
-      min-width: 100vw;
-      min-height: 100vh;
-      width:100%;
-      height:100%;
-      padding: 0 3vw;
-    }
-    
-    .ub-dashboard .widget {
-      padding: 10px;
-      margin: 10px 10px 0 0;
-      background: #303030;
-      font-size: 50px;
-      color: white;
-      height: 100%;
-      width: 100%;
-      min-height: 175px;
-    }
-    
-    .ub-dashboard > .row > div {
-      padding-left: 5px;
-      padding-right: 5px;
-    }
-    
-    .ub-dashboard .widget .wd-content {
-      text-align: center;
-    }
-    
-    .ub-dashboard .widget .wd-label {
-      font-size: 18px;
-      color: #d3d3d3;
-      text-align: center;
-    }
-    
-    .ub-dashboard .widget .wd-error-down {
-      font-size: 35px;
-      color: #51e534;
-      text-align: center;
-    }
-    
-    .ub-dashboard .widget .wd-error-up {
-      font-size: 35px;
-      color: #e3524f;
-      text-align: center;
-    }
-    
-    .ub-dashboard .widget .wd-error-cnt {
-      font-size: 65px;
-      color: #e3524f;
-    }
-    
-    .ub-dashboard .widget .wd-ingest-percentage-down {
-      color: #e3524f;
-    }
-    
-    .ub-dashboard .widget .wd-ingest-percentage-up {
-      color: #51e534;
-    }
-    
-    .ub-dashboard .widget .wd-status-up {
-      color: #51e534;
-    }
-    
-    .ub-dashboard .widget .wd-status-down {
-      color: #e3524f;
-    }
-    
-    .ub-dashboard .height-2x {
-      min-height: 360px;
-    }
-    
-    .ub-dashboard .wd-header {
-      color: #d3d3d3;
-      font-size: 15px;
-      text-align: left;
-      padding-bottom: 15px;
-    }
-  
   </style>
+  
   <div class="ub-dashboard">
       <div class="row">
         <div class="col-lg-1"></div>
         <div class="col-lg-6">
-          <div class="widget">
-            <div class="wd-header">Documents Ingested</div>
-            <div class="wd-content">
-              <div class="col-md-4">
-                <div>{{ totalDocsIngestedToday | number:0 }}</div>
-                <div class="wd-label">Today</div>
-              </div>
-              <div class="col-md-4">
-                <div>{{ totalDocsIngestedYesterday | number:0 }}</div>
-                <div class="wd-label">Yesterday</div>
-              </div>
-              <div class="col-md-4">
-                <div class="{{ totalDocsIngestedDelta < 1 ? 'wd-ingest-percentage-down' : 'wd-ingest-percentage-up' }}"><i class="{{ totalDocsIngestedDelta < 1 ? 'glyphicon glyphicon-arrow-down' : 'glyphicon glyphicon-arrow-up'}}" style="font-size:0.7em;"></i>{{ totalDocsIngestedDelta * 100 | number:0 }}%</div>
-                <div class="wd-label">Delta (24 hrs)</div>
-              </div>
-            </div>
-          </div>
+          <ubw-nums-with-delta header="Documents Ingested" 
+                               labels="Today,Yesterday,Delta (24 hrs)" 
+                               values="{{ totalDocsIngestedToday }},{{ totalDocsIngestedYesterday }},{{ totalDocsIngestedDelta }}"></ubw-nums-with-delta>
         </div>
         <div class="col-lg-4">
-          <div class="widget">
-            <div class="wd-header">Documents Ingested / Source</div>
-            <div class="wd-content">
-              <div>
-                <highchart config="docsIngestedPerSrcConfig"></highchart>
-              </div>
-            </div>
-          </div>
+          <ubw-bar-chart header="Documents Ingested / Source" 
+                         labels="twitter,reddit" 
+                         colors="#48bcfa,#ff4605" 
+                         values="{{ twitterIngestCountToday }},{{ redditIngestCountToday }}"></ubw-bar-chart> 
         </div>
         <div class="col-lg-1"></div>
       </div>
       <div class="row">
         <div class="col-lg-1"></div>
         <div class="col-lg-4">
-          <div class="widget">
-            <div class="wd-header">Twitter Error Rate and Count</div>
-            <div class="wd-content">
-              <div class="col-md-6">
-                <div>{{ twitterErrorRate | number:2 }}</div>
-                <div class="{{ twitterErrorDelta < 1 ? 'wd-error-down' : 'wd-error-up' }}"><i class="{{ twitterErrorDelta < 1 ? 'glyphicon glyphicon-arrow-down' : 'glyphicon glyphicon-arrow-up'}}" style="font-size:0.7em;"></i>{{ twitterErrorDelta * 100 | number:0 }}%</div>
-              </div>
-              <div class="col-md-6">
-                <div class="wd-error-cnt">{{ twitterErrorCountToday }}</div>
-              </div>
-            </div>
-          </div>
-          <div class="widget">
-            <div class="wd-header">Reddit Error Rate and Count</div>
-            <div class="wd-content">
-              <div class="col-md-6">
-                <div>{{ redditErrorRate | number:2 }}</div>
-                <div class="{{ redditErrorDelta < 1 ? 'wd-error-down' : 'wd-error-up' }}"><i class="{{ redditErrorDelta < 1 ? 'glyphicon glyphicon-arrow-down' : 'glyphicon glyphicon-arrow-up'}}" style="font-size:0.7em;"></i>{{ redditErrorDelta * 100 | number:0 }}%</div>
-              </div>
-              <div class="col-md-6">
-                <div class="wd-error-cnt">{{ redditErrorCountToday }}</div>
-              </div>
-            </div>
-          </div>
+          <ubw-rate-and-count-with-delta header="Twitter Error Rate and Count" 
+                                         rate="{{ twitterErrorRate }}" 
+                                         count="{{ twitterErrorCountToday }}" 
+                                         delta="{{ twitterErrorDelta }}"></ubw-rate-and-count-with-delta>
+          
+          <ubw-rate-and-count-with-delta header="Reddit Error Rate and Count" 
+                                         rate="{{ redditErrorRate }}" 
+                                         count="{{ redditErrorCountToday }}" 
+                                         delta="{{ redditErrorDelta }}"></ubw-rate-and-count-with-delta>
         </div>
         <div class="col-lg-2">
-          <div class="widget">
-            <div class="wd-header">Twitter Ingest Rate</div>
-            <div class="wd-content">
-              <div class="col-md-12">
-                <div>{{ twitterIngestRateToday }}</div>
-                <div>
-                  <highchart config="twitterIngestRateConfig"></highchart>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="widget">
-            <div class="wd-header">Reddit Ingest Rate</div>
-            <div class="wd-content">
-              <div class="col-md-12">
-                <div>{{ redditIngestRateToday }}</div>
-                <div>
-                  <highchart config="redditIngestRateConfig"></highchart>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ubw-num-and-sparkline header="Twitter Ingest Rate" 
+                                 value="{{ twitterIngestRateToday }}"></ubw-num-and-sparkline>
+          
+          <ubw-num-and-sparkline header="Reddit Ingest Rate" 
+                                 value="{{ redditIngestRateToday }}"></ubw-num-and-sparkline>
         </div>
         <div class="col-lg-4">
-          <div class="widget height-2x">
-            <div class="wd-header">Document Feed</div>
-            <div class="wd-content">
-              <ubw-feed data="data"></ubw-feed>
-            </div>
-          </div>
+          <ubw-feed header="Document Feed" 
+                    sources="twitter,reddit" 
+                    colors="#81cdff,#fa7f53" 
+                    event="testEvent"></ubw-feed>
         </div>
         <div class="col-lg-1"></div>
       </div>
       <div class="row">
         <div class="col-lg-1"></div>
         <div class="col-lg-2">
-          <div class="widget height-2x">
-            <div class="wd-header">Twitter Uptime</div>
-            <div class="wd-content">
-              <div style="margin-top:2vh;">{{ twitterUptimeHours }}</div>
-              <div class="wd-label">hours</div>
-              <div style="margin-top:2vh;">
-                <highchart config="twitterUptimeHoursConfig"></highchart>
-              </div>
-            </div>
-          </div>
+          <ubw-num-and-gauge header="Twitter Uptime" 
+                             label="hours" 
+                             value="{{ twitterUptimeHours }}" 
+                             gauge-value="{{ twitterUptimePercentage }}"></ubw-num-and-gauge>
         </div>
         <div class="col-lg-2">
-          <div class="widget height-2x">
-            <div class="wd-header">Reddit Uptime</div>
-            <div class="wd-content">
-              <div style="margin-top:2vh;">{{ redditUptimeHours }}</div>
-              <div class="wd-label">hours</div>
-              <div style="margin-top:2vh;">
-                <highchart config="redditUptimeHoursConfig"></highchart>
-              </div>
-            </div>
-          </div>
+          <ubw-num-and-gauge header="Reddit Uptime" 
+                             label="hours" 
+                             value="{{ redditUptimeHours }}" 
+                             gauge-value="{{ redditUptimePercentage }}"></ubw-num-and-gauge>
         </div>
         <div class="col-lg-2">
-          <div class="widget height-2x">
-            <div class="wd-header">Status</div>
-            <div class="wd-content">
-              <div class="{{ twitterStatus === 'running' ? 'wd-status-up' : 'wd-status-down'}}" style="margin-top:2vh;">{{ twitterStatus }}</div>
-              <div class="wd-label">Twitter</div>
-              <div class="{{ redditStatus === 'running' ? 'wd-status-up' : 'wd-status-down'}}" style="margin-top:5vh;">{{ redditStatus }}</div>
-              <div class="wd-label">Reddit</div>
-            </div>
-          </div>
+          <ubw-status header="Status"
+                      labels="Twitter,Reddit"
+                      values="{{ twitterStatus }},{{ redditStatus }}"></ubw-status>
         </div>
         <div class="col-lg-4">
-          <div class="widget height-2x">
-            <ubw-drop-in data="data"></ubw-drop-in>
-          </div>
+          <ubw-drop-in sources="twitter,reddit" 
+                       image-paths="/images/twitter_smlogo_texture.png,/images/reddit_smlogo_texture.png" 
+                       event="testEvent"></ubw-drop-in>
         </div>
         <div class="col-lg-1"></div>
       </div>

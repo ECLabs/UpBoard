@@ -1,0 +1,17 @@
+<div class="widget">
+  <div class="wd-header">{{ header }}</div>
+  <div class="wd-content">
+    <div class="col-md-4">
+      <div>{{ value0 | number:0 }}</div>
+      <div class="wd-label">{{ label0 }}</div>
+    </div>
+    <div class="col-md-4">
+      <div>{{ value1 | number:0 }}</div>
+      <div class="wd-label">{{ label1 }}</div>
+    </div>
+    <div class="col-md-4">
+      <div class="{{ value2 < 1 ? 'wd-percentage-down' : 'wd-percentage-up' }}"><i class="{{ value2 < 1 ? 'glyphicon glyphicon-arrow-down' : 'glyphicon glyphicon-arrow-up'}}" style="font-size:0.7em;"></i>{{ value2 * 100 | number:0 }}%</div>
+      <div class="wd-label">{{ label2 }}</div>
+    </div>
+  </div>
+</div>
