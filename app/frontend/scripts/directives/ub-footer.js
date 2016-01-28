@@ -6,13 +6,13 @@
      * @ngdoc directive
      * @name upBoardApp.directive:ubFooter
      * @description
-     * # ubFooter
+     * # footer
      */
     angular.module('upBoardApp')
-      .directive('ubFooter', ubFooter);
+      .directive('ubFooter', footer);
     
-    ubFooter.$inject = ['$log', '$interval', 'mapsGoogleApis', 'openWeatherMap'];
-    function ubFooter($log, $interval, mapsGoogleApis, openWeatherMap) {
+    footer.$inject = ['$log', '$interval', 'mapsGoogleApis', 'openWeatherMap'];
+    function footer($log, $interval, mapsGoogleApis, openWeatherMap) {
         return {
           templateUrl: '/app/frontend/scripts/directives/ub-footer.tpl.html',
           restrict: 'E',
@@ -48,11 +48,13 @@
               $interval(tick, 1000); // update the clock every second
               $interval(updateWeather, 60000); // update weather every minute
               
-              scope.$watch(attrs.ngShow, function(){
+              // update footer content each time slide changes
+              scope.$watch(function(){return scope.data != null ? scope.data.slideId : null}, function(){
                  
-                  var isShown = scope.$eval(attrs.ngShow);
-                  if(isShown){
-                      scope.caption = scope.data.content.caption != null ? scope.data.content.caption : null; // need to clear out if caption is null
+                  if(scope.data != null && scope.data.content != null){
+
+                      // need to clear out if caption is null
+                      scope.caption = scope.data.content.caption != null ? scope.data.content.caption : null;
                   }
               });
           }

@@ -1,0 +1,21 @@
+<div ng-show="data.type === 'dropIn' && data.slideId == index">
+  
+  <div class="container-fluid" style="background:#303239;height:100vh;">
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="ub-drop-in-point">
+          <h2><i class="glyphicon glyphicon-arrow-down" style="color:#aaaaaa;"></i></h2>
+        </div>
+      </div>
+      <div class="col-xs-6" style="color:white;height:100vh;border-left:1px dashed #aaaaaa;padding:4vmin;">
+        <div class="ub-drop-in-message">
+          <div class="row" ng-repeat="message in messages | orderBy:id:true" style="padding:2vh 0;border-bottom:1px solid #aaaaaa;">
+            <div class="col-xs-2" style="color:{{message.color}};"><i class="glyphicon glyphicon-log-out" style="padding-right:5px;"></i>{{ message.id }}</div>
+            <div class="col-xs-10">{{ message.text }}</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>

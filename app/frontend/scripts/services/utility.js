@@ -52,6 +52,12 @@
               }
               return slideTime;
           },
+          
+          camelToHyphen: function(str){
+            
+            // return camel cased string as hyphen separated lower cased string
+            return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+          },
 
           cloneArray: function(a){
             

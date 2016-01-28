@@ -1,7 +1,7 @@
-<div ng-show="data.type === 'bioPanels'" class="container-fluid bl-main">
-    <div id="bioPanels"><!-- content dynamically added --></div>
+<div ng-show="data.type === 'bioPanels' && data.slideId == index" class="container-fluid bl-main">
+    <div><!-- content dynamically added --></div>
     
-    <div id="bioContent" ng-show="showContent" class="container-fluid bl-content">
+    <div ng-show="showContent" class="container-fluid bl-content">
         <div class="row">
           <div class="col-lg-6" style="padding: 3% 0 0 3%;">
             <h2><!-- name injected here --></h2>

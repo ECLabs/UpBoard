@@ -17,7 +17,8 @@
           restrict: 'E',
           replace: true,
           scope:{
-              data: "="
+              data: "=",
+              index: '@'
           },
           link: function(scope, element, attrs){
 

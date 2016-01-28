@@ -1,6 +1,6 @@
-<div ng-show="data.type === 'liveVideoOverlay'">
+<div ng-show="data.type === 'liveVideoOverlay' && data.slideId == index">
     <!-- webcam background -->
-    <video autoplay="true" id="videoElement"></video>
+    <video autoplay="true" class="video-element"></video>
 
     <div class="box">
       <p><!--liveVideoOverlayContent Injected Here --></p>

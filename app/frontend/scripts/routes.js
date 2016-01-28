@@ -57,14 +57,9 @@ angular.module('upBoardApp')
   // before trying to access that route
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
-      .when('/', {
+      .whenAuthenticated('/', {
         templateUrl: '/app/frontend/views/main.html',
-        controller: 'MainCtrl as main',
-        resolve: {
-          "currentAuth": ["Auth", function(Auth) {
-            return Auth.$waitForAuth();
-          }]
-        }
+        controller: 'MainCtrl as main'
       })
 
       .when('/chat', {
@@ -77,14 +72,9 @@ angular.module('upBoardApp')
       })
       .whenAuthenticated('/account', {
         templateUrl: '/app/frontend/views/account.html',
-        controller: 'AccountCtrl',
-        resolve: {
-          "currentAuth": ["Auth", function(Auth) {
-            return Auth.$requireAuth();
-          }]
-        }
+        controller: 'AccountCtrl'
       })
-      .otherwise({redirectTo: '/'});
+      .otherwise({redirectTo: '/login'});
   }])
 
   /**

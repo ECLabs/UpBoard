@@ -18,26 +18,47 @@
           restrict: 'E',
           replace: true,
           scope: {
-              data: '='
+              data: '=',
+              index: '@',
+              paused: '@'
           },
           link: function(scope, element, attrs){
 
+              var columnConstants = {max: 4, min: 2}; // <-- change these if you want different min/max
+              var bootstrapMaxColSize = 12; // bootstrap column sizing maxes out at 12
+
               var savedData; // use to remember for exit transition
 
-              scope.count = 0;           // bio content counter
-              scope.showContent = false; // use to show/hide bio content
+              function init(){
+                  scope.count = 0;           // bio content counter
+                  scope.showContent = false; // use to show/hide bio content
+                  scope.timeoutPromises = [];
+                  scope.startTime = null;
+                  scope.remainingTimes = {};
+              }
+
+              function clear(){
               
+                  // clear out transition state if the slide is left early
+                  scope['showLine' + scope.count] = false;
+                  scope.showContent = false;
+
+                  while(scope.timeoutPromises.length > 0){
+                      $timeout.cancel(scope.timeoutPromises.shift());
+                  }
+              }
+
               function showBioContent(show){
-                  
+
                   // set transform origin to show, using jQuery for better css() support
-                  var currentBioPanel = $('#bioPanel' + scope.count);
+                  var currentBioPanel = $(element.find('.bl-panel')[scope.count]);
                   var scrollTop = $(window).scrollTop();
                   var xAxis = currentBioPanel.position().left;
                   var yAxis = currentBioPanel.position().top - scrollTop; // compensate for scroll
                   var bpHeight = currentBioPanel.outerHeight();
                   var bpWidth = currentBioPanel.outerWidth();
                   
-                  var bioContent = $('#bioContent'); 
+                  var bioContent = $(element.find('.bl-content')[0]); 
                   bioContent.css('height', bpHeight + 'px');
                   bioContent.css('width', bpWidth + 'px');
                   bioContent.css('transform-origin', xAxis + 'px ' + yAxis + 'px');
@@ -59,7 +80,7 @@
                       }
                       
                       // delay showing inside of content to give some time for transition effect
-                      $timeout(function(){$('#bioContent .row').css('opacity', '1')}, 500);
+                      $timeout(function(){$('.bl-content .row').css('opacity', '1')}, 500);
                   }
                   else {
                       // scale up other panels
@@ -70,10 +91,156 @@
                               $(bioPanels[i]).css('transition-duration', '0.5s');
                           }
                       }
-                      $('#bioContent .row').css('opacity', '0');
+                      $(element.find('.bl-content .row')[0]).css('opacity', '0');
                   }
               }
-              
+
+              function getTableProps(){
+
+                  var tableProps = {};
+
+                  tableProps.content = scope.data.content.content;
+                  tableProps.timing = scope.data.timing;
+                  tableProps.contentLength = tableProps.content.length;
+                  tableProps.dividedSize = Math.ceil(tableProps.contentLength / 2);
+
+                  tableProps.numCols = tableProps.dividedSize > columnConstants.max ?
+                                                                columnConstants.max :
+                                       tableProps.dividedSize < columnConstants.min ?
+                                                                columnConstants.min :
+                                                                tableProps.dividedSize;
+
+                  tableProps.columnSize = bootstrapMaxColSize / tableProps.numCols;
+                  tableProps.numRows = Math.ceil(tableProps.contentLength / tableProps.numCols);
+
+                  return tableProps;
+              }
+
+              function saveRemainingTimes(){
+
+                  var tableProps = getTableProps();
+
+//                  $log.debug('begin saveRemainingTimes')
+//                  $log.debug(scope.remainingTimes)
+
+                  var timePassed = new Date().getTime() - scope.startTime;
+                  var underlineTime = tableProps.timing.openSection / 3;
+
+                  for(var i = 0; i < tableProps.contentLength; i++){
+
+                      var timeToNextPanelShow = tableProps.timing.transitionTime +
+                                                tableProps.timing.openFirstSection +
+                                                ((tableProps.timing.openSection +
+                                                  tableProps.timing.sectionTime) * i);
+
+                      var timeToNextPanelHide = tableProps.timing.transitionTime +
+                                                tableProps.timing.openFirstSection +
+                                                ((tableProps.timing.openSection +
+                                                  tableProps.timing.sectionTime) * i) +
+                                                tableProps.timing.sectionTime;
+
+                      // use remaining times if they exist and deduct time passed from them, otherwise use starter values
+                      var duration = scope.remainingTimes[i] != null && scope.remainingTimes[i].underlineIn != null ?
+                                     scope.remainingTimes[i].underlineIn : timeToNextPanelShow - underlineTime;
+                      var underlineInDuration = duration - timePassed;
+
+                      duration = scope.remainingTimes[i] != null && scope.remainingTimes[i].showContent != null ?
+                                 scope.remainingTimes[i].showContent : timeToNextPanelShow;
+                      var showContentDuration = duration - timePassed;
+
+                      duration = scope.remainingTimes[i] != null && scope.remainingTimes[i].hideContent != null ?
+                                 scope.remainingTimes[i].hideContent : timeToNextPanelHide;
+                      var hideContentDuration = duration - timePassed;
+
+                      duration = scope.remainingTimes[i] != null && scope.remainingTimes[i].underlineOut != null ?
+                                 scope.remainingTimes[i].underlineOut : timeToNextPanelHide + underlineTime;
+                      var underlineOutDuration = duration - timePassed;
+
+                      // store remaining times
+                      scope.remainingTimes[i] = {underlineIn: underlineInDuration,
+                                                 showContent: showContentDuration,
+                                                 hideContent: hideContentDuration,
+                                                 underlineOut: underlineOutDuration};
+                  }
+
+//                $log.debug('end saveRemainingTimes')
+//                $log.debug(scope.remainingTimes);
+              }
+
+              function run(){
+
+                  var tableProps = getTableProps();
+
+                  // start transitions where the scope.count was last
+                  for(var i = scope.count; i < tableProps.contentLength; i++){
+
+                      // fire transition effects with delays
+                      if(scope.remainingTimes[i].underlineIn > 0){
+
+                          // show underline in
+                          scope.timeoutPromises.push($timeout(function(){
+
+                              var bioPanelEl = angular.element(element.find('.bl-panel')[scope.count]);
+                              $document.duScrollToElement(bioPanelEl, 0, 1000);
+                              scope['showLine' + scope.count] = true;
+
+                          }, scope.remainingTimes[i].underlineIn));
+                      }
+
+                      if(scope.remainingTimes[i].showContent > 0){
+
+                          // show bio content
+                          scope.timeoutPromises.push($timeout(function(){
+
+                              var content = scope.data.content.content;
+
+                              var name = element.find('.bl-content h2')[0];
+                              var bio = element.find('.bl-content p')[0];
+                              var hireYear = element.find('.bl-content .ecTeamMemberDate')[0];
+                              var imgCover = element.find('.bl-content-img')[0];
+
+                              // reset
+                              name.innerHTML = '';
+                              bio.innerHTML = '';
+                              hireYear.innerHTML = '';
+                              imgCover.src = '';
+
+                              name.innerHTML = tableProps.content[scope.count].name;
+                              bio.innerHTML = tableProps.content[scope.count].bio;
+                              hireYear.innerHTML = tableProps.content[scope.count].hireYear;
+                              imgCover.setAttribute('style', "background-image:url('" +
+                                                    tableProps.content[scope.count].imageUrlContent + "');");
+
+                              showBioContent(true);
+                              scope.showContent = true;
+
+                          }, scope.remainingTimes[i].showContent));
+                      }
+
+                      if(scope.remainingTimes[i].hideContent > 0){
+
+                          // hide bio content
+                          scope.timeoutPromises.push($timeout(function(){
+
+                              showBioContent(false);
+                              scope.showContent = false;
+
+                          }, scope.remainingTimes[i].hideContent));
+                      }
+
+                      if(scope.remainingTimes[i].underlineOut > 0){
+
+                          // show underline out
+                          scope.timeoutPromises.push($timeout(function(){
+
+                              scope['showLine' + scope.count] = false;
+                              scope.count++;
+
+                          }, scope.remainingTimes[i].underlineOut));
+                      }
+                  }
+              }
+
               scope.$watch(attrs.ngShow, function(){
 
                   var isShown = scope.$eval(attrs.ngShow);
@@ -81,45 +248,32 @@
                   if(isShown){
                       $log.debug('about to show ' + scope.data.type);
                       
-                      var bioPanels = element.find('#bioPanels')[0];
-                      
-                      // reset data
-                      scope.count = 0;
+                      //reset data first
+                      var bioPanels = element.find('div')[0];
                       bioPanels.innerHTML = '';
-                      
-                      var content = scope.data.content.content;
-                      var timing = scope.data.timing;
-                      
-                      var contentLength = content.length;
-                      var columnConstants = {max: 4, min: 2}; // <-- change these if you want different min/max
-                      var dividedSize = Math.ceil(contentLength / 2);
-                      
-                      var numCols = dividedSize > columnConstants.max ? columnConstants.max:
-                                    dividedSize < columnConstants.min ? columnConstants.min : dividedSize;
-                      
-                      var bootstrapMaxColSize = 12; // bootstrap column sizing maxes out at 12
-                      var columnSize = bootstrapMaxColSize / numCols; 
-                      
-                      var numRows = Math.ceil(contentLength / numCols);
-                      
+
+                      // initialize scope variables
+                      init();
+
+                      var tableProps = getTableProps();
+
                       // dynamically build out rows/columns
-                      for(var i = 0, j = 0; i < contentLength && j < numRows; j++){
+                      for(var i = 0, j = 0; i < tableProps.contentLength && j < tableProps.numRows; j++){
 
                           var row = document.createElement('div');
                           row.setAttribute('class', 'row');
 
-                          for(var k = 0; k < numCols; i++, k++){
+                          for(var k = 0; k < tableProps.numCols; i++, k++){
 
-                              if(i < contentLength){
+                              if(i < tableProps.contentLength){
                                   
                                   var col = document.createElement('div');
-                                  col.setAttribute('class', 'bl-panel col-lg-' + columnSize);
-                                  col.setAttribute('id', 'bioPanel' + i);
+                                  col.setAttribute('class', 'bl-panel col-lg-' + tableProps.columnSize);
 
                                   var bioBox = document.createElement('div');
                                   bioBox.setAttribute('class', 'bl-box');
-                                  bioBox.setAttribute('style', 'padding-top:' + (100 / numRows) + 
-                                                      "vh;background-image:url('" + content[i].imageUrlCover + "')");
+                                  bioBox.setAttribute('style', 'padding-top:' + (100 / tableProps.numRows) +
+                                                      "vh;background-image:url('" + tableProps.content[i].imageUrlCover + "')");
                                   bioBox.innerHTML = '&nbsp;'; // need some content, everything else is absolute
                                   
                                   var filter = document.createElement('div');
@@ -130,7 +284,7 @@
                                   about.setAttribute('class', 'bl-icon bl-icon-about');
 
                                   var firstName = document.createElement('h2');
-                                  firstName.innerHTML = content[i].name.split(' ')[0]; // get first name
+                                  firstName.innerHTML = tableProps.content[i].name.split(' ')[0]; // get first name
 
                                   // dynamically sized based on name length
                                   var underline = document.createElement('div');
@@ -146,66 +300,15 @@
                                   col.appendChild(bioBox);
                                   row.appendChild(col);
                                   bioPanels.appendChild(row);
-
-                                  // fire transition effects with delays
-                                  var timeToNextPanelShow = timing.transitionTime + timing.openFirstSection + 
-                                                            ((timing.openSection + timing.sectionTime) * i);
-
-                                  var timeToNextPanelHide = timing.transitionTime + timing.openFirstSection + 
-                                                            ((timing.openSection + timing.sectionTime) * i) + 
-                                                            timing.sectionTime;
-
-                                  // show underline in
-                                  $timeout(function(){
-                                      $document.duScrollToElement(angular.element('#bioPanel' + scope.count), 0, 1000);
-                                      scope['showLine' + scope.count] = true;
-                                  }, timeToNextPanelShow - 1500);
-
-                                  // show bio content
-                                  $timeout(function(){
-
-                                      var content = scope.data.content.content;
-
-                                      var name = element.find('.bl-content h2')[0];
-                                      var bio = element.find('.bl-content p')[0];
-                                      var hireYear = element.find('.bl-content .ecTeamMemberDate')[0];
-                                      var imgCover = element.find('.bl-content-img')[0];
-
-                                      // reset
-                                      name.innerHTML = '';
-                                      bio.innerHTML = '';
-                                      hireYear.innerHTML = '';
-                                      imgCover.src = '';
-
-                                      name.innerHTML = content[scope.count].name;
-                                      bio.innerHTML = content[scope.count].bio;
-                                      hireYear.innerHTML = content[scope.count].hireYear;
-                                      imgCover.setAttribute('style', "background-image:url('" + content[scope.count].imageUrlContent + "');");
-
-                                      showBioContent(true);
-                                      scope.showContent = true;
-                                  }, timeToNextPanelShow);
-
-                                  // hide bio content
-                                  $timeout(function(){
-                                      showBioContent(false);
-                                      scope.showContent = false;
-                                  }, timeToNextPanelHide);
-
-                                  // show underline out
-                                  $timeout(function(){
-                                      scope['showLine' + scope.count] = false;
-                                      scope.count++;
-                                  }, timeToNextPanelHide + 1500);
                               }
                               else{
                                   // add blank columns to fill space
                                   var col = document.createElement('div');
-                                  col.setAttribute('class', 'bl-panel col-lg-' + columnSize);
+                                  col.setAttribute('class', 'bl-panel col-lg-' + tableProps.columnSize);
 
                                   var bioBox = document.createElement('div');
                                   bioBox.setAttribute('class', 'bl-box');
-                                  bioBox.setAttribute('style', 'padding-top:' + (100 / numRows) + 'vh;');
+                                  bioBox.setAttribute('style', 'padding-top:' + (100 / tableProps.numRows) + 'vh;');
                                   bioBox.innerHTML = '&nbsp;';
                                   
                                   var filter = document.createElement('div');
@@ -224,11 +327,52 @@
                       
                       utility.setEntryTransition(element, scope.data);
                       savedData = scope.data;
+
+                      if(scope.paused === 'false') {
+                        $log.debug('initial start');
+                        scope.startTime = new Date().getTime();
+                        saveRemainingTimes();
+                        run();
+                      }
                   }
                   else if(savedData != null){
+
+                      clear();
                       $log.debug('about to hide ' + savedData.type + ', next type on deck: ' + scope.data.type);
                       utility.setExitTransition(element, savedData);
                       savedData = null;
+                  }
+              });
+
+              scope.$watch(function(){ return attrs.ngShow && scope.paused }, function(){
+
+                  if(scope.data != null && scope.data.type === 'bioPanels') {
+
+                      if(scope.paused === 'true'){
+                          //$log.debug('slideshow was paused!');
+
+                          while(scope.timeoutPromises.length > 0){
+                              $timeout.cancel(scope.timeoutPromises.shift());
+                          }
+
+                          // slideshow was started, need to save remaining times
+                          if(scope.startTime != null) saveRemainingTimes();
+                      }
+                      else if(scope.timeoutPromises.length === 0 && scope.paused === 'false'){
+
+                          //$log.debug('slideshow was started!');
+
+                          // no remaining times have been saved, need to initialize
+                          if(Object.keys(scope.remainingTimes).length === 0) {
+                              scope.startTime = new Date().getTime();
+                              saveRemainingTimes();
+                          }
+                          else {
+                              // remaining times have been set already, adjust start time for next pause
+                              scope.startTime = new Date().getTime();
+                          }
+                          run(); // continue slideshow
+                      }
                   }
               });
           }
