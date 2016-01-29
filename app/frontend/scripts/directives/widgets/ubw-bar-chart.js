@@ -11,8 +11,8 @@
   angular.module('upBoardApp')
     .directive('ubwBarChart', ubwBarChart);
 
-  ubwBarChart.$inject = ['$log'];
-  function ubwBarChart($log) {
+  ubwBarChart.$inject = ['$log', '$timeout'];
+  function ubwBarChart($log, $timeout) {
     return {
       templateUrl: '/app/frontend/scripts/directives/widgets/ubw-bar-chart.tpl.html',
       restrict: 'E',
@@ -90,7 +90,14 @@
             }
           },
           series: $scope.barChartSeries,
-          loading: false
+          loading: false,
+          func: function(chart){
+            
+            // need this to properly size chart due to dynamic parent container size
+            $timeout(function(){
+              chart.reflow();
+            }, 0);
+          }
         }
       }],
       link: function postLink(scope, element, attrs) {

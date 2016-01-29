@@ -11,8 +11,8 @@
   angular.module('upBoardApp')
     .directive('ubwNumAndSparkline', ubwNumAndSparkline);
   
-  ubwNumAndSparkline.$inject = ['$log'];
-  function ubwNumAndSparkline($log) {
+  ubwNumAndSparkline.$inject = ['$log', '$timeout'];
+  function ubwNumAndSparkline($log, $timeout) {
       return {
         templateUrl: '/app/frontend/scripts/directives/widgets/ubw-num-and-sparkline.tpl.html',
         restrict: 'E',
@@ -98,7 +98,14 @@
                 }
               },
               series: $scope.sparklineChartSeries,
-              loading: false
+              loading: false,
+              func: function(chart){
+
+                // need this to properly size chart due to dynamic parent container size
+                $timeout(function(){
+                  chart.reflow();
+                }, 0);
+              }
           }
         }],
         link: function postLink(scope, element, attrs) {

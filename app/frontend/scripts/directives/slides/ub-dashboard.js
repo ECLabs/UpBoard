@@ -11,8 +11,9 @@
   angular.module('upBoardApp')
     .directive('ubDashboard', ubDashboard);
   
-  ubDashboard.$inject = ['$log', '$timeout', '$interval', '$filter', 'highchartsNG', 'ubSocketIo'];
-  function ubDashboard($log, $timeout, $interval, $filter, highchartsNG, ubSocketIo) {
+  ubDashboard.$inject = ['$log', '$timeout', '$interval', '$filter', '$compile', '$window',
+                         'highchartsNG', 'ubSocketIo', 'utility'];
+  function ubDashboard($log, $timeout, $interval, $filter, $compile, $window, highchartsNG, ubSocketIo, utility) {
     return {
       templateUrl: '/app/frontend/scripts/directives/slides/ub-dashboard.tpl.html',
       restrict: 'E',
@@ -23,15 +24,20 @@
       },
       link: function postLink(scope, element, attrs) {
         
+        var savedData = null;
+        var savedEvent = null; // use to keep track of adding event listener only once
+        
+        var sources = [];
+        
         function updateTotalIngest(){
           
           scope.totalDocsIngestedToday = 0;
           scope.totalDocsIngestedYesterday = 0;
           
           // add up counts from all sources, calculate delta
-          for(var i = 0; i < scope.sources.length; i++){
+          for(var i = 0; i < sources.length; i++){
             
-            var source = scope.sources[i];
+            var source = sources[i];
             scope.totalDocsIngestedToday += scope[source + 'IngestCountToday'];
             scope.totalDocsIngestedYesterday += scope[source + 'IngestCountYesterday'];
           }
@@ -60,161 +66,124 @@
           scope[source + 'UptimePercentage'] = Math.round(((totalMinutes - downMinutes) / totalMinutes) * 100);
         }
         
-        
+
         /* TODO generate dashboard dynamically with firebase data - scope.data.rows
         
         // TODO widget values <- dashboard widget loader needs to initialize w/DB values and then switch to use scope variables
-        
-        rows:{
-          0: {
-            widgets: {
-              0: {
-                columns: 1 // spacer
+        layout: {  
+          rows:{
+            0: {
+              widgets: {
+                0: {
+                  columns: 1 // spacer
+                },
+                1: {
+                  columns: 6,
+                  type: 'numsWithDelta',
+                  sources: 'twitter,reddit',
+                  header: 'Documents Ingested',
+                  labels: 'Today,Yesterday,Delta (24 hrs)'
+                }
+                2: {
+                  columns: 4,
+                  type: 'barChart',
+                  sources: 'twitter,reddit',
+                  header: 'Documents Ingested / Source',
+                  labels: 'twitter,reddit',
+                  colors: '#48bcfa,#ff4605'
+                },
+                3: {
+                  columns: 1
+                }
               },
-              1: {
-                columns: 6,
-                type: 'numsWithDelta',
-                header: 'Documents Ingested',
-                labels: 'Today,Yesterday,Delta (24 hrs)',
-                values: '612,5750,0.11'
-              }
-              2: {
-                columns: 4,
-                type: 'barChart',
-                header: 'Documents Ingested / Source',
-                labels: 'twitter,reddit',
-                colors: '#48bcfa,#ff4605',
-                values: '420,192'
-              },
-              3: {
-                columns: 1
+            },
+            1: {
+              widgets: {
+                0: {
+                  columns: 1
+                },
+                1: {
+                  columns: 4,
+                  widgets: {
+                    0: {
+                      type: 'rateAndCountWithDelta',
+                      source: 'twitter',
+                      header: 'Twitter Error Rate and Count'
+                    },
+                    1: {
+                      type: 'rateAndCountWithDelta',
+                      source: 'reddit',
+                      header: 'Reddit Error Rate and Count'
+                    }
+                  }
+                },
+                2: {
+                  columns: 2,
+                  widgets: {
+                    0: {
+                      type: 'numAndSparkline',
+                      source: 'twitter',
+                      header: 'Twitter Ingest Rate'
+                    },
+                    1: {
+                      type: 'numAndSparkline',
+                      source: 'reddit',
+                      header: 'Reddit Ingest Rate'
+                    }
+                  }
+                },
+                3: {
+                  columns: 4,
+                  type: 'feed',
+                  sources: 'twitter,reddit',
+                  header: 'Document Feed',
+                  colors: '#81cdff,#fa7f53',
+                  event: 'testEvent'
+                },
+                4: {
+                  columns: 1
+                }
               }
             },
-          },
-          1: {
-            widgets: {
-              0: {
-                columns: 1
-              },
-              1: {
-                columns: 4,
-                widgets: {
-                  0: {
-                    type: 'rateAndCountWithDelta',
-                    header: 'Twitter Error Rate and Count',
-                    rate: .05,
-                    count: 21,
-                    delta: .21
-                  },
-                  1: {
-                    type: 'rateAndCountWithDelta',
-                    header: 'Reddit Error Rate and Count',
-                    rate: .04,
-                    count: 7,
-                    delta: .33
-                  }
+            2: {
+              widgets: {
+                0: {
+                  columns: 1
+                },
+                1: {
+                  columns: 2,
+                  type: 'numAndGauge',
+                  source: 'twitter',
+                  header: 'Twitter Uptime',
+                  label: 'hours'
+                },
+                2: {
+                  columns: 2,
+                  type: 'numAndGauge',
+                  source: 'reddit',
+                  header: 'Reddit Uptime',
+                  label: 'hours'
+                },
+                3: {
+                  columns: 2,
+                  type: 'status',
+                  labels: 'Twitter,Reddit'
+                },
+                4: {
+                  columns: 4,
+                  type: 'dropIn',
+                  sources: 'twitter,reddit',
+                  imagePaths: '/images/twitter_smlogo_texture.png,/images/reddit_smlogo_texture.png',
+                  event: 'testEvent'
+                },
+                5: {
+                  columns: 1
                 }
-              },
-              2: {
-                columns: 2,
-                widgets: {
-                  0: {
-                    type: 'numAndSparkline',
-                    header: 'Twitter Ingest Rate',
-                    value: 88
-                  },
-                  1: {
-                    type: 'numAndSparkline',
-                    header: 'Reddit Ingest Rate',
-                    value: 63
-                  }
-                }
-              },
-              3: {
-                columns: 4,
-                type: 'feed',
-                header: 'Document Feed',
-                sources: 'twitter,reddit',
-                colors: '#81cdff,#fa7f53',
-                event: 'feedEvent'
-              },
-              4: {
-                columns: 1
-              }
-            }
-          },
-          2: {
-            widgets: {
-              0: {
-                columns: 1
-              },
-              1: {
-                columns: 2,
-                type: 'numAndGauge',
-                header: 'Twitter Uptime',
-                label: 'hours',
-                value: 51,
-                gaugeValue: 91
-              },
-              2: {
-                columns: 2,
-                type: 'numAndGauge',
-                header: 'Reddit Uptime',
-                label: 'hours',
-                value: 8,
-                gaugeValue: 50
-              },
-              3: {
-                columns: 2,
-                type: 'status',
-                labels: 'Twitter,Reddit',
-                values: 'running,stopped'
-              },
-              4: {
-                columns: 4,
-                type: 'dropIn',
-                header: '',
-                sources: 'twitter,reddit',
-                imagePaths: '/images/twitter_smlogo_texture.png,/images/reddit_smlogo_texture.png'
-              },
-              5: {
-                columns: 1
               }
             }
           }
         }
         */
-        // initial pull from scope.data, after that use socket event listeners to update via POSTS
-        
-        // TODO pull this saved data from scope.data.content.snapshot?
-        scope.sources = ['twitter', 'reddit'];
-        for(var i = 0; i < scope.sources.length; i++){
-          
-          var source = scope.sources[i];
-          
-          if(source === 'twitter'){
-            scope[source + 'ErrorCountToday'] = 21;
-            scope[source + 'ErrorCountYesterday'] = 101;
-            scope[source + 'IngestCountToday'] = 420;
-            scope[source + 'IngestCountYesterday'] = 4500;
-            scope[source + 'Status'] = 'running';
-            updateIngestRate(source, 103);
-            updateUptime(source, 3340, 300);
-          }
-          else if(source === 'reddit'){
-            scope[source + 'ErrorCountToday'] = 7;
-            scope[source + 'ErrorCountYesterday'] = 21;
-            scope[source + 'IngestCountToday'] = 192;
-            scope[source + 'IngestCountYesterday'] = 1250;
-            scope[source + 'Status'] = 'stopped';
-            updateIngestRate(source, 51);
-            updateUptime(source, 1000, 501);
-          }
-          updateErrorRateAndDelta(source);
-        }
-        
-        updateTotalIngest();
-        
         
        /* Incoming request body
         event   = ingestEvent
@@ -227,7 +196,7 @@
           },
           "yesterday":{
             "errorCount": 150,
-            "ingestCount": 4500
+            "ingestCount": 192
           },
           "status": "running",
           "uptime":{
@@ -237,71 +206,222 @@
         }
         */
         // make event configurable via scope data
-        ubSocketIo.on('ingestEvent', function(data){
+        
+        scope.$watch(attrs.ngShow, function(){
+        
+          var isShown = scope.$eval(attrs.ngShow);
 
-          $log.debug(data)
-          $log.debug(JSON.parse(data.content));
-          
-          var source = data.source;
-          var content = JSON.parse(data.content);
-          
-          if(content != null){
-
-            if(content.today != null){
-
-              var errorCountToday = content.today.errorCount;
-              if(errorCountToday != null){
-                scope[source + 'ErrorCountToday'] = errorCountToday;
+          if(isShown){
+            
+            // initial load from previously saved data, after that use socket event listeners to update via POSTS
+            var snapshot = scope.data.content.snapshot;
+            if(snapshot != null){
+            
+              for(var i = 0; i < snapshot.length; i++){
+                
+                var source = snapshot[i].source;
+                var content = snapshot[i].content;
+                
+                scope[source + 'ErrorCountToday'] = content.today.errorCount;
+                scope[source + 'ErrorCountYesterday'] = content.yesterday.errorCount;
+                scope[source + 'IngestCountToday'] = content.today.ingestCount;
+                scope[source + 'IngestCountYesterday'] = content.yesterday.ingestCount;
+                scope[source + 'Status'] = content.status;
+                updateIngestRate(source, content.today.ingestRate);
+                updateUptime(source, content.uptime.totalMinutes, content.uptime.downMinutes);
                 updateErrorRateAndDelta(source);
+                
+                sources.push(source); // save source to list of sources
               }
-              
-              var ingestCountToday = content.today.ingestCount;
-              if(ingestCountToday != null){
-                scope[source + 'IngestCountToday'] = ingestCountToday;
-                updateTotalIngest();
-              }
-              
-              var ingestRateToday = content.today.ingestRate;
-              if(ingestRateToday != null){
-                updateIngestRate(source, ingestRateToday);
-              }
-            }
-
-            if(content.yesterday != null){
-
-              var errorCountYesterday = content.yesterday.errorCount;
-              if(errorCountYesterday != null){
-                scope[source + 'ErrorCountYesterday'] = errorCountYesterday;
-                updateErrorRateAndDelta(source);
-              }
-              
-              var ingestCountYesterday = content.yesterday.ingestCount;
-              if(ingestCountYesterday != null){
-                scope[source + 'IngestCountYesterday'] = ingestCountYesterday;
-                updateTotalIngest();
-              }
+              updateTotalIngest();
             }
             
-            if(content.status != null){
-              scope[source + 'Status'] = content.status;
+            // build dashboard layout
+            var htm = '<div class="ub-dashboard">';
+
+            var layout = scope.data.content.layout;
+            for(var i = 0; i < layout.rows.length; i++){
+
+              var row = layout.rows[i];
+              
+              htm += '<div class="row">'
+              
+              // load dashboard widgets
+              var widgets = row.widgets;
+              
+              if(widgets != null){
+                
+                for(var j = 0; j < widgets.length; j++){
+                  
+                  var widget = widgets[j];
+                  
+                  htm += '<div class="col-lg-' + widget.columns + '">';
+                  
+                  (function buildWidget(widget){
+                    
+                    if(widget.type != null){
+
+                      var tag = 'ubw-' + utility.camelToHyphen(widget.type);
+
+                      $log.debug(tag)
+
+                      // need to be specific for now in order to map to angular model
+                      // TODO - look into making this more dynamic/generic
+                      if(widget.type === 'numsWithDelta'){
+
+                        htm += '<' + tag + ' header="' + widget.header + '" labels="' + widget.labels + '" values="{{ totalDocsIngestedToday }},{{ totalDocsIngestedYesterday }},{{ totalDocsIngestedDelta }}"></' + tag + '>';
+
+                      }
+                      else if(widget.type === 'barChart'){
+
+                        htm += '<' + tag + ' header="' + widget.header + '" labels="' + widget.labels + '" colors="' + widget.colors + '" values="{{ twitterIngestCountToday }},{{ redditIngestCountToday }}"></' + tag + '>'; 
+
+                      }
+                      else if(widget.type === 'rateAndCountWithDelta'){
+
+                        htm += '<' + tag + ' header="' + widget.header + '" rate="{{ ' + widget.source + 'ErrorRate }}" count="{{ ' + widget.source + 'ErrorCountToday }}" delta="{{ ' + widget.source + 'ErrorDelta }}"></' + tag + '>'; 
+                      }
+
+                      else if(widget.type === 'numAndSparkline'){
+
+                        htm += '<' + tag + ' header="' + widget.header + '" value="{{ ' + widget.source + 'IngestRateToday }}"></' + tag + '>'; 
+                      }
+
+                      else if(widget.type === 'feed'){
+
+                        htm += '<' + tag + ' header="' + widget.header + '" sources="' + widget.sources + '" colors="' + widget.colors + '" event="' + widget.event + '"></' + tag + '>'; 
+                      }
+
+                      else if(widget.type === 'numAndGauge'){
+
+                        htm += '<' + tag + ' header="' + widget.header + '" label="' + widget.label + '" value="{{ ' + widget.source + 'UptimeHours }}" gauge-value="{{ ' + widget.source + 'UptimePercentage }}"></' + tag + '>'; 
+                      }
+
+                      else if(widget.type === 'status'){
+
+                        htm += '<' + tag + ' header="' + widget.header + '" labels="' + widget.labels + '" values="{{ twitterStatus }},{{ redditStatus }}"></' + tag + '>'; 
+                      }
+
+                      else if(widget.type === 'dropIn'){
+
+                        htm += '<' + tag + ' sources="' + widget.sources + '" image-paths="' + widget.imagePaths + '" event="' + widget.event + '"></' + tag + '>'; 
+                      }
+                    }
+                    else if(widget.widgets != null){
+
+                      // column nested widgets
+                      for(var k = 0; k < widget.widgets.length; k++){
+                        buildWidget(widget.widgets[k]);  
+                      }
+                    }
+                    else {
+                      // spacer, check for columns
+                      $log.debug(widget.columns)
+                    }
+                  })(widget);
+                  
+                  htm += '</div>';
+                }
+              }
+              htm += '</div>'  
             }
             
-            if(content.uptime != null){
+            $log.debug(htm)
+
+            htm += '</div>';
+            
+            var compiled = $compile(htm)(scope);
+            element.append(compiled);
+
+            $log.debug(scope.data.content.event)
+            
+            // only open socket once per event, event name could change dynamically
+            if(scope.data.content.event != null && savedEvent !== scope.data.content.event){
+
+              // remove previous listener if event name changes
+              if(savedEvent !== null) ubSocketIo.removeListener(savedEvent);
+                  
+              ubSocketIo.on(scope.data.content.event, function(data){
+
+//                $log.debug(data)
+//                $log.debug(JSON.parse(data.content));
+
+                var source = data.source;
+                var content = JSON.parse(data.content);
+
+                if(content != null){
+
+                  if(content.today != null){
+
+                    var errorCountToday = content.today.errorCount;
+                    if(errorCountToday != null){
+                      scope[source + 'ErrorCountToday'] = errorCountToday;
+                      updateErrorRateAndDelta(source);
+                    }
+
+                    var ingestCountToday = content.today.ingestCount;
+                    if(ingestCountToday != null){
+                      scope[source + 'IngestCountToday'] = ingestCountToday;
+                      updateTotalIngest();
+                    }
+
+                    var ingestRateToday = content.today.ingestRate;
+                    if(ingestRateToday != null){
+                      updateIngestRate(source, ingestRateToday);
+                    }
+                  }
+
+                  if(content.yesterday != null){
+
+                    var errorCountYesterday = content.yesterday.errorCount;
+                    if(errorCountYesterday != null){
+                      scope[source + 'ErrorCountYesterday'] = errorCountYesterday;
+                      updateErrorRateAndDelta(source);
+                    }
+
+                    var ingestCountYesterday = content.yesterday.ingestCount;
+                    if(ingestCountYesterday != null){
+                      scope[source + 'IngestCountYesterday'] = ingestCountYesterday;
+                      updateTotalIngest();
+                    }
+                  }
+
+                  if(content.status != null){
+                    scope[source + 'Status'] = content.status;
+                  }
+
+                  if(content.uptime != null){
+
+                    var totalMinutes = content.uptime.totalMinutes;
+                    var downMinutes = content.uptime.downMinutes;
+                    if(totalMinutes != null &&  downMinutes != null){
+                      updateUptime(source, totalMinutes, downMinutes);
+                    }
+                  }
+                }
+
+                else {
+                  $log.warn('no content specified, ignoring');
+                }
+
+              });
               
-              var totalMinutes = content.uptime.totalMinutes;
-              var downMinutes = content.uptime.downMinutes;
-              if(totalMinutes != null &&  downMinutes != null){
-                updateUptime(source, totalMinutes, downMinutes);
-              }
+              // save event to keep track if it changes
+              savedEvent = scope.data.content.event;
             }
+            utility.setEntryTransition(element, scope.data);
+            savedData = scope.data;
           }
-
-          else {
-            $log.warn('no content specified, ignoring');
+          else if(savedData != null){
+            $log.debug('about to hide ' + savedData.type + ', next type on deck: ' + scope.data.type);
+            utility.setExitTransition(element, savedData);
+            
+            // TODO take a snapshot, turn off socket listener
+            
+            
+            savedData = null;
           }
-
         });
-            
         
         
         // ingest rates

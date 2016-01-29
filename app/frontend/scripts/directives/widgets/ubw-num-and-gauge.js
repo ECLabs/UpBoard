@@ -11,8 +11,8 @@
   angular.module('upBoardApp')
     .directive('ubwNumAndGauge', ubwNumAndGauge);
   
-  ubwNumAndGauge.$inject = ['$log'];
-  function ubwNumAndGauge($log) {
+  ubwNumAndGauge.$inject = ['$log', '$timeout'];
+  function ubwNumAndGauge($log, $timeout) {
     return {
       templateUrl: '/app/frontend/scripts/directives/widgets/ubw-num-and-gauge.tpl.html',
       restrict: 'E',
@@ -95,7 +95,14 @@
             }  
           },
           series: $scope.gaugeChartSeries,
-          loading: false
+          loading: false,
+          func: function(chart){
+            
+            // need this to properly size chart due to dynamic parent container size
+            $timeout(function(){
+              chart.reflow();
+            }, 0);
+          }
         }
       }],
       link: function postLink(scope, element, attrs) {
