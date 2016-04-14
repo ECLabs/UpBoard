@@ -314,6 +314,11 @@
                       else if(widget.type === 'percentage'){
                         htm += '<' + tag + ' header="' + widget.header + '" value="' + widget.value + '"></' + tag + '>'; 
                       }
+                      
+                      else if(widget.type === 'sparkline'){
+
+                        htm += '<' + tag + ' header="' + widget.header + '" value="{{ ' + widget.source + 'IngestRateToday }}"></' + tag + '>'; 
+                      }
                     }
                     else if(widget.widgets != null){
 
