@@ -306,6 +306,10 @@
 
                         htm += '<' + tag + ' sources="' + widget.sources + '" image-paths="' + widget.imagePaths + '" event="' + widget.event + '"></' + tag + '>'; 
                       }
+                      
+                      else if(widget.type === 'profile'){
+                        htm += '<' + tag + ' src="' + widget.src + '" name="' + widget.name + '" description="' + widget.description + '" degree="' + widget.degree + '"></' + tag + '>'; 
+                      }
                     }
                     else if(widget.widgets != null){
 
