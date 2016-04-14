@@ -310,6 +310,10 @@
                       else if(widget.type === 'profile'){
                         htm += '<' + tag + ' src="' + widget.src + '" name="' + widget.name + '" description="' + widget.description + '" degree="' + widget.degree + '"></' + tag + '>'; 
                       }
+                      
+                      else if(widget.type === 'percentage'){
+                        htm += '<' + tag + ' header="' + widget.header + '" value="' + widget.value + '"></' + tag + '>'; 
+                      }
                     }
                     else if(widget.widgets != null){
 
