@@ -255,7 +255,7 @@
                   
                   var widget = widgets[j];
                   
-                  htm += '<div class="col-lg-' + widget.columns + '">';
+                  htm += '<div class="col-lg-' + widget.columns + ' height-' + (widget.rows != null ? widget.rows : 1) + 'x" style="position:relative;">';
                   
                   (function buildWidget(widget){
                     
@@ -318,6 +318,10 @@
                       else if(widget.type === 'sparkline'){
 
                         htm += '<' + tag + ' header="' + widget.header + '" value="{{ ' + widget.source + 'IngestRateToday }}"></' + tag + '>'; 
+                      }
+                      
+                      else if(widget.type === 'map'){
+                        htm += '<' + tag + ' header="' + widget.header + '"></' + tag + '>'; 
                       }
                     }
                     else if(widget.widgets != null){

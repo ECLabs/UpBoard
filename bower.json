@@ -23,7 +23,8 @@
     "angular-bootstrap": "~0.14.3",
     "Matter": "matter-js#~0.9.0",
     "highcharts-ng": "~0.0.11",
-    "highcharts": "~4.2.1"
+    "highcharts": "~4.2.1",
+    "angular-leaflet-directive": "^0.10.0"
   },
   "devDependencies": {
     "mockfirebase": "0.11.0",

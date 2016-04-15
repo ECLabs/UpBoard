@@ -82,7 +82,7 @@
                 },
                 plotOptions: {
                   series: {
-                      color: '#48bcfa',
+                      color: '#FFFFFF',
                       animation: false,
                       shadow: false,
                       marker: {

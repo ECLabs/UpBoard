@@ -1,5 +1,9 @@
 $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 
+html,body {
+    height:100%;
+}
+
 body {
     margin:0;
     padding:0;
@@ -760,7 +764,13 @@ a > i:hover {
   font-size:4vmin;
 }
 
+.ub-dashboard > .row > div {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 .ub-dashboard {
+  
   font-family: 'Questrial', sans-serif;
   background:black;
   min-width: 100vw;
@@ -768,76 +778,81 @@ a > i:hover {
   width:100%;
   height:100%;
   padding: 0 3vw;
-}
+  
+  .widget {
+    
+    position:absolute;
+    padding: 10px;
+    margin: 10px 10px 0 0;
+    background: #303030;
+    font-size: 50px;
+    color: white;
+    height: 100%;
+    width: 100%;
+    border: 5px solid black;
+    
+    .wd-content {
+      text-align: center;
+    }
+    
+    .wd-label {
+      font-size: 18px;
+      color: #d3d3d3;
+      text-align: center;
+    }
 
-.ub-dashboard .widget {
-  padding: 10px;
-  margin: 10px 10px 0 0;
-  background: #303030;
-  font-size: 50px;
-  color: white;
-  height: 100%;
-  width: 100%;
-  min-height: 175px;
-}
-
-.ub-dashboard > .row > div {
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-.ub-dashboard .widget .wd-content {
-  text-align: center;
-}
-
-.ub-dashboard .widget .wd-label {
-  font-size: 18px;
-  color: #d3d3d3;
-  text-align: center;
-}
-
-.ub-dashboard .widget .wd-error-down {
-  font-size: 35px;
-  color: #51e534;
-  text-align: center;
-}
-
-.ub-dashboard .widget .wd-error-up {
-  font-size: 35px;
-  color: #e3524f;
-  text-align: center;
-}
-
-.ub-dashboard .widget .wd-error-cnt {
-  font-size: 65px;
-  color: #e3524f;
-}
-
-.ub-dashboard .widget .wd-percentage-down {
-  color: #e3524f;
-}
-
-.ub-dashboard .widget .wd-percentage-up {
-  color: #51e534;
-}
-
-.ub-dashboard .widget .wd-status-up {
-  color: #51e534;
-}
-
-.ub-dashboard .widget .wd-status-down {
-  color: #e3524f;
-}
-
-.ub-dashboard .height-2x {
-  min-height: 360px;
-}
-
-.ub-dashboard .wd-header {
-  color: #d3d3d3;
-  font-size: 15px;
-  text-align: left;
-  padding-bottom: 15px;
+    .wd-error-down {
+      font-size: 35px;
+      color: #51e534;
+      text-align: center;
+    }
+    
+    .wd-error-up {
+      font-size: 35px;
+      color: #e3524f;
+      text-align: center;
+    }
+    
+    .wd-error-cnt {
+      font-size: 65px;
+      color: #e3524f;
+    }
+    
+    .wd-percentage-down {
+      color: #e3524f;
+    }
+    
+    .wd-percentage-up {
+      color: #51e534;
+    }
+    
+    .wd-status-up {
+      color: #51e534;
+    }
+    
+    .wd-status-down {
+      color: #e3524f;
+    }
+  }
+  
+  .wd-header {
+    color: #d3d3d3;
+    font-size: 15px;
+    text-align: left;
+    padding-bottom: 15px;
+  }
+  
+  .height-1x {
+    min-height: 175px;
+  }
+  
+  .height-2x {
+    min-height: 360px;
+  }
+  
+  .height-3x {
+    min-height: 545px;
+  }
 }
 
 /*** TRANSITION EFFECTS ***/

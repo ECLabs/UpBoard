@@ -25,7 +25,8 @@ angular.module('upBoardApp', [
     'btford.socket-io',
     'cfp.hotkeys',
     'ui.bootstrap',
-    'highcharts-ng'
+    'highcharts-ng',
+    'leaflet-directive'
   ])
 
   .config(['$logProvider', function($logProvider){ 
