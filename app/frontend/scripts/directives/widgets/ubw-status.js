@@ -28,7 +28,7 @@
         
         scope.$watch(function(){ return scope.values }, function(){
           scope.valuesArr = scope.values.split(',');
-        })
+        });
       }
     };
   }

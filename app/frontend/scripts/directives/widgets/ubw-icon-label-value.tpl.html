@@ -1,9 +1,22 @@
 <div class="widget">
-  <div class="wd-header">{{ header }}</div>
+  <div class="wd-header" style="font-size:25px;">{{ header }} ({{ values != 'undefined' ? values.length : '' }})</div>
   <div class="wd-content">
+    <div class="row">
+      <div class="col-md-4">
+
+      </div>
+      <div class="col-md-4">
+
+      </div>
+      <div class="col-md-4">
+
+      </div>
+    </div>
+<!--
     <div ng-repeat="label in labelsArr">
       <div class="{{ valuesArr[$index] === 'running' ? 'wd-status-up' : 'wd-status-down'}}" style="margin-top:2vh;">{{ valuesArr[$index] }}</div>
       <div class="wd-label">{{ label }}</div>
     </div>
+-->
   </div>
 </div>

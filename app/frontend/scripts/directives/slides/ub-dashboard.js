@@ -255,9 +255,9 @@
                   
                   var widget = widgets[j];
                   
-                  htm += '<div class="col-lg-' + widget.columns + ' height-' + (widget.rows != null ? widget.rows : 1) + 'x" style="position:relative;">';
+                  (function buildWidget(widget, nested){
                   
-                  (function buildWidget(widget){
+                    htm += '<div class="col-lg-' + (widget.columns != null ? widget.columns : 12) + ' height-' + (widget.rows != null ? widget.rows : 1) + 'x" style="position:relative;' + (nested ? 'padding:0;' : '') + '">';
                     
                     if(widget.type != null){
 
@@ -323,21 +323,28 @@
                       else if(widget.type === 'map'){
                         htm += '<' + tag + ' header="' + widget.header + '"></' + tag + '>'; 
                       }
+                      
+                      else if(widget.type === 'iconLabelValue'){
+                        htm += '<' + tag + ' header="' + widget.header + '" values="' + widget.values + '"></' + tag + '>'; 
+                      }
                     }
                     else if(widget.widgets != null){
 
                       // column nested widgets
                       for(var k = 0; k < widget.widgets.length; k++){
-                        buildWidget(widget.widgets[k]);  
+                        buildWidget(widget.widgets[k], true);  
                       }
                     }
                     else {
                       // spacer, check for columns
                       $log.debug(widget.columns)
                     }
+                    
+                    htm += '</div>';
+                    
                   })(widget);
                   
-                  htm += '</div>';
+                  
                 }
               }
               htm += '</div>'  
