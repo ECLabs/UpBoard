@@ -11,8 +11,8 @@
   angular.module('upBoardApp')
     .directive('ubwBarChart', ubwBarChart);
 
-  ubwBarChart.$inject = ['$log', '$timeout'];
-  function ubwBarChart($log, $timeout) {
+  ubwBarChart.$inject = ['$log', '$timeout', 'ubSocketIo'];
+  function ubwBarChart($log, $timeout, ubSocketIo) {
     return {
       templateUrl: '/app/frontend/scripts/directives/widgets/ubw-bar-chart.tpl.html',
       restrict: 'E',
@@ -21,7 +21,8 @@
         header: '@',
         labels: '@',
         colors: '@',
-        values: '@'
+        values: '@',
+        event: '@'
       },
       controller: ['$scope', function($scope){
 
@@ -36,7 +37,7 @@
               type: 'bar',
               backgroundColor: null,
               borderWidth: 0,
-              height: 100
+              height: 200
             },
             xAxis: {
               categories: $scope.barChartCategories,
@@ -102,9 +103,16 @@
       }],
       link: function postLink(scope, element, attrs) {
 
-        scope.$watch(function(){ return scope.values }, function(){
-          scope.barChartSeries[0].data = scope.values.split(',').map(Number);
+        ubSocketIo.on(scope.event, function(data){
+          scope.values = data.values;
+          
+          $log.debug(data);
+          scope.barChartSeries[0].data = data.values;
         });
+        
+//        scope.$watch(function(){ return scope.values }, function(){
+//          scope.barChartSeries[0].data = scope.values.split(',').map(Number);
+//        });
       }
     };
   }

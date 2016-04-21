@@ -274,7 +274,7 @@
                       }
                       else if(widget.type === 'barChart'){
 
-                        htm += '<' + tag + ' header="' + widget.header + '" labels="' + widget.labels + '" colors="' + widget.colors + '" values="{{ twitterIngestCountToday }},{{ redditIngestCountToday }}"></' + tag + '>'; 
+                        htm += '<' + tag + ' header="' + widget.header + '" labels="' + widget.labels + '" colors="' + widget.colors + '" values="{{ twitterIngestCountToday }},{{ redditIngestCountToday }}" event="' + widget.event + '"></' + tag + '>'; 
 
                       }
                       else if(widget.type === 'rateAndCountWithDelta'){
@@ -308,24 +308,24 @@
                       }
                       
                       else if(widget.type === 'profile'){
-                        htm += '<' + tag + ' src="' + widget.src + '" name="' + widget.name + '" description="' + widget.description + '" degree="' + widget.degree + '"></' + tag + '>'; 
+                        htm += '<' + tag + ' src="' + widget.src + '" name="' + widget.name + '" description="' + widget.description + '" degree="' + widget.degree + '" event="' + widget.event + '"></' + tag + '>'; 
                       }
                       
                       else if(widget.type === 'percentage'){
-                        htm += '<' + tag + ' header="' + widget.header + '" value="' + widget.value + '"></' + tag + '>'; 
+                        htm += '<' + tag + ' header="' + widget.header + '" value="' + widget.value + '" event="' + widget.event + '"></' + tag + '>'; 
                       }
                       
                       else if(widget.type === 'sparkline'){
 
-                        htm += '<' + tag + ' header="' + widget.header + '" value="{{ ' + widget.source + 'IngestRateToday }}"></' + tag + '>'; 
+                        htm += '<' + tag + ' header="' + widget.header + '" value="' + widget.value + '" event="' + widget.event + '"></' + tag + '>'; 
                       }
                       
                       else if(widget.type === 'map'){
-                        htm += '<' + tag + ' header="' + widget.header + '"></' + tag + '>'; 
+                        htm += '<' + tag + ' header="' + widget.header + '" event="' + widget.event + '"></' + tag + '>'; 
                       }
                       
                       else if(widget.type === 'iconLabelValue'){
-                        htm += '<' + tag + ' header="' + widget.header + '" values="' + widget.values + '"></' + tag + '>'; 
+                        htm += '<' + tag + ' header="' + widget.header + '" values="' + widget.values + '" event="' + widget.event + '"></' + tag + '>'; 
                       }
                     }
                     else if(widget.widgets != null){

@@ -11,15 +11,16 @@
   angular.module('upBoardApp')
     .directive('ubwSparkline', ubwSparkline);
   
-  ubwSparkline.$inject = ['$log', '$timeout'];
-  function ubwSparkline($log, $timeout) {
+  ubwSparkline.$inject = ['$log', '$timeout', 'ubSocketIo'];
+  function ubwSparkline($log, $timeout, ubSocketIo) {
       return {
         templateUrl: '/app/frontend/scripts/directives/widgets/ubw-sparkline.tpl.html',
         restrict: 'E',
         replace: true,
         scope: {
           header: '@',
-          value: '@'
+          value: '@',
+          event: '@'
         },
         controller: ['$scope', function($scope){
           
@@ -110,10 +111,18 @@
         }],
         link: function postLink(scope, element, attrs) {
           
-          scope.$watch(function(){ return scope.value; }, function(){
+          ubSocketIo.on(scope.event, function(data){
+            $log.debug(data);
+            scope.value = data.value;
+            
             scope.sparklineChartSeries[0].data.push(Number.parseInt(scope.value)); // Highcharts really doesn't like String values
             if(scope.sparklineChartSeries[0].data.length > 20) scope.sparklineChartConfig.series[0].data.shift();
           });
+          
+//          scope.$watch(function(){ return scope.value; }, function(){
+//            scope.sparklineChartSeries[0].data.push(Number.parseInt(scope.value)); // Highcharts really doesn't like String values
+//            if(scope.sparklineChartSeries[0].data.length > 20) scope.sparklineChartConfig.series[0].data.shift();
+//          });
         }
       };
     }
