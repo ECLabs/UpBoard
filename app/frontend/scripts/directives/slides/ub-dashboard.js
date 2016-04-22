@@ -274,7 +274,7 @@
                       }
                       else if(widget.type === 'barChart'){
 
-                        htm += '<' + tag + ' header="' + widget.header + '" labels="' + widget.labels + '" colors="' + widget.colors + '" values="{{ twitterIngestCountToday }},{{ redditIngestCountToday }}" event="' + widget.event + '"></' + tag + '>'; 
+                        htm += '<' + tag + ' header="' + widget.header + '" labels="' + widget.labels + '" colors="' + widget.colors + '" values="{{ twitterIngestCountToday }},{{ redditIngestCountToday }}" value-suffix="' + widget.valueSuffix + '" event="' + widget.event + '"></' + tag + '>'; 
 
                       }
                       else if(widget.type === 'rateAndCountWithDelta'){

@@ -22,6 +22,7 @@
         labels: '@',
         colors: '@',
         values: '@',
+        valueSuffix: '@',
         event: '@'
       },
       controller: ['$scope', function($scope){
@@ -70,7 +71,7 @@
             },
             tooltip: {
               formatter: function(){
-                return this.y;
+                return this.y + $scope.valueSuffix;
               },
               followPointer: true,
               hideDelay: 0
@@ -82,7 +83,10 @@
                 dataLabels: {
                   enabled: true,
                   color: 'white',
-                  style: {"textShadow":""}
+                  style: {"textShadow":""},
+                  formatter: function(){
+                    return this.y + $scope.valueSuffix;
+                  }
                 },
                 animation: false,
                 shadow: false,

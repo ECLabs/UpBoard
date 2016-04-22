@@ -25,13 +25,13 @@ module.exports = function(io){
     // send event to profile widget
     io.emit('eatonProfile', {name: req.body.insider_name});
     
-    // send event to overall risk and trending widgets
+    // send event to overall risk (average) and trending widgets
     var totalRisk = req.body.risk_scores.total;
     io.emit('eatonTotalRisk', {value: totalRisk});
     
     // send event to top risk factors widget
-    io.emit('eatonRisks', {values: [Math.ceil(req.body.risk_scores.travel / totalRisk * 100), Math.ceil(req.body.risk_scores.finance / totalRisk * 100), 
-                                    Math.ceil(req.body.risk_scores.computer / totalRisk * 100), Math.ceil(req.body.risk_scores.foreign_contact / totalRisk * 100)]});
+    io.emit('eatonRisks', {values: [req.body.risk_scores.travel, req.body.risk_scores.finance, 
+                                    req.body.risk_scores.computer, req.body.risk_scores.foreign_contact]});
     
     // send event to overseas travel map
     var travelMap = {};
