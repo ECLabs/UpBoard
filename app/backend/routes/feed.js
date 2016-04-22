@@ -34,6 +34,26 @@ module.exports = function(io){
                                     Math.ceil(req.body.risk_scores.computer / totalRisk * 100), Math.ceil(req.body.risk_scores.foreign_contact / totalRisk * 100)]});
     
     // send event to overseas travel map
+    var travelMap = {};
+    travelMap.markers = [];
+    travelMap.center = {};
+    
+    if(req.body.tweets != null){
+      for(var i = 0; i < req.body.tweets.length; i++){
+        
+        var tweet = req.body.tweets[i];
+        
+        // add marker
+        travelMap.markers.push({lat: Number.parseInt(tweet.location.latitude), lng: Number.parseInt(tweet.location.longitude)});
+        
+        // center on last location
+        if(i === req.body.tweets.length - 1){
+          travelMap.center = {lat: Number.parseInt(tweet.location.latitude), lng: Number.parseInt(tweet.location.longitude), zoom: 4};
+        }
+      }
+    }
+    io.emit('eatonMap', travelMap);
+    
     
     // send event to social locales map
     var locales = [];

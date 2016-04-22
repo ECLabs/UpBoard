@@ -15,33 +15,46 @@
     UbMapController.$inject = ['$scope'];
     function UbMapController($scope){
       
-      angular.extend($scope, {
-        center: {
+      
+      $scope.center = {
           lat: 48.8566,
           lng: 2.3522,
           zoom: 13
+      };
+      
+      $scope.markers = {
+        m1: {
+          lat: 48.86,
+          lng: 2.34
         },
+        m2: {
+          lat: 48.85,
+          lng: 2.36,
+        },
+        m3: {
+          lat: 48.86,
+          lng: 2.37
+        },
+        m4: {
+          lat: 48.84,
+          lng: 2.32
+        }
+      };
+      
+      angular.extend($scope, {
+        center: $scope.center,
+        
+//        {
+//          lat: 48.8566,
+//          lng: 2.3522,
+//          zoom: 13
+//        },
         defaults: {
           zoomControlPosition: 'bottomleft'
         },
-        markers: {
-          m1: {
-            lat: 48.86,
-            lng: 2.34
-          },
-          m2: {
-            lat: 48.85,
-            lng: 2.36,
-          },
-          m3: {
-            lat: 48.86,
-            lng: 2.37
-          },
-          m4: {
-            lat: 48.84,
-            lng: 2.32
-          }
-        }
+        markers: $scope.markers
+        
+        
 //        layers: {
 //          baselayers: {
 //           darkgray: {
@@ -71,14 +84,17 @@
       $scope.test = 'this is a test';
     }
   
-    ubwMap.$inject = ['$log', '$timeout', 'leafletData'];
-    function ubwMap($log, $timeout, leafletData) {
+    ubwMap.$inject = ['$log', '$timeout', 'leafletData', 'ubSocketIo'];
+    function ubwMap($log, $timeout, leafletData, ubSocketIo) {
       return {
         templateUrl: '/app/frontend/scripts/directives/widgets/ubw-map.tpl.html',
         restrict: 'E',
         replace: true,
         scope:{
-          header: '@'
+          header: '@',
+//          center: '@',
+//          markers: '@',
+          event: '@'
         },
         controller: UbMapController,
         controllerAs: 'vm',
@@ -90,6 +106,12 @@
             // the map to size appropriately on load
             $timeout(function(){ map.invalidateSize(); }, 250);
               
+          });
+          
+          ubSocketIo.on(scope.event, function(data){
+            $log.debug(data);
+            scope.center = data.center;
+            scope.markers = data.markers;
           });
         }
       };

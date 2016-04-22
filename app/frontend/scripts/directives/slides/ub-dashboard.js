@@ -321,7 +321,7 @@
                       }
                       
                       else if(widget.type === 'map'){
-                        htm += '<' + tag + ' header="' + widget.header + '" event="' + widget.event + '"></' + tag + '>'; 
+                        htm += '<' + tag + ' header="' + widget.header + '" center="' + widget.center + '" markers="' + widget.markers + '" event="' + widget.event + '"></' + tag + '>'; 
                       }
                       
                       else if(widget.type === 'iconLabelValue'){
