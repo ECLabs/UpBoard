@@ -327,6 +327,10 @@
                       else if(widget.type === 'iconLabelValue'){
                         htm += '<' + tag + ' header="' + widget.header + '" values="' + widget.values + '" event="' + widget.event + '"></' + tag + '>'; 
                       }
+                      
+                      else if(widget.type === 'socialLocales'){
+                        htm += '<' + tag + ' header="' + widget.header + '" values="' + widget.values + '" event="' + widget.event + '"></' + tag + '>'; 
+                      }
                     }
                     else if(widget.widgets != null){
 

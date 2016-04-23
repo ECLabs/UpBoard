@@ -15,45 +15,33 @@
     UbMapController.$inject = ['$scope'];
     function UbMapController($scope){
       
-      
-      $scope.center = {
+      angular.extend($scope, {
+        center: {
           lat: 48.8566,
           lng: 2.3522,
           zoom: 13
-      };
-      
-      $scope.markers = {
-        m1: {
-          lat: 48.86,
-          lng: 2.34
         },
-        m2: {
-          lat: 48.85,
-          lng: 2.36,
-        },
-        m3: {
-          lat: 48.86,
-          lng: 2.37
-        },
-        m4: {
-          lat: 48.84,
-          lng: 2.32
-        }
-      };
-      
-      angular.extend($scope, {
-        center: $scope.center,
-        
-//        {
-//          lat: 48.8566,
-//          lng: 2.3522,
-//          zoom: 13
-//        },
         defaults: {
           zoomControlPosition: 'bottomleft'
         },
-        markers: $scope.markers
-        
+        markers: {
+          m1: {
+            lat: 48.86,
+            lng: 2.34
+          },
+          m2: {
+            lat: 48.85,
+            lng: 2.36,
+          },
+          m3: {
+            lat: 48.86,
+            lng: 2.37
+          },
+          m4: {
+            lat: 48.84,
+            lng: 2.32
+          }
+        }
         
 //        layers: {
 //          baselayers: {
@@ -80,8 +68,6 @@
 //          
 //        }
       });
-      
-      $scope.test = 'this is a test';
     }
   
     ubwMap.$inject = ['$log', '$timeout', 'leafletData', 'ubSocketIo'];
@@ -108,10 +94,22 @@
               
           });
           
+          var markers = [];
+          
           ubSocketIo.on(scope.event, function(data){
             $log.debug(data);
             scope.center = data.center;
-            scope.markers = data.markers;
+            
+            if(data.markers != null){
+              
+              for(var i = 0; i < data.markers.length; i++){
+                markers.push(data.markers[i]);
+                
+                // restrict to no more than 30 markers
+                if(markers.length > 30) markers.shift();
+              }
+              scope.markers = markers;
+            }
           });
         }
       };

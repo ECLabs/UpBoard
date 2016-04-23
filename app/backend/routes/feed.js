@@ -43,7 +43,7 @@ module.exports = function(io){
         
         var tweet = req.body.tweets[i];
         
-        // add marker
+        // add marker, Highcharts does not like String values
         travelMap.markers.push({lat: Number.parseInt(tweet.location.latitude), lng: Number.parseInt(tweet.location.longitude)});
         
         // center on last location
@@ -65,54 +65,7 @@ module.exports = function(io){
         var location = {};
         location.icon = 'https://s3.amazonaws.com/upboard/twitter_bird.png';
         location.label = tweet.location.name;
-        
-        var diff = 0;
-        var timeSuffix = '';
-        
-        var milliDiff = new Date().getTime() - new Date(Number.parseInt(tweet.create_date)).getTime();
-        diff = milliDiff;
-        timeSuffix = ' ms';
-        
-        if(milliDiff > 1000){
-          
-          var secDiff = Math.floor(milliDiff / 1000);
-          diff = secDiff;
-          timeSuffix = ' s';
-
-          if(secDiff > 60) {
-
-            // switch to minutes
-            var minDiff = Math.floor(secDiff / 60);
-            diff = minDiff;
-            timeSuffix = ' m';
-
-            if(minDiff > 60){
-
-              // switch to hours
-              var hourDiff = Math.floor(minDiff / 60);
-              diff = hourDiff;
-              timeSuffix = ' h';
-
-              if(hourDiff > 24){
-
-                // switch to days
-                var dayDiff = Math.floor(hourDiff / 24);
-                diff = dayDiff;
-                timeSuffix = ' d';
-
-                if(dayDiff > 365){
-
-                  // switch to years
-                  var yearDiff = Math.floor(dayDiff / 365);
-                  diff = yearDiff;
-                  timeSuffix = ' y';
-                }
-              }
-            }
-          }
-        }
-        
-        location.value = diff + timeSuffix;
+        location.value = tweet.create_date;
         
         locales.push(location);
       }
