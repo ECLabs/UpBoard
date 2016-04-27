@@ -855,6 +855,16 @@ a > i:hover {
   }
 }
 
+.startEatonLink {
+  position:absolute;
+  opacity: 0;
+}
+
+.startEatonLink:hover {
+  color:white;
+  opacity: 1;
+}
+
 /*** TRANSITION EFFECTS ***/
 
 // fade in/out effect

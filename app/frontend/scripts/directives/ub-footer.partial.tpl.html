@@ -1,0 +1,8 @@
+<div class="ub-footer-logo" style="background-image:url('{{logo.url}}');{{logo.dimensions != null ? 'background-size:' + logo.dimensions.width + ' ' + logo.dimensions.height : ''}}">&nbsp;</div>
+<div class="ub-footer-caption">{{caption}}</div>
+<div class="ub-footer-time-weather">
+    <span style="font-size:6vh;white-space:nowrap;">{{ clock | date:'shortTime'}}</span><br/>
+    <span style="font-size:3vh;white-space:nowrap;">{{ weather }}</span>
+</div>
+<!-- this is temporary -->
+<a class="startEatonLink" ng-click="startEaton();" style="cursor:pointer;">START</a>

@@ -77,19 +77,19 @@
         
         ubSocketIo.on(scope.event, function(data){
           $log.debug(data);
-          
+
           if(data.values != null){
-            
+
             // update stored locales
             for(var i = 0; i < locales.length; i++){
               getTimeDiff(locales[i]);
             }
-            
+
             // add new locales with time diff and add to beginning of list
             for(var j = 0; j < data.values.length; j++){
               getTimeDiff(data.values[j]);
               locales.unshift(data.values[j]);
-              
+
               // restrict to no more than 30 results in the array
               if(locales.length > 30) locales.pop();
             }
@@ -97,7 +97,7 @@
           scope.values = locales;
         });
       }
-    };
+    }
   }
   
 })();

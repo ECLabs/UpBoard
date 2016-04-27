@@ -227,7 +227,7 @@
         function setCurrentSlide(){
 
             // remove all socket listeners when switching slides, important for performance
-            ubSocketIo.removeAllListeners();
+            //ubSocketIo.removeAllListeners();
           
             vm.currentSlide = vm.activeDeck.slides[vm.currentIndex];
 

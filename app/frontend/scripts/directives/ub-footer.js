@@ -11,15 +11,16 @@
     angular.module('upBoardApp')
       .directive('ubFooter', footer);
     
-    footer.$inject = ['$log', '$interval', 'mapsGoogleApis', 'openWeatherMap'];
-    function footer($log, $interval, mapsGoogleApis, openWeatherMap) {
+    footer.$inject = ['$compile', '$log', '$http', '$interval', '$templateCache', 'mapsGoogleApis', 'openWeatherMap'];
+    function footer($compile, $log, $http, $interval, $templateCache, mapsGoogleApis, openWeatherMap) {
         return {
           templateUrl: '/app/frontend/scripts/directives/ub-footer.tpl.html',
           restrict: 'E',
           replace: true,
           scope: {
               data: '=',
-              logo: '='
+              logo: '=',
+              type: '@'
           },
           link: function postLink(scope, element, attrs) {
               
@@ -53,10 +54,45 @@
                  
                   if(scope.data != null && scope.data.content != null){
 
-                      // need to clear out if caption is null
-                      scope.caption = scope.data.content.caption != null ? scope.data.content.caption : null;
+                    // need to clear out if caption is null
+                    scope.caption = scope.data.content.caption != null ? scope.data.content.caption : null;
+                    
+                    $log.debug(scope.type)
+                    
+                    var contentUrl = '/app/frontend/scripts/directives/ub-footer.partial.tpl.html';
+                    
+                    if(scope.type != null && scope.type != '') contentUrl = '/app/frontend/scripts/directives/ub-footer.partial.' + scope.type + '.tpl.html';
+                    
+                    var contentHtml = $templateCache.get(contentUrl);
+                    var footerContents = element.find('.ub-footer-content')[0];
+                    
+                    if(contentHtml != null){
+                      angular.element(footerContents).html($compile(contentHtml)(scope));
+                    }
+                    else {
+                      $http.get(contentUrl).then(function(response){
+
+                        $log.debug(response)
+                        
+                        angular.element(footerContents).html($compile(response.data)(scope));
+                        $templateCache.put(contentUrl, response.data);
+                      })
+                    }
                   }
               });
+            
+            // temporary function to kick of eaton feed
+            scope.startEaton = function(){
+              $log.debug('this is a test');
+              
+              $http.get('https://httpbin.org/get').then(function(response){
+                $log.debug(response);
+              });
+            }
+            
+            scope.getContent = function(){
+              return "'/app/frontend/scripts/directives/ub-footer.partial." + (scope.type != null && scope.type != '' ? scope.type + '.' : '') + "tpl.html'"
+            }
           }
         };
       }

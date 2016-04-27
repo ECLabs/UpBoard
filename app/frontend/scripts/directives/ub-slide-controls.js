@@ -28,7 +28,8 @@
         repeat: '=',
         paused: '=',
         slideTime: '@time',
-        id: '@'
+        id: '@',
+        hideControls: '@'
       },
       link: function postLink(scope, element, attrs) {
 
