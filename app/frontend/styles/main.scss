@@ -858,6 +858,9 @@ a > i:hover {
 .startEatonLink {
   position:absolute;
   opacity: 0;
+  left: 0;
+  bottom: 0;
+  cursor: pointer;
 }
 
 .startEatonLink:hover {
