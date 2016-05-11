@@ -85,7 +85,7 @@
             scope.startEaton = function(){
               $log.debug('this is a test');
               
-              $http.get('https://httpbin.org/get').then(function(response){
+              $http.get('http://eaton-dev.us-east-1.elasticbeanstalk.com:8081/api/demo').then(function(response){
                 $log.debug(response);
               });
             }
