@@ -74,15 +74,15 @@ module.exports = function(io){
     
     // send event to overseas travel map
     var overseasTravel = [];
-    if(req.body.reported_travel != null){
-      for(var i = 0; i < req.body.reported_travel.length; i++){
+    if(req.body.travel != null){
+      for(var i = 0; i < req.body.travel.length; i++){
         
-        var travel = req.body.reported_travel[i];
+        var travel = req.body.travel[i];
         
         var location = {};
-        location.icon = 'https://s3.amazonaws.com/upboard/warning.png';
+        location.icon = travel.reported_year != null ? 'https://s3.amazonaws.com/upboard/green_white_checkmark.png' : 'https://s3.amazonaws.com/upboard/warning.png';
         location.label = travel.location_name;
-        location.value = travel.reported_year;
+        location.value = travel.reported_year != null ? travel.reported_year : '';
         
         overseasTravel.push(location);
       }
