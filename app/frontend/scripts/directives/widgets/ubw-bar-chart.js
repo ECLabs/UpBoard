@@ -38,7 +38,7 @@
               type: 'bar',
               backgroundColor: null,
               borderWidth: 0,
-              height: 200
+              height: 280
             },
             xAxis: {
               categories: $scope.barChartCategories,

@@ -25,13 +25,26 @@ module.exports = function(io){
     // send event to profile widget
     io.emit('eatonProfile', {name: req.body.insider_name});
     
+//    {"insider_name":"Bernie Sanders","risk_scores":{"A: Allegiance to the United States":10,"B: Foreign Influence":0,"C: Foreign Preference":6,"D: Sexual Behavior":4,"E: Personal Conduct":9,"F: Financial Considerations":2,"G: Alcohol Consumption":6,"H: Drug Involvement":4,"I: Psychological Conditions":7,"J: Criminal Conduct":10,"K: Handling Protected Information":2,"L: Outside Activities":1,"M: Use of Information Technology Systems":5,"total":5,"travel":0},"tweets":[{"location":{"name":"United States","latitude":"37.09024","longitude":"-95.712891"},"text":"","create_date":"1463195294392"}],"travel":[{"location_name":"China","reported_year":2016},{"location_name":"Japan","reported_year":2016},{"location_name":"Sweden","reported_year":2016},{"location_name":"United States","reported_year":2016}]}
+    
     // send event to overall risk (average) and trending widgets
     var totalRisk = req.body.risk_scores.total;
     io.emit('eatonTotalRisk', {value: totalRisk});
     
     // send event to top risk factors widget
-    io.emit('eatonRisks', {values: [req.body.risk_scores.travel, req.body.risk_scores.finance, 
-                                    req.body.risk_scores.computer, req.body.risk_scores.foreign_contact]});
+    io.emit('eatonRisks', {values: [req.body.risk_scores["A: Allegiance to the United States"], 
+                                    req.body.risk_scores["B: Foreign Influence"], 
+                                    req.body.risk_scores["C: Foreign Preference"], 
+                                    req.body.risk_scores["D: Sexual Behavior"],
+                                    req.body.risk_scores["E: Personal Conduct"],
+                                    req.body.risk_scores["F: Financial Considerations"],
+                                    req.body.risk_scores["G: Alcohol Consumption"],
+                                    req.body.risk_scores["H: Drug Involvement"],
+                                    req.body.risk_scores["I: Psychological Conditions"],
+                                    req.body.risk_scores["J: Criminal Conduct"],
+                                    req.body.risk_scores["K: Handling Protected Information"],
+                                    req.body.risk_scores["L: Outside Activities"],
+                                    req.body.risk_scores["M: Use of Information Technology Systems"]]});
     
     // send event to overseas travel map
     var travelMap = {};
