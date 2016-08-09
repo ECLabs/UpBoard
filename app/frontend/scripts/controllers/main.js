@@ -13,10 +13,10 @@
 
     mainCtrl.$inject = ['$firebaseArray', 'Auth', 'Ref',
                         '$timeout', '$log', '$location', '$window',
-                        'hotkeys', 'toaster', 'utility'];
+                        'hotkeys', 'toaster', 'ubSocketIo', 'utility'];
     function mainCtrl($firebaseArray, Auth, Ref,
                       $timeout, $log, $location, $window,
-                      hotkeys, toaster, utility) {
+                      hotkeys, toaster, ubSocketIo, utility) {
         
         var vm = this;
         
@@ -226,6 +226,9 @@
 
         function setCurrentSlide(){
 
+            // remove all socket listeners when switching slides, important for performance
+            //ubSocketIo.removeAllListeners();
+          
             vm.currentSlide = vm.activeDeck.slides[vm.currentIndex];
 
             // pass active deck id and slide id for firebase ref binding

@@ -58,7 +58,7 @@ module.exports = function (grunt) {
         tasks: ['wiredep']
       },
       frontend: {
-        files: ['<%= yeoman.app.frontend %>/{scripts,views}/{,*/}*.{js,html}'],
+        files: ['<%= yeoman.app.frontend %>/{scripts,views}/{,**/}*.{js,html}'],
         tasks: ['newer:jshint:all', 'ngtemplates']
       },
       jsTest: {
@@ -520,7 +520,7 @@ module.exports = function (grunt) {
     'sftp-deploy': {
       build: {
         auth: {
-          host: 'ec2-52-90-150-92.compute-1.amazonaws.com',
+          host: 'ec2-54-82-249-137.compute-1.amazonaws.com',
           port: 22,
           authKey: 'key1' // defined in .ftppass - reference grunt-sftp-deploy project for file format
         },

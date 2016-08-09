@@ -14,6 +14,7 @@
                    repeat="main.loop"
                    paused="main.paused"
                    time="{{main.currentSlide.slideTime}}"
-                   id="{{main.currentIndex}}"></ub-slide-controls>
+                   id="{{main.currentIndex}}"
+                   hide-controls="{{main.currentSlide.hideControls}}"></ub-slide-controls>
 
-<ub-footer data="main.currentSlide" logo="main.logo"></ub-footer>
+<ub-footer type="{{ main.currentSlide.footerType }}" data="main.currentSlide" logo="main.logo"></ub-footer>

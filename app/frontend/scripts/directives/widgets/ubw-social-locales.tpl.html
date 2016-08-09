@@ -1,0 +1,16 @@
+<div class="widget">
+  <div class="wd-header" style="font-size:25px;">{{ header }} ({{ values != 'undefined' ? values.length : '' }})</div>
+  <div class="wd-content" style="margin:10px;overflow:scroll;max-height:80%;">
+    <div class="row" ng-repeat="item in values track by $index" style="font-size:.4em;margin-bottom:10px;">
+      <div class="col-xs-4">
+        <img src="{{ item.icon }}" style="height:25px;width:25px;"/>
+      </div>
+      <div class="col-xs-4" style="text-align:left;">
+        {{ item.label }}
+      </div>
+      <div class="col-xs-4" style="color:#BBBBBB;">
+        {{ item.timeDiff }}
+      </div>
+    </div>
+  </div>
+</div>
